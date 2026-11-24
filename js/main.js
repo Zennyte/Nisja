@@ -47,6 +47,7 @@
     "work.concepts": "A site for every business",
     "work.conceptsIntro": "Concept projects for the businesses that lose the most time on the phone. Each has a system that saves the owner work.",
     "work.try": "Try the demo",
+    "work.client": "Real client · live",
     "reel.t1": "Barber", "reel.t2": "Salon", "reel.t3": "Gym", "reel.t4": "Dentist",
     "reel.k1": "Barber · Prishtina", "reel.k2": "Beauty salon · Gjakova", "reel.k3": "Gym · Prizren", "reel.k4": "Dental clinic · Peja",
     "reel.p1": "Clients pick a barber and see only his free times. The owner sees each barber's day on one screen.",
