@@ -507,7 +507,7 @@
   (function () {
     "use strict";
     var D = window.UDHA, $ = function (id) { return document.getElementById(id); };
-    if (/[?&]test\b/.test(location.search)) D.demo = false; // test mode: booking requests are really emailed
+    if (/[?&]test\b/.test(location.search)) { D.demo = false; D.whatsapp = D.whatsapp || D.testWhatsapp; } // test mode: real email + WhatsApp to the test number
     var EN = {
       "demo": "This is a <b>concept demo</b> made by <a href=\"../../\">Nisja Studio</a>. Want a site like this for your business?",
       "logo.sub": "Rent a Car · Gjakovë", "nav.cars": "Cars", "nav.how": "How it works", "nav.terms": "Terms", "nav.faq": "FAQ", "nav.contact": "Contact", "nav.cta": "Book",
