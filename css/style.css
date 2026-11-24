@@ -687,6 +687,8 @@ p { margin: 0; }
 .concepts-head { display: flex; justify-content: space-between; align-items: end; gap: 16px 48px; flex-wrap: wrap; margin: clamp(56px, 8vw, 96px) 0 28px; }
 .concepts-head h3 { font-weight: 800; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.03em; }
 .concepts-head p { color: var(--ash); max-width: 48ch; }
+.work-grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.work-grid--three .work-info h3 { font-size: 1.375rem; }
 .tags li.tag-concept { border-color: rgba(255, 107, 44, 0.5); color: var(--fire); }
 
 /* ---------- Process ---------- */
@@ -1029,7 +1031,7 @@ html.is-loading { overflow: hidden; }
   .header-actions { margin-left: auto; }
 
   .section-head { grid-template-columns: 1fr; }
-  .work-grid { grid-template-columns: 1fr; }
+  .work-grid, .work-grid--three { grid-template-columns: 1fr; }
   .work-card--wide { flex-direction: column; align-items: stretch; }
   .work-card--wide .shot { flex: none; }
   .work-card--wide .work-info { padding: 22px 12px 12px; }

@@ -49,6 +49,8 @@
     "work.try": "Try the demo",
     "d1.text": "A barbershop site with prices, team, opening hours and three-step online booking.",
     "d2.text": "A restaurant site with a menu by category, the venue’s story and table booking.",
+    "d3.text": "A dental clinic site with services and guide prices, the team and online appointment requests.",
+    "tag.request": "Appointment requests",
     "tag.concept": "Concept demo",
     "tag.booking": "Online booking",
     "tag.portfolio": "Portfolio",
