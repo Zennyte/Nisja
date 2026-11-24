@@ -88,33 +88,10 @@
     }
   })();
 
-  /* ---------- Headline decode ---------- */
-  var GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/{}=*#";
-  function scramble(el, done) {
-    var final = el.getAttribute("data-final") || el.textContent;
-    el.setAttribute("data-final", final);
-    el.setAttribute("aria-label", final);
-    if (reduce) { el.textContent = final; if (done) done(); return; }
-    var frame = 0, total = 38;
-    var order = final.split("").map(function (_, i) { return i + Math.random() * 10; });
-    var max = Math.max.apply(null, order);
-    clearInterval(el._scr);
-    el._scr = setInterval(function () {
-      var progress = (frame / total) * max;
-      var html = "";
-      for (var i = 0; i < final.length; i++) {
-        var ch = final[i];
-        if (ch === " " || order[i] <= progress) html += ch === "<" ? "&lt;" : ch;
-        else html += '<span class="glyph" aria-hidden="true">' + GLYPHS[Math.floor(Math.random() * GLYPHS.length)] + "</span>";
-      }
-      el.innerHTML = html;
-      if (++frame > total) { clearInterval(el._scr); el.textContent = final; if (done) done(); }
-    }, 32);
-  }
-
   /* ---------- Hero trail: the full stop turns into an arrow ----------
-     From the "." the line drops down behind the text, runs left, climbs up,
-     then shoots right into the code editor (or straight down to it on phones). */
+     The "." shrinks away and an orange line grows from it: it drops into the
+     gap under the headline (never over the text below), runs right and turns
+     into the code editor. On phones it runs down the right margin instead. */
   var trail = (function () {
     var title = document.querySelector(".hero-title");
     var inner = document.querySelector(".hero-inner");
@@ -137,7 +114,7 @@
     var drawn = false;
 
     function wrapDot() {
-      var text = title.getAttribute("data-final") || title.textContent;
+      var text = title.textContent.trim();
       if (text.slice(-1) !== ".") return null;
       title.innerHTML = "";
       title.appendChild(document.createTextNode(text.slice(0, -1)));
@@ -168,24 +145,38 @@
       var rel = function (r) { return { l: r.left - o.left, t: r.top - o.top, r: r.right - o.left, b: r.bottom - o.top, w: r.width, h: r.height }; };
       var d = rel(dot.getBoundingClientRect()), h1 = rel(title.getBoundingClientRect());
       var sb = rel((sub || title).getBoundingClientRect()), ed = rel(editor.getBoundingClientRect());
+      var fs = parseFloat(getComputedStyle(title).fontSize) || 80;
       var x0 = Math.round(d.l + d.w * 0.5), y0 = Math.round(d.t + d.h * 0.74);
+      // a lane between the headline's descenders and the first line of the paragraph
+      var lane = Math.round((h1.b + fs * 0.1 + sb.t + 6) / 2);
       var pts;
       if (ed.l > h1.l + h1.w * 0.6) {
-        // editor sits to the right
-        var y1 = Math.round(sb.b + 18);
-        var x1 = Math.max(6, Math.round(h1.l - 30));
-        var y2 = Math.round(h1.t - 12);
+        // editor to the right: drop into the lane, run right, turn into the editor
+        var textRight = Math.max(d.r, sb.r);
+        var xm = Math.round(textRight + (ed.l - textRight) * 0.55);
         var xe = Math.round(ed.l - 16);
-        var ye = Math.min(Math.max(y2, ed.t + 60), ed.b - 60);
-        pts = [[x0, y0], [x0, y1], [x1, y1], [x1, y2]];
-        if (Math.abs(ye - y2) > 4) {
-          var xm = Math.round((h1.r + ed.l) / 2);
-          pts.push([xm, y2], [xm, ye]);
-        }
-        pts.push([xe, ye]);
+        var ye = Math.round(Math.min(Math.max(ed.t + 110, ed.t + 40), ed.b - 60));
+        pts = [[x0, y0], [x0, lane], [xm, lane], [xm, ye], [xe, ye]];
       } else {
-        // phones: editor is below, drop straight down to it
-        pts = [[x0, y0], [x0, Math.round(ed.t - 16)]];
+        // editor below the text (tablets and phones)
+        var actions = document.querySelector(".hero-actions");
+        var act = rel((actions || sub || title).getBoundingClientRect());
+        var actRight = act.l;
+        if (actions) Array.prototype.forEach.call(actions.children, function (c) { actRight = Math.max(actRight, rel(c.getBoundingClientRect()).r); });
+        var subRight = sb.l;
+        if (sub) { var rg = document.createRange(); rg.selectNodeContents(sub); Array.prototype.forEach.call(rg.getClientRects(), function (r) { subRight = Math.max(subRight, r.right - o.left); }); }
+        var textRight = Math.max(d.r, subRight, actRight);
+        if (textRight + 40 < ed.r - 40) {
+          // room on the right: run right in the lane, then straight down into the editor
+          var xd = Math.round(Math.min(ed.r - 48, textRight + (ed.r - textRight) / 2));
+          pts = [[x0, y0], [x0, lane], [xd, lane], [xd, Math.round(ed.t - 14)]];
+        } else {
+          // narrow phones: down the right margin, under the buttons, then into the editor
+          var xr = Math.round(Math.min(inner.clientWidth - 8, Math.max(textRight, ed.r) + 10));
+          var yg = Math.round(act.b + 22);
+          var xk = Math.round(ed.r - 52);
+          pts = [[x0, y0], [x0, lane], [xr, lane], [xr, yg], [xk, yg], [xk, Math.round(ed.t - 14)]];
+        }
       }
       return pts;
     }
@@ -238,14 +229,12 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { trail.refresh(); });
 
   whenReady(function () {
-    $$(".scramble").forEach(function (el) { scramble(el, el.classList.contains("hero-title") ? trail.run : null); });
+    var go = function () { setTimeout(trail.run, 450); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(go); else go();
   });
   onLang(function () {
-    if (document.documentElement.classList.contains("is-loading")) return; // whenReady picks up the new text
-    $$(".scramble").forEach(function (el) {
-      el.removeAttribute("data-final");
-      scramble(el, el.classList.contains("hero-title") ? trail.run : null);
-    });
+    if (document.documentElement.classList.contains("is-loading")) return;
+    trail.run(); // redraws the arrow for the new headline (no replay)
   });
 
   /* ---------- Heading word reveal + block reveal ---------- */

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zennyte.github.io/Nisja/sitemap.xml
+Sitemap: https://nisja.vercel.app/sitemap.xml

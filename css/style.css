@@ -292,10 +292,9 @@ p { margin: 0; }
   max-width: 11ch;
   min-height: 1.86em;
 }
-.scramble .glyph { color: var(--fire); }
 
 .hero-sub {
-  margin-top: 28px;
+  margin-top: 40px;
   max-width: 36ch;
   font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
   line-height: 1.55;
@@ -960,7 +959,7 @@ html.is-loading { overflow: hidden; }
 @media (max-width: 1100px) {
   .hero-inner { grid-template-columns: minmax(0, 1fr); min-height: 0; }
   .hero-title { max-width: 12ch; }
-  .build { max-width: 680px; width: 100%; }
+  .build { max-width: 680px; width: 100%; margin-top: 40px; }
 }
 
 @media (max-width: 1040px) {
