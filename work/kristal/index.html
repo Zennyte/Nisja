@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kristal Dental · Klinikë dentare në Pejë, termin online</title>
+  <meta name="description" content="Kristal Dental në Pejë: kontroll, pastrim, mbushje, zbardhim, implante dhe aparate. Gjeni vizitën e duhur, shihni çmimin dhe rezervoni online. Orë urgjente çdo ditë.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#EEF4F7">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <meta property="og:title" content="Kristal Dental · Pejë">
+  <meta property="og:description" content="Gjeni vizitën e duhur dhe rezervoni online.">
+  <meta property="og:image" content="img/room2.jpg">
+  <link rel="preload" href="../kit/fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="img/room2.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "name": "Kristal Dental",
+    "description": "Klinikë dentare në Pejë: kontroll, pastrim, mbushje, zbardhim, implante dhe ortodonci, me rezervim online dhe orë urgjente çdo ditë.",
+    "image": "https://nisja.vercel.app/work/kristal/img/room2.jpg",
+    "url": "https://nisja.vercel.app/work/kristal/",
+    "telephone": "+383 44 000 111",
+    "priceRange": "€15–€550",
+    "currenciesAccepted": "EUR",
+    "address": { "@type": "PostalAddress", "streetAddress": "Rr. Mbretëresha Teutë 31", "addressLocality": "Pejë", "postalCode": "30000", "addressCountry": "XK" },
+    "geo": { "@type": "GeoCoordinates", "latitude": 42.6593, "longitude": 20.2887 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "08:30", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:30", "closes": "17:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "14:00" }
+    ],
+    "availableService": [
+      { "@type": "MedicalProcedure", "name": "Pastrim profesional" },
+      { "@type": "MedicalProcedure", "name": "Mbushje kompozit" },
+      { "@type": "MedicalProcedure", "name": "Zbardhim dhëmbësh" },
+      { "@type": "MedicalProcedure", "name": "Implant dentar" },
+      { "@type": "MedicalProcedure", "name": "Ortodonci" }
+    ],
+    "potentialAction": { "@type": "ReserveAction", "target": "https://nisja.vercel.app/work/kristal/#vizita" }
+  }
+  </script>
+  <style>
+    @font-face { font-family: "Sora"; src: url("../kit/fonts/sora.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
+    :root {
+      --ice: #EEF4F7; --white: #FFFFFF; --navy: #0F2C46; --blue: #1D6AAD; --blue-d: #155185; --mint: #6CC3B9; --text2: #4B5F72; --line: #D5E1E9; --red: #B4332B;
+      --f: "Sora", system-ui, sans-serif; --r: 10px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 78px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    body { margin: 0; font: 16px/1.65 var(--f); color: var(--navy); background: var(--white); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+    h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -.035em; line-height: 1.04; }
+    h2 { font-size: clamp(36px, 4.6vw, 60px); }
+    .lead { font-size: 18px; color: var(--text2); max-width: 54ch; }
+    [hidden] { display: none !important; }
+
+    .demo-bar { background: var(--navy); color: #D3E1EC; font-size: 14px; padding: 8px 16px; display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; text-align: center; }
+    .demo-bar a { color: #fff; font-weight: 700; }
+    .demo-bar button { background: transparent; border: 1px solid rgba(255,255,255,.45); border-radius: 99px; padding: 3px 12px; font-size: 13px; font-weight: 600; color: #fff; }
+
+    header { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; gap: 26px; height: 68px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 20px; letter-spacing: -.03em; }
+    .logo svg { width: 26px; height: 26px; }
+    .nav ul { list-style: none; display: flex; gap: 24px; margin: 0 0 0 auto; padding: 0; font-size: 15px; font-weight: 500; }
+    .nav ul a { text-decoration: none; color: var(--text2); }
+    .nav ul a:hover { color: var(--navy); }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 99px; overflow: hidden; }
+    .lang button { background: none; border: 0; padding: 5px 10px; font-size: 13px; font-weight: 700; color: var(--text2); }
+    .lang button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 99px; border: 0; background: var(--blue); color: #fff; font-weight: 600; font-size: 16px; text-decoration: none; transition: background .2s; }
+    .btn:hover { background: var(--blue-d); }
+    .btn.soft { background: var(--ice); color: var(--navy); }
+    .btn.soft:hover { background: #E1EBF1; }
+    .btn.red { background: var(--red); }
+    .nav .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
+    @media (max-width: 900px) { .nav ul { display: none; } .nav .lang { margin-left: auto; } }
+    @media (max-width: 480px) { .nav { gap: 12px; } .logo span { display: none; } .nav .btn { padding: 0 14px; } }
+
+    /* hero: the photo is cut like a gem, light runs across its facets */
+    .hero { background: linear-gradient(180deg, var(--ice), var(--white)); padding: 60px 0 80px; overflow: hidden; }
+    .hero .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .hero h1 { font-size: clamp(46px, 6.4vw, 88px); font-weight: 600; }
+    .hero h1 span { color: var(--blue); display: block; }
+    .hero .lead { margin: 24px 0 30px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .urgent-line { margin-top: 26px; display: flex; gap: 10px; align-items: center; font-size: 15px; color: var(--text2); }
+    .urgent-line a { color: var(--red); font-weight: 700; }
+    .urgent-line i { width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px rgba(180,51,43,.15); }
+    .gem { position: relative; aspect-ratio: 1 / 1.06; }
+    .gem svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .gem .sweep { transform: translateX(-120%); }
+    .gem.run .sweep { animation: sweep 5.5s cubic-bezier(.6,0,.3,1) 0.6s infinite; }
+    @keyframes sweep { 0% { transform: translateX(-120%); } 35%, 100% { transform: translateX(120%); } }
+    .gem .facet { transition: opacity .6s; }
+    .gem .tag { position: absolute; background: #fff; border-radius: 14px; padding: 12px 16px; box-shadow: 0 18px 40px -18px rgba(15,44,70,.35); font-size: 14px; display: flex; gap: 10px; align-items: center; }
+    .gem .tag b { display: block; font-size: 15px; }
+    .gem .tag small { color: var(--text2); }
+    .gem .tag.t1 { left: -6%; bottom: 16%; } .gem .tag.t2 { right: -2%; top: 10%; }
+    .gem .tag i { width: 34px; height: 34px; border-radius: 50%; background: var(--ice); display: grid; place-items: center; color: var(--blue); font-style: normal; font-weight: 700; }
+    @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; } .gem { max-width: 460px; margin: 0 auto; } }
+    @media (prefers-reduced-motion: reduce) { .gem .sweep { display: none; } }
+
+    .trust { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .trust .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .trust .wrap > div { padding: 24px 22px; border-left: 1px solid var(--line); font-size: 14.5px; color: var(--text2); }
+    .trust .wrap > div:first-child { border-left: 0; padding-left: 0; }
+    .trust .wrap b { display: block; color: var(--navy); font-size: 16px; }
+    @media (max-width: 860px) { .trust .wrap { grid-template-columns: 1fr 1fr; column-gap: 18px; } .trust .wrap > div { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); } .trust .wrap > div:nth-child(-n+2) { border-top: 0; } }
+
+    section { padding: 100px 0; }
+    .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 28px; flex-wrap: wrap; margin-bottom: 44px; }
+
+    /* finder */
+    .finder { background: var(--ice); border-radius: 28px; padding: 40px; }
+    .q { font-size: 22px; font-weight: 600; letter-spacing: -.02em; margin: 0 0 16px; }
+    .opts { display: flex; flex-wrap: wrap; gap: 10px; }
+    .opt { background: #fff; border: 1.5px solid var(--line); border-radius: 99px; padding: 12px 20px; font-weight: 500; font-size: 15.5px; transition: border-color .2s, background .2s; }
+    .opt:hover { border-color: var(--blue); }
+    .opt[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .q2 { margin-top: 30px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .result { margin-top: 30px; background: #fff; border-radius: 20px; padding: 30px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; animation: rise .45s cubic-bezier(.2,.7,.2,1); }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+    .result h3 { font-size: 30px; margin-bottom: 8px; }
+    .result p { color: var(--text2); margin: 0; max-width: 60ch; }
+    .facts { display: flex; gap: 26px; margin-top: 18px; flex-wrap: wrap; }
+    .facts div { font-size: 13px; color: var(--text2); }
+    .facts b { display: block; font-size: 22px; color: var(--navy); font-weight: 600; letter-spacing: -.02em; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; background: #FBE9E7; color: var(--red); font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 99px; margin-bottom: 12px; }
+    .callbox { background: #FBE9E7; border-radius: 16px; padding: 18px 20px; margin-top: 18px; color: #6D1E19; }
+    .callbox a { color: var(--red); font-weight: 700; font-size: 20px; text-decoration: none; display: inline-block; margin-top: 4px; }
+    @media (max-width: 760px) { .finder { padding: 26px 20px; } .result { grid-template-columns: 1fr; } }
+
+    .book { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 40px; }
+    .book > div { min-width: 0; }
+    .step { padding: 24px 0 26px; border-top: 1px solid var(--line); }
+    .step h3 { font-size: 24px; margin-bottom: 16px; }
+    .docs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .doc { text-align: left; background: #fff; border: 1.5px solid var(--line); border-radius: var(--r); padding: 14px; display: grid; gap: 3px; align-content: start; min-height: 116px; }
+    .doc[aria-pressed="true"] { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+    .doc:disabled { opacity: .45; cursor: not-allowed; }
+    .doc b { font-size: 15.5px; font-weight: 600; }
+    .doc span { font-size: 13px; color: var(--text2); }
+    .doc em { font-style: normal; font-size: 13px; color: var(--blue); font-weight: 600; }
+    .days { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+    .day { flex: 0 0 70px; background: #fff; border: 1.5px solid var(--line); border-radius: var(--r); padding: 9px 0; text-align: center; }
+    .day span { display: block; font-size: 12px; color: var(--text2); font-weight: 600; }
+    .day b { font-size: 22px; font-weight: 600; }
+    .day[aria-pressed="true"] { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .day[aria-pressed="true"] span { color: #B8CCDD; }
+    .day:disabled { opacity: .35; cursor: not-allowed; }
+    .slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+    .slot { background: #fff; border: 1.5px solid var(--line); border-radius: 99px; padding: 9px 0; font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; }
+    .slot:hover:not(:disabled) { border-color: var(--blue); }
+    .slot:disabled { opacity: .35; text-decoration: line-through; cursor: not-allowed; }
+    .slot.em { border-color: var(--red); color: var(--red); }
+    .slot[aria-pressed="true"] { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .slot.em[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+    .empty { grid-column: 1 / -1; color: var(--text2); margin: 0; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fields label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; color: var(--text2); }
+    .fields input, .fields select { font: inherit; color: var(--navy); background: #fff; border: 1.5px solid var(--line); border-radius: var(--r); padding: 11px 13px; min-height: 50px; }
+    .fields input:focus, .fields select:focus { border-color: var(--blue); outline: none; }
+    .fields .full { grid-column: 1 / -1; }
+    .side { position: sticky; top: 90px; align-self: start; border: 1.5px solid var(--line); border-radius: 20px; padding: 24px; }
+    .side h3 { font-size: 22px; margin-bottom: 14px; }
+    .side dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 14px; margin: 0 0 18px; font-size: 15px; }
+    .side dt { color: var(--text2); }
+    .side dd { margin: 0; font-weight: 600; text-align: right; }
+    .side .btn { width: 100%; }
+    .side .btn:disabled { background: #BACBD8; cursor: not-allowed; }
+    .side .fine { font-size: 13px; color: var(--text2); margin: 12px 0 0; }
+    .err { color: var(--red); font-size: 14px; font-weight: 600; min-height: 1.2em; margin: 10px 0 0; }
+    @media (max-width: 980px) { .book { grid-template-columns: 1fr; } .side { position: static; } .docs { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .fields { grid-template-columns: 1fr; } }
+
+    .ticket { max-width: 660px; margin: 40px auto 0; background: #fff; border: 1.5px solid var(--line); border-radius: 26px; padding: 34px; }
+    .ticket h3 { font-size: 34px; }
+    .ticket .code { color: var(--blue); font-weight: 700; letter-spacing: .06em; margin: 6px 0 18px; }
+    .ticket dl { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0 0 18px; }
+    .ticket dt { font-size: 13px; color: var(--text2); }
+    .ticket dd { margin: 0; font-weight: 600; }
+    .ticket .recall { background: var(--ice); border-radius: 14px; padding: 14px 16px; font-size: 15px; margin-bottom: 18px; }
+
+    /* prices */
+    .prices { background: var(--navy); color: #E6EEF4; }
+    .prices h2 { color: #fff; }
+    .prices .lead { color: #A9BDCE; }
+    .plist { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; }
+    .plist div { display: flex; justify-content: space-between; gap: 18px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.12); font-size: 16px; }
+    .plist b { color: #fff; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .prices .note { color: #A9BDCE; font-size: 14px; margin-top: 22px; }
+    @media (max-width: 820px) { .plist { grid-template-columns: 1fr; } }
+
+    .clinic { display: grid; grid-template-columns: 1.2fr .8fr .8fr; grid-template-rows: 260px 260px; gap: 14px; }
+    .clinic img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
+    .clinic img:first-child { grid-row: span 2; }
+    @media (max-width: 760px) { .clinic { grid-template-columns: 1fr 1fr; grid-template-rows: 260px 160px 160px; } .clinic img:first-child { grid-column: span 2; grid-row: auto; } }
+
+    .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+    .member { border: 1.5px solid var(--line); border-radius: 20px; padding: 24px; }
+    .member .ini { width: 56px; height: 56px; border-radius: 16px; background: var(--ice); color: var(--blue); display: grid; place-items: center; font-weight: 700; font-size: 20px; transform: rotate(45deg); margin: 8px 0 22px 8px; }
+    .member .ini span { transform: rotate(-45deg); }
+    .member h3 { font-size: 22px; }
+    .member p { color: var(--text2); margin: 4px 0 8px; font-size: 15px; }
+    .member small { font-size: 13px; font-weight: 600; color: var(--blue); }
+    @media (max-width: 860px) { .team { grid-template-columns: 1fr; } }
+
+    .dia { background: var(--ice); }
+    .dia .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .dia ol { margin: 26px 0 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 16px; }
+    .dia li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: 14px; }
+    .dia li::before { content: counter(s); width: 40px; height: 40px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-weight: 700; color: var(--blue); }
+    .dia li b { display: block; }
+    .dia li span { color: var(--text2); font-size: 15px; }
+    .dia img { border-radius: 24px; width: 100%; height: 440px; object-fit: cover; }
+    @media (max-width: 860px) { .dia .wrap { grid-template-columns: 1fr; } .dia img { height: 280px; } }
+
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .hours td:last-child { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .hours tr.today td { color: var(--blue); font-weight: 700; }
+    .contact a { display: inline-block; font-weight: 600; margin: 8px 22px 0 0; text-underline-offset: 4px; }
+    @media (max-width: 860px) { .visit { grid-template-columns: 1fr; } }
+
+    .faq details { border-bottom: 1px solid var(--line); padding: 20px 0; }
+    .faq summary { cursor: pointer; font-weight: 600; font-size: 18px; list-style: none; display: flex; justify-content: space-between; gap: 20px; letter-spacing: -.01em; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font-size: 26px; line-height: 1; color: var(--blue); transition: transform .3s; font-weight: 400; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq p { color: var(--text2); margin: 10px 0 0; }
+
+    footer { border-top: 1px solid var(--line); padding: 34px 0 50px; color: var(--text2); font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+
+    dialog { border: 0; border-radius: 22px; padding: 0; width: min(980px, 94vw); max-height: 88vh; background: #fff; color: var(--navy); }
+    dialog::backdrop { background: rgba(15,44,70,.55); }
+    .dlg-h { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: #fff; }
+    .dlg-h h3 { font-size: 24px; }
+    .dlg-h button { background: none; border: 1.5px solid var(--line); border-radius: 99px; padding: 6px 14px; font-weight: 600; }
+    .kpis { display: flex; gap: 30px; padding: 18px 24px 0; flex-wrap: wrap; }
+    .kpis div { font-size: 13px; color: var(--text2); }
+    .kpis b { display: block; font-size: 32px; font-weight: 600; letter-spacing: -.03em; color: var(--navy); }
+    .agenda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 18px 24px 24px; }
+    .agenda h4 { margin: 0 0 2px; font-size: 16px; }
+    .agenda .sum { font-size: 13px; color: var(--text2); margin: 0 0 10px; }
+    .appt { display: grid; grid-template-columns: 50px 1fr; gap: 8px; font-size: 14px; padding: 8px 10px; border-radius: 10px; background: var(--ice); margin-bottom: 6px; }
+    .appt.new { background: #E3EEF8; box-shadow: inset 3px 0 0 var(--blue); }
+    .appt.urg { background: #FBE9E7; box-shadow: inset 3px 0 0 var(--red); }
+    .appt.hold { background: #fff; border: 1.5px dashed #E3B1AC; color: var(--red); }
+    .appt.past { opacity: .5; }
+    @media (max-width: 760px) { .agenda { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="demo-bar"><span data-i18n-html="demo">Ky është një <b>projekt koncept</b> nga <a href="../../">Nisja Studio</a>. Klinika nuk ekziston.</span><button type="button" id="openStaff" data-i18n="demo.staff">Shiko kalendarin e klinikës</button></div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#top" aria-label="Kristal Dental"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M13 1 24 9 13 25 2 9Z" fill="#1D6AAD"/><path d="M13 1 17 9 13 25 9 9Z" fill="#6CC3B9" opacity=".85"/><path d="M2 9h22" stroke="#fff" stroke-width="1.2"/></svg><span>Kristal Dental</span></a>
+      <ul>
+        <li><a href="#vizita" data-i18n="nav.find">Gjeni vizitën</a></li>
+        <li><a href="#cmimet" data-i18n="nav.prices">Çmimet</a></li>
+        <li><a href="#diaspora" data-i18n="nav.dia">Diaspora</a></li>
+        <li><a href="#kontakt" data-i18n="nav.visit">Kontakt</a></li>
+      </ul>
+      <div class="lang" role="group" aria-label="Gjuha / Language"><button type="button" data-lang="sq">SQ</button><button type="button" data-lang="en">EN</button></div>
+      <a class="btn" href="#vizita" data-i18n="cta.book">Rezervo</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <h1><span data-i18n="h.l1">Buzëqeshje e qetë,</span><span data-i18n="h.l2">pa frikë.</span></h1>
+          <p class="lead" data-i18n="h.lead">Klinikë dentare në Pejë ku çmimi thuhet para trajtimit dhe çdo hap shpjegohet. Na tregoni çfarë ju shqetëson dhe ju gjejmë vizitën e duhur me orarin e lirë.</p>
+          <div class="cta-row"><a class="btn" href="#vizita" data-i18n="h.cta">Gjeni vizitën tuaj</a><a class="btn soft" href="#cmimet" data-i18n="h.cta2">Shiko çmimet</a></div>
+          <p class="urgent-line"><i aria-hidden="true"></i><span><span data-i18n="h.urg">Dhimbje e fortë? Mbajmë dy orë urgjente çdo ditë.</span> <a href="tel:+38344000112">+383 44 000 112</a></span></p>
+        </div>
+        <div class="gem" id="gem">
+          <svg viewBox="0 0 500 530" role="img" aria-labelledby="gemT">
+            <title id="gemT" data-i18n="h.alt">Kabineti i klinikës: karrige dentare në dritë të bardhë</title>
+            <defs>
+              <clipPath id="cut"><path d="M250 6 470 120 486 330 330 520 170 520 14 330 30 120Z"/></clipPath>
+              <linearGradient id="sw" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <linearGradient id="fa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <linearGradient id="fb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1D6AAD" stop-opacity=".22"/><stop offset="1" stop-color="#1D6AAD" stop-opacity="0"/></linearGradient>
+            </defs>
+            <g clip-path="url(#cut)">
+              <image href="img/room2.jpg" x="-120" y="0" width="760" height="530" preserveAspectRatio="xMidYMid slice"/>
+              <path class="facet" d="M250 6 470 120 250 200Z" fill="url(#fa)"/>
+              <path class="facet" d="M250 6 30 120 250 200Z" fill="url(#fa)" opacity=".6"/>
+              <path class="facet" d="M14 330 30 120 250 200 170 520Z" fill="url(#fb)"/>
+              <path class="facet" d="M486 330 470 120 250 200 330 520Z" fill="url(#fa)" opacity=".4"/>
+              <g class="sweep"><rect x="80" y="-60" width="140" height="660" fill="url(#sw)" transform="rotate(18 250 265)"/></g>
+            </g>
+            <path d="M250 6 470 120 486 330 330 520 170 520 14 330 30 120Z M30 120 250 200 470 120 M250 200 170 520 M250 200 330 520" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.5"/>
+          </svg>
+          <div class="tag t1"><i aria-hidden="true">✓</i><div><b data-i18n="tag1">Çmim me shkrim</b><small data-i18n="tag1s">para çdo trajtimi</small></div></div>
+          <div class="tag t2"><i aria-hidden="true">3D</i><div><b data-i18n="tag2">Skanim digjital</b><small data-i18n="tag2s">pa masë në gojë</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust"><div class="wrap">
+      <div><b data-i18n="tr1">Autoklavë klasi B</b><span data-i18n="tr1s">paketim i hapur para jush</span></div>
+      <div><b data-i18n="tr2">Rreze X digjitale</b><span data-i18n="tr2s">deri 90% më pak rrezatim</span></div>
+      <div><b data-i18n="tr3">Këste pa kamatë</b><span data-i18n="tr3s">për trajtime mbi €300</span></div>
+      <div><b data-i18n="tr4">Kujtesë çdo 6 muaj</b><span data-i18n="tr4s">që të mos harroni kontrollin</span></div>
+    </div></div>
+
+    <section id="vizita">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 data-i18n="f.title">Çfarë ju sjell te ne?</h2>
+          <p class="lead" data-i18n="f.lead">Dy pyetje dhe ju tregojmë cilën vizitë duhet të rezervoni, sa zgjat, sa kushton dhe kush e bën. Orët që shihni janë orët e vërteta të lira.</p>
+        </div>
+        <div id="flow">
+          <div class="finder">
+            <p class="q" data-i18n="f.q1">Zgjidhni atë që ju përshkruan më mirë</p>
+            <div class="opts" id="q1" role="group" aria-label="Arsyeja e vizitës"></div>
+            <div class="q2" id="q2wrap" hidden><p class="q" id="q2"></p><div class="opts" id="q2opts" role="group"></div></div>
+            <div class="result" id="result" hidden aria-live="polite"></div>
+          </div>
+          <div class="book" id="book" hidden>
+            <div>
+              <div class="step"><h3 data-i18n="b.doc">Me cilin mjek?</h3><div class="docs" id="docs" role="group" aria-label="Mjeku"></div></div>
+              <div class="step"><h3 data-i18n="b.day">Dita</h3><div class="days" id="days" role="group" aria-label="Dita"></div></div>
+              <div class="step"><h3 data-i18n="b.time">Ora</h3><div class="slots" id="slots" role="group" aria-label="Ora"></div></div>
+              <div class="step">
+                <h3 data-i18n="b.you">Të dhënat</h3>
+                <div class="fields">
+                  <label><span data-i18n="fl.name">Emri dhe mbiemri</span><input id="fName" autocomplete="name"></label>
+                  <label><span data-i18n="fl.phone">Telefoni</span><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+383 4x xxx xxx"></label>
+                  <label><span data-i18n="fl.first">Hera e parë te ne?</span><select id="fFirst"><option value="yes" data-i18n="fl.yes">Po, pacient i ri</option><option value="no" data-i18n="fl.no">Jo, kam qenë më parë</option></select></label>
+                  <label><span data-i18n="fl.lang">Gjuha</span><select id="fLang"><option>Shqip</option><option>English</option><option>Deutsch</option></select></label>
+                  <label class="full"><span data-i18n="fl.note">Shënim për mjekun (opsional)</span><input id="fNote" data-i18n-ph="fl.note.ph" placeholder="p.sh. dhëmbi poshtë majtas, ndjeshmëri ndaj të ftohtit"></label>
+                </div>
+              </div>
+            </div>
+            <aside class="side">
+              <h3 data-i18n="s.title">Termini juaj</h3>
+              <dl>
+                <dt data-i18n="s.visit">Vizita</dt><dd id="sVisit">-</dd>
+                <dt data-i18n="s.doc">Mjeku</dt><dd id="sDoc">-</dd>
+                <dt data-i18n="s.when">Kur</dt><dd id="sWhen">-</dd>
+                <dt data-i18n="s.price">Çmimi</dt><dd id="sPrice">-</dd>
+              </dl>
+              <button class="btn" type="button" id="confirm" disabled data-i18n="s.confirm">Konfirmo terminin</button>
+              <p class="err" id="err" role="alert"></p>
+              <p class="fine" data-i18n="s.fine">Ju konfirmojmë me SMS. Për ndryshime na shkruani deri 24 orë para.</p>
+            </aside>
+          </div>
+        </div>
+        <div id="done" hidden>
+          <div class="ticket" id="ticket" tabindex="-1">
+            <h3 data-i18n="t.title">Termini u rezervua</h3>
+            <div class="code" id="tCode"></div>
+            <dl>
+              <div><dt data-i18n="s.visit">Vizita</dt><dd id="tVisit"></dd></div>
+              <div><dt data-i18n="s.doc">Mjeku</dt><dd id="tDoc"></dd></div>
+              <div><dt data-i18n="s.when">Kur</dt><dd id="tWhen"></dd></div>
+              <div><dt data-i18n="s.price">Çmimi</dt><dd id="tPrice"></dd></div>
+            </dl>
+            <div class="recall" id="tRecall"></div>
+            <p id="tMsg" style="color:var(--text2);font-size:15px;margin:0 0 18px"></p>
+            <div class="cta-row"><button class="btn" type="button" id="tIcs" data-i18n="t.ics">Shto në kalendar</button><a class="btn soft" id="tWa" target="_blank" rel="noopener" data-i18n="t.wa">Dërgo në WhatsApp</a><button class="btn soft" type="button" id="tAgain" data-i18n="t.again">Termin tjetër</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prices" id="cmimet">
+      <div class="wrap">
+        <div class="sec-head"><h2 data-i18n="p.title">Çmimet, pa surpriza</h2><p class="lead" data-i18n="p.lead">Çmimi i saktë ju jepet me shkrim pas kontrollit. Këto janë intervalet tona të zakonshme.</p></div>
+        <div class="plist" id="plist"></div>
+        <p class="note" data-i18n="p.note">Kontrolli zbritet nga çmimi nëse vazhdoni me trajtimin brenda 30 ditëve.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head"><h2 data-i18n="c.title">Klinika dhe ekipi</h2><p class="lead" data-i18n="c.lead">Tre kabinete, një pritje e qetë dhe instrumente që i shihni të hapen para jush.</p></div>
+        <div class="clinic">
+          <img src="img/room.jpg" alt="Kabinet dentar me dritë natyrale" loading="lazy" width="1100" height="734">
+          <img src="img/wall.jpg" alt="Salla e pritjes me karrige dhe bimë" loading="lazy" width="1100" height="1287">
+          <img src="img/tools.jpg" alt="Instrumente dentare në dorë me doreza" loading="lazy" width="900" height="1350">
+          <img src="img/models.jpg" alt="Modele implantesh dhe kurorash" loading="lazy" width="1100" height="734">
+          <img src="img/brushes.jpg" alt="Furça dhëmbësh prej bambuje" loading="lazy" width="1100" height="1100">
+        </div>
+        <div class="team" id="team"></div>
+      </div>
+    </section>
+
+    <section class="dia" id="diaspora">
+      <div class="wrap">
+        <div>
+          <h2 data-i18n="d.title">Vini nga diaspora?</h2>
+          <p class="lead" style="margin-top:16px" data-i18n="d.lead">Shumë pacientë na vijnë për 1–2 javë në verë ose në festa. Planifikojeni trajtimin para se të arrini, që të mos humbni ditë.</p>
+          <ol>
+            <li><div><b data-i18n="d1">Na dërgoni një foto ose rreze X</b><span data-i18n="d1s">Në WhatsApp, edhe nga telefoni.</span></div></li>
+            <li><div><b data-i18n="d2">Merrni planin dhe çmimin me shkrim</b><span data-i18n="d2s">Brenda 48 orëve, në shqip, anglisht ose gjermanisht.</span></div></li>
+            <li><div><b data-i18n="d3">Ne i rendisim vizitat sipas ditëve tuaja</b><span data-i18n="d3s">Që trajtimi të përfundojë para se të ktheheni.</span></div></li>
+          </ol>
+          <div class="cta-row" style="margin-top:26px"><a class="btn" id="diaWa" target="_blank" rel="noopener" data-i18n="d.cta">Dërgo në WhatsApp</a></div>
+        </div>
+        <img src="img/implant.jpg" alt="Implant dentar i mbajtur me dorë me doreza" loading="lazy" width="900" height="1350">
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="wrap visit">
+        <div>
+          <h2 data-i18n="v.title">Na gjeni në Pejë</h2>
+          <p class="lead" style="margin-top:14px">Rr. Mbretëresha Teutë 31, Pejë</p>
+          <div class="contact"><a href="tel:+38344000111">+383 44 000 111</a><a id="cMaps" target="_blank" rel="noopener" data-i18n="v.maps">Hap në Google Maps</a></div>
+          <p style="color:var(--text2);margin-top:16px" data-i18n="v.access">Kati përdhes, pa shkallë. Parking para klinikës.</p>
+        </div>
+        <div><table class="hours" id="hours" aria-label="Orari"></table></div>
+      </div>
+    </section>
+
+    <section class="faq" style="padding-top:20px">
+      <div class="wrap" style="max-width:860px">
+        <h2 data-i18n="faq.title" style="margin-bottom:18px">Pyetje të shpeshta</h2>
+        <div id="faq"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><span>© <span id="yr"></span> Kristal Dental</span><span data-i18n-html="foot">Faqe koncept nga <a href="../../">Nisja Studio</a>. Fotot: Unsplash.</span></div></footer>
+
+  <dialog id="staffDlg" aria-labelledby="staffH">
+    <div class="dlg-h"><h3 id="staffH" data-i18n="st.title">Kalendari i sotëm</h3><button type="button" id="closeStaff" data-i18n="st.close">Mbyll</button></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="agenda" id="agenda"></div>
+    <p style="padding:0 24px 22px;margin:0;font-size:13px;color:var(--text2)" data-i18n="st.note">Orët urgjente me vija të kuqe mbahen të lira deri sa t'i zërë një pacient me dhimbje. Pacientët vijnë me vizitën e duhur të zgjedhur, kështu kohëzgjatja është e saktë.</p>
+  </dialog>
+
+  <script src="../kit/kit.js"></script>
+  <script src="data.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var S = window.SITE, $ = K.$, t = K.t, KEY = "kristal-bookings";
+    var docBy = function (id) { return S.doctors.find(function (d) { return d.id === id; }); };
+    var hoursFor = function (wd) { return S.hours[wd] || null; };
+    var docHours = function (d) { var h = {}; for (var i = 0; i < 7; i++) h[i] = d.off.indexOf(i) > -1 ? null : hoursFor(i); return h; };
+    var emTimes = S.emergencyTimes.map(K.toMin);
+    var isEm = function (ms) { var d = new Date(ms); return emTimes.indexOf(d.getHours() * 60 + d.getMinutes()) > -1; };
+    var demo = K.demoBusy(S.doctors.map(function (d) { return d.id; }), S.daysAhead, hoursFor, { seed: 33, load: .38, block: 45 })
+      .filter(function (x) { return docBy(x.res).off.indexOf(new Date(x.start).getDay()) === -1 && !emTimes.some(function (m) { var d = new Date(x.start), s = d.getHours() * 60 + d.getMinutes(), e = s + (x.end - x.start) / 6e4; return m < e && s < m + 45; }); });
+    var busy = function () { return demo.concat(K.saved(KEY).map(function (x) { return { res: x.res, start: x.start, end: x.end, mine: true, visit: x.visit, urgent: x.urgent }; })); };
+
+    var st = { a1: null, a2: null, visit: null, urgent: false, call: false, doc: "any", day: null, slot: null, who: null };
+
+    /* normal visits cannot sit on an emergency hold; urgent visits can only use holds today/tomorrow, or the first free time */
+    function slotsFor(docId, day) {
+      var v = S.visits[st.visit], wd = new Date(day).getDay();
+      var res = S.doctors.filter(function (d) { return v.by.indexOf(d.id) > -1 && (docId === "any" || d.id === docId); }).map(function (d) { return { id: d.id, hours: docHours(d) }; });
+      var b = busy();
+      if (!st.urgent) {
+        S.doctors.forEach(function (d) { emTimes.forEach(function (m) { var s = K.day0(day); s.setMinutes(m); b.push({ res: d.id, start: s.getTime(), end: s.getTime() + 45 * 6e4 }); }); });
+      }
+      var list = K.slots({ day: day, hours: hoursFor(wd), step: S.step, duration: v.min, resources: res, busy: b, noticeMin: st.urgent ? 20 : S.noticeMin });
+      return list.map(function (s) { s.em = isEm(s.t); return s; });
+    }
+    function nextFree(docId) {
+      for (var d = 0; d < S.daysAhead; d++) { var day = K.day0(new Date()); day.setDate(day.getDate() + d); var s = slotsFor(docId, day).find(function (x) { return x.free.length; }); if (s) return s; }
+      return null;
+    }
+
+    /* ---------- finder ---------- */
+    function opt(box, label, pressed, fn) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = label; b.setAttribute("aria-pressed", String(!!pressed)); b.addEventListener("click", fn); box.appendChild(b);
+    }
+    function renderFinder() {
+      var box = $("q1"); box.innerHTML = "";
+      S.finder.forEach(function (f) { opt(box, t(f.label), st.a1 === f.id, function () { st.a1 = f.id; st.a2 = null; if (f.go) { setVisit(f.go, false, false); } else { st.visit = null; } renderFinder(); }); });
+      var f = S.finder.find(function (x) { return x.id === st.a1; });
+      var q2 = $("q2wrap");
+      if (f && f.ask) {
+        q2.hidden = false; $("q2").textContent = t(f.ask.q); var ob = $("q2opts"); ob.innerHTML = ""; ob.setAttribute("aria-label", t(f.ask.q));
+        f.ask.opts.forEach(function (o, i) { opt(ob, t(o.label), st.a2 === i, function () { st.a2 = i; setVisit(o.go, !!o.urgent, !!o.call); renderFinder(); }); });
+      } else q2.hidden = true;
+      renderResult();
+    }
+    function setVisit(id, urgent, call) {
+      var changed = st.visit !== id || st.urgent !== urgent;
+      st.visit = id; st.urgent = urgent; st.call = call;
+      if (changed) { st.slot = null; st.day = null; if (st.doc !== "any" && S.visits[id].by.indexOf(st.doc) === -1) st.doc = "any"; }
+      renderBook();
+      if (changed && !K.reduced) setTimeout(function () { $("result").scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 60);
+    }
+    function priceText(v) { return v.consult ? t("Konsulta €15", "Consultation €15") : v.from === v.to ? K.eur(v.from) : K.eur(v.from) + "–" + v.to; }
+    function renderResult() {
+      var box = $("result");
+      if (!st.visit) { box.hidden = true; $("book").hidden = true; return; }
+      var v = S.visits[st.visit]; box.hidden = false; box.innerHTML = "";
+      var left = document.createElement("div");
+      if (st.urgent) { var bd = document.createElement("span"); bd.className = "badge"; bd.textContent = t("Urgjente: ju japim orën e parë të lirë, edhe sot", "Urgent: we'll give you the first free time, even today"); left.appendChild(bd); }
+      var h = document.createElement("h3"); h.textContent = t(v.name); left.appendChild(h);
+      var p = document.createElement("p"); p.textContent = t(v.what); left.appendChild(p);
+      var facts = document.createElement("div"); facts.className = "facts";
+      [[K.dur(v.min), t("zgjat", "takes")], [priceText(v), t("çmimi", "price")], [v.by.map(function (id) { return docBy(id).name.replace("Dr. ", "Dr "); }).join(", "), t("e bën", "done by")]].forEach(function (f) { var d = document.createElement("div"); d.innerHTML = "<b></b><span></span>"; d.firstChild.textContent = f[0]; d.lastChild.textContent = f[1]; facts.appendChild(d); });
+      left.appendChild(facts);
+      if (st.call) { var cb = document.createElement("div"); cb.className = "callbox"; cb.innerHTML = "<span></span><br><a></a>"; cb.firstChild.textContent = t("Ënjtja ose temperatura duan vëmendje sot. Telefononi linjën urgjente, ose rezervoni orën e parë më poshtë.", "Swelling or fever needs attention today. Call the urgent line, or book the first time below."); var a = cb.querySelector("a"); a.href = "tel:" + S.emergency.replace(/\s/g, ""); a.textContent = S.emergency; left.appendChild(cb); }
+      box.appendChild(left);
+      var go = document.createElement("a"); go.className = "btn" + (st.urgent ? " red" : ""); go.href = "#book"; go.textContent = st.urgent ? t("Merr orën urgjente", "Get the urgent time") : t("Zgjidh orën", "Choose a time");
+      go.addEventListener("click", function (e) { e.preventDefault(); K.smooth("#book"); });
+      box.appendChild(go);
+      $("book").hidden = false;
+    }
+
+    /* ---------- booking ---------- */
+    function pressed(box, attr, val) { box.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset[attr] === String(val))); }); }
+    function renderBook() { if (!st.visit) return; renderDocs(); renderDays(); renderSlots(); renderSide(); }
+    function renderDocs() {
+      var box = $("docs"), v = S.visits[st.visit]; box.innerHTML = "";
+      [{ id: "any", name: t("I pari i lirë", "First available"), role: { sq: "Ju jep orën më të afërt", en: "Gives you the soonest time" } }].concat(S.doctors).forEach(function (d) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "doc"; b.dataset.id = d.id;
+        var can = d.id === "any" || v.by.indexOf(d.id) > -1; b.disabled = !can;
+        b.innerHTML = "<b></b><span></span><em></em>"; b.querySelector("b").textContent = d.name; b.querySelector("span").textContent = t(d.role);
+        var n = can ? nextFree(d.id) : null;
+        b.querySelector("em").textContent = !can ? t("Nuk e bën këtë vizitë", "Doesn't do this visit") : n ? K.dayLabel(n.t, true).split(",")[0] + " " + n.label : t("Pa orë të lira", "No free times");
+        b.addEventListener("click", function () { st.doc = d.id; st.slot = null; pressed(box, "id", d.id); renderDays(); renderSlots(); renderSide(); });
+        box.appendChild(b);
+      });
+      pressed(box, "id", st.doc);
+    }
+    function renderDays() {
+      var box = $("days"), first = null; box.innerHTML = "";
+      for (var d = 0; d < S.daysAhead; d++) {
+        var day = K.day0(new Date()); day.setDate(day.getDate() + d);
+        var b = document.createElement("button"); b.type = "button"; b.className = "day"; b.dataset.t = day.getTime(); b.title = K.dayLabel(day);
+        var ok = hoursFor(day.getDay()) && slotsFor(st.doc, day).some(function (x) { return x.free.length; });
+        b.disabled = !ok; if (ok && first === null) first = day.getTime();
+        b.innerHTML = "<span></span><b></b>"; b.querySelector("span").textContent = d === 0 ? t("Sot", "Today") : d === 1 ? t("Nesër", "Tmrw") : K.WS[K.lang][day.getDay()]; b.querySelector("b").textContent = day.getDate();
+        (function (ts) { b.addEventListener("click", function () { st.day = ts; st.slot = null; pressed(box, "t", ts); renderSlots(); renderSide(); }); })(day.getTime());
+        box.appendChild(b);
+      }
+      var cur = st.day && box.querySelector('[data-t="' + st.day + '"]');
+      if (!cur || cur.disabled) st.day = first;
+      pressed(box, "t", st.day);
+    }
+    function renderSlots() {
+      var box = $("slots"); box.innerHTML = "";
+      if (!st.day) { var p = document.createElement("p"); p.className = "empty"; p.textContent = t("Nuk ka orë të lira në 3 javët e ardhshme. Na telefononi.", "No free times in the next 3 weeks. Please call us."); box.appendChild(p); return; }
+      slotsFor(st.doc, st.day).forEach(function (s) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "slot" + (s.em && st.urgent ? " em" : ""); b.dataset.t = s.t; b.textContent = s.label; b.disabled = !s.free.length;
+        if (s.em && st.urgent) b.title = t("Orë urgjente", "Urgent slot");
+        b.addEventListener("click", function () { st.slot = s.t; st.who = pickWho(s); pressed(box, "t", s.t); renderSide(); });
+        box.appendChild(b);
+      });
+      pressed(box, "t", st.slot);
+    }
+    function pickWho(s) {
+      if (st.doc !== "any") return st.doc;
+      var d0 = K.day0(s.t).getTime(), d1 = d0 + 864e5, load = function (id) { return busy().filter(function (x) { return x.res === id && x.start >= d0 && x.start < d1; }).length; };
+      return s.free.slice().sort(function (a, b) { return load(a) - load(b); })[0];
+    }
+    function renderSide() {
+      var v = st.visit && S.visits[st.visit];
+      $("sVisit").textContent = v ? t(v.name) : "-";
+      $("sDoc").textContent = st.slot ? docBy(st.who).name : st.doc === "any" ? t("I pari i lirë", "First available") : docBy(st.doc).name;
+      $("sWhen").textContent = st.slot ? K.dayLabel(st.slot, true) + ", " + K.hm(st.slot) : "-";
+      $("sPrice").textContent = v ? priceText(v) : "-";
+      $("confirm").disabled = !(v && st.slot);
+    }
+    $("confirm").addEventListener("click", function () {
+      var name = $("fName").value.trim(), phone = $("fPhone").value.trim(), err = $("err");
+      if (name.length < 3) { err.textContent = t("Shkruani emrin dhe mbiemrin.", "Please enter your full name."); $("fName").focus(); return; }
+      if (phone.replace(/\D/g, "").length < 8) { err.textContent = t("Shkruani një numër telefoni të saktë.", "Please enter a valid phone number."); $("fPhone").focus(); return; }
+      var v = S.visits[st.visit], start = st.slot, end = start + v.min * 6e4, who = st.who;
+      if (busy().some(function (x) { return x.res === who && x.start < end && start < x.end; })) { err.textContent = t("Kjo orë sapo u zu. Zgjidhni një tjetër.", "That time was just taken. Pick another."); st.slot = null; renderSlots(); renderSide(); return; }
+      err.textContent = "";
+      var code = K.code("KD"), d = docBy(who), btn = $("confirm"); btn.disabled = true; btn.textContent = t("Duke dërguar…", "Sending…");
+      K.submit(S, (st.urgent ? "URGJENTE " : "") + "Termin " + code + ": " + v.name.sq + ", " + d.name + ", " + K.dayLabel(start) + " " + K.hm(start), {
+        Kodi: code, Vizita: v.name.sq, Urgjente: st.urgent ? "PO" : "Jo", Mjeku: d.name, Kur: K.dayLabel(start) + ", " + K.hm(start) + "–" + K.hm(end), Pacient_i_ri: $("fFirst").value === "yes" ? "Po" : "Jo", Gjuha: $("fLang").value, Emri: name, Telefoni: phone, Shenim: $("fNote").value.trim() || "-"
+      }).then(function (r) {
+        K.save(KEY, { code: code, res: who, visit: st.visit, urgent: st.urgent, start: start, end: end, name: name });
+        $("flow").hidden = true; $("done").hidden = false;
+        $("tCode").textContent = t("Kodi ", "Code ") + code; $("tVisit").textContent = t(v.name); $("tDoc").textContent = d.name; $("tWhen").textContent = K.dayLabel(start, true) + ", " + K.hm(start); $("tPrice").textContent = priceText(v);
+        var rc = new Date(start); rc.setMonth(rc.getMonth() + S.recallMonths); rc.setHours(10, 0, 0, 0);
+        $("tRecall").textContent = t("Kontrolli i radhës: ", "Next check-up: ") + K.MO[K.lang][rc.getMonth()] + " " + rc.getFullYear() + t(". E shtojmë si kujtesë në kalendarin tuaj.", ". We'll add it as a reminder to your calendar.");
+        $("tMsg").textContent = r.demo ? t("Demo: në faqen e vërtetë klinika e merr menjëherë në email dhe WhatsApp dhe ju konfirmon me SMS.", "Demo: on the live site the clinic gets it instantly by email and WhatsApp and confirms by SMS.") : t("Klinika u njoftua. Ju konfirmojmë me SMS.", "The clinic has been notified. We'll confirm by SMS.");
+        $("tIcs").onclick = function () { K.ics("kristal-" + code, [{ start: start, end: end, title: "Kristal Dental: " + t(v.name) + " (" + d.name + ")", where: S.address }, { start: rc.getTime(), end: rc.getTime() + 15 * 6e4, title: t("Kujtesë: rezervo kontrollin te Kristal Dental", "Reminder: book your check-up at Kristal Dental"), where: location.href.split("?")[0] }]); };
+        $("tWa").href = K.wa(S.whatsapp, "Përshëndetje Kristal Dental, rezervova " + v.name.sq + " me " + d.name + ", " + K.dayLabel(start) + " " + K.hm(start) + ". Kodi " + code + ". " + name);
+        $("ticket").focus(); K.smooth("#vizita");
+      }).catch(function () { err.textContent = t("Nuk u dërgua. Kontrolloni internetin ose na telefononi.", "Not sent. Check your connection or call us."); })
+        .then(function () { btn.textContent = t("Konfirmo terminin", "Confirm booking"); renderSide(); });
+    });
+    $("tAgain").addEventListener("click", function () { st.slot = null; $("done").hidden = true; $("flow").hidden = false; renderBook(); });
+
+    /* ---------- rest ---------- */
+    function renderPrices() { var box = $("plist"); box.innerHTML = ""; S.prices.forEach(function (p) { var d = document.createElement("div"); d.innerHTML = "<span></span><b></b>"; d.firstChild.textContent = t(p.n); d.lastChild.textContent = typeof p.p === "string" ? p.p : t(p.p); box.appendChild(d); }); }
+    function renderTeam() {
+      var box = $("team"); box.innerHTML = "";
+      S.doctors.forEach(function (d) {
+        var el = document.createElement("article"); el.className = "member";
+        var ini = d.name.replace("Dr. ", "").split(" ").map(function (w) { return w[0]; }).join("");
+        el.innerHTML = '<div class="ini" aria-hidden="true"><span></span></div><h3></h3><p></p><small></small>';
+        el.querySelector(".ini span").textContent = ini; el.querySelector("h3").textContent = d.name; el.querySelector("p").textContent = t(d.role);
+        el.querySelector("small").textContent = t("Jo në klinikë: ", "Not in: ") + d.off.map(function (x) { return K.WD[K.lang][x]; }).join(", ");
+        box.appendChild(el);
+      });
+    }
+    function renderHours() { var wd = new Date().getDay(), rows = ""; [1, 2, 3, 4, 5, 6, 0].forEach(function (d) { var h = S.hours[d]; rows += "<tr" + (d === wd ? ' class="today"' : "") + "><td>" + K.WD[K.lang][d] + "</td><td>" + (h ? h[0] + "–" + h[1] : t("Mbyllur", "Closed")) + "</td></tr>"; }); $("hours").innerHTML = rows; }
+    function renderFaq() { var box = $("faq"); box.innerHTML = ""; S.faq.forEach(function (f) { var d = document.createElement("details"); d.innerHTML = "<summary></summary><p></p>"; d.querySelector("summary").textContent = t(f.q); d.querySelector("p").textContent = t(f.a); box.appendChild(d); }); }
+    function renderAgenda() {
+      var d0 = K.day0(new Date()).getTime(), d1 = d0 + 864e5, now = Date.now(), box = $("agenda"), count = 0, urg = 0, newP = 0; box.innerHTML = "";
+      var open = hoursFor(new Date().getDay());
+      S.doctors.forEach(function (doc) {
+        var col = document.createElement("div"); col.innerHTML = "<h4></h4><p class=\"sum\"></p>"; col.querySelector("h4").textContent = doc.name;
+        if (!open || doc.off.indexOf(new Date().getDay()) > -1) { col.querySelector(".sum").textContent = t("Jo në klinikë sot", "Not in today"); box.appendChild(col); return; }
+        var list = busy().filter(function (x) { return x.res === doc.id && x.start >= d0 && x.start < d1; });
+        emTimes.forEach(function (m) { var s = K.day0(new Date()); s.setMinutes(m); if (!list.some(function (x) { return x.start === s.getTime(); })) list.push({ hold: true, start: s.getTime(), end: s.getTime() + 45 * 6e4 }); });
+        list.sort(function (a, z) { return a.start - z.start; });
+        var n = 0;
+        list.forEach(function (x) {
+          var r = document.createElement("div"), vis = x.visit ? S.visits[x.visit] : S.visits[doc.id === "lule" ? "clean" : ["check", "filling", "pain"][(x.start / 6e4 / 45 | 0) % 3]];
+          r.className = "appt" + (x.hold ? " hold" : x.urgent ? " urg" : x.mine ? " new" : "") + (x.end < now ? " past" : "");
+          r.innerHTML = "<b></b><span></span>"; r.querySelector("b").textContent = K.hm(x.start);
+          r.querySelector("span").textContent = x.hold ? t("Mbajtur për urgjenca", "Held for emergencies") : t(vis.name) + (x.mine ? t(" · online", " · online") : "");
+          col.appendChild(r); if (!x.hold) n++; if (x.urgent) urg++; if (x.mine) newP++;
+        });
+        col.querySelector(".sum").textContent = n + t(" pacientë", " patients");
+        count += n; box.appendChild(col);
+      });
+      $("kpis").innerHTML = "";
+      [[count, t("pacientë sot", "patients today")], [urg, t("urgjenca të rezervuara", "urgent bookings")], [newP, t("rezervuar online nga ju", "booked online by you")]].forEach(function (k) { var d = document.createElement("div"); d.innerHTML = "<b></b><span></span>"; d.querySelector("b").textContent = k[0]; d.querySelector("span").textContent = k[1]; $("kpis").appendChild(d); });
+    }
+    var dlg = $("staffDlg");
+    $("openStaff").addEventListener("click", function () { renderAgenda(); dlg.showModal(); });
+    $("closeStaff").addEventListener("click", function () { dlg.close(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+
+    /* gem: light sweep only while visible; facets brighten toward the pointer */
+    (function () {
+      var g = $("gem"), facets = g.querySelectorAll(".facet");
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { g.classList.toggle("run", es[0].isIntersecting && !K.reduced); }).observe(g);
+      if (K.reduced || !window.matchMedia("(pointer: fine)").matches) return;
+      g.addEventListener("pointermove", function (e) {
+        var r = g.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        facets[0].style.opacity = (.4 + x * .6).toFixed(2); facets[1].style.opacity = (1 - x * .6).toFixed(2); facets[2].style.opacity = (.3 + (1 - x) * y).toFixed(2); facets[3].style.opacity = (.2 + x * y).toFixed(2);
+      });
+    })();
+
+    function renderAll() { renderFinder(); renderBook(); renderPrices(); renderTeam(); renderHours(); renderFaq(); $("diaWa").href = K.wa(S.whatsapp, t("Përshëndetje Kristal Dental, vij nga diaspora dhe dua një plan trajtimi. Do të jem në Pejë nga ... deri ...", "Hello Kristal Dental, I'm visiting from abroad and would like a treatment plan. I'll be in Peja from ... to ...")); }
+    K.onLang(renderAll);
+    K.i18n({
+      "demo": 'This is a <b>concept project</b> by <a href="../../">Nisja Studio</a>. The clinic is fictional.', "demo.staff": "See the clinic calendar",
+      "nav.find": "Find your visit", "nav.prices": "Prices", "nav.dia": "From abroad", "nav.visit": "Contact", "cta.book": "Book",
+      "h.l1": "A calm smile,", "h.l2": "without fear.", "h.lead": "A dental clinic in Peja where the price is given before treatment and every step is explained. Tell us what's bothering you and we'll find the right visit and a free time.",
+      "h.cta": "Find your visit", "h.cta2": "See prices", "h.urg": "Severe pain? We keep two urgent slots free every day.", "h.alt": "Clinic treatment room: dental chair in bright white light",
+      "tag1": "Written price", "tag1s": "before any treatment", "tag2": "Digital scan", "tag2s": "no impression trays",
+      "tr1": "Class B autoclave", "tr1s": "pack opened in front of you", "tr2": "Digital X-rays", "tr2s": "up to 90% less radiation", "tr3": "Interest-free instalments", "tr3s": "for treatment over €300", "tr4": "6-month reminders", "tr4s": "so you never forget a check-up",
+      "f.title": "What brings you in?", "f.lead": "Two questions and we'll tell you which visit to book, how long it takes, what it costs and who does it. The times you see are the real free times.",
+      "f.q1": "Choose what describes you best",
+      "b.doc": "Which dentist?", "b.day": "Day", "b.time": "Time", "b.you": "Your details",
+      "fl.name": "Full name", "fl.phone": "Phone", "fl.first": "First time with us?", "fl.yes": "Yes, new patient", "fl.no": "No, I've been before", "fl.lang": "Language", "fl.note": "Note for the dentist (optional)", "fl.note.ph": "e.g. lower left tooth, sensitive to cold",
+      "s.title": "Your booking", "s.visit": "Visit", "s.doc": "Dentist", "s.when": "When", "s.price": "Price", "s.confirm": "Confirm booking", "s.fine": "We confirm by SMS. For changes, message us up to 24 hours before.",
+      "t.title": "Your visit is booked", "t.ics": "Add to calendar", "t.wa": "Send on WhatsApp", "t.again": "Book another",
+      "p.title": "Prices, no surprises", "p.lead": "You get the exact price in writing after the check-up. These are our usual ranges.", "p.note": "The check-up fee is deducted if you go ahead with treatment within 30 days.",
+      "c.title": "The clinic and the team", "c.lead": "Three treatment rooms, a quiet waiting room and instruments you watch being unpacked.",
+      "d.title": "Visiting from abroad?", "d.lead": "Many patients come for 1–2 weeks in summer or over the holidays. Plan your treatment before you arrive so you don't lose days.",
+      "d1": "Send us a photo or X-ray", "d1s": "On WhatsApp, even from your phone.", "d2": "Get a written plan and price", "d2s": "Within 48 hours, in Albanian, English or German.", "d3": "We schedule visits around your days", "d3s": "So treatment is finished before you fly back.", "d.cta": "Send on WhatsApp",
+      "v.title": "Find us in Peja", "v.maps": "Open in Google Maps", "v.access": "Ground floor, step-free. Parking in front of the clinic.", "faq.title": "Common questions",
+      "foot": 'Concept site by <a href="../../">Nisja Studio</a>. Photos: Unsplash.',
+      "st.title": "Today's calendar", "st.close": "Close", "st.note": "Red dashed urgent slots stay free until a patient in pain takes them. Patients arrive with the right visit already chosen, so durations are accurate."
+    });
+    $("cMaps").href = S.maps; $("yr").textContent = new Date().getFullYear();
+    if (/[?&]staff\b/.test(location.search)) { renderAgenda(); dlg.showModal(); }
+    window.KRISTAL = { st: st, slotsFor: slotsFor, busy: busy, isEm: isEm };
+  })();
+  </script>
+</body>
+</html>

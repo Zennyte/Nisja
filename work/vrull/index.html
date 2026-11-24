@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vrull Fitness · Palestër dhe klasa në Prizren, dita e parë falas</title>
+  <meta name="description" content="Vrull Fitness në Prizren: palestër, HIIT, boks, spinning dhe trajnerë personalë. Shihni orarin e klasave, rezervoni vendin dhe provoni një ditë falas.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#ECEBE7">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <meta property="og:title" content="Vrull Fitness · Prizren">
+  <meta property="og:description" content="Orari i klasave, abonimet dhe dita e provës, online.">
+  <meta property="og:image" content="img/hero.jpg">
+  <link rel="preload" href="../kit/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="img/hero-960.jpg" imagesrcset="img/hero-960.jpg 960w, img/hero.jpg 2200w" imagesizes="100vw">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ExerciseGym",
+    "name": "Vrull Fitness",
+    "description": "Palestër në Prizren me zonë peshash, klasa në grup (HIIT, boks, spinning, forcë, lëvizshmëri) dhe trajnerë personalë.",
+    "image": "https://nisja.vercel.app/work/vrull/img/hero.jpg",
+    "url": "https://nisja.vercel.app/work/vrull/",
+    "telephone": "+383 45 000 000",
+    "priceRange": "€25–€79 / muaj",
+    "address": { "@type": "PostalAddress", "streetAddress": "Rr. Remzi Ademaj 9", "addressLocality": "Prizren", "postalCode": "20000", "addressCountry": "XK" },
+    "geo": { "@type": "GeoCoordinates", "latitude": 42.2139, "longitude": 20.7397 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "06:00", "closes": "23:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "20:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "15:00" }
+    ],
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Ring boksi", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Dushe dhe dollapë", "value": true }
+    ],
+    "makesOffer": [
+      { "@type": "Offer", "name": "Palestra", "price": "25", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "25", "priceCurrency": "EUR", "unitCode": "MON" } },
+      { "@type": "Offer", "name": "Vrull Plus", "price": "35", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "35", "priceCurrency": "EUR", "unitCode": "MON" } },
+      { "@type": "Offer", "name": "Me trajner", "price": "79", "priceCurrency": "EUR", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "79", "priceCurrency": "EUR", "unitCode": "MON" } }
+    ]
+  }
+  </script>
+  <style>
+    @font-face { font-family: "Archivo"; src: url("../kit/fonts/archivo-wdth.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
+    :root {
+      --chalk: #ECEBE7; --paper: #F7F6F3; --ink: #15161A; --text2: #55585F; --line: #D2D0CA; --cobalt: #2340D8; --cobalt-d: #1A31AE; --flare: #FF5B1F;
+      --f: "Archivo", "Arial Narrow", system-ui, sans-serif; --r: 4px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 74px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    body { margin: 0; font: 16px/1.6 var(--f); font-stretch: 100%; color: var(--ink); background: var(--chalk); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    :focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
+    h1, h2, h3 { margin: 0; font-weight: 850; font-stretch: 70%; line-height: 1; text-transform: uppercase; letter-spacing: -.01em; }
+    h2 { font-size: clamp(48px, 8vw, 112px); }
+    .lead { font-size: 18px; color: var(--text2); max-width: 52ch; }
+    [hidden] { display: none !important; }
+
+    .demo-bar { background: var(--ink); color: #DADAD6; font-size: 14px; padding: 8px 16px; display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; text-align: center; }
+    .demo-bar a { color: #fff; font-weight: 700; }
+    .demo-bar button { background: var(--flare); border: 0; border-radius: 99px; padding: 4px 12px; font-size: 13px; font-weight: 700; color: var(--ink); }
+
+    header { position: sticky; top: 0; z-index: 40; background: rgba(236,235,231,.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; gap: 28px; height: 64px; }
+    .logo { font-weight: 900; font-stretch: 125%; font-size: 24px; text-decoration: none; letter-spacing: -.02em; display: flex; align-items: center; gap: 8px; }
+    .logo i { width: 12px; height: 12px; background: var(--flare); border-radius: 50%; }
+    .nav ul { list-style: none; display: flex; gap: 24px; margin: 0 0 0 auto; padding: 0; font-weight: 600; font-size: 15px; }
+    .nav ul a { text-decoration: none; color: var(--text2); }
+    .nav ul a:hover { color: var(--ink); }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 99px; overflow: hidden; }
+    .lang button { background: none; border: 0; padding: 5px 10px; font-size: 13px; font-weight: 800; color: var(--text2); }
+    .lang button[aria-pressed="true"] { background: var(--ink); color: var(--chalk); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px; border-radius: var(--r); border: 0; background: var(--cobalt); color: #fff; font-weight: 800; font-size: 16px; text-decoration: none; text-transform: uppercase; letter-spacing: .02em; font-stretch: 85%; transition: background .2s, transform .15s; }
+    .btn:hover { background: var(--cobalt-d); }
+    .btn:active { transform: scale(.98); }
+    .btn.dark { background: var(--ink); }
+    .btn.dark:hover { background: #2A2C33; }
+    .btn.out { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
+    .btn.out:hover { background: var(--ink); color: var(--chalk); }
+    .nav .btn { min-height: 42px; padding: 0 18px; font-size: 14px; }
+    @media (max-width: 900px) { .nav ul { display: none; } .nav .lang { margin-left: auto; } }
+    @media (max-width: 480px) { .nav { gap: 10px; } .nav .btn { padding: 0 12px; font-size: 13px; white-space: nowrap; } .logo { font-size: 20px; } }
+
+    /* hero: the headline stretches with your scroll */
+    .hero { padding: 44px 0 0; overflow: hidden; }
+    .kin { font-size: clamp(84px, 19.5vw, 300px); line-height: .8; font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: -.02em; }
+    .kin span { display: block; font-stretch: var(--w, 62%); transition: font-stretch .12s linear; white-space: nowrap; }
+    .kin span:nth-child(2) { color: var(--cobalt); text-align: right; }
+    .hero-row { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end; margin: 34px 0 40px; }
+    .hero-row .lead { margin: 0; color: #3E4148; }
+    .hero-row .cta-row { justify-content: flex-end; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .band { position: relative; height: min(62vh, 560px); overflow: hidden; }
+    .band img { width: 100%; height: 118%; object-fit: cover; will-change: transform; }
+    .band .stats { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(21,22,26,.82); color: #fff; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .band .stats div { padding: 20px 24px; border-left: 1px solid rgba(255,255,255,.14); }
+    .band .stats b { display: block; font-size: 38px; font-weight: 900; font-stretch: 70%; line-height: 1; }
+    .band .stats span { font-size: 14px; color: #C8C9CC; }
+    @media (max-width: 860px) { .hero-row { grid-template-columns: 1fr; } .hero-row .cta-row { justify-content: flex-start; } .band .stats { grid-template-columns: 1fr 1fr; } }
+
+    .marquee { background: var(--ink); color: var(--chalk); overflow: hidden; border-top: 1px solid #000; }
+    .marquee .track { display: flex; width: max-content; will-change: transform; }
+    .marquee span { font-size: clamp(30px, 4vw, 54px); font-weight: 900; font-stretch: 75%; text-transform: uppercase; padding: 14px 0; display: flex; align-items: center; gap: 34px; margin-right: 34px; white-space: nowrap; }
+    .marquee span::after { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--flare); }
+
+    section { padding: 110px 0; }
+    .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 28px; flex-wrap: wrap; margin-bottom: 44px; }
+
+    /* crowd meter */
+    .crowd { display: grid; grid-template-columns: .8fr 1.2fr; gap: 50px; align-items: end; }
+    .meter { display: flex; align-items: end; gap: 6px; height: 220px; border-bottom: 2px solid var(--ink); position: relative; }
+    .meter .bar { flex: 1; background: #C9C7C0; border-radius: 3px 3px 0 0; position: relative; min-height: 4px; transition: height .8s cubic-bezier(.2,.7,.2,1); }
+    .meter .bar.now { background: var(--cobalt); }
+    .meter .bar.past { background: #DCDAD4; }
+    .meter .bar span { position: absolute; bottom: -26px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--text2); font-weight: 600; }
+    .meter .bar.now::after { content: attr(data-now); position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: var(--cobalt); color: #fff; font-size: 12px; font-weight: 800; padding: 3px 8px; border-radius: 99px; white-space: nowrap; }
+    .crowd-now { font-size: clamp(40px, 5vw, 64px); font-weight: 900; font-stretch: 70%; text-transform: uppercase; line-height: .95; margin: 14px 0 12px; }
+    .crowd-now[data-l="low"] { color: #2F7D57; } .crowd-now[data-l="mid"] { color: #A0570C; } .crowd-now[data-l="high"] { color: #C2341B; }
+    .meter-wrap { padding-bottom: 30px; }
+    @media (max-width: 860px) { .crowd { grid-template-columns: 1fr; } .meter .bar:nth-child(even) span { display: none; } }
+
+    /* timetable */
+    .light { background: var(--paper); }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+    .filt { border: 2px solid var(--ink); background: transparent; border-radius: 99px; padding: 7px 16px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+    .filt i { width: 10px; height: 10px; border-radius: 50%; }
+    .filt[aria-pressed="true"] { background: var(--ink); color: var(--chalk); }
+    .week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; }
+    .col h3 { font-size: 22px; font-stretch: 85%; padding: 10px 0; border-bottom: 2px solid var(--ink); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline; }
+    .col h3 small { font-size: 13px; font-weight: 600; color: var(--text2); text-transform: none; }
+    .col.today h3 { color: var(--cobalt); border-color: var(--cobalt); }
+    .cls { width: 100%; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 12px 12px 12px 16px; margin-bottom: 8px; position: relative; display: grid; gap: 2px; transition: transform .2s, box-shadow .2s; }
+    .cls::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--c); border-radius: var(--r) 0 0 var(--r); }
+    .cls:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 20px -12px rgba(0,0,0,.35); }
+    .cls b { font-size: 17px; font-weight: 800; }
+    .cls .tm { font-weight: 800; font-variant-numeric: tabular-nums; font-size: 14px; }
+    .cls .co { font-size: 13px; color: var(--text2); }
+    .cls .sp { font-size: 13px; font-weight: 700; margin-top: 4px; }
+    .cls .sp.low { color: #C2341B; } .cls .sp.full { color: var(--text2); }
+    .cls .pips { display: flex; gap: 2px; margin-top: 6px; }
+    .cls .pips i { flex: 1; height: 4px; background: #E3E1DB; border-radius: 2px; }
+    .cls .pips i.on { background: var(--ink); }
+    .cls.mine { box-shadow: inset 0 0 0 2px var(--cobalt); }
+    .cls:disabled { opacity: .55; cursor: default; }
+    .none { font-size: 14px; color: var(--text2); padding: 8px 0; }
+    @media (max-width: 1000px) { .week { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 74%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; } .col { scroll-snap-align: start; } }
+
+    /* plans */
+    .terms { display: inline-flex; background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 4px; gap: 4px; }
+    .terms button { border: 0; background: none; border-radius: 99px; padding: 9px 16px; font-weight: 700; font-size: 14px; }
+    .terms button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+    .terms small { color: #B83A0B; font-weight: 800; margin-left: 4px; }
+    .terms button[aria-pressed="true"] small { color: #FFB08F; }
+    .switch { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; cursor: pointer; margin-left: 18px; }
+    .switch input { width: 44px; height: 26px; appearance: none; -webkit-appearance: none; background: #C9C7C0; border-radius: 99px; position: relative; cursor: pointer; transition: background .2s; margin: 0; }
+    .switch input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; }
+    .switch input:checked { background: var(--cobalt); }
+    .switch input:checked::after { transform: translateX(18px); }
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+    .plan { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 30px; display: flex; flex-direction: column; position: relative; }
+    .plan.best { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .plan .flag { position: absolute; top: -12px; left: 30px; background: var(--flare); color: var(--ink); font-weight: 800; font-size: 13px; padding: 3px 10px; border-radius: 99px; }
+    .plan h3 { font-size: 34px; font-stretch: 80%; }
+    .price { margin: 22px 0 4px; display: flex; align-items: baseline; gap: 6px; }
+    .price b { font-size: 72px; font-weight: 900; font-stretch: 70%; line-height: .9; font-variant-numeric: tabular-nums; }
+    .price span { font-weight: 600; color: var(--text2); }
+    .plan.best .price span, .plan.best .tot { color: #B9BBC1; }
+    .price s { color: var(--text2); font-weight: 600; font-size: 18px; }
+    .tot { font-size: 14px; color: var(--text2); min-height: 22px; }
+    .plan ul { list-style: none; padding: 0; margin: 22px 0 28px; display: grid; gap: 10px; flex: 1; }
+    .plan li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; font-size: 15.5px; }
+    .plan li::before { content: ""; width: 10px; height: 10px; background: var(--cobalt); margin-top: 7px; border-radius: 2px; }
+    .plan.best li::before { background: var(--flare); }
+    .plan.best .btn { background: var(--flare); color: var(--ink); }
+    .plan.best .btn:hover { background: #FF7A47; }
+    @media (max-width: 900px) { .plans { grid-template-columns: 1fr; } .switch { margin: 14px 0 0; } }
+
+    /* trial */
+    .trial { background: var(--cobalt); color: #fff; }
+    .trial .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; }
+    .trial .lead { color: #D5DBFA; }
+    .trial h2 { color: #fff; }
+    .form { background: #fff; color: var(--ink); border-radius: 8px; padding: 30px; }
+    .form h3 { font-size: 22px; font-stretch: 85%; margin: 0 0 12px; }
+    .form .grp { margin-bottom: 22px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { border: 2px solid var(--line); background: #fff; border-radius: 99px; padding: 8px 14px; font-weight: 700; font-size: 14px; }
+    .pill[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .pill:disabled { opacity: .35; cursor: not-allowed; }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fields label { display: grid; gap: 6px; font-size: 14px; font-weight: 700; }
+    .fields input { font: inherit; border: 2px solid var(--line); border-radius: var(--r); padding: 11px 12px; min-height: 50px; }
+    .fields input:focus { border-color: var(--cobalt); outline: none; }
+    .err { color: #C2341B; font-weight: 700; font-size: 14px; min-height: 1.2em; margin: 10px 0 0; }
+    .pass { background: #fff; color: var(--ink); border-radius: 8px; padding: 30px; position: relative; overflow: hidden; }
+    .pass::after { content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: var(--flare); }
+    .pass h3 { font-size: 46px; font-stretch: 70%; }
+    .pass .code { font-size: 64px; font-weight: 900; font-stretch: 70%; color: var(--cobalt); letter-spacing: .02em; margin: 10px 0; line-height: 1; }
+    .pass p { color: var(--text2); }
+    @media (max-width: 900px) { .trial .wrap { grid-template-columns: 1fr; } }
+    @media (max-width: 520px) { .fields { grid-template-columns: 1fr; } }
+
+    /* floor */
+    .floor { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 210px; gap: 12px; }
+    .floor figure { margin: 0; position: relative; overflow: hidden; border-radius: var(--r); background: #ccc; }
+    .floor img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+    .floor figure:hover img { transform: scale(1.05); }
+    .floor figcaption { position: absolute; left: 12px; bottom: 12px; background: var(--chalk); color: var(--ink); font-weight: 800; font-size: 14px; padding: 6px 10px; border-radius: var(--r); }
+    .f1 { grid-column: span 7; grid-row: span 2; } .f2 { grid-column: span 5; } .f3 { grid-column: span 5; } .f4 { grid-column: span 4; } .f5 { grid-column: span 4; } .f6 { grid-column: span 4; }
+    @media (max-width: 760px) { .floor { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; } .floor figure { grid-column: span 1 !important; grid-row: span 1 !important; } .f1 { grid-column: span 2 !important; grid-row: span 2 !important; } }
+
+    .coaches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .coach { border-top: 3px solid var(--ink); padding-top: 18px; }
+    .coach .ini { font-size: 90px; font-weight: 900; font-stretch: 62%; line-height: .8; color: var(--cobalt); }
+    .coach h3 { font-size: 34px; font-stretch: 80%; margin: 14px 0 6px; }
+    .coach p { color: var(--text2); margin: 0 0 8px; }
+    .coach small { font-weight: 700; font-size: 14px; }
+    @media (max-width: 860px) { .coaches { grid-template-columns: 1fr; } }
+
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
+    .hours td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+    .hours tr.today td { color: var(--cobalt); font-weight: 800; }
+    .addr { font-size: clamp(36px, 4.4vw, 60px); font-weight: 900; font-stretch: 70%; text-transform: uppercase; line-height: .95; margin: 22px 0; }
+    .contact a { display: inline-block; font-weight: 800; margin: 6px 22px 0 0; text-underline-offset: 4px; }
+    @media (max-width: 860px) { .visit { grid-template-columns: 1fr; } }
+
+    .faq details { border-bottom: 2px solid var(--ink); padding: 18px 0; }
+    .faq summary { cursor: pointer; font-weight: 800; font-size: 19px; list-style: none; display: flex; justify-content: space-between; gap: 20px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font-weight: 900; font-size: 26px; line-height: 1; color: var(--cobalt); transition: transform .3s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq p { color: var(--text2); margin: 10px 0 0; }
+
+    footer { background: var(--ink); color: #AEB0B5; padding: 36px 0 50px; font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    footer a { color: #fff; }
+
+    dialog { border: 0; border-radius: 8px; padding: 0; width: min(560px, 94vw); max-height: 90vh; background: var(--paper); color: var(--ink); }
+    dialog.wide { width: min(980px, 94vw); }
+    dialog::backdrop { background: rgba(21,22,26,.7); }
+    .dlg-h { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--paper); z-index: 1; }
+    .dlg-h h3 { font-size: 28px; font-stretch: 80%; }
+    .dlg-h button { background: none; border: 2px solid var(--ink); border-radius: 99px; padding: 5px 14px; font-weight: 800; }
+    .dlg-b { padding: 22px 24px 26px; }
+    .dlg-b .meta { color: var(--text2); margin: 0 0 18px; }
+    .kpis { display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 20px; }
+    .kpis div { font-size: 13px; color: var(--text2); }
+    .kpis b { display: block; font-size: 40px; font-weight: 900; font-stretch: 70%; color: var(--ink); line-height: 1; }
+    .roster { display: grid; gap: 8px; }
+    .roster div { display: grid; grid-template-columns: 60px 1fr auto; gap: 12px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 10px 14px; font-size: 15px; }
+    .roster b { font-variant-numeric: tabular-nums; }
+    .roster em { font-style: normal; font-weight: 800; }
+    .roster .wl { color: #C2341B; font-size: 13px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar"><span data-i18n-html="demo">Ky është një <b>projekt koncept</b> nga <a href="../../">Nisja Studio</a>. Palestra nuk ekziston.</span><button type="button" id="openStaff" data-i18n="demo.staff">Paneli i recepsionit</button></div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#top"><i aria-hidden="true"></i>VRULL</a>
+      <ul>
+        <li><a href="#klasat" data-i18n="nav.classes">Klasat</a></li>
+        <li><a href="#abonimet" data-i18n="nav.plans">Abonimet</a></li>
+        <li><a href="#prova" data-i18n="nav.trial">Dita e provës</a></li>
+        <li><a href="#vizita" data-i18n="nav.visit">Vizita</a></li>
+      </ul>
+      <div class="lang" role="group" aria-label="Gjuha / Language"><button type="button" data-lang="sq">SQ</button><button type="button" data-lang="en">EN</button></div>
+      <a class="btn" href="#prova" data-i18n="cta.trial">Provo falas</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <h1 class="kin" id="kin"><span data-i18n="h.l1">Merr</span><span data-i18n="h.l2">vrull.</span></h1>
+        <div class="hero-row">
+          <p class="lead" data-i18n="h.lead">Palestër, klasa në grup dhe trajnerë në Prizren. Shihni sa e mbushur është tani, zini vendin në klasë dhe provoni një ditë pa paguar asgjë.</p>
+          <div class="cta-row"><a class="btn" href="#prova" data-i18n="h.cta">Merr ditën falas</a><a class="btn out" href="#klasat" data-i18n="h.cta2">Orari i klasave</a></div>
+        </div>
+      </div>
+      <div class="band">
+        <img id="bandImg" src="img/hero-960.jpg" srcset="img/hero-960.jpg 960w, img/hero.jpg 2200w" sizes="100vw" alt="Salla e peshave me rreshta makinerish dhe dritë të ulët" width="2200" height="1468" fetchpriority="high" data-i18n-alt="h.alt">
+        <div class="stats">
+          <div><b>900 m²</b><span data-i18n="st1">hapësirë stërvitjeje</span></div>
+          <div><b>17</b><span data-i18n="st2">klasa në javë</span></div>
+          <div><b>06–23</b><span data-i18n="st3">hapur çdo ditë pune</span></div>
+          <div><b>0 €</b><span data-i18n="st4">dita e parë</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+    <section id="tani">
+      <div class="wrap crowd">
+        <div>
+          <h2 data-i18n="c.title">Sa plot është?</h2>
+          <div class="crowd-now" id="crowdNow"></div>
+          <p class="lead" id="crowdTip"></p>
+        </div>
+        <div class="meter-wrap"><div class="meter" id="meter" role="img"></div></div>
+      </div>
+    </section>
+
+    <section class="light" id="klasat">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 data-i18n="k.title">Klasat e javës</h2>
+          <p class="lead" data-i18n="k.lead">Prekni një klasë për të zënë vendin. Kur mbushet, hyni në listë pritjeje dhe vendi ju kalon vetë nëse dikush anulon.</p>
+        </div>
+        <div class="filters" id="filters" role="group" aria-label="Lloji i klasës"></div>
+        <div class="week" id="week"></div>
+      </div>
+    </section>
+
+    <section id="abonimet">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2 data-i18n="p.title">Abonimet</h2>
+          <div>
+            <div class="terms" id="terms" role="group" aria-label="Kohëzgjatja"></div>
+            <label class="switch"><input type="checkbox" id="student"><span data-i18n="p.student">Student ose nxënës</span></label>
+          </div>
+        </div>
+        <div class="plans" id="plans"></div>
+      </div>
+    </section>
+
+    <section class="trial" id="prova">
+      <div class="wrap">
+        <div>
+          <h2 data-i18n="t.title">Një ditë, falas</h2>
+          <p class="lead" style="margin-top:22px" data-i18n="t.lead">Pa kartelë, pa detyrim. Zgjidhni ditën, merrni kodin dhe tregojeni në recepsion. Trajneri ju pret dhe ju tregon makineritë.</p>
+        </div>
+        <div>
+          <div class="form" id="trialForm">
+            <div class="grp"><h3 data-i18n="t.day">Dita</h3><div class="pills" id="tDays" role="group" aria-label="Dita"></div></div>
+            <div class="grp"><h3 data-i18n="t.part">Kur vini?</h3><div class="pills" id="tPart" role="group" aria-label="Pjesa e ditës"></div></div>
+            <div class="grp"><h3 data-i18n="t.goal">Qëllimi juaj</h3><div class="pills" id="tGoal" role="group" aria-label="Qëllimi"></div></div>
+            <div class="fields grp">
+              <label><span data-i18n="f.name">Emri</span><input id="tName" autocomplete="name"></label>
+              <label><span data-i18n="f.phone">Telefoni</span><input id="tPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+383 4x xxx xxx"></label>
+            </div>
+            <button class="btn dark" type="button" id="tSend" style="width:100%" data-i18n="t.send">Merr kodin e provës</button>
+            <p class="err" id="tErr" role="alert"></p>
+          </div>
+          <div class="pass" id="tPass" hidden tabindex="-1">
+            <h3 data-i18n="t.pass">Kodi juaj</h3>
+            <div class="code" id="tCode"></div>
+            <p id="tInfo"></p>
+            <div class="cta-row"><button class="btn" type="button" id="tIcs" data-i18n="t.ics">Shto në kalendar</button><a class="btn out" id="tWa" target="_blank" rel="noopener" data-i18n="t.wa">Dërgo në WhatsApp</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="salla">
+      <div class="wrap">
+        <div class="sec-head"><h2 data-i18n="fl.title">Brenda</h2><p class="lead" data-i18n="fl.lead">Pesha të lira deri 50 kg, ring boksi me masë, zonë funksionale me kettlebell dhe sallë spinning me 16 biçikleta.</p></div>
+        <div class="floor">
+          <figure class="f1"><img src="img/rack.jpg" alt="Zona e kardios me dritare të mëdha dhe bar me kafe" loading="lazy" width="1100" height="1075"><figcaption data-i18n="fl1">Kardio me pamje</figcaption></figure>
+          <figure class="f2"><img src="img/ring.jpg" alt="Doreza boksi mbi dyshemenë e gomës" loading="lazy" width="1100" height="734"><figcaption data-i18n="fl2">Boks</figcaption></figure>
+          <figure class="f3"><img src="img/kettle.jpg" alt="Rafti i pesave të dorës" loading="lazy" width="1100" height="734"><figcaption data-i18n="fl3">Pesha të lira</figcaption></figure>
+          <figure class="f4"><img src="img/squat.jpg" alt="Stërvitje me shtangë" loading="lazy" width="1100" height="734"><figcaption data-i18n="fl4">Forcë</figcaption></figure>
+          <figure class="f5"><img src="img/arms.jpg" alt="Stërvitje me pesa dore" loading="lazy" width="1100" height="734"><figcaption data-i18n="fl5">Zona funksionale</figcaption></figure>
+          <figure class="f6"><img src="img/floor.jpg" alt="Salla kryesore me makineri" loading="lazy" width="1100" height="825"><figcaption data-i18n="fl6">Salla kryesore</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="light" style="padding-top:90px">
+      <div class="wrap">
+        <div class="sec-head"><h2 data-i18n="co.title">Trajnerët</h2><p class="lead" data-i18n="co.lead">Të njëjtit njerëz që i shihni në klasë, i gjeni edhe për seanca personale.</p></div>
+        <div class="coaches" id="coaches"></div>
+      </div>
+    </section>
+
+    <section id="vizita">
+      <div class="wrap visit">
+        <div>
+          <h2 data-i18n="v.title">Na gjeni</h2>
+          <p class="addr">Rr. Remzi Ademaj 9<br>Prizren</p>
+          <div class="contact"><a href="tel:+38345000000">+383 45 000 000</a><a id="cMaps" target="_blank" rel="noopener" data-i18n="v.maps">Hap në Google Maps</a></div>
+          <p style="color:var(--text2);margin-top:18px" data-i18n="v.park">Parking falas për anëtarët pas ndërtesës.</p>
+        </div>
+        <div><table class="hours" id="hours" aria-label="Orari"></table></div>
+      </div>
+    </section>
+
+    <section class="faq" style="padding-top:20px">
+      <div class="wrap" style="max-width:880px">
+        <h2 data-i18n="faq.title" style="margin-bottom:22px">Pyetje</h2>
+        <div id="faq"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><span>© <span id="yr"></span> Vrull Fitness</span><span data-i18n-html="foot">Faqe koncept nga <a href="../../">Nisja Studio</a>. Fotot: Unsplash.</span></div></footer>
+
+  <dialog id="clsDlg" aria-labelledby="clsH">
+    <div class="dlg-h"><h3 id="clsH"></h3><button type="button" data-close data-i18n="close">Mbyll</button></div>
+    <div class="dlg-b">
+      <p class="meta" id="clsMeta"></p>
+      <div id="clsForm">
+        <div class="fields" style="margin-bottom:16px">
+          <label><span data-i18n="f.name">Emri</span><input id="cName" autocomplete="name"></label>
+          <label><span data-i18n="f.phone">Telefoni</span><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+383 4x xxx xxx"></label>
+        </div>
+        <button class="btn" type="button" id="cSend" style="width:100%"></button>
+        <p class="err" id="cErr" role="alert"></p>
+      </div>
+      <div id="clsDone" hidden><p id="clsDoneTxt" style="font-size:18px;font-weight:700;margin:0 0 16px"></p><button class="btn dark" type="button" data-close data-i18n="ok">Në rregull</button></div>
+    </div>
+  </dialog>
+
+  <dialog id="joinDlg" aria-labelledby="joinH">
+    <div class="dlg-h"><h3 id="joinH" data-i18n="j.title">Bëhuni anëtar</h3><button type="button" data-close data-i18n="close">Mbyll</button></div>
+    <div class="dlg-b">
+      <p class="meta" id="joinMeta"></p>
+      <div id="joinForm">
+        <div class="fields" style="margin-bottom:16px">
+          <label><span data-i18n="f.name">Emri</span><input id="jName" autocomplete="name"></label>
+          <label><span data-i18n="f.phone">Telefoni</span><input id="jPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+383 4x xxx xxx"></label>
+        </div>
+        <button class="btn" type="button" id="jSend" style="width:100%" data-i18n="j.send">Rezervo abonimin</button>
+        <p class="err" id="jErr" role="alert"></p>
+        <p style="font-size:13px;color:var(--text2);margin:6px 0 0" data-i18n="j.fine">Paguani në recepsion ditën e parë. Abonimi fillon kur vini.</p>
+      </div>
+      <div id="joinDone" hidden><p id="joinDoneTxt" style="font-size:18px;font-weight:700;margin:0 0 16px"></p><button class="btn dark" type="button" data-close data-i18n="ok">Në rregull</button></div>
+    </div>
+  </dialog>
+
+  <dialog id="staffDlg" class="wide" aria-labelledby="staffH">
+    <div class="dlg-h"><h3 id="staffH" data-i18n="s.title">Recepsioni, sot</h3><button type="button" data-close data-i18n="close">Mbyll</button></div>
+    <div class="dlg-b">
+      <div class="kpis" id="kpis"></div>
+      <div class="roster" id="roster"></div>
+      <p style="font-size:13px;color:var(--text2);margin:16px 0 0" data-i18n="s.note">Rezervimet në klasa, ditët e provës dhe anëtarët e rinj vijnë në email dhe WhatsApp. Lista e pritjes mbushet vetë, pa grupe në WhatsApp.</p>
+    </div>
+  </dialog>
+
+  <script src="../kit/kit.js"></script>
+  <script src="data.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var S = window.SITE, $ = K.$, t = K.t;
+    var KC = "vrull-classes", KT = "vrull-trials", KJ = "vrull-joins";
+    var st = { filter: "all", term: 1, student: false, tDay: null, tPart: "eve", tGoal: null, cls: null, plan: null };
+    var coachBy = function (id) { return S.coaches.find(function (c) { return c.id === id; }); };
+
+    /* each class occurrence in the next 7 days, with a stable id and seeded demo attendance */
+    function occurrences() {
+      var out = [];
+      for (var d = 0; d < 7; d++) {
+        var day = K.day0(new Date()); day.setDate(day.getDate() + d);
+        S.classes.filter(function (c) { return c.d === day.getDay(); }).forEach(function (c) {
+          var s = new Date(day); s.setHours(+c.at.slice(0, 2), +c.at.slice(3), 0, 0);
+          var id = c.type + "-" + s.getTime();
+          var seed = (s.getTime() / 6e4) % 97, base = Math.round(c.cap * (.35 + (seed % 60) / 100));
+          if (c.at >= "18:00") base = Math.min(c.cap, base + 3);
+          var mine = K.saved(KC).filter(function (x) { return x.id === id; });
+          out.push(Object.assign({}, c, { id: id, start: s.getTime(), end: s.getTime() + c.min * 6e4, taken: Math.min(c.cap, base) + mine.filter(function (x) { return !x.wait; }).length, wait: mine.filter(function (x) { return x.wait; }).length + (base >= c.cap ? 2 : 0), mine: mine.length > 0 }));
+        });
+      }
+      return out;
+    }
+
+    /* ---------- crowd meter ---------- */
+    function renderCrowd() {
+      var now = new Date(), h = now.getHours(), wd = now.getDay(), oh = S.hours[wd], box = $("meter"); box.innerHTML = "";
+      var open = oh ? [+oh[0].slice(0, 2), +oh[1].slice(0, 2)] : null, isOpen = open && h >= open[0] && h < open[1];
+      for (var x = 6; x <= 22; x++) {
+        var v = S.crowd[x] || 0, b = document.createElement("div"); b.className = "bar";
+        if (wd === 0 || wd === 6) v = Math.round(v * .7);
+        b.style.height = Math.max(4, v) + "%";
+        if (x === h && isOpen) { b.classList.add("now"); b.dataset.now = t("Tani", "Now"); } else if (x < h) b.classList.add("past");
+        if (open && (x < open[0] || x >= open[1])) b.style.opacity = .25;
+        var l = document.createElement("span"); l.textContent = x; b.appendChild(l); box.appendChild(b);
+      }
+      var cur = isOpen ? (S.crowd[h] || 0) * (wd === 0 || wd === 6 ? .7 : 1) : -1, el = $("crowdNow");
+      var quiet = [], hrs = Object.keys(S.crowd).map(Number).filter(function (x) { return open && x > h && x < open[1]; });
+      hrs.forEach(function (x) { if (S.crowd[x] <= 30) quiet.push(x); });
+      if (cur < 0) { el.dataset.l = "low"; el.textContent = t("Mbyllur tani", "Closed now"); $("crowdTip").textContent = oh ? t("Hapemi nesër. Më e qetë: 10:00–15:00.", "We open tomorrow. Quietest: 10:00–15:00.") : t("Sot jemi mbyllur.", "Closed today."); }
+      else {
+        el.dataset.l = cur < 40 ? "low" : cur < 75 ? "mid" : "high";
+        el.textContent = cur < 40 ? t("E qetë", "Quiet") : cur < 75 ? t("Mesatare", "Moderate") : t("Shumë plot", "Very busy");
+        $("crowdTip").textContent = quiet.length ? t("Më e qetë sot: rreth ", "Quietest later today: around ") + quiet[0] + ":00." : t("Pjesa tjetër e ditës mbetet aktive. Mëngjesi para 9:00 është më i qeti.", "The rest of today stays busy. Early mornings before 9:00 are quietest.");
+      }
+      box.setAttribute("aria-label", t("Sa plot është palestra sipas orës sot. Tani: ", "How busy the gym is by hour today. Now: ") + el.textContent);
+    }
+
+    /* ---------- timetable ---------- */
+    function renderFilters() {
+      var box = $("filters"); box.innerHTML = "";
+      [["all", { sq: "Të gjitha", en: "All" }, null]].concat(Object.keys(S.types).map(function (k) { return [k, S.types[k], S.types[k].c]; })).forEach(function (f) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "filt"; b.dataset.f = f[0];
+        if (f[2]) { var i = document.createElement("i"); i.style.background = f[2]; b.appendChild(i); }
+        b.appendChild(document.createTextNode(t(f[1])));
+        b.setAttribute("aria-pressed", String(st.filter === f[0]));
+        b.addEventListener("click", function () { st.filter = f[0]; renderFilters(); renderWeek(); });
+        box.appendChild(b);
+      });
+    }
+    function renderWeek() {
+      var box = $("week"), occ = occurrences(), now = Date.now(); box.innerHTML = "";
+      for (var d = 0; d < 7; d++) {
+        var day = K.day0(new Date()); day.setDate(day.getDate() + d);
+        var col = document.createElement("div"); col.className = "col" + (d === 0 ? " today" : "");
+        var h = document.createElement("h3"); h.innerHTML = "<span></span><small></small>";
+        h.firstChild.textContent = d === 0 ? t("Sot", "Today") : K.WS[K.lang][day.getDay()]; h.lastChild.textContent = day.getDate() + " " + K.MO[K.lang][day.getMonth()].slice(0, 3);
+        col.appendChild(h);
+        var list = occ.filter(function (o) { return K.day0(o.start).getTime() === day.getTime() && (st.filter === "all" || o.type === st.filter); });
+        if (!list.length) { var n = document.createElement("p"); n.className = "none"; n.textContent = t("Pa klasa", "No classes"); col.appendChild(n); }
+        list.forEach(function (o) {
+          var b = document.createElement("button"); b.type = "button"; b.className = "cls" + (o.mine ? " mine" : ""); b.dataset.id = o.id;
+          b.style.setProperty("--c", S.types[o.type].c);
+          var left = o.cap - o.taken, past = o.start < now;
+          b.disabled = past;
+          b.innerHTML = '<span class="tm"></span><b></b><span class="co"></span><span class="sp"></span><span class="pips" aria-hidden="true"></span>';
+          b.querySelector(".tm").textContent = o.at + "–" + K.hm(o.end);
+          b.querySelector("b").textContent = t(S.types[o.type]);
+          b.querySelector(".co").textContent = coachBy(o.coach).name + " · " + o.min + " min";
+          var sp = b.querySelector(".sp");
+          if (o.mine) sp.textContent = t("Jeni brenda", "You're in");
+          else if (past) sp.textContent = t("Përfundoi", "Finished");
+          else if (left <= 0) { sp.textContent = t("Plot · pritje: ", "Full · waitlist: ") + o.wait; sp.classList.add("full"); }
+          else { sp.textContent = left + (left === 1 ? t(" vend i lirë", " spot left") : t(" vende të lira", " spots left")); if (left <= 3) sp.classList.add("low"); }
+          var pips = b.querySelector(".pips"); for (var i = 0; i < o.cap; i++) { var p = document.createElement("i"); if (i < o.taken) p.className = "on"; pips.appendChild(p); }
+          b.addEventListener("click", function () { openClass(o); });
+          col.appendChild(b);
+        });
+        box.appendChild(col);
+      }
+    }
+    function openClass(o) {
+      st.cls = o; var full = o.taken >= o.cap;
+      $("clsH").textContent = t(S.types[o.type]) + ", " + o.at;
+      $("clsMeta").textContent = K.dayLabel(o.start) + " · " + coachBy(o.coach).name + " · " + o.min + " min · " + (full ? t("Klasa është plot. Hyni në listën e pritjes; nëse lirohet vend, ju kalon automatikisht.", "This class is full. Join the waitlist; if a spot opens, it's yours automatically.") : (o.cap - o.taken) + t(" vende të lira nga ", " spots left of ") + o.cap);
+      $("cSend").textContent = full ? t("Hyr në listën e pritjes", "Join the waitlist") : t("Zë vendin", "Book my spot");
+      $("clsForm").hidden = false; $("clsDone").hidden = true; $("cErr").textContent = "";
+      $("clsDlg").showModal();
+    }
+    $("cSend").addEventListener("click", function () {
+      var o = st.cls, name = $("cName").value.trim(), phone = $("cPhone").value.trim();
+      if (!name) { $("cErr").textContent = t("Shkruani emrin.", "Please enter your name."); return; }
+      if (phone.replace(/\D/g, "").length < 8) { $("cErr").textContent = t("Shkruani një numër telefoni të saktë.", "Please enter a valid phone number."); return; }
+      var cur = occurrences().find(function (x) { return x.id === o.id; });
+      if (cur.mine) { $("cErr").textContent = t("Jeni regjistruar tashmë në këtë klasë.", "You're already booked into this class."); return; }
+      var wait = cur.taken >= cur.cap;
+      $("cSend").disabled = true;
+      K.submit(S, (wait ? "Listë pritjeje: " : "Klasë: ") + S.types[o.type].sq + " " + K.dayLabel(o.start) + " " + o.at, { Klasa: S.types[o.type].sq, Kur: K.dayLabel(o.start) + " " + o.at, Trajneri: coachBy(o.coach).name, Lloji: wait ? "Listë pritjeje (nr. " + (cur.wait + 1) + ")" : "Vend i zënë", Emri: name, Telefoni: phone })
+        .then(function () {
+          K.save(KC, { id: o.id, wait: wait, name: name, at: Date.now() });
+          $("clsForm").hidden = true; $("clsDone").hidden = false;
+          $("clsDoneTxt").textContent = wait ? t("Jeni i " + (cur.wait + 1) + "-i në listën e pritjes. Ju njoftojmë nëse lirohet vend.", "You're number " + (cur.wait + 1) + " on the waitlist. We'll tell you if a spot opens.") : t("Vendi është juaji. Ejani 5 minuta më herët.", "The spot is yours. Come 5 minutes early.");
+          renderWeek();
+        }).catch(function () { $("cErr").textContent = t("Nuk u dërgua. Provoni sërish.", "Not sent. Please try again."); })
+        .then(function () { $("cSend").disabled = false; });
+    });
+
+    /* ---------- plans ---------- */
+    function price(p) {
+      var term = S.terms.find(function (x) { return x.months === st.term; });
+      var m = p.price * (1 - term.off / 100) * (st.student ? 1 - S.studentOff / 100 : 1);
+      m = Math.round(m * 2) / 2;
+      return { month: m, total: Math.round(m * st.term * 100) / 100, was: p.price };
+    }
+    function renderTerms() {
+      var box = $("terms"); box.innerHTML = "";
+      S.terms.forEach(function (x) {
+        var b = document.createElement("button"); b.type = "button"; b.dataset.m = x.months;
+        b.textContent = x.months === 1 ? t("1 muaj", "1 month") : x.months + t(" muaj", " months");
+        if (x.off) { var s = document.createElement("small"); s.textContent = "−" + x.off + "%"; b.appendChild(s); }
+        b.setAttribute("aria-pressed", String(st.term === x.months));
+        b.addEventListener("click", function () { st.term = x.months; renderTerms(); renderPlans(); });
+        box.appendChild(b);
+      });
+    }
+    $("student").addEventListener("change", function (e) { st.student = e.target.checked; renderPlans(); });
+    function renderPlans() {
+      var box = $("plans"); box.innerHTML = "";
+      S.plans.forEach(function (p) {
+        var pr = price(p), el = document.createElement("article"); el.className = "plan" + (p.best ? " best" : "");
+        el.innerHTML = (p.best ? '<span class="flag"></span>' : "") + '<h3></h3><div class="price"><b></b><span></span> <s></s></div><div class="tot"></div><ul></ul><button class="btn" type="button"></button>';
+        if (p.best) el.querySelector(".flag").textContent = t("Më e zgjedhura", "Most chosen");
+        el.querySelector("h3").textContent = t(p.name);
+        el.querySelector(".price b").textContent = K.eur(pr.month);
+        el.querySelector(".price span").textContent = t("/ muaj", "/ month");
+        el.querySelector(".price s").textContent = pr.month < pr.was ? K.eur(pr.was) : "";
+        el.querySelector(".tot").textContent = st.term > 1 ? K.eur(pr.total) + t(" gjithsej për ", " total for ") + st.term + t(" muaj", " months") : t("Pa kontratë. Anuloni kur të doni.", "No contract. Cancel any time.");
+        var ul = el.querySelector("ul"); t(p.gets).forEach(function (g) { var li = document.createElement("li"); li.textContent = g; ul.appendChild(li); });
+        var b = el.querySelector("button"); b.textContent = t("Zgjidh ", "Choose ") + t(p.name);
+        b.addEventListener("click", function () { openJoin(p); });
+        box.appendChild(el);
+      });
+    }
+    function openJoin(p) {
+      st.plan = p; var pr = price(p);
+      $("joinMeta").textContent = t(p.name) + " · " + K.eur(pr.month) + t(" / muaj", " / month") + " · " + (st.term === 1 ? t("1 muaj", "1 month") : st.term + t(" muaj", " months")) + (st.student ? t(" · student", " · student") : "") + (st.term > 1 ? " · " + K.eur(pr.total) + t(" gjithsej", " total") : "");
+      $("joinForm").hidden = false; $("joinDone").hidden = true; $("jErr").textContent = "";
+      $("joinDlg").showModal();
+    }
+    $("jSend").addEventListener("click", function () {
+      var name = $("jName").value.trim(), phone = $("jPhone").value.trim(), p = st.plan, pr = price(p);
+      if (!name) { $("jErr").textContent = t("Shkruani emrin.", "Please enter your name."); return; }
+      if (phone.replace(/\D/g, "").length < 8) { $("jErr").textContent = t("Shkruani një numër telefoni të saktë.", "Please enter a valid phone number."); return; }
+      $("jSend").disabled = true;
+      K.submit(S, "Anëtar i ri: " + p.name.sq + " (" + st.term + " muaj)", { Plani: p.name.sq, Kohezgjatja: st.term + " muaj", Student: st.student ? "Po" : "Jo", Cmimi: "€" + pr.month + " / muaj, €" + pr.total + " gjithsej", Emri: name, Telefoni: phone })
+        .then(function () {
+          K.save(KJ, { plan: p.id, term: st.term, name: name, at: Date.now() });
+          $("joinForm").hidden = true; $("joinDone").hidden = false;
+          $("joinDoneTxt").textContent = t("Faleminderit, " + name + ". Abonimi juaj ju pret në recepsion; ju shkruajmë sot për ditën e parë.", "Thanks, " + name + ". Your membership is waiting at reception; we'll message you today about your first day.");
+        }).catch(function () { $("jErr").textContent = t("Nuk u dërgua. Provoni sërish.", "Not sent. Please try again."); })
+        .then(function () { $("jSend").disabled = false; });
+    });
+
+    /* ---------- trial ---------- */
+    var PARTS = { morn: { sq: "Mëngjes 6–12", en: "Morning 6–12", h: 9 }, mid: { sq: "Pasdite 12–17", en: "Afternoon 12–17", h: 14 }, eve: { sq: "Mbrëmje 17–23", en: "Evening 17–23", h: 18 } };
+    var GOALS = { lose: { sq: "Të dobësohem", en: "Lose weight" }, str: { sq: "Forcë", en: "Strength" }, fit: { sq: "Kondicion", en: "Fitness" }, box: { sq: "Boks", en: "Boxing" } };
+    function pills(id, items, key, onPick) {
+      var box = $(id); box.innerHTML = "";
+      items.forEach(function (it) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "pill"; b.textContent = it.label; b.disabled = !!it.disabled;
+        b.setAttribute("aria-pressed", String(st[key] === it.v));
+        b.addEventListener("click", function () { st[key] = it.v; onPick && onPick(); renderTrial(); });
+        box.appendChild(b);
+      });
+    }
+    function renderTrial() {
+      var days = [];
+      for (var d = 0; d < 7; d++) {
+        var day = K.day0(new Date()); day.setDate(day.getDate() + d);
+        var oh = S.hours[day.getDay()], ok = !!oh;
+        if (d === 0 && oh) ok = new Date().getHours() < +oh[1].slice(0, 2) - 2;
+        days.push({ v: day.getTime(), label: K.dayLabel(day, true).split(",")[0] + " " + day.getDate(), disabled: !ok });
+      }
+      if (!st.tDay || days.find(function (x) { return x.v === st.tDay && x.disabled; })) st.tDay = (days.find(function (x) { return !x.disabled; }) || {}).v;
+      pills("tDays", days, "tDay");
+      var wd = new Date(st.tDay).getDay(), oh2 = S.hours[wd] || ["06:00", "23:00"];
+      pills("tPart", Object.keys(PARTS).map(function (k) { var c = +oh2[0].slice(0, 2), e = +oh2[1].slice(0, 2); var range = { morn: [6, 12], mid: [12, 17], eve: [17, 23] }[k]; return { v: k, label: t(PARTS[k]), disabled: range[1] <= c || range[0] >= e }; }), "tPart");
+      pills("tGoal", Object.keys(GOALS).map(function (k) { return { v: k, label: t(GOALS[k]) }; }), "tGoal");
+    }
+    $("tSend").addEventListener("click", function () {
+      var name = $("tName").value.trim(), phone = $("tPhone").value.trim(), err = $("tErr");
+      if (!st.tDay) { err.textContent = t("Zgjidhni ditën.", "Pick a day."); return; }
+      if (!name) { err.textContent = t("Shkruani emrin.", "Please enter your name."); $("tName").focus(); return; }
+      if (phone.replace(/\D/g, "").length < 8) { err.textContent = t("Shkruani një numër telefoni të saktë.", "Please enter a valid phone number."); $("tPhone").focus(); return; }
+      if (K.saved(KT).some(function (x) { return x.phone.replace(/\D/g, "") === phone.replace(/\D/g, ""); })) { err.textContent = t("Ky numër e ka marrë tashmë ditën e provës.", "This number already has a trial day."); return; }
+      err.textContent = "";
+      var code = K.code("VR"), part = PARTS[st.tPart], day = new Date(st.tDay);
+      $("tSend").disabled = true;
+      K.submit(S, "Ditë prove: " + name + ", " + K.dayLabel(day) + " (" + part.sq + ")", { Kodi: code, Dita: K.dayLabel(day), Koha: part.sq, Qellimi: st.tGoal ? GOALS[st.tGoal].sq : "-", Emri: name, Telefoni: phone })
+        .then(function (r) {
+          K.save(KT, { code: code, day: st.tDay, part: st.tPart, goal: st.tGoal, name: name, phone: phone });
+          $("trialForm").hidden = true; $("tPass").hidden = false; $("tCode").textContent = code;
+          $("tInfo").textContent = K.dayLabel(day) + ", " + t(part).toLowerCase() + ". " + t("Tregojeni kodin në recepsion. ", "Show the code at reception. ") + (r.demo ? t("(Demo: në faqen e vërtetë recepsioni e merr menjëherë.)", "(Demo: on the live site reception gets it instantly.)") : "");
+          var s = new Date(day); s.setHours(part.h, 0, 0, 0);
+          $("tIcs").onclick = function () { K.ics("vrull-" + code, [{ start: s.getTime(), end: s.getTime() + 90 * 6e4, title: "Vrull Fitness: dita e provës (" + code + ")", where: S.address }]); };
+          $("tWa").href = K.wa(S.whatsapp, "Përshëndetje Vrull, mora ditën e provës për " + K.dayLabel(day) + " (" + part.sq + "). Kodi " + code + ". " + name);
+          $("tPass").focus();
+        }).catch(function () { err.textContent = t("Nuk u dërgua. Provoni sërish.", "Not sent. Please try again."); })
+        .then(function () { $("tSend").disabled = false; });
+    });
+
+    /* ---------- the rest ---------- */
+    function renderCoaches() {
+      var box = $("coaches"); box.innerHTML = "";
+      S.coaches.forEach(function (c) {
+        var n = S.classes.filter(function (x) { return x.coach === c.id; }).length;
+        var el = document.createElement("article"); el.className = "coach";
+        el.innerHTML = '<div class="ini" aria-hidden="true"></div><h3></h3><p></p><small></small>';
+        el.querySelector(".ini").textContent = c.name[0]; el.querySelector("h3").textContent = c.name; el.querySelector("p").textContent = t(c.tag);
+        el.querySelector("small").textContent = n + t(" klasa në javë", " classes a week");
+        box.appendChild(el);
+      });
+    }
+    function renderHours() {
+      var wd = new Date().getDay(), rows = "";
+      [1, 2, 3, 4, 5, 6, 0].forEach(function (d) { var h = S.hours[d]; rows += "<tr" + (d === wd ? ' class="today"' : "") + "><td>" + K.WD[K.lang][d] + "</td><td>" + (h ? h[0] + "–" + h[1] : t("Mbyllur", "Closed")) + "</td></tr>"; });
+      $("hours").innerHTML = rows;
+    }
+    function renderFaq() {
+      var box = $("faq"); box.innerHTML = "";
+      S.faq.forEach(function (f) { var d = document.createElement("details"); d.innerHTML = "<summary></summary><p></p>"; d.querySelector("summary").textContent = t(f.q); d.querySelector("p").textContent = t(f.a); box.appendChild(d); });
+    }
+    function renderMarquee() {
+      var tr = $("track"); tr.innerHTML = "";
+      var words = Object.keys(S.types).map(function (k) { return t(S.types[k]); }).concat([t("Pesha të lira", "Free weights"), t("Trajner personal", "Personal coach")]);
+      for (var r = 0; r < 4; r++) words.forEach(function (w) { var s = document.createElement("span"); s.textContent = w; tr.appendChild(s); });
+    }
+    function renderStaff() {
+      var d0 = K.day0(new Date()).getTime(), d1 = d0 + 864e5, occ = occurrences().filter(function (o) { return o.start >= d0 && o.start < d1; });
+      var trials = K.saved(KT).filter(function (x) { return x.day >= d0 && x.day < d0 + 7 * 864e5; }).length, joins = K.saved(KJ).length;
+      var people = occ.reduce(function (a, o) { return a + o.taken; }, 0);
+      $("kpis").innerHTML = "";
+      [[occ.length, t("klasa sot", "classes today")], [people, t("vende të zëna", "spots booked")], [trials, t("ditë prove këtë javë", "trial days this week")], [joins, t("anëtarë të rinj online", "new members online")]].forEach(function (k) { var d = document.createElement("div"); d.innerHTML = "<b></b><span></span>"; d.querySelector("b").textContent = k[0]; d.querySelector("span").textContent = k[1]; $("kpis").appendChild(d); });
+      var box = $("roster"); box.innerHTML = "";
+      if (!occ.length) { box.innerHTML = "<p></p>"; box.firstChild.textContent = t("Sot nuk ka klasa.", "No classes today."); return; }
+      occ.forEach(function (o) {
+        var r = document.createElement("div"); r.innerHTML = "<b></b><span></span><span><em></em> <span class=\"wl\"></span></span>";
+        r.querySelector("b").textContent = o.at; r.querySelector("span").textContent = t(S.types[o.type]) + " · " + coachBy(o.coach).name;
+        r.querySelector("em").textContent = o.taken + "/" + o.cap; r.querySelector(".wl").textContent = o.wait ? t("pritje ", "waitlist ") + o.wait : "";
+        box.appendChild(r);
+      });
+    }
+    document.querySelectorAll("dialog").forEach(function (d) {
+      d.addEventListener("click", function (e) { if (e.target === d || e.target.hasAttribute("data-close")) d.close(); });
+    });
+    $("openStaff").addEventListener("click", function () { renderStaff(); $("staffDlg").showModal(); });
+
+    /* ---------- motion: stretch the headline and push the marquee with scroll speed ---------- */
+    (function () {
+      var kin = $("kin"), lines = kin.querySelectorAll("span"), track = $("track"), img = $("bandImg");
+      if (K.reduced) { lines.forEach(function (l) { l.style.setProperty("--w", "75%"); }); return; }
+      var last = window.scrollY, vel = 0, x = 0, intro = 0, t0 = performance.now();
+      function frame(now) {
+        var y = window.scrollY, dy = y - last; last = y;
+        vel = vel * .88 + dy * .12;
+        intro = Math.min(1, (now - t0) / 1100);
+        var ease = 1 - Math.pow(1 - intro, 3);
+        var p = Math.min(1, y / 500);
+        lines.forEach(function (l, i) {
+          var w = 62 + ease * 13 + p * (i ? 45 : 30) + Math.min(14, Math.abs(vel) * .6);
+          l.style.setProperty("--w", Math.min(125, w).toFixed(1) + "%");
+        });
+        x -= .6 + Math.abs(vel) * .5;
+        var half = track.scrollWidth / 2; if (half && -x > half) x += half;
+        track.style.transform = "translate3d(" + x.toFixed(1) + "px,0,0)";
+        var r = img.parentNode.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < innerHeight) img.style.transform = "translate3d(0," + (-(1 - (r.bottom / (innerHeight + r.height))) * 14).toFixed(2) + "%,0)";
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
+
+    function renderAll() { renderCrowd(); renderFilters(); renderWeek(); renderTerms(); renderPlans(); renderTrial(); renderCoaches(); renderHours(); renderFaq(); renderMarquee(); }
+    K.onLang(renderAll);
+    K.i18n({
+      "demo": 'This is a <b>concept project</b> by <a href="../../">Nisja Studio</a>. The gym is fictional.', "demo.staff": "Reception panel",
+      "nav.classes": "Classes", "nav.plans": "Memberships", "nav.trial": "Free trial", "nav.visit": "Visit", "cta.trial": "Try free",
+      "h.l1": "Get", "h.l2": "moving.", "h.lead": "Gym, group classes and coaches in Prizren. See how busy it is right now, book your spot in a class and try a day without paying a thing.",
+      "h.cta": "Get your free day", "h.cta2": "Class timetable", "h.alt": "Weights room with rows of machines in low light",
+      "st1": "of training space", "st2": "classes a week", "st3": "open every weekday", "st4": "your first day",
+      "c.title": "How busy is it?", "k.title": "This week's classes", "k.lead": "Tap a class to book your spot. When it fills up, join the waitlist and the spot passes to you automatically if someone cancels.",
+      "p.title": "Memberships", "p.student": "Student or pupil",
+      "t.title": "One day, free", "t.lead": "No card, no commitment. Pick the day, get your code and show it at reception. A coach meets you and shows you the machines.",
+      "t.day": "Day", "t.part": "When are you coming?", "t.goal": "Your goal", "t.send": "Get my trial code", "t.pass": "Your code", "t.ics": "Add to calendar", "t.wa": "Send on WhatsApp",
+      "f.name": "Name", "f.phone": "Phone",
+      "fl.title": "Inside", "fl.lead": "Free weights up to 50 kg, a full-size boxing ring, a functional zone with kettlebells and a spin room with 16 bikes.",
+      "fl1": "Cardio with a view", "fl2": "Boxing", "fl3": "Free weights", "fl4": "Strength", "fl5": "Functional zone", "fl6": "Main floor",
+      "co.title": "Coaches", "co.lead": "The same people you see in class are available for personal sessions.",
+      "v.title": "Find us", "v.maps": "Open in Google Maps", "v.park": "Free parking for members behind the building.", "faq.title": "Questions",
+      "foot": 'Concept site by <a href="../../">Nisja Studio</a>. Photos: Unsplash.',
+      "close": "Close", "ok": "Done", "j.title": "Become a member", "j.send": "Reserve membership", "j.fine": "Pay at reception on your first day. The membership starts when you come in.",
+      "s.title": "Reception, today", "s.note": "Class bookings, trial days and new members arrive by email and WhatsApp. The waitlist fills itself, no WhatsApp groups needed."
+    });
+    $("cMaps").href = S.maps; $("yr").textContent = new Date().getFullYear();
+    if (/[?&]staff\b/.test(location.search)) { renderStaff(); $("staffDlg").showModal(); }
+    setInterval(renderCrowd, 60000);
+    window.VRULL = { st: st, occurrences: occurrences, price: price };
+  })();
+  </script>
+</body>
+</html>
