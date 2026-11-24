@@ -38,19 +38,19 @@
     youngDriverPerDay: 5,             // drivers aged 21–24
 
     cars: [
-      { id: "polo", name: "VW Polo", cls: "economy", body: "hatch", gear: "manual", fuel: "petrol", seats: 5, bags: 2, rates: { low: 24, mid: 30, high: 42 }, deposit: 200, color: "#C9D6CF" },
-      { id: "yaris", name: "Toyota Yaris Hybrid", cls: "economy", body: "hatch", gear: "auto", fuel: "hybrid", seats: 5, bags: 2, rates: { low: 29, mid: 36, high: 49 }, deposit: 200, color: "#E7D9C0" },
-      { id: "golf", name: "VW Golf 8", cls: "compact", body: "hatch", gear: "manual", fuel: "diesel", seats: 5, bags: 3, rates: { low: 32, mid: 40, high: 55 }, deposit: 300, color: "#BFCAD6" },
-      { id: "octavia", name: "Škoda Octavia Combi", cls: "estate", body: "wagon", gear: "auto", fuel: "diesel", seats: 5, bags: 5, rates: { low: 39, mid: 48, high: 66 }, deposit: 300, color: "#D5CFC6" },
-      { id: "duster", name: "Dacia Duster 4x4", cls: "suv", body: "suv", gear: "manual", fuel: "diesel", seats: 5, bags: 3, rates: { low: 36, mid: 45, high: 60 }, deposit: 300, color: "#D9C9B0" },
-      { id: "touran", name: "VW Touran", cls: "seven", body: "mpv", gear: "auto", fuel: "diesel", seats: 7, bags: 3, rates: { low: 52, mid: 64, high: 86 }, deposit: 400, color: "#C6D2CC" },
-      { id: "vito", name: "Mercedes Vito Tourer", cls: "van", body: "van", gear: "auto", fuel: "diesel", seats: 9, bags: 6, rates: { low: 75, mid: 92, high: 125 }, deposit: 500, color: "#CFD3D6" }
+      { id: "polo", name: "VW Polo", cls: "economy", body: "hatch", gear: "manual", fuel: "petrol", seats: 5, bags: 2, rates: { low: 24, mid: 30, high: 42 }, deposit: 200, color: "#C9D6CF", img: "img/polo.jpg" },
+      { id: "golf", name: "VW Golf 8", cls: "compact", body: "hatch", gear: "auto", fuel: "diesel", seats: 5, bags: 3, rates: { low: 32, mid: 40, high: 55 }, deposit: 300, color: "#BFCAD6", img: "img/golf.jpg" },
+      { id: "octavia", name: "Škoda Octavia Combi", cls: "estate", body: "wagon", gear: "auto", fuel: "diesel", seats: 5, bags: 5, rates: { low: 39, mid: 48, high: 66 }, deposit: 300, color: "#D5CFC6", img: "img/octavia.jpg" },
+      { id: "tiguan", name: "VW Tiguan", cls: "suv", body: "suv", gear: "auto", fuel: "diesel", seats: 5, bags: 4, rates: { low: 45, mid: 56, high: 75 }, deposit: 400, color: "#D9C9B0", img: "img/tiguan.jpg" },
+      { id: "cclass", name: "Mercedes C-Class", cls: "premium", body: "sedan", gear: "auto", fuel: "diesel", seats: 5, bags: 3, rates: { low: 60, mid: 75, high: 99 }, deposit: 500, color: "#CFD3D6", img: "img/cclass.jpg" },
+      { id: "vito", name: "Mercedes Vito Tourer", cls: "van", body: "van", gear: "auto", fuel: "diesel", seats: 9, bags: 6, rates: { low: 75, mid: 92, high: 125 }, deposit: 500, color: "#C6D2CC", img: "img/vito.jpg" }
     ],
+
 
     bookings: [
       { car: "golf", from: day(0, 9), to: day(6, 18) },
-      { car: "touran", from: day(1, 8), to: day(5, 20) },
-      { car: "yaris", from: day(6, 10), to: day(9, 10) },
+      { car: "cclass", from: day(1, 8), to: day(5, 20) },
+      { car: "tiguan", from: day(6, 10), to: day(9, 10) },
       { car: "octavia", from: day(12, 10), to: day(20, 10) }
     ]
   };

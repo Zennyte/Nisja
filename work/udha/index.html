@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Udha Rent a Car Gjakovë — koncept demo nga Nisja Studio</title>
+  <meta name="description" content="Koncept demo nga Nisja Studio: faqe për rent a car me rezervim online, çmim të plotë që në fillim dhe marrje në Aeroportin e Prishtinës.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#173A31">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Barlow:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRental",
+    "name": "Udha Rent a Car",
+    "description": "Rent a car në Gjakovë me marrje në Aeroportin e Prishtinës. Çmimi i plotë që në fillim, kilometra pa limit, pagesë në marrje.",
+    "url": "https://nisja.vercel.app/work/udha/",
+    "image": "https://nisja.vercel.app/work/udha/img/hero.jpg",
+    "telephone": "+383 49 000 000",
+    "email": "info@udha-rent.example",
+    "priceRange": "€24–€125 / ditë",
+    "currenciesAccepted": "EUR",
+    "paymentAccepted": "Cash, Credit Card, Debit Card",
+    "address": { "@type": "PostalAddress", "streetAddress": "Rr. Nëna Terezë", "addressLocality": "Gjakovë", "postalCode": "50000", "addressCountry": "XK" },
+    "geo": { "@type": "GeoCoordinates", "latitude": 42.3803, "longitude": 20.4308 },
+    "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "08:00", "closes": "20:00" }],
+    "areaServed": ["Gjakovë", "Prishtina International Airport", "Kosovo"],
+    "knowsLanguage": ["sq", "en"]
+  }
+  </script>
+  <style>
+    :root {
+      --pine: #173A31; --pine-2: #20493F; --pine-3: #2C5A4E;
+      --ink: #1C2022; --muted: #5C6662; --stone: #F2EFE8; --paper: #FBFAF6; --line: #DCE2DD;
+      --amber: #F2A516; --amber-2: #FFB935; --amber-ink: #2E2100; --red: #B8382D; --ok: #2F7A55; --rks: #2350A8;
+      --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+      --sans: "Barlow", "Segoe UI", system-ui, sans-serif;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body { margin: 0; background: var(--stone); color: var(--ink); font: 17px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: var(--display); font-weight: 700; margin: 0; line-height: .98; letter-spacing: -0.005em; }
+    p { margin: 0; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    :focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; border-radius: 6px; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 40px); }
+    [hidden] { display: none !important; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    .demo-bar { background: var(--amber); color: var(--amber-ink); font-size: 14px; text-align: center; padding: 8px 16px; }
+    .demo-bar a { font-weight: 600; }
+
+    header { position: sticky; top: 0; z-index: 20; background: rgba(23, 58, 49, .96); backdrop-filter: blur(10px); color: #fff; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 68px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-size: 26px; font-weight: 700; letter-spacing: .01em; }
+    .logo svg { flex: none; }
+    .logo small { font-family: var(--sans); font-size: 13px; font-weight: 500; opacity: .75; letter-spacing: 0; }
+    .nav-links { display: flex; gap: 26px; }
+    .nav-links a { text-decoration: none; font-size: 15px; font-weight: 500; opacity: .82; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-end { display: flex; align-items: center; gap: 10px; }
+    .lang { display: inline-flex; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 3px; }
+    .lang button { border: 0; background: none; color: #fff; padding: 5px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer; min-width: 40px; min-height: 32px; }
+    .lang button[aria-pressed="true"] { background: #fff; color: var(--pine); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 22px; border-radius: 12px; border: 1px solid transparent; font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s, transform .2s var(--ease); }
+    .btn:active { transform: translateY(1px); }
+    .btn-amber { background: var(--amber); color: var(--amber-ink); } .btn-amber:hover { background: var(--amber-2); }
+    .btn-pine { background: var(--pine); color: #fff; } .btn-pine:hover { background: var(--pine-2); }
+    .btn-line { border-color: var(--line); background: var(--paper); color: var(--ink); } .btn-line:hover { border-color: var(--ink); }
+    .btn[disabled] { cursor: not-allowed; background: #E5E8E5; color: #8A938F; border-color: transparent; }
+    .nav .btn { min-height: 42px; padding: 0 16px; font-size: 15px; }
+
+    /* Hero: the booking search is the hero */
+    .hero { position: relative; background: var(--pine); color: #fff; overflow: hidden; }
+    .hero .topo { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .14; pointer-events: none; }
+    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero:has(.hero-photo)::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,36,30,0) 55%, rgba(14,36,30,.85) 100%), linear-gradient(100deg, rgba(14,36,30,.95) 0%, rgba(14,36,30,.86) 45%, rgba(14,36,30,.5) 100%); }
+    .hero:has(.hero-photo) .topo { display: none; }
+    .hero:has(.hero-photo)::before { z-index: 1; }
+    .hero > .wrap { position: relative; z-index: 2; }
+    .stats { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 22px 0 26px; list-style: none; border-top: 1px solid rgba(255,255,255,.18); }
+    .stats li { display: grid; gap: 2px; padding-right: 16px; }
+    .stats b { font-family: var(--display); font-size: 2.2rem; line-height: 1; color: var(--amber); }
+    .stats span { font-size: 14.5px; color: #D5E2DC; }
+    .hero-inner { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: clamp(28px, 5vw, 64px); align-items: center; padding-top: clamp(40px, 6vw, 84px); padding-bottom: clamp(36px, 5vw, 64px); }
+    .hero h1 { font-size: clamp(3rem, 6vw, 5rem); text-transform: uppercase; }
+    .hero .lead { margin-top: 20px; max-width: 34ch; font-size: 1.15rem; color: #D5E2DC; }
+    .facts { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 26px 0 0; padding: 0; list-style: none; color: #fff; font-weight: 500; }
+    .facts li { display: flex; align-items: center; gap: 8px; }
+    .facts li::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--amber); transform: rotate(45deg); }
+
+    .search { background: var(--paper); color: var(--ink); border-radius: 20px; padding: clamp(18px, 3vw, 26px); box-shadow: 0 30px 60px -30px rgba(0,0,0,.55); }
+    .search h2 { font-size: 1.9rem; text-transform: uppercase; color: var(--pine); }
+    .steps { display: flex; gap: 6px; margin: 10px 0 18px; padding: 0; list-style: none; font-size: 13px; font-weight: 600; color: var(--muted); }
+    .steps li { display: flex; align-items: center; gap: 6px; }
+    .steps li + li::before { content: ""; width: 14px; height: 1px; background: var(--line); }
+    .steps b { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--line); color: var(--ink); font-size: 12px; }
+    .steps li.on b { background: var(--pine); color: #fff; }
+    .steps li.on { color: var(--ink); }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid2 > * { min-width: 0; }
+    .field { display: grid; gap: 5px; font-size: 14px; font-weight: 600; }
+    .field.full { grid-column: 1 / -1; }
+    .field input, .field select, .field textarea { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid #C9D1CC; border-radius: 10px; background: #fff; font-size: 16px; font-weight: 400; }
+    .field textarea { min-height: 80px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--pine); box-shadow: 0 0 0 3px rgba(23,58,49,.15); }
+    .field .hint { font-weight: 400; color: var(--muted); font-size: 13px; }
+    .dt { display: grid; grid-template-columns: minmax(0, 1fr) 112px; gap: 8px; }
+    .check { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; cursor: pointer; }
+    .check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--pine); flex: none; }
+    .search .check { margin: 2px 0 2px; }
+    .err { color: var(--red); font-size: 14px; min-height: 1.3em; margin: 6px 0 0; }
+    .search .btn { width: 100%; margin-top: 8px; }
+    .search .note { margin-top: 10px; font-size: 13px; color: var(--muted); text-align: center; }
+
+    section.block { padding: clamp(64px, 9vw, 112px) 0; }
+    .head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 56px; align-items: end; margin-bottom: clamp(28px, 4vw, 44px); }
+    .head h2 { font-size: clamp(2.5rem, 5vw, 4rem); text-transform: uppercase; color: var(--pine); }
+    .head p { color: var(--muted); max-width: 46ch; }
+
+    /* Promises */
+    .promises { background: var(--paper); border-bottom: 1px solid var(--line); }
+    .promise-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+    .promise-list li { padding: 28px 24px 28px 0; }
+    .promise-list li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+    .promise-list h3 { font-size: 1.45rem; text-transform: uppercase; color: var(--pine); }
+    .promise-list p { margin-top: 8px; color: var(--muted); font-size: 15.5px; }
+
+    /* Fleet */
+    .fleet-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .trip { font-weight: 600; }
+    .trip span { color: var(--muted); font-weight: 400; }
+    .trip button { border: 0; background: none; padding: 0; color: var(--pine); text-decoration: underline; cursor: pointer; font-weight: 600; margin-left: 6px; min-height: 32px; }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { border: 1px solid #C9D1CC; background: var(--paper); border-radius: 999px; min-height: 40px; padding: 0 16px; font-size: 15px; font-weight: 500; cursor: pointer; }
+    .chip[aria-pressed="true"] { background: var(--pine); border-color: var(--pine); color: #fff; }
+    .cars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .car { position: relative; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 18px; transition: border-color .2s, box-shadow .2s; }
+    .car:hover { border-color: #B9C4BE; }
+    .car.sel { border-color: var(--pine); box-shadow: 0 0 0 2px var(--pine); }
+    .car.off { background: #F4F4F1; }
+    .car.off .art { opacity: .45; }
+    .car.off .price b { color: #66716D; text-decoration: line-through; text-decoration-thickness: 2px; }
+    .art { border-radius: 12px; display: grid; place-items: center; aspect-ratio: 16 / 7; margin-bottom: 14px; }
+    .art { position: relative; overflow: hidden; aspect-ratio: 16 / 9; }
+    .art svg { width: 86%; height: auto; }
+    .art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .car-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+    .car h3 { font-size: 1.6rem; }
+    .cls { font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+    .specs { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; }
+    .specs li { font-size: 13.5px; padding: 3px 9px; border-radius: 6px; background: #ECEFEB; }
+    .price { display: flex; align-items: baseline; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed #CDD5D0; }
+    .price b { font-family: var(--display); font-size: 2.1rem; line-height: 1; color: var(--pine); }
+    .price span { color: var(--muted); font-size: 14.5px; }
+    .dep { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+    .car .btn { margin-top: 14px; width: 100%; }
+    .busy { margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--red); }
+    .busy + .btn { margin-top: 8px; }
+    .empty { padding: 36px; text-align: center; background: var(--paper); border: 1px dashed #C9D1CC; border-radius: 16px; grid-column: 1 / -1; color: var(--muted); }
+
+    /* Booking */
+    #rezervo { display: none; background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    #rezervo.open { display: block; }
+    .book { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .95fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+    .book h2 { font-size: clamp(2.3rem, 4.5vw, 3.4rem); text-transform: uppercase; color: var(--pine); }
+    .book .sub { margin-top: 8px; color: var(--muted); }
+    fieldset { border: 0; padding: 0; margin: 26px 0 0; min-width: 0; }
+    legend { font-family: var(--display); font-size: 1.45rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; padding: 0; }
+    .opts { display: grid; gap: 10px; }
+    .opt { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 14px; border: 1px solid #CFD7D2; border-radius: 12px; background: #fff; cursor: pointer; }
+    .opt:has(input:checked) { border-color: var(--pine); background: #F3F7F5; }
+    .opt input[type="checkbox"] { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--pine); }
+    .opt b { display: block; font-weight: 600; }
+    .opt small { display: block; color: var(--muted); font-size: 14px; line-height: 1.4; margin-top: 2px; }
+    .opt .cost { font-weight: 600; white-space: nowrap; }
+    .qty { display: inline-flex; align-items: center; border: 1px solid #CFD7D2; border-radius: 10px; overflow: hidden; }
+    .qty button { width: 40px; height: 40px; border: 0; background: #F1F3F0; font-size: 20px; cursor: pointer; }
+    .qty output { min-width: 34px; text-align: center; font-weight: 600; }
+    .pay-line { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: #EEF3F0; font-weight: 600; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .pay-line span { color: var(--muted); font-weight: 400; }
+    .book form .btn-amber { width: 100%; margin-top: 18px; min-height: 56px; font-size: 18px; }
+
+    .summary { position: sticky; top: 92px; background: var(--pine); color: #fff; border-radius: 20px; padding: 24px; }
+    .summary h3 { font-size: 1.9rem; }
+    .summary .when { margin-top: 10px; display: grid; gap: 8px; font-size: 15px; color: #D5E2DC; }
+    .summary .when b { color: #fff; font-weight: 600; }
+    .lines { margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(255,255,255,.18); list-style: none; display: grid; gap: 8px; font-size: 15px; }
+    .lines li { display: flex; justify-content: space-between; gap: 14px; }
+    .lines li span:last-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .lines li.minus span:last-child { color: var(--amber-2); }
+    .total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.18); }
+    .total span { font-weight: 600; }
+    .total b { font-family: var(--display); font-size: 2.6rem; line-height: 1; }
+    .sum-notes { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 14px; color: #D5E2DC; }
+    .sum-notes li::before { content: "✓ "; color: var(--amber); font-weight: 700; }
+    .back { margin-top: 14px; border: 0; background: none; color: #fff; text-decoration: underline; cursor: pointer; padding: 0; font-weight: 600; min-height: 32px; }
+
+    /* Confirmation */
+    .done { display: none; max-width: 760px; margin: 0 auto; text-align: center; }
+    .done.show { display: block; }
+    .done h2 { font-size: clamp(2.4rem, 5vw, 3.6rem); text-transform: uppercase; color: var(--pine); }
+    .done h2 + p { margin-top: 10px; }
+    .plate { display: inline-flex; align-items: stretch; margin: 24px 0 8px; border: 3px solid var(--ink); border-radius: 10px; background: #fff; overflow: hidden; font-family: var(--display); }
+    .plate .rks { display: grid; place-items: center; background: var(--rks); color: #fff; font-size: 15px; padding: 0 10px; letter-spacing: .06em; }
+    .plate .num { font-size: clamp(2.2rem, 7vw, 3.4rem); letter-spacing: .08em; padding: 4px 22px; font-weight: 700; }
+    .done .code-l { font-size: 14px; color: var(--muted); }
+    .recap { margin: 24px auto 0; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 8px; }
+    .recap div { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid #EEF0ED; padding-bottom: 8px; }
+    .recap div:last-child { border: 0; padding: 0; }
+    .recap span:first-child { color: var(--muted); }
+    .recap span:last-child { text-align: right; font-weight: 600; }
+    .next { margin: 26px auto 0; padding: 0; list-style: none; text-align: left; display: grid; gap: 10px; counter-reset: n; }
+    .next li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; counter-increment: n; }
+    .next li::before { content: counter(n); display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--pine); color: #fff; font-weight: 600; font-size: 14px; }
+    .done .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 26px; }
+    .demo-note { margin-top: 18px; font-size: 14px; color: var(--muted); }
+
+    /* How + conditions + FAQ */
+    .how { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+    .how li { counter-increment: s; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .how li::before { content: counter(s); display: block; font-family: var(--display); font-size: 3.4rem; line-height: 1; color: var(--amber); font-weight: 700; }
+    .how h3 { margin-top: 10px; font-size: 1.55rem; text-transform: uppercase; }
+    .how p { margin-top: 8px; color: var(--muted); }
+    .terms { background: var(--pine); color: #fff; }
+    .terms .head h2 { color: #fff; } .terms .head p { color: #C7D8D0; }
+    .term-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid rgba(255,255,255,.18); }
+    .term { padding: 22px 22px 22px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+    .term:not(:nth-child(3n+1)) { padding-left: 22px; border-left: 1px solid rgba(255,255,255,.18); }
+    .term h3 { font-size: 1.35rem; text-transform: uppercase; color: var(--amber-2); }
+    .term p { margin-top: 8px; color: #E4EEE9; font-size: 15.5px; }
+    .faq { max-width: 860px; }
+    .faq details { border-bottom: 1px solid #CFD7D2; }
+    .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; font-weight: 600; font-size: 1.1rem; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font-family: var(--display); font-size: 1.8rem; line-height: .8; color: var(--pine); transition: transform .25s var(--ease); }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { padding: 0 0 20px; color: var(--muted); max-width: 70ch; }
+
+    .contact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .card { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .card h3 { font-size: 1.5rem; text-transform: uppercase; color: var(--pine); }
+    .card p { margin-top: 10px; color: var(--muted); }
+    .card a { font-weight: 600; color: var(--ink); }
+    footer { background: var(--ink); color: #AEB6B2; padding: 30px 0; font-size: 15px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+    footer a { color: #fff; }
+
+    @media (max-width: 1020px) {
+      .cars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .promise-list, .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats { row-gap: 16px; }
+      .promise-list li:nth-child(3) { padding-left: 0; border-left: 0; }
+      .promise-list li:nth-child(n+3) { border-top: 1px solid var(--line); }
+      .term-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .term:not(:nth-child(3n+1)) { padding-left: 0; border-left: 0; }
+      .term:nth-child(even) { padding-left: 22px; border-left: 1px solid rgba(255,255,255,.18); }
+    }
+    @media (max-width: 880px) {
+      .nav-links { display: none; }
+      .hero-inner, .head, .book { grid-template-columns: minmax(0, 1fr); }
+      .summary { position: static; }
+      .how, .contact { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 620px) {
+      .cars, .promise-list, .term-grid { grid-template-columns: minmax(0, 1fr); }
+      .promise-list li, .promise-list li + li { padding: 20px 0; border-left: 0; }
+      .promise-list li + li { border-top: 1px solid var(--line); }
+      .term, .term:nth-child(even) { padding-left: 0; border-left: 0; }
+      .grid2 { grid-template-columns: minmax(0, 1fr); }
+      .nav .btn { display: none; }
+      .logo small { display: none; }
+      .hero h1 { font-size: 2.45rem; }
+      .hero .lead { font-size: 1rem; margin-top: 12px; }
+      .facts { display: none; }
+      .hero-inner { padding-top: 28px; gap: 22px; }
+      .search h2 { font-size: 1.6rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="demo-bar" data-i18n-html="demo">Ky është një <b>koncept demo</b>, i krijuar nga <a href="../../">Nisja Studio</a>. Doni një faqe të tillë për biznesin tuaj?</div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#" aria-label="Udha Rent a Car">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#F2A516"/><path d="M11 30 C13 21 21 14 23 4" fill="none" stroke="#173A31" stroke-width="3.2" stroke-linecap="round"/><path d="M17 27 L18 24 M19.5 19.5 L20.6 16.8 M22 12 L22.6 9.6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>UDHA <small data-i18n="logo.sub">Rent a Car · Gjakovë</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Kryesore">
+        <a href="#makinat" data-i18n="nav.cars">Makinat</a>
+        <a href="#si" data-i18n="nav.how">Si funksionon</a>
+        <a href="#kushtet" data-i18n="nav.terms">Kushtet</a>
+        <a href="#pyetje" data-i18n="nav.faq">Pyetje</a>
+        <a href="#kontakti" data-i18n="nav.contact">Kontakti</a>
+      </nav>
+      <div class="nav-end">
+        <div class="lang" role="group" aria-label="Gjuha / Language">
+          <button type="button" data-lang="sq" aria-pressed="true">SQ</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="btn btn-amber" href="#kerko" data-i18n="nav.cta">Rezervo</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="kerko">
+      <img class="hero-photo" src="img/hero.jpg" srcset="img/hero-960.jpg 960w, img/hero.jpg 1920w" sizes="100vw" alt="" fetchpriority="high" onerror="this.remove()">
+      <svg class="topo" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.4">
+        <path d="M-20 520 C180 470 260 380 420 400 S700 520 880 430 1120 300 1240 330"/>
+        <path d="M-20 470 C170 420 250 330 420 350 S690 470 880 380 1110 250 1240 280"/>
+        <path d="M-20 420 C160 370 250 285 420 300 S680 420 880 330 1100 200 1240 230"/>
+        <path d="M-20 370 C150 320 250 240 420 250 S670 370 880 280 1090 150 1240 180"/>
+        <path d="M-20 320 C140 270 250 195 420 200 S660 320 880 230 1080 100 1240 130"/>
+        <path d="M-20 270 C130 220 250 150 420 150 S650 270 880 180 1070 50 1240 80"/>
+        <path d="M-20 220 C120 170 250 105 420 100 S640 220 880 130 1060 0 1240 30"/>
+      </svg>
+      <div class="wrap hero-inner">
+        <div>
+          <h1 data-i18n="hero.title">Makina ju pret kur zbrisni nga avioni.</h1>
+          <p class="lead" data-i18n="hero.lead">Rent a car në Gjakovë, me marrje edhe në Aeroportin e Prishtinës. Çmimin e plotë e shihni para se të rezervoni, dhe paguani vetëm kur e merrni makinën.</p>
+          <ul class="facts">
+            <li data-i18n="hero.f1">Kilometra pa limit</li>
+            <li data-i18n="hero.f2">Pa pagesë online</li>
+            <li data-i18n="hero.f3">Anulim falas</li>
+          </ul>
+        </div>
+
+        <form class="search" id="search" novalidate>
+          <h2 data-i18n="search.title">Gjeni makinën tuaj</h2>
+          <ol class="steps" aria-label="Hapat e rezervimit">
+            <li class="on" data-step="1"><b>1</b><span data-i18n="step.1">Datat</span></li>
+            <li data-step="2"><b>2</b><span data-i18n="step.2">Makina</span></li>
+            <li data-step="3"><b>3</b><span data-i18n="step.3">Të dhënat</span></li>
+          </ol>
+          <div class="grid2">
+            <label class="field full"><span data-i18n="search.pick">Ku e merrni makinën?</span>
+              <select id="pickLoc" name="pickLoc"></select>
+            </label>
+            <label class="check full"><input type="checkbox" id="diffReturn"> <span data-i18n="search.diff">E kthej në vend tjetër</span></label>
+            <label class="field full" id="retWrap" hidden><span data-i18n="search.ret">Ku e ktheni makinën?</span>
+              <select id="retLoc" name="retLoc"></select>
+            </label>
+            <div class="field full"><span id="l-from" data-i18n="search.from">Marrja</span>
+              <div class="dt"><input type="date" id="fromDate" aria-labelledby="l-from" required><select id="fromTime" aria-label="Ora e marrjes"></select></div>
+            </div>
+            <div class="field full"><span id="l-to" data-i18n="search.to">Kthimi</span>
+              <div class="dt"><input type="date" id="toDate" aria-labelledby="l-to" required><select id="toTime" aria-label="Ora e kthimit"></select></div>
+            </div>
+          </div>
+          <p class="err" id="searchErr" role="alert"></p>
+          <button class="btn btn-amber" type="submit" data-i18n="search.btn">Shiko makinat e lira</button>
+          <p class="note" data-i18n="search.note">Nuk ju kërkojmë kartë krediti për të rezervuar.</p>
+        </form>
+      </div>
+      <div class="wrap"><ul class="stats">
+        <li><b>6</b><span data-i18n="st.cars">makina, nga Polo te Vito 9-ulëse</span></li>
+        <li><b>24/7</b><span data-i18n="st.help">ndihmë në rrugë</span></li>
+        <li><b>€0</b><span data-i18n="st.dep">depozitë me mbulim të plotë</span></li>
+        <li><b>60 min</b><span data-i18n="st.wait">pritje falas në aeroport</span></li>
+      </ul></div>
+    </section>
+
+    <section class="promises" aria-label="Premtimet tona">
+      <div class="wrap">
+        <ul class="promise-list">
+          <li><h3 data-i18n="p1.t">Çmimi final që në fillim</h3><p data-i18n="p1.d">Çdo tarifë shihet këtu, para rezervimit. Në sportel nuk shtohet asgjë.</p></li>
+          <li><h3 data-i18n="p2.t">Depozita e qartë</h3><p data-i18n="p2.d">E shkruajmë te çdo makinë dhe e kthejmë ditën që e ktheni makinën. Me mbulim të plotë, s'ka depozitë fare.</p></li>
+          <li><h3 data-i18n="p3.t">Ju presim në aeroport</h3><p data-i18n="p3.d">Ndjekim fluturimin tuaj. Nëse vonohet avioni, ne presim pa pagesë shtesë.</p></li>
+          <li><h3 data-i18n="p4.t">E fotografojmë bashkë</h3><p data-i18n="p4.d">Makinën e kontrollojmë dhe e fotografojmë me ju në marrje dhe në kthim, që askush të mos paguajë për dëme që s'i ka bërë.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block" id="makinat">
+      <div class="wrap">
+        <div class="head">
+          <h2 data-i18n="fleet.title">Makinat</h2>
+          <p data-i18n="fleet.intro">Merrni pikërisht makinën që zgjidhni, jo “një të ngjashme”. Çmimi ndryshon sipas sezonit dhe ulet sa më shumë ditë që e merrni.</p>
+        </div>
+        <div class="fleet-bar">
+          <p class="trip" id="trip" aria-live="polite"></p>
+          <div class="chips" role="group" aria-label="Filtro makinat">
+            <button type="button" class="chip" data-filter="all" aria-pressed="true" data-i18n="f.all">Të gjitha</button>
+            <button type="button" class="chip" data-filter="auto" aria-pressed="false" data-i18n="f.auto">Automatik</button>
+            <button type="button" class="chip" data-filter="big" aria-pressed="false" data-i18n="f.big">Familje dhe grupe</button>
+          </div>
+        </div>
+        <div class="cars" id="cars"></div>
+      </div>
+    </section>
+
+    <section class="block" id="rezervo" aria-labelledby="bookTitle">
+      <div class="wrap">
+        <div class="book" id="bookWrap">
+          <form id="bookForm" novalidate>
+            <h2 id="bookTitle" data-i18n="book.title">Përfundoni rezervimin</h2>
+            <p class="sub" data-i18n="book.sub">Edhe një hap. Ju konfirmojmë brenda 30 minutash në WhatsApp ose telefon.</p>
+
+            <fieldset>
+              <legend data-i18n="book.extras">Shtesa</legend>
+              <div class="opts">
+                <label class="opt"><input type="checkbox" id="xFull"><span><b data-i18n="x.full">Mbulim i plotë</b><small data-i18n="x.fullD">Depozita dhe franshiza bëhen €0. Nuk paguani asgjë për gërvishtje apo dëme.</small></span><span class="cost" id="cFull"></span></label>
+                <div class="opt"><span aria-hidden="true"></span><span><b data-i18n="x.child">Ulëse për fëmijë</b><small data-i18n="x.childD">Për fëmijë deri në 12 vjeç.</small></span><span class="qty"><button type="button" id="seatMinus" aria-label="Më pak">−</button><output id="seatN" aria-live="polite">0</output><button type="button" id="seatPlus" aria-label="Më shumë">+</button></span></div>
+                <label class="opt"><input type="checkbox" id="xBorder"><span><b data-i18n="x.border">Udhëtim në Shqipëri, Maqedoni të Veriut, Mal të Zi</b><small data-i18n="x.borderD">Kartoni i gjelbër përfshihet. Për vende të tjera na pyesni.</small></span><span class="cost" id="cBorder"></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend data-i18n="book.driver">Shoferi</legend>
+              <div class="grid2">
+                <label class="field"><span data-i18n="d.name">Emri dhe mbiemri</span><input id="dName" autocomplete="name" required></label>
+                <label class="field"><span data-i18n="d.phone">Telefoni ose WhatsApp</span><input id="dPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+383 4x xxx xxx" required></label>
+                <label class="field"><span data-i18n="d.age">Mosha e shoferit</span>
+                  <select id="dAge"><option value="25" data-i18n="d.age25">25 vjeç ose më shumë</option><option value="21" data-i18n="d.age21">21–24 vjeç</option></select>
+                </label>
+                <label class="field"><span><span data-i18n="d.email">Email</span> <span class="hint" data-i18n="opt">(opsionale)</span></span><input id="dEmail" type="email" autocomplete="email"></label>
+                <label class="field full" id="flightWrap" hidden><span><span data-i18n="d.flight">Numri i fluturimit</span> <span class="hint" data-i18n="d.flightH">që ta ndjekim nëse vonohet</span></span><input id="dFlight" placeholder="p.sh. LH 1426" autocapitalize="characters"></label>
+                <label class="field full"><span><span data-i18n="d.notes">Shënime</span> <span class="hint" data-i18n="opt">(opsionale)</span></span><textarea id="dNotes" data-i18n-ph="d.notesP" placeholder="P.sh. shofer i dytë, adresa ku ta sjellim makinën…"></textarea></label>
+              </div>
+            </fieldset>
+
+            <label class="check" style="margin-top:18px"><input type="checkbox" id="dTerms" required> <span data-i18n-html="d.terms">I kam lexuar <a href="#kushtet">kushtet e qirasë</a>.</span></label>
+            <p class="pay-line" id="payLine" aria-live="polite"></p>
+            <p class="err" id="bookErr" role="alert"></p>
+            <button class="btn btn-amber" type="submit" id="bookBtn" data-i18n="book.btn">Dërgo rezervimin</button>
+          </form>
+
+          <aside class="summary" aria-live="polite" aria-label="Përmbledhja">
+            <h3 id="sCar"></h3>
+            <div class="when" id="sWhen"></div>
+            <ul class="lines" id="sLines"></ul>
+            <div class="total"><span data-i18n="s.total">Gjithsej</span><b id="sTotal"></b></div>
+            <ul class="sum-notes">
+              <li id="sDeposit"></li>
+              <li data-i18n="s.pay">Paguani në marrje, me kartë ose para në dorë</li>
+              <li data-i18n="s.km">Kilometra pa limit · karburant plot–plot</li>
+            </ul>
+            <button type="button" class="back" id="changeCar" data-i18n="s.change">Ndrysho makinën</button>
+          </aside>
+        </div>
+
+        <div class="done" id="done" tabindex="-1">
+          <h2 data-i18n="done.title">Rezervimi u dërgua</h2>
+          <p data-i18n="done.sub">Ju shkruajmë brenda 30 minutash për ta konfirmuar.</p>
+          <div class="plate" aria-label="Kodi i rezervimit"><span class="rks">RKS</span><span class="num" id="code"></span></div>
+          <p class="code-l" data-i18n="done.code">Kodi i rezervimit tuaj</p>
+          <div class="recap" id="recap"></div>
+          <ol class="next">
+            <li data-i18n="done.n1">Ju konfirmojmë me WhatsApp ose telefon brenda 30 minutash (08:00–20:00).</li>
+            <li data-i18n="done.n2">Në marrje sillni letërnjoftimin ose pasaportën dhe patentë shoferin.</li>
+            <li data-i18n="done.n3">E kontrollojmë makinën bashkë, bëjmë foto, dhe paguani me kartë ose para në dorë.</li>
+          </ol>
+          <div class="actions">
+            <a class="btn btn-pine" id="waBtn" target="_blank" rel="noopener" data-i18n="done.wa">Dërgoje edhe me WhatsApp</a>
+            <button type="button" class="btn btn-line" id="icsBtn" data-i18n="done.ics">Shto në kalendar</button>
+            <button type="button" class="btn btn-line" id="again" data-i18n="done.again">Rezervim tjetër</button>
+          </div>
+          <p class="demo-note" id="demoNote" data-i18n="done.demo">Ky është demo: rezervimi u ruajt vetëm në këtë shfletues. Provoni ta rezervoni të njëjtën makinë në të njëjtat data.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="si">
+      <div class="wrap">
+        <div class="head"><h2 data-i18n="how.title">Si funksionon</h2><p data-i18n="how.intro">Rezervimi merr një minutë. Nuk paguani asgjë online.</p></div>
+        <ol class="how">
+          <li><h3 data-i18n="how.1t">Zgjidhni datat dhe makinën</h3><p data-i18n="how.1d">Shihni vetëm makinat që janë të lira në datat tuaja, me çmimin e plotë.</p></li>
+          <li><h3 data-i18n="how.2t">Ne konfirmojmë</h3><p data-i18n="how.2d">Ju shkruajmë në WhatsApp brenda 30 minutash. Nëse ndryshon plani, anuloni falas.</p></li>
+          <li><h3 data-i18n="how.3t">Merrni çelësat</h3><p data-i18n="how.3d">Në zyrë, në adresën tuaj ose në aeroport. Kontrollojmë makinën bashkë dhe paguani atëherë.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="block terms" id="kushtet">
+      <div class="wrap">
+        <div class="head"><h2 data-i18n="t.title">Kushtet e qirasë</h2><p data-i18n="t.intro">Të shkruara qartë, që të mos ketë surpriza në sportel.</p></div>
+        <div class="term-grid">
+          <div class="term"><h3 data-i18n="t.docs">Dokumentet</h3><p data-i18n="t.docsD">Letërnjoftim ose pasaportë dhe patentë shoferi që e keni të paktën 2 vjet. Nuk kërkohet kartë krediti.</p></div>
+          <div class="term"><h3 data-i18n="t.age">Mosha</h3><p data-i18n="t.ageD">Nga 21 vjeç. Për shoferë 21–24 vjeç shtohen €5 në ditë.</p></div>
+          <div class="term"><h3 data-i18n="t.dep">Depozita</h3><p data-i18n="t.depD">€200–500 sipas makinës, me kartë ose para në dorë. Kthehet ditën që e ktheni makinën. Me mbulim të plotë: €0.</p></div>
+          <div class="term"><h3 data-i18n="t.ins">Sigurimi</h3><p data-i18n="t.insD">Sigurimi bazë (CDW) përfshihet, me franshizë sa depozita. Mbulimi i plotë (€9/ditë) e bën franshizën €0.</p></div>
+          <div class="term"><h3 data-i18n="t.fuel">Karburanti dhe kilometrat</h3><p data-i18n="t.fuelD">Plot–plot: e ktheni me aq sa e morët. Kilometra pa limit.</p></div>
+          <div class="term"><h3 data-i18n="t.border">Jashtë Kosovës</h3><p data-i18n="t.borderD">Shqipëri, Maqedoni e Veriut, Mal i Zi: €25 për gjithë qiranë, kartoni i gjelbër përfshihet. Na tregoni në rezervim.</p></div>
+          <div class="term"><h3 data-i18n="t.air">Aeroporti</h3><p data-i18n="t.airD">Marrja ose kthimi në Aeroportin e Prishtinës kushton €30. Pritja falas deri në 60 minuta pas aterrimit.</p></div>
+          <div class="term"><h3 data-i18n="t.late">Kthimi me vonesë</h3><p data-i18n="t.lateD">Keni 2 orë tolerancë. Pas kësaj llogaritet një ditë më shumë.</p></div>
+          <div class="term"><h3 data-i18n="t.cancel">Anulimi</h3><p data-i18n="t.cancelD">Falas në çdo kohë, sepse nuk paguani asgjë paraprakisht. Ju lutemi na njoftoni.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="pyetje">
+      <div class="wrap">
+        <div class="head"><h2 data-i18n="q.title">Pyetje të shpeshta</h2><p data-i18n="q.intro">Nuk e gjeni përgjigjen? Na shkruani në WhatsApp.</p></div>
+        <div class="faq">
+          <details><summary data-i18n="q.1">A më duhet kartë krediti?</summary><p data-i18n="q.1a">Jo. Depozitën mund ta lini edhe me para në dorë ose me kartë debiti, dhe ju kthehet ditën që e ktheni makinën.</p></details>
+          <details><summary data-i18n="q.2">Çfarë ndodh nëse vonohet avioni?</summary><p data-i18n="q.2a">Me numrin e fluturimit e ndjekim avionin tuaj dhe ju presim. Rezervimi nuk anulohet dhe nuk paguani pritjen.</p></details>
+          <details><summary data-i18n="q.3">A e marr pikërisht makinën që zgjodha?</summary><p data-i18n="q.3a">Po. Nuk shkruajmë “ose e ngjashme”. Nëse makina prishet para qirasë, ju ofrojmë një të së njëjtës klasë ose më të madhe, pa pagesë shtesë.</p></details>
+          <details><summary data-i18n="q.4">A mund të shkoj në Shqipëri ose në Mal të Zi?</summary><p data-i18n="q.4a">Po. Shënoni opsionin në rezervim (€25 për gjithë qiranë) dhe ju japim kartonin e gjelbër bashkë me çelësat.</p></details>
+          <details><summary data-i18n="q.5">Çfarë ndodh nëse prishet makina gjatë rrugës?</summary><p data-i18n="q.5a">Na telefononi në çdo orë. Ju ndihmojmë në rrugë dhe, nëse duhet, ju sjellim një makinë tjetër.</p></details>
+          <details><summary data-i18n="q.6">A mund ta zgjas qiranë?</summary><p data-i18n="q.6a">Po, nëse makina është e lirë. Na shkruani të paktën një ditë para kthimit dhe çmimi llogaritet me zbritjen për më shumë ditë.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="kontakti" style="padding-top:0">
+      <div class="wrap contact">
+        <div class="card"><h3 data-i18n="c.office">Zyra</h3><p>Rr. Nëna Terezë, Gjakovë<br><span data-i18n="c.hours">Çdo ditë 08:00–20:00</span></p></div>
+        <div class="card"><h3 data-i18n="c.call">Telefon dhe WhatsApp</h3><p><a href="tel:+38349000000">+383 49 000 000</a><br><span data-i18n="c.callD">Për prishje në rrugë: 24 orë</span></p></div>
+        <div class="card"><h3 data-i18n="c.air">Aeroporti</h3><p data-i18n="c.airD">Ju presim në dalje të mbërritjeve me emrin tuaj në tabelë.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap"><p>© Udha Rent a Car · <span data-i18n="foot.demo">koncept demo</span></p><p><span data-i18n="foot.by">Faqe nga</span> <a href="../../">Nisja Studio</a></p></div></footer>
+
+  <script src="data.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var D = window.UDHA, $ = function (id) { return document.getElementById(id); };
+    if (/[?&]test\b/.test(location.search)) D.demo = false; // test mode: booking requests are really emailed
+    var EN = {
+      "demo": "This is a <b>concept demo</b> made by <a href=\"../../\">Nisja Studio</a>. Want a site like this for your business?",
+      "logo.sub": "Rent a Car · Gjakovë", "nav.cars": "Cars", "nav.how": "How it works", "nav.terms": "Terms", "nav.faq": "FAQ", "nav.contact": "Contact", "nav.cta": "Book",
+      "hero.title": "Your car is waiting when you land.", "hero.lead": "Car rental in Gjakovë, with pickup at Prishtina Airport too. You see the full price before you book, and you only pay when you collect the car.",
+      "hero.f1": "Unlimited kilometres", "hero.f2": "No online payment", "hero.f3": "Free cancellation",
+      "search.title": "Find your car", "step.1": "Dates", "step.2": "Car", "step.3": "Your details", "search.pick": "Where do you pick up the car?", "search.diff": "Return it somewhere else", "search.ret": "Where do you return the car?",
+      "search.from": "Pickup", "search.to": "Return", "search.btn": "See available cars", "search.note": "No credit card needed to book.",
+      "p1.t": "Final price up front", "p1.d": "Every fee is shown here, before you book. Nothing gets added at the desk.",
+      "p2.t": "A clear deposit", "p2.d": "We show it on every car and return it the day you bring the car back. With full cover there is no deposit at all.",
+      "p3.t": "We wait at the airport", "p3.d": "We track your flight. If it's late, we wait at no extra cost.",
+      "p4.t": "We photograph it together", "p4.d": "We check and photograph the car with you at pickup and return, so nobody pays for damage they didn't cause.",
+      "fleet.title": "Our cars", "fleet.intro": "You get exactly the car you choose, not “one like it”. Prices change with the season and drop the more days you rent.",
+      "f.all": "All", "f.auto": "Automatic", "f.big": "Families & groups",
+      "book.title": "Finish your booking", "book.sub": "One more step. We confirm within 30 minutes by WhatsApp or phone.", "book.extras": "Extras",
+      "x.full": "Full cover", "x.fullD": "Deposit and excess become €0. You pay nothing for scratches or damage.", "x.child": "Child seat", "x.childD": "For children up to 12.",
+      "x.border": "Driving to Albania, North Macedonia, Montenegro", "x.borderD": "Green card included. Ask us about other countries.",
+      "book.driver": "Driver", "d.name": "Full name", "d.phone": "Phone or WhatsApp", "d.age": "Driver's age", "d.age25": "25 or older", "d.age21": "21–24",
+      "d.email": "Email", "opt": "(optional)", "d.flight": "Flight number", "d.flightH": "so we can track it if it's late", "d.notes": "Notes", "d.notesP": "E.g. a second driver, the address to bring the car to…",
+      "d.terms": "I have read the <a href=\"#kushtet\">rental terms</a>.", "book.btn": "Send booking",
+      "s.total": "Total", "s.pay": "Pay at pickup, by card or cash", "s.km": "Unlimited km · full-to-full fuel", "s.change": "Change car",
+      "done.title": "Booking sent", "done.sub": "We'll message you within 30 minutes to confirm.", "done.code": "Your booking code",
+      "done.n1": "We confirm by WhatsApp or phone within 30 minutes (08:00–20:00).", "done.n2": "At pickup, bring your ID or passport and your driving licence.", "done.n3": "We check the car together, take photos, and you pay by card or cash.",
+      "done.wa": "Also send it on WhatsApp", "done.ics": "Add to calendar", "done.again": "New booking",
+      "done.demo": "This is a demo: the booking was saved only in this browser. Try booking the same car on the same dates.",
+      "how.title": "How it works", "how.intro": "Booking takes a minute. You pay nothing online.",
+      "how.1t": "Pick dates and a car", "how.1d": "You only see cars that are free on your dates, with the full price.",
+      "how.2t": "We confirm", "how.2d": "We message you on WhatsApp within 30 minutes. If plans change, cancel for free.",
+      "how.3t": "Get the keys", "how.3d": "At our office, at your address or at the airport. We check the car together and you pay then.",
+      "t.title": "Rental terms", "t.intro": "Written plainly, so there are no surprises at the desk.",
+      "t.docs": "Documents", "t.docsD": "ID card or passport, and a driving licence held for at least 2 years. No credit card needed.",
+      "t.age": "Age", "t.ageD": "From 21. Drivers aged 21–24 pay €5 extra per day.",
+      "t.dep": "Deposit", "t.depD": "€200–500 depending on the car, by card or cash. Returned the day you bring the car back. With full cover: €0.",
+      "t.ins": "Insurance", "t.insD": "Basic cover (CDW) is included, with an excess equal to the deposit. Full cover (€9/day) makes the excess €0.",
+      "t.fuel": "Fuel and kilometres", "t.fuelD": "Full-to-full: return it with as much as you got. Unlimited kilometres.",
+      "t.border": "Outside Kosovo", "t.borderD": "Albania, North Macedonia, Montenegro: €25 for the whole rental, green card included. Tell us when you book.",
+      "t.air": "Airport", "t.airD": "Pickup or return at Prishtina Airport costs €30. Free waiting up to 60 minutes after landing.",
+      "t.late": "Late return", "t.lateD": "You have 2 hours of grace. After that, one more day is charged.",
+      "t.cancel": "Cancellation", "t.cancelD": "Free at any time, because you pay nothing in advance. Please let us know.",
+      "q.title": "Frequently asked questions", "q.intro": "Can't find the answer? Message us on WhatsApp.",
+      "q.1": "Do I need a credit card?", "q.1a": "No. You can leave the deposit in cash or with a debit card, and you get it back the day you return the car.",
+      "q.2": "What if my flight is late?", "q.2a": "With your flight number we track your plane and wait for you. The booking isn't cancelled and you don't pay for the wait.",
+      "q.3": "Do I get exactly the car I chose?", "q.3a": "Yes. We don't write “or similar”. If the car breaks down before your rental, we give you one of the same class or bigger, at no extra cost.",
+      "q.4": "Can I drive to Albania or Montenegro?", "q.4a": "Yes. Tick the option when you book (€25 for the whole rental) and we hand you the green card with the keys.",
+      "q.5": "What if the car breaks down on the road?", "q.5a": "Call us at any hour. We help you on the road and, if needed, bring you another car.",
+      "q.6": "Can I extend the rental?", "q.6a": "Yes, if the car is free. Message us at least a day before the return and the price is worked out with the longer-rental discount.",
+      "c.office": "Office", "c.hours": "Every day 08:00–20:00", "c.call": "Phone and WhatsApp", "c.callD": "For breakdowns: 24 hours", "c.air": "Airport", "c.airD": "We meet you at the arrivals exit with your name on a sign.",
+      "foot.demo": "concept demo", "st.cars": "cars, from Polo to the 9-seat Vito", "st.help": "roadside help", "st.dep": "deposit with full cover", "st.wait": "free waiting at the airport", "foot.by": "Website by"
+    };
+    var TXT = {
+      sq: { cls: { economy: "Ekonomike", compact: "Kompakte", estate: "Familjare", suv: "SUV", premium: "Premium", van: "Furgon 9 ulëse" }, gear: { manual: "Manual", auto: "Automatik" }, fuel: { petrol: "Benzinë", diesel: "Naftë", hybrid: "Hibrid" },
+        seats: "ulëse", bags: "valixhe", ac: "A/C", day: "ditë", days: "ditë", perDay: "/ditë", from: "nga", total: "gjithsej", totalL: "Gjithsej", payAt: "paguani në marrje", choose: "Zgjidh këtë makinë", chosen: "E zgjedhur",
+        busy: "E zënë në këto data", freeFrom: "E lirë nga", deposit: "Depozitë", dep0: "€0 me mbulim të plotë", noCars: "Asnjë makinë nuk përputhet me filtrin.",
+        trip: "{d} ditë · {from} → {to}", tripNone: "Zgjidhni datat për të parë çmimin e plotë.", change: "Ndrysho",
+        rent: "Qiraja", season: { low: "sezon i ulët", mid: "sezon mesatar", high: "sezon i lartë" }, discount: "Zbritje për {n}+ ditë (−{p}%)",
+        full: "Mbulim i plotë", seat: "Ulëse për fëmijë", border: "Udhëtim jashtë Kosovës", young: "Shofer 21–24 vjeç", pickFee: "Marrja në aeroport", retFee: "Kthimi në aeroport",
+        depositIs: "Depozitë: {v}", pickup: "Marrja", ret: "Kthimi", car: "Makina", name: "Emri", phone: "Telefoni",
+        eDates: "Data e kthimit duhet të jetë pas marrjes.", ePast: "Marrja duhet të jetë të paktën 2 orë nga tani.", eName: "Shkruani emrin dhe mbiemrin.", ePhone: "Shkruani një numër telefoni që të mund t'ju konfirmojmë.", eTerms: "Konfirmoni që i keni lexuar kushtet.",
+        eTaken: "Kjo makinë sapo u rezervua në këto data. Zgjidhni një tjetër.", eSend: "Rezervimi nuk u dërgua. Provoni përsëri ose na shkruani në WhatsApp.", sending: "Duke dërguar…",
+        wa: "Përshëndetje! Dua të rezervoj:", icsPick: "Marrja e makinës", icsRet: "Kthimi i makinës", stepsLabel: "Hapat e rezervimit" },
+      en: { cls: { economy: "Economy", compact: "Compact", estate: "Estate", suv: "SUV", premium: "Premium", van: "9-seat van" }, gear: { manual: "Manual", auto: "Automatic" }, fuel: { petrol: "Petrol", diesel: "Diesel", hybrid: "Hybrid" },
+        seats: "seats", bags: "bags", ac: "A/C", day: "day", days: "days", perDay: "/day", from: "from", total: "total", totalL: "Total", payAt: "pay at pickup", choose: "Choose this car", chosen: "Selected",
+        busy: "Taken on these dates", freeFrom: "Free from", deposit: "Deposit", dep0: "€0 with full cover", noCars: "No car matches this filter.",
+        trip: "{d} days · {from} → {to}", tripNone: "Pick your dates to see the full price.", change: "Change",
+        rent: "Rental", season: { low: "low season", mid: "mid season", high: "high season" }, discount: "{n}+ day discount (−{p}%)",
+        full: "Full cover", seat: "Child seat", border: "Driving outside Kosovo", young: "Driver aged 21–24", pickFee: "Airport pickup", retFee: "Airport return",
+        depositIs: "Deposit: {v}", pickup: "Pickup", ret: "Return", car: "Car", name: "Name", phone: "Phone",
+        eDates: "The return must be after the pickup.", ePast: "Pickup must be at least 2 hours from now.", eName: "Enter your full name.", ePhone: "Enter a phone number so we can confirm.", eTerms: "Please confirm you've read the terms.",
+        eTaken: "This car was just booked for these dates. Please choose another.", eSend: "The booking didn't go through. Try again or message us on WhatsApp.", sending: "Sending…",
+        wa: "Hello! I'd like to book:", icsPick: "Car pickup", icsRet: "Car return", stepsLabel: "Booking steps" }
+    };
+
+    var lang = "sq", SQ = {};
+    function T(k, v) { var s = k.split(".").reduce(function (o, p) { return o && o[p]; }, TXT[lang]); if (typeof s !== "string") return k; return v ? s.replace(/\{(\w+)\}/g, function (_, n) { return v[n]; }) : s; }
+    var eur = function (n) { return "€" + Math.round(n).toLocaleString("de-DE"); };
+    var loc = function () { return lang === "sq" ? "sq-AL" : "en-GB"; };
+    var pad = function (n) { return String(n).padStart(2, "0"); };
+    var ymd = function (d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); };
+    var WD = ["Die", "Hën", "Mar", "Mër", "Enj", "Pre", "Sht"], MO = ["jan", "shk", "mar", "pri", "maj", "qer", "korr", "gush", "sht", "tet", "nën", "dhj"];
+    function fmt(d) {
+      var day = lang === "sq" ? WD[d.getDay()] + " " + d.getDate() + " " + MO[d.getMonth()] : d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+      return day + ", " + pad(d.getHours()) + ":" + pad(d.getMinutes());
+    }
+    function locName(id) { var l = D.locations.find(function (x) { return x.id === id; }); return l ? l[lang] : ""; }
+
+    /* ---------- language ---------- */
+    document.querySelectorAll("[data-i18n],[data-i18n-html],[data-i18n-ph]").forEach(function (el) {
+      if (el.dataset.i18n) SQ[el.dataset.i18n] = el.textContent;
+      if (el.dataset.i18nHtml) SQ[el.dataset.i18nHtml] = el.innerHTML;
+      if (el.dataset.i18nPh) SQ[el.dataset.i18nPh] = el.getAttribute("placeholder");
+    });
+    function applyLang() {
+      var dict = lang === "en" ? EN : SQ;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(function (el) { var k = el.dataset.i18n; if (dict[k] != null) el.textContent = dict[k]; });
+      document.querySelectorAll("[data-i18n-html]").forEach(function (el) { var k = el.dataset.i18nHtml; if (dict[k] != null) el.innerHTML = dict[k]; });
+      document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { var k = el.dataset.i18nPh; if (dict[k] != null) el.setAttribute("placeholder", dict[k]); });
+      document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+      document.querySelector(".steps").setAttribute("aria-label", T("stepsLabel"));
+      fillLocations(); renderAll();
+    }
+    document.querySelectorAll(".lang button").forEach(function (b) {
+      b.addEventListener("click", function () { lang = b.dataset.lang; try { localStorage.setItem("udha-lang", lang); } catch (e) {} applyLang(); });
+    });
+
+    /* ---------- search form ---------- */
+    function fillLocations() {
+      ["pickLoc", "retLoc"].forEach(function (id) {
+        var sel = $(id), v = sel.value;
+        sel.innerHTML = D.locations.map(function (l) { return '<option value="' + l.id + '">' + l[lang] + (l.fee ? " (+€" + l.fee + ")" : "") + "</option>"; }).join("");
+        if (v) sel.value = v;
+      });
+    }
+    var times = []; for (var h = 6; h <= 23; h++) { times.push(pad(h) + ":00"); if (h < 23) times.push(pad(h) + ":30"); }
+    ["fromTime", "toTime"].forEach(function (id) { $(id).innerHTML = times.map(function (t) { return "<option>" + t + "</option>"; }).join(""); $(id).value = "10:00"; });
+    var t0 = new Date(); t0.setDate(t0.getDate() + 1);
+    var t1 = new Date(t0); t1.setDate(t1.getDate() + 3);
+    $("fromDate").value = ymd(t0); $("toDate").value = ymd(t1); $("fromDate").min = ymd(new Date()); $("toDate").min = ymd(t0);
+    $("fromDate").addEventListener("change", function () {
+      $("toDate").min = $("fromDate").value;
+      if ($("toDate").value <= $("fromDate").value) { var n = new Date($("fromDate").value + "T12:00"); n.setDate(n.getDate() + 3); $("toDate").value = ymd(n); }
+    });
+    $("diffReturn").addEventListener("change", function () { $("retWrap").hidden = !this.checked; if (!this.checked) $("retLoc").value = $("pickLoc").value; });
+    $("pickLoc").addEventListener("change", function () { if (!$("diffReturn").checked) $("retLoc").value = this.value; });
+
+    var S = { from: null, to: null, pick: "office", ret: "office", car: null, filter: "all", seats: 0 };
+    function readSearch() {
+      var f = new Date($("fromDate").value + "T" + $("fromTime").value), t = new Date($("toDate").value + "T" + $("toTime").value);
+      if (isNaN(f) || isNaN(t) || t <= f) return T("eDates");
+      if (f.getTime() < Date.now() + 2 * 36e5) return T("ePast");
+      S.from = f; S.to = t; S.pick = $("pickLoc").value; S.ret = $("diffReturn").checked ? $("retLoc").value : S.pick;
+      return "";
+    }
+    $("search").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var err = readSearch(); $("searchErr").textContent = err;
+      if (err) return;
+      if (S.car && !isFree(S.car)) S.car = null;
+      setStep(S.car ? 3 : 2); renderAll();
+      document.getElementById(S.car ? "rezervo" : "makinat").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+
+    /* ---------- availability ---------- */
+    function saved() { try { return JSON.parse(localStorage.getItem("udha-bookings") || "[]"); } catch (e) { return []; } }
+    function allBookings() { return D.bookings.concat(saved()); }
+    function overlaps(b, from, to) {
+      var buf = D.bufferHours * 36e5, bf = new Date(b.from).getTime() - buf, bt = new Date(b.to).getTime() + buf;
+      return from.getTime() < bt && bf < to.getTime();
+    }
+    function isFree(carId) { return !allBookings().some(function (b) { return b.car === carId && overlaps(b, S.from, S.to); }); }
+    function freeFrom(carId) {
+      var list = allBookings().filter(function (b) { return b.car === carId && overlaps(b, S.from, S.to); });
+      var end = Math.max.apply(null, list.map(function (b) { return new Date(b.to).getTime() + D.bufferHours * 36e5; }));
+      var d = new Date(end), len = S.to - S.from;
+      // walk forward until the same length fits
+      var open = function (x) { x = new Date(x); x.setMinutes(x.getMinutes() > 0 && x.getMinutes() <= 30 ? 30 : x.getMinutes() > 30 ? 60 : 0, 0, 0); if (x.getHours() >= 20 && (x.getHours() > 20 || x.getMinutes())) { x.setDate(x.getDate() + 1); x.setHours(8, 0); } if (x.getHours() < 8) x.setHours(8, 0); return x; };
+      for (var i = 0; i < 60; i++) {
+        d = open(d);
+        var f = new Date(d.getTime()), t = new Date(f.getTime() + len);
+        var clash = allBookings().filter(function (b) { return b.car === carId && overlaps(b, f, t); });
+        if (!clash.length) return f;
+        d = new Date(Math.max.apply(null, clash.map(function (b) { return new Date(b.to).getTime() + D.bufferHours * 36e5; })));
+      }
+      return d;
+    }
+
+    /* ---------- pricing ---------- */
+    function seasonOf(d) {
+      var md = pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+      for (var i = 0; i < D.seasons.length; i++) {
+        var s = D.seasons[i];
+        if (s.from <= s.to ? (md >= s.from && md <= s.to) : (md >= s.from || md <= s.to)) return s.id;
+      }
+      return "low";
+    }
+    function dayCount(from, to) { return Math.max(1, Math.ceil(((to - from) - D.graceHours * 36e5) / 864e5)); }
+    function quote(car, opts) {
+      opts = opts || {};
+      var days = dayCount(S.from, S.to), bySeason = {}, base = 0;
+      for (var i = 0; i < days; i++) {
+        var d = new Date(S.from.getTime() + i * 864e5), s = seasonOf(d), r = car.rates[s];
+        base += r; bySeason[s] = bySeason[s] || { n: 0, rate: r }; bySeason[s].n++;
+      }
+      var lines = [];
+      Object.keys(bySeason).forEach(function (s) { var x = bySeason[s]; lines.push({ l: T("rent") + ": " + x.n + " × " + eur(x.rate) + " (" + T("season." + s) + ")", v: x.n * x.rate }); });
+      var disc = D.lengthDiscounts.find(function (x) { return days >= x.min; }), total = base;
+      if (disc) { var dv = Math.round(base * disc.pct / 100); total -= dv; lines.push({ l: T("discount", { n: disc.min, p: disc.pct }), v: -dv, minus: true }); }
+      if (opts.full) { var fv = D.fullCoverPerDay * days; total += fv; lines.push({ l: T("full") + ": " + days + " × " + eur(D.fullCoverPerDay), v: fv }); }
+      if (opts.seats) { var sv = opts.seats * Math.min(D.childSeatPerDay * days, D.childSeatMax); total += sv; lines.push({ l: T("seat") + " × " + opts.seats, v: sv }); }
+      if (opts.border) { total += D.crossBorder; lines.push({ l: T("border"), v: D.crossBorder }); }
+      if (opts.young) { var yv = D.youngDriverPerDay * days; total += yv; lines.push({ l: T("young") + ": " + days + " × " + eur(D.youngDriverPerDay), v: yv }); }
+      var pf = (D.locations.find(function (l) { return l.id === S.pick; }) || {}).fee || 0, rf = (D.locations.find(function (l) { return l.id === S.ret; }) || {}).fee || 0;
+      if (pf) { total += pf; lines.push({ l: T("pickFee"), v: pf }); }
+      if (rf) { total += rf; lines.push({ l: T("retFee"), v: rf }); }
+      return { days: days, total: total, lines: lines, deposit: opts.full ? 0 : car.deposit, rental: total - pf - rf };
+    }
+    function opts() { return { full: $("xFull").checked, seats: S.seats, border: $("xBorder").checked, young: $("dAge").value === "21" }; }
+
+    /* ---------- car pictures ---------- */
+    var BODY = {
+      hatch: { d: "M18 84 L18 66 Q20 56 34 53 L74 46 Q96 28 120 25 L170 25 Q186 25 198 38 L212 52 Q236 55 240 66 L240 84 Z", w: ["M84 47 Q102 33 122 31 L150 31 L150 47 Z", "M156 31 L170 31 Q182 31 192 42 L198 47 L156 47 Z"], wh: [66, 196] },
+      sedan: { d: "M14 84 L14 64 Q16 56 28 54 L60 52 L80 34 Q92 25 112 24 L160 24 Q176 24 190 38 L204 50 Q236 53 242 64 L242 84 Z", w: ["M88 50 L100 36 Q108 30 118 30 L140 30 L140 50 Z", "M146 30 L160 30 Q172 30 184 42 L190 50 L146 50 Z"], wh: [62, 200] },
+      wagon: { d: "M14 84 L14 66 Q16 57 30 54 L66 47 Q88 30 112 27 L220 26 Q234 26 238 38 L244 56 Q248 62 248 70 L248 84 Z", w: ["M76 48 Q94 34 114 32 L156 32 L156 48 Z", "M162 32 L216 32 Q227 32 231 42 L233 48 L162 48 Z"], wh: [62, 206] },
+      suv: { d: "M16 86 L16 62 Q18 52 32 50 L64 46 L84 22 Q88 18 96 18 L196 18 Q210 18 216 30 L226 46 Q242 48 244 60 L244 86 Z", w: ["M92 24 L138 24 L138 44 L76 44 Z", "M144 24 L194 24 Q204 24 208 32 L214 44 L144 44 Z"], wh: [66, 194] },
+      mpv: { d: "M14 86 L14 64 Q16 54 30 51 L58 46 Q76 22 100 19 L210 18 Q226 18 232 32 L242 56 Q246 62 246 70 L246 86 Z", w: ["M70 46 Q84 27 104 25 L140 25 L140 46 Z", "M146 25 L182 25 L182 46 L146 46 Z", "M188 25 L212 25 Q222 25 226 34 L230 46 L188 46 Z"], wh: [62, 200] },
+      van: { d: "M12 88 L12 62 Q14 52 26 49 L46 44 L70 16 Q74 12 82 12 L234 12 Q246 12 248 24 L250 88 Z", w: ["M76 20 L118 20 L118 42 L56 42 Z", "M124 20 L170 20 L170 42 L124 42 Z", "M176 20 L222 20 L222 42 L176 42 Z"], wh: [60, 204] }
+    };
+    function carSvg(car) {
+      var b = BODY[car.body], r = car.body === "suv" || car.body === "van" ? 17 : 15;
+      return '<svg viewBox="0 0 260 108" aria-hidden="true"><ellipse cx="130" cy="98" rx="118" ry="6" fill="rgba(23,58,49,.14)"/>' +
+        '<path d="' + b.d + '" fill="#173A31"/>' + b.w.map(function (w) { return '<path d="' + w + '" fill="#E9EFEB" opacity=".9"/>'; }).join("") +
+        '<rect x="' + (car.body === "van" ? 236 : 228) + '" y="' + (car.body === "suv" || car.body === "mpv" || car.body === "van" ? 56 : 60) + '" width="12" height="6" rx="2" fill="#F2A516"/>' +
+        '<rect x="' + (car.body === "van" ? 12 : 16) + '" y="62" width="8" height="6" rx="2" fill="#D4473B"/>' +
+        b.wh.map(function (x) { return '<circle cx="' + x + '" cy="86" r="' + r + '" fill="#1C2022"/><circle cx="' + x + '" cy="86" r="' + (r - 9) + '" fill="#B9C2BD"/>'; }).join("") + "</svg>";
+    }
+
+    /* ---------- render ---------- */
+    function setStep(n) { document.querySelectorAll(".steps li").forEach(function (li) { li.classList.toggle("on", +li.dataset.step <= n); }); }
+    function renderTrip() {
+      if (!S.from) { $("trip").textContent = T("tripNone"); return; }
+      $("trip").innerHTML = T("trip", { d: dayCount(S.from, S.to), from: fmt(S.from), to: fmt(S.to) }).replace(/^(\d+ \S+)/, "$1<span>") + '</span><button type="button" id="editTrip">' + T("change") + "</button>";
+      $("editTrip").addEventListener("click", function () { $("kerko").scrollIntoView({ behavior: "smooth" }); $("fromDate").focus({ preventScroll: true }); });
+    }
+    function renderCars() {
+      var list = D.cars.filter(function (c) { return S.filter === "all" || (S.filter === "auto" ? c.gear === "auto" : (c.bags >= 4 || c.seats >= 7)); });
+      var rows = list.map(function (c) { var q = S.from ? quote(c) : null; return { c: c, q: q, free: S.from ? isFree(c.id) : true }; });
+      rows.sort(function (a, b) { return (b.free - a.free) || ((a.q ? a.q.total : a.c.rates.low) - (b.q ? b.q.total : b.c.rates.low)); });
+      if (!rows.length) { $("cars").innerHTML = '<p class="empty">' + T("noCars") + "</p>"; return; }
+      $("cars").innerHTML = rows.map(function (r) {
+        var c = r.c, q = r.q, sel = S.car === c.id;
+        var price = q ? '<b>' + eur(q.rental) + '</b><span>' + q.days + " " + (q.days === 1 ? T("day") : T("days")) + " · " + eur(q.rental / q.days) + T("perDay") + "</span>"
+                      : '<b>' + eur(c.rates.low) + '</b><span>' + T("from") + " " + T("perDay").replace("/", "") + "</span>";
+        var action = r.free
+          ? '<button type="button" class="btn ' + (sel ? "btn-pine" : "btn-line") + '" data-car="' + c.id + '" aria-pressed="' + sel + '">' + (sel ? T("chosen") : T("choose")) + "</button>"
+          : '<p class="busy">' + T("busy") + '</p><button type="button" class="btn btn-line" data-free="' + c.id + '">' + T("freeFrom") + " " + fmt(freeFrom(c.id)) + "</button>";
+        return '<article class="car' + (sel ? " sel" : "") + (r.free ? "" : " off") + '"><div class="art" style="background:' + c.color + '">' + carSvg(c) + (c.img ? '<img src="' + c.img + '" alt="' + c.name + '" loading="lazy" onerror="this.remove()">' : "") + '</div>' +
+          '<div class="car-top"><h3>' + c.name + '</h3><span class="cls">' + T("cls." + c.cls) + "</span></div>" +
+          '<ul class="specs"><li>' + T("gear." + c.gear) + "</li><li>" + T("fuel." + c.fuel) + "</li><li>" + c.seats + " " + T("seats") + "</li><li>" + c.bags + " " + T("bags") + "</li><li>" + T("ac") + "</li></ul>" +
+          '<div class="price">' + price + '</div><p class="dep">' + T("deposit") + " " + eur(c.deposit) + " · " + T("dep0") + "</p>" + action + "</article>";
+      }).join("");
+    }
+    function renderSummary() {
+      var car = D.cars.find(function (c) { return c.id === S.car; });
+      if (!car || !S.from) return;
+      var q = quote(car, opts());
+      $("sCar").textContent = car.name;
+      $("sWhen").innerHTML = "<div><b>" + T("pickup") + ":</b> " + fmt(S.from) + "<br>" + locName(S.pick) + "</div><div><b>" + T("ret") + ":</b> " + fmt(S.to) + "<br>" + locName(S.ret) + "</div>";
+      $("sLines").innerHTML = q.lines.map(function (l) { return '<li class="' + (l.minus ? "minus" : "") + '"><span>' + l.l + "</span><span>" + (l.v < 0 ? "−" + eur(-l.v) : eur(l.v)) + "</span></li>"; }).join("");
+      $("sTotal").textContent = eur(q.total);
+      $("sDeposit").textContent = T("depositIs", { v: eur(q.deposit) });
+      $("payLine").innerHTML = "<b>" + T("totalL") + ": " + eur(q.total) + "</b><span>" + T("depositIs", { v: eur(q.deposit) }) + " · " + T("payAt") + "</span>";
+      $("cFull").textContent = "+" + eur(D.fullCoverPerDay) + T("perDay");
+      $("cBorder").textContent = "+" + eur(D.crossBorder);
+      $("flightWrap").hidden = !(D.locations.find(function (l) { return l.id === S.pick; }) || {}).airport;
+    }
+    function renderAll() { renderTrip(); renderCars(); renderSummary(); }
+
+    $("cars").addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.free) {
+        var f = freeFrom(b.dataset.free), len = S.to - S.from, t = new Date(f.getTime() + len);
+        $("fromDate").value = ymd(f); $("fromTime").value = pad(f.getHours()) + ":" + (f.getMinutes() < 30 ? "00" : "30");
+        $("toDate").value = ymd(t); $("toTime").value = $("fromTime").value;
+        if (!readSearch()) { S.car = b.dataset.free; renderAll(); openBooking(); }
+        return;
+      }
+      if (b.dataset.car) {
+        if (!S.from) { var err = readSearch(); if (err) { $("searchErr").textContent = err; $("kerko").scrollIntoView(); return; } }
+        S.car = b.dataset.car; renderAll(); openBooking();
+      }
+    });
+    function openBooking() {
+      $("rezervo").classList.add("open"); $("bookWrap").hidden = false; $("done").classList.remove("show");
+      setStep(3); renderSummary();
+      $("rezervo").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      setTimeout(function () { $("dName").focus({ preventScroll: true }); }, 450);
+    }
+    document.querySelectorAll(".chip").forEach(function (ch) {
+      ch.addEventListener("click", function () { S.filter = ch.dataset.filter; document.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", String(x === ch)); }); renderCars(); });
+    });
+    ["xFull", "xBorder", "dAge"].forEach(function (id) { $(id).addEventListener("change", renderSummary); });
+    $("seatPlus").addEventListener("click", function () { S.seats = Math.min(3, S.seats + 1); $("seatN").textContent = S.seats; renderSummary(); });
+    $("seatMinus").addEventListener("click", function () { S.seats = Math.max(0, S.seats - 1); $("seatN").textContent = S.seats; renderSummary(); });
+    $("changeCar").addEventListener("click", function () { setStep(2); $("makinat").scrollIntoView({ behavior: "smooth" }); });
+
+    /* ---------- submit ---------- */
+    var last = null;
+    $("bookForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = $("dName").value.trim(), phone = $("dPhone").value.trim(), err = "";
+      if (name.length < 3) err = T("eName"); else if (phone.replace(/\D/g, "").length < 8) err = T("ePhone"); else if (!$("dTerms").checked) err = T("eTerms");
+      else if (!isFree(S.car)) err = T("eTaken");
+      $("bookErr").textContent = err;
+      if (err) { var bad = err === T("eName") ? "dName" : err === T("ePhone") ? "dPhone" : err === T("eTerms") ? "dTerms" : null; if (bad) $(bad).focus(); if (err === T("eTaken")) renderCars(); return; }
+      var car = D.cars.find(function (c) { return c.id === S.car; }), q = quote(car, opts());
+      var code = "07-" + String(Math.floor(100 + Math.random() * 900)) + "-UD";
+      last = { code: code, car: car, q: q, from: S.from, to: S.to, pick: S.pick, ret: S.ret, name: name, phone: phone, email: $("dEmail").value.trim(), flight: $("dFlight").value.trim(), notes: $("dNotes").value.trim(), o: opts() };
+      var finish = function () {
+        var list = saved(); list.push({ car: car.id, from: S.from.toISOString(), to: S.to.toISOString(), code: code });
+        try { localStorage.setItem("udha-bookings", JSON.stringify(list)); } catch (x) {}
+        showDone();
+      };
+      if (D.demo) { finish(); return; }
+      var btn = $("bookBtn"); btn.disabled = true; btn.textContent = T("sending");
+      fetch(D.formEndpoint, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ _subject: "Rezervim i ri " + code + " · " + car.name, Kodi: code, Makina: car.name, Marrja: fmt(S.from) + " · " + locName(S.pick), Kthimi: fmt(S.to) + " · " + locName(S.ret),
+          Gjithsej: eur(q.total), Depozita: eur(q.deposit), Shtesa: q.lines.map(function (l) { return l.l + " " + eur(l.v); }).join(" | "), Emri: name, Telefoni: phone, Email: last.email || "-", Fluturimi: last.flight || "-", Shenime: last.notes || "-", _template: "table" }) })
+        .then(function (r) { if (!r.ok) throw 0; finish(); })
+        .catch(function () { $("bookErr").textContent = T("eSend"); })
+        .then(function () { btn.disabled = false; btn.textContent = lang === "en" ? EN["book.btn"] : SQ["book.btn"]; });
+    });
+    function waText() {
+      var b = last; return T("wa") + "\n" + b.car.name + "\n" + T("pickup") + ": " + fmt(b.from) + ", " + locName(b.pick) + "\n" + T("ret") + ": " + fmt(b.to) + ", " + locName(b.ret) + "\n" + T("totalL") + ": " + eur(b.q.total) + "\n" + T("name") + ": " + b.name + "\n#" + b.code;
+    }
+    function showDone() {
+      var b = last;
+      $("bookWrap").hidden = true; $("done").classList.add("show");
+      $("code").textContent = b.code;
+      $("recap").innerHTML = [[T("car"), b.car.name], [T("pickup"), fmt(b.from) + " · " + locName(b.pick)], [T("ret"), fmt(b.to) + " · " + locName(b.ret)], [T("totalL"), eur(b.q.total)], [T("deposit"), eur(b.q.deposit)]]
+        .map(function (r) { return "<div><span>" + r[0] + "</span><span>" + r[1] + "</span></div>"; }).join("");
+      $("waBtn").href = "https://wa.me/" + (D.whatsapp || "") + "?text=" + encodeURIComponent(waText());
+      $("demoNote").hidden = !D.demo;
+      renderCars();
+      $("done").focus({ preventScroll: true }); $("rezervo").scrollIntoView({ behavior: "smooth" });
+    }
+    $("icsBtn").addEventListener("click", function () {
+      var b = last, st = function (d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00"; };
+      var ev = function (uid, d, title, where) { var e = new Date(d.getTime() + 30 * 6e4); return ["BEGIN:VEVENT", "UID:" + uid + "@udha-rent", "DTSTAMP:" + st(new Date()), "DTSTART:" + st(d), "DTEND:" + st(e), "SUMMARY:" + title + " · " + b.car.name, "LOCATION:" + where, "DESCRIPTION:Udha Rent a Car · " + b.code, "END:VEVENT"].join("\r\n"); };
+      var ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Udha Rent a Car//SQ", ev(b.code + "-1", b.from, T("icsPick"), locName(b.pick)), ev(b.code + "-2", b.to, T("icsRet"), locName(b.ret)), "END:VCALENDAR"].join("\r\n");
+      var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" })); a.download = "udha-" + b.code + ".ics"; document.body.appendChild(a); a.click(); a.remove();
+    });
+    $("again").addEventListener("click", function () {
+      S.car = null; $("bookForm").reset(); S.seats = 0; $("seatN").textContent = "0"; $("done").classList.remove("show"); $("bookWrap").hidden = false; $("rezervo").classList.remove("open");
+      setStep(2); renderAll(); $("makinat").scrollIntoView({ behavior: "smooth" });
+    });
+
+    /* ---------- start ---------- */
+    try { lang = localStorage.getItem("udha-lang") || "sq"; } catch (e) { lang = "sq"; }
+    readSearch(); applyLang();
+  })();
+  </script>
+</body>
+</html>
