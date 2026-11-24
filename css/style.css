@@ -1151,9 +1151,11 @@ html.is-loading { overflow: hidden; }
 .wall .reel-url { display: none; }
 
 /* ---------- Mobile menu button: always clearly visible ---------- */
-.menu-toggle { background: var(--sand); color: var(--night); border-color: var(--sand); }
-.menu-toggle svg path { transition: d .3s, opacity .2s; }
-.menu-toggle[aria-expanded="true"] { background: var(--fire); border-color: var(--fire); }
+.menu-toggle { background: #2A2520 !important; color: #FFFFFF !important; border: 1.5px solid #8A8075 !important; }
+.menu-toggle svg { width: 22px; height: 22px; display: block; }
+.menu-toggle svg path { stroke: #FFFFFF; stroke-width: 2.4; }
+.menu-toggle:hover, .menu-toggle:focus-visible { border-color: #F5EFE6 !important; }
+.menu-toggle[aria-expanded="true"] { background: #FF6B2C !important; border-color: #FF6B2C !important; }
 
 /* ---------- Services stage: pick a service, watch it work ---------- */
 .svc { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
