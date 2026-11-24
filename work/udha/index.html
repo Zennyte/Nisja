@@ -144,7 +144,7 @@
     .car:hover { border-color: #B9C4BE; }
     .car.sel { border-color: var(--pine); box-shadow: 0 0 0 2px var(--pine); }
     .car.off { background: #F4F4F1; }
-    .car.off .art { opacity: .45; }
+    .car.off .art { overflow: hidden; opacity: .45; }
     .car.off .price b { color: #66716D; text-decoration: line-through; text-decoration-thickness: 2px; }
     .art { border-radius: 12px; display: grid; place-items: center; aspect-ratio: 16 / 7; margin-bottom: 14px; }
     .art { position: relative; overflow: hidden; aspect-ratio: 16 / 9; }
@@ -281,6 +281,29 @@
       .hero-inner { padding-top: 28px; gap: 22px; }
       .search h2 { font-size: 1.6rem; }
     }
+    /* night road: dashes rush toward you, faster while you scroll */
+    .road { position: absolute; left: 0; right: 0; bottom: 112px; width: 100%; height: 56%; z-index: 1; pointer-events: none; }
+    .hero > .wrap { position: relative; z-index: 2; }
+    @media (max-width: 760px) { .road { bottom: auto; top: 0; height: 330px; opacity: .7; } }
+    .hero h1, .hero .lead, .hero .facts, .hero .search { animation: up .9s cubic-bezier(.2,.7,.2,1) both; }
+    .hero .lead { animation-delay: .08s; } .hero .facts { animation-delay: .16s; } .hero .search { animation-delay: .22s; }
+    @keyframes up { from { opacity: 0; transform: translateY(18px); } }
+    /* live price under the dates */
+    .live { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 4px 0 2px; padding: 14px 16px; border-radius: 14px; background: var(--pine); color: #fff; }
+    .live b { font-size: 2rem; line-height: 1; color: var(--amber-2); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+    .live span { font-size: .95rem; color: #D7E3DD; }
+    .live.bump b { animation: bump .45s cubic-bezier(.2,.7,.2,1); }
+    @keyframes bump { 40% { transform: translateY(-3px) scale(1.06); } }
+    /* cars drive into frame; the picked one revs and flashes its lights */
+    .car .art > svg, .car .art > img { transform: translateX(-34%); opacity: 0; filter: blur(5px); transition: transform 1s cubic-bezier(.16,.84,.24,1), opacity .5s, filter .8s; }
+    .car.in .art > svg, .car.in .art > img { transform: none; opacity: 1; filter: none; }
+    .car.in:hover .art > img { transform: translateX(2%) scale(1.04); transition-duration: .6s; }
+    .car .art::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 88% 60%, rgba(255,205,90,.55), transparent 70%); opacity: 0; pointer-events: none; }
+    .car.just .art > img, .car.just .art > svg { animation: rev .7s cubic-bezier(.3,.6,.3,1); }
+    .car.just .art::after { animation: flash .9s ease-out; }
+    @keyframes rev { 20% { transform: translateX(-3%); } 45% { transform: translateX(4%) scale(1.03); } 70% { transform: translateX(-1%); } }
+    @keyframes flash { 15%, 35% { opacity: 1; } 25% { opacity: .3; } 100% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .car .art > svg, .car .art > img { transform: none; opacity: 1; filter: none; } }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }
   </style>
 </head>
@@ -313,6 +336,7 @@
   <main>
     <section class="hero" id="kerko">
       <img class="hero-photo" src="img/hero.jpg" srcset="img/hero-960.jpg 960w, img/hero.jpg 1920w" sizes="100vw" alt="" fetchpriority="high" onerror="this.remove()">
+      <canvas class="road" id="road" aria-hidden="true"></canvas>
       <svg class="topo" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.4">
         <path d="M-20 520 C180 470 260 380 420 400 S700 520 880 430 1120 300 1240 330"/>
         <path d="M-20 470 C170 420 250 330 420 350 S690 470 880 380 1110 250 1240 280"/>
@@ -355,6 +379,7 @@
               <div class="dt"><input type="date" id="toDate" aria-labelledby="l-to" required><select id="toTime" aria-label="Ora e kthimit"></select></div>
             </div>
           </div>
+          <div class="live" id="liveQuote" aria-live="polite" hidden><b id="lqTotal">€0</b><span id="lqText"></span></div>
           <p class="err" id="searchErr" role="alert"></p>
           <button class="btn btn-amber" type="submit" data-i18n="search.btn">Shiko makinat e lira</button>
           <p class="note" data-i18n="search.note">Nuk ju kërkojmë kartë krediti për të rezervuar.</p>
@@ -761,11 +786,19 @@
         var action = r.free
           ? '<button type="button" class="btn ' + (sel ? "btn-pine" : "btn-line") + '" data-car="' + c.id + '" aria-pressed="' + sel + '">' + (sel ? T("chosen") : T("choose")) + "</button>"
           : '<p class="busy">' + T("busy") + '</p><button type="button" class="btn btn-line" data-free="' + c.id + '">' + T("freeFrom") + " " + fmt(freeFrom(c.id)) + "</button>";
-        return '<article class="car' + (sel ? " sel" : "") + (r.free ? "" : " off") + '"><div class="art" style="background:' + c.color + '">' + carSvg(c) + (c.img ? '<img src="' + c.img + '" alt="' + c.name + '" loading="lazy" onerror="this.remove()">' : "") + '</div>' +
+        return '<article data-id="' + c.id + '" class="car' + (sel ? " sel" : "") + (r.free ? "" : " off") + (SEEN[c.id] ? " in" : "") + (sel && JUST === c.id ? " just" : "") + '"><div class="art" style="background:' + c.color + '">' + carSvg(c) + (c.img ? '<img src="' + c.img + '" alt="' + c.name + '" loading="lazy" onerror="this.remove()">' : "") + '</div>' +
           '<div class="car-top"><h3>' + c.name + '</h3><span class="cls">' + T("cls." + c.cls) + "</span></div>" +
           '<ul class="specs"><li>' + T("gear." + c.gear) + "</li><li>" + T("fuel." + c.fuel) + "</li><li>" + c.seats + " " + T("seats") + "</li><li>" + c.bags + " " + T("bags") + "</li><li>" + T("ac") + "</li></ul>" +
           '<div class="price">' + price + '</div><p class="dep">' + T("deposit") + " " + eur(c.deposit) + " · " + T("dep0") + "</p>" + action + "</article>";
       }).join("");
+    }
+    var SEEN = {}, JUST = null, lastSel = null, carIO = null;
+    function animateCars() {
+      if (S.car !== lastSel) { JUST = S.car; lastSel = S.car; } else JUST = null;
+      var els = document.querySelectorAll("#cars .car:not(.in)");
+      if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach(function (e) { e.classList.add("in"); SEEN[e.dataset.id] = 1; }); return; }
+      carIO = carIO || new IntersectionObserver(function (es) { es.forEach(function (e, i) { if (e.isIntersecting) { var el = e.target; setTimeout(function () { el.classList.add("in"); }, i * 110); SEEN[el.dataset.id] = 1; carIO.unobserve(el); } }); }, { threshold: .25 });
+      els.forEach(function (e) { carIO.observe(e); });
     }
     function renderSummary() {
       var car = D.cars.find(function (c) { return c.id === S.car; });
@@ -781,7 +814,7 @@
       $("cBorder").textContent = "+" + eur(D.crossBorder);
       $("flightWrap").hidden = !(D.locations.find(function (l) { return l.id === S.pick; }) || {}).airport;
     }
-    function renderAll() { renderTrip(); renderCars(); renderSummary(); }
+    function renderAll() { if (S.car !== lastSel) { JUST = S.car; lastSel = S.car; } else JUST = null; renderTrip(); renderCars(); renderSummary(); animateCars(); JUST = null; }
 
     $("cars").addEventListener("click", function (e) {
       var b = e.target.closest("button"); if (!b) return;
@@ -863,8 +896,67 @@
     });
 
     /* ---------- start ---------- */
+    /* ---------- live price: total for the cheapest free car, as the dates change ---------- */
+    var lqShown = 0;
+    function liveQuote() {
+      var box = $("liveQuote"), f = new Date($("fromDate").value + "T" + $("fromTime").value), t = new Date($("toDate").value + "T" + $("toTime").value);
+      if (isNaN(f) || isNaN(t) || t <= f) { box.hidden = true; return; }
+      var keep = { from: S.from, to: S.to, pick: S.pick, ret: S.ret };
+      S.from = f; S.to = t; S.pick = $("pickLoc").value; S.ret = $("diffReturn").checked ? $("retLoc").value : S.pick;
+      var free = D.cars.filter(function (c) { return isFree(c.id); }), days = dayCount(f, t);
+      var min = free.length ? Math.min.apply(null, free.map(function (c) { return quote(c).total; })) : 0;
+      S.from = keep.from; S.to = keep.to; S.pick = keep.pick; S.ret = keep.ret;
+      box.hidden = false;
+      var en = lang === "en";
+      $("lqText").textContent = free.length
+        ? (en ? days + (days === 1 ? " day · " : " days · ") + free.length + " of " + D.cars.length + " cars free · cheapest total" : days + (days === 1 ? " ditë · " : " ditë · ") + free.length + " nga " + D.cars.length + " makina të lira · totali më i lirë")
+        : (en ? "No cars free on these dates. Try other days." : "S'ka makina të lira në këto data. Provoni ditë të tjera.");
+      var el = $("lqTotal"), from = lqShown, to = min, t0 = performance.now();
+      if (!free.length) { el.textContent = "—"; lqShown = 0; return; }
+      box.classList.remove("bump"); void box.offsetWidth; box.classList.add("bump");
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = eur(to); lqShown = to; return; }
+      (function tick(now) { var k = Math.min(1, (now - t0) / 500), e = 1 - Math.pow(1 - k, 3); el.textContent = eur(Math.round(from + (to - from) * e)); if (k < 1) requestAnimationFrame(tick); else lqShown = to; })(t0);
+    }
+    ["fromDate", "fromTime", "toDate", "toTime", "pickLoc", "retLoc", "diffReturn"].forEach(function (id) { $(id).addEventListener("change", function () { setTimeout(liveQuote, 0); }); });
+    document.querySelectorAll("[data-lang]").forEach(function (b) { b.addEventListener("click", function () { setTimeout(liveQuote, 0); }); });
+
+    /* ---------- night road in the hero ---------- */
+    (function () {
+      var c = $("road"); if (!c || !c.getContext) return;
+      var ctx = c.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 1.5), w, h, off = 0, vel = 0, lastY = window.scrollY, run = true;
+      var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function size() { w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        var vx = w * .5, vy = h * .04, spread = w < 760 ? 1.1 : .72;
+        var L = function (t) { return vx + (-spread * w * .5 - 0) * t; }, R = function (t) { return vx + (spread * w * .5) * t; };
+        var g = ctx.createLinearGradient(0, vy, 0, h); g.addColorStop(0, "rgba(14,36,30,0)"); g.addColorStop(1, "rgba(10,26,22,.55)");
+        ctx.beginPath(); ctx.moveTo(vx, vy); ctx.lineTo(L(1), h); ctx.lineTo(R(1), h); ctx.closePath(); ctx.fillStyle = g; ctx.fill();
+        ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(233,239,235,.28)";
+        ctx.beginPath(); ctx.moveTo(vx, vy); ctx.lineTo(L(1), h); ctx.moveTo(vx, vy); ctx.lineTo(R(1), h); ctx.stroke();
+        for (var i = 0; i < 14; i++) {
+          var p0 = ((i + off) % 14) / 14, p1 = p0 + .035;
+          var y0 = vy + (h - vy) * p0 * p0, y1 = vy + (h - vy) * Math.min(1, p1 * p1);
+          var hw0 = 1 + p0 * p0 * 7, hw1 = 1 + p1 * p1 * 7;
+          ctx.beginPath(); ctx.moveTo(vx - hw0, y0); ctx.lineTo(vx + hw0, y0); ctx.lineTo(vx + hw1, y1); ctx.lineTo(vx - hw1, y1); ctx.closePath();
+          ctx.fillStyle = "rgba(255,185,53," + (.15 + p0 * .75).toFixed(2) + ")"; ctx.fill();
+        }
+        var hl = ctx.createRadialGradient(vx, h * 1.05, 0, vx, h * 1.05, h * .9); hl.addColorStop(0, "rgba(255,214,120,.16)"); hl.addColorStop(1, "rgba(255,214,120,0)");
+        ctx.fillStyle = hl; ctx.fillRect(0, 0, w, h);
+      }
+      function frame() {
+        var y = window.scrollY; vel = vel * .9 + Math.abs(y - lastY) * .1; lastY = y;
+        if (run) { off = (off + .045 + Math.min(.5, vel * .02)) % 14; draw(); }
+        requestAnimationFrame(frame);
+      }
+      size(); window.addEventListener("resize", function () { size(); if (still) draw(); });
+      if (still) { draw(); return; }
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { run = es[0].isIntersecting; }).observe(c);
+      requestAnimationFrame(frame);
+    })();
+
     try { lang = localStorage.getItem("udha-lang") || "sq"; } catch (e) { lang = "sq"; }
-    readSearch(); applyLang();
+    readSearch(); applyLang(); liveQuote();
   })();
   </script>
 </body>
