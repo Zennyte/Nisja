@@ -14,7 +14,6 @@
                                       // (open the page with ?test at the end of the address to send real emails)
     formEndpoint: "https://formsubmit.co/ajax/41e7fb5e547431c7ebd7349e96f94390", // where booking requests are emailed (Nisja's inbox for testing)
     whatsapp: "",                     // owner's WhatsApp number, digits only, e.g. "38349123456"
-    testWhatsapp: "",      // Nisja's number, used only in ?test mode
 
     // Seasons by month-day. Days that match none are "low" season.
     seasons: [
