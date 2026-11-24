@@ -51,6 +51,7 @@
     "d2.text": "A restaurant site with a menu by category, the venue’s story and table booking.",
     "d3.text": "A dental clinic site with services and guide prices, the team and online appointment requests.",
     "tag.request": "Appointment requests",
+    "d4.text": "A car rental site that shows which cars are free on your dates, the full price up front, and online booking.",
     "tag.concept": "Concept demo",
     "tag.booking": "Online booking",
     "tag.portfolio": "Portfolio",
