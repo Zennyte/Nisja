@@ -399,7 +399,7 @@
       term.hidden = false;
       term.textContent = "";
 
-      var request = fetch("https://formsubmit.co/ajax/nisjastudio@gmail.com", {
+      var request = fetch("https://formsubmit.co/ajax/41e7fb5e547431c7ebd7349e96f94390", {
         method: "POST",
         headers: { "Accept": "application/json" },
         body: new FormData(form)
