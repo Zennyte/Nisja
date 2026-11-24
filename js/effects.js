@@ -249,7 +249,7 @@
   splitEls.forEach(split);
   onLang(function () { splitEls.forEach(function (el) { split(el); }); });
 
-  var revealEls = $$(".tile, .work-card, .plan, .step, .extras, .contact-form, .contact-direct");
+  var revealEls = $$(".tile, .work-card, .plan, .step, .extras, .contact-form, .contact-direct, .faq-item");
   revealEls.forEach(function (el, i) {
     el.classList.add("reveal");
     // stagger siblings a little
