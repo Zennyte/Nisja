@@ -240,6 +240,24 @@
       .hero { min-height: 78vh; }
       .hero h1 { font-size: 3rem; }
     }
+    /* embers rising off the grill; they flare while you scroll and stay clear of the text */
+    .embers { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    .hero-inner { z-index: 2; }
+    .hero .ph::before { content: ""; position: absolute; left: -10%; right: -10%; bottom: -20%; height: 55%; z-index: 1; background: radial-gradient(60% 60% at 50% 100%, rgba(212,96,47,.42), rgba(212,96,47,0) 70%); animation: glow 3.2s ease-in-out infinite alternate; pointer-events: none; }
+    @keyframes glow { from { opacity: .55; transform: scaleY(.94); } to { opacity: 1; transform: scaleY(1.06); } }
+    /* live count of free times */
+    .live { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 14px 0 0; padding: 12px 16px; border-radius: 12px; background: rgba(212,96,47,.12); border: 1px solid rgba(212,96,47,.35); color: #F2EFEA; }
+    .live b { font-family: var(--serif, inherit); font-size: 1.9rem; line-height: 1; color: #F08A57; font-variant-numeric: tabular-nums; }
+    .live span { font-size: .95rem; color: #D8D2CA; }
+    .live.bump b { animation: bump .45s cubic-bezier(.2,.7,.2,1); }
+    @keyframes bump { 40% { transform: translateY(-3px) scale(1.08); } }
+    /* dishes slide in; the picked time sizzles once */
+    .dishes > li { opacity: 0; transform: translateY(16px); }
+    .dishes.in > li { animation: dishIn .6s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i, 0) * 60ms); }
+    @keyframes dishIn { to { opacity: 1; transform: none; } }
+    .slot.just { animation: sizzle .7s ease-out; }
+    @keyframes sizzle { 0% { box-shadow: 0 0 0 0 rgba(240,138,87,.9); } 15% { transform: translateX(-2px); } 30% { transform: translateX(2px); } 45% { transform: translateX(-1px); } 100% { box-shadow: 0 0 0 14px rgba(240,138,87,0); transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .dishes > li { opacity: 1; transform: none; } .dishes.in > li, .slot.just, .live.bump b, .hero .ph::before { animation: none; } }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } html { scroll-behavior: auto; } }
   </style>
 </head>
@@ -267,6 +285,7 @@
 
   <main>
     <section class="hero">
+      <canvas class="embers" id="embers" aria-hidden="true"></canvas>
       <div class="ph"><img src="img/hero.jpg" srcset="img/hero-960.jpg 960w, img/hero.jpg 1920w" sizes="100vw" alt="" fetchpriority="high" onerror="this.remove()"></div>
       <div class="wrap hero-inner">
         <div>
@@ -340,6 +359,7 @@
             <div class="step">
               <h3><b data-i18n="res.s2">Cilën ditë?</b></h3>
               <div class="days" id="days" role="group" aria-label="Data"></div>
+              <p class="live" id="liveTables" aria-live="polite"><b id="ltN">0</b><span id="ltText"></span></p>
             </div>
             <div class="step">
               <h3><b data-i18n="res.s3">Në çfarë ore?</b> <span id="slotHint"></span></h3>
@@ -499,6 +519,8 @@
       if (src) { var im = new Image(); im.alt = cap; im.loading = "lazy"; im.onerror = function () { im.remove(); }; im.src = src; ph.insertBefore(im, ph.firstChild); }
       $("menuCap").textContent = cap;
     }
+    var menuSeen = false;
+    function staggerDishes() { var u = $("dishes"); if (!menuSeen) return; u.classList.remove("in"); void u.offsetWidth; u.classList.add("in"); }
     function renderTabs() {
       $("tabs").innerHTML = D.menu.map(function (c) { return '<button type="button" class="tab" role="tab" id="tab-' + c.id + '" aria-selected="' + (c.id === cat) + '" data-cat="' + c.id + '">' + c[lang] + "</button>"; }).join("");
     }
@@ -506,7 +528,7 @@
       var c = D.menu.find(function (x) { return x.id === cat; });
       $("dishPanel").setAttribute("aria-labelledby", "tab-" + c.id);
       $("dishes").innerHTML = c.items.map(function (it, i) {
-        return '<li class="dish" data-i="' + i + '"><div class="row"><h3>' + it[lang] + (it.veg ? '<span class="veg" title="Vegjetariane">V</span>' : "") + '</h3><span class="lead-dots"></span><span class="price">' + eur(it.price) + "</span></div><p>" + (lang === "sq" ? it.dsq : it.den) + "</p></li>";
+        return '<li class="dish" data-i="' + i + '" style="--i:' + i + '"><div class="row"><h3>' + it[lang] + (it.veg ? '<span class="veg" title="Vegjetariane">V</span>' : "") + '</h3><span class="lead-dots"></span><span class="price">' + eur(it.price) + "</span></div><p>" + (lang === "sq" ? it.dsq : it.den) + "</p></li>";
       }).join("");
       var match = c.items.find(function (it) { return it.img === c.img; });
       setPh(c.img, match ? match[lang] : c[lang]);
@@ -556,6 +578,21 @@
       }
       return out;
     }
+    var _renderMenu = renderMenu; renderMenu = function () { _renderMenu(); staggerDishes(); };
+    var lastSlot = null, ltShown = 0;
+    function liveTables() {
+      var box = $("liveTables"); if (!S.day) { box.hidden = true; return; }
+      var list = slotsFor(new Date(S.day)), free = list.filter(function (x) { return x.left > 0; }), en = lang === "en";
+      box.hidden = false;
+      $("ltText").textContent = free.length
+        ? (en ? (free.length === 1 ? "time" : "times") + " with a free table for " + S.party + (S.party === 1 ? " person" : " people") + " · soonest " + free[0].label
+              : (free.length === 1 ? "orë" : "orë") + " me tavolinë të lirë për " + S.party + (S.party === 1 ? " person" : " veta") + " · më e afërta " + free[0].label)
+        : (en ? "Full for " + S.party + " on this day. Try another day." : "Plot për " + S.party + " veta këtë ditë. Provoni një ditë tjetër.");
+      var el = $("ltN"), from = ltShown, to = free.length, t0 = performance.now();
+      box.classList.remove("bump"); void box.offsetWidth; box.classList.add("bump");
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = to; ltShown = to; return; }
+      (function tick(now) { var k = Math.min(1, (now - t0) / 450), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(from + (to - from) * e); if (k < 1) requestAnimationFrame(tick); else ltShown = to; })(t0);
+    }
     function renderParty() {
       var html = ""; for (var n = 1; n <= D.maxParty; n++) html += '<button type="button" class="pill" data-n="' + n + '" aria-pressed="' + (S.party === n) + '" aria-label="' + (n === 1 ? T("person") : T("people", { n: n })) + '">' + n + "</button>";
       $("party").innerHTML = html;
@@ -584,6 +621,8 @@
         }).join("") + "</div>";
       };
       $("slotWrap").innerHTML = group(list.filter(function (s) { return s.lunch; }), T("lunch")) + group(list.filter(function (s) { return !s.lunch; }), T("dinner"));
+      if (S.slot && S.slot !== lastSlot) { var j = $("slotWrap").querySelector('.slot[data-t="' + S.slot + '"]'); if (j) j.classList.add("just"); }
+      lastSlot = S.slot;
     }
     function renderTicket() {
       $("tParty").textContent = S.party === 1 ? T("person") : T("people", { n: S.party });
@@ -592,8 +631,8 @@
       var ft = S.slot ? freeTable(S.party, S.slot) : null;
       $("tTable").textContent = ft ? T("tableFor", { n: ft.seats }) : "—";
     }
-    $("party").addEventListener("click", function (e) { var b = e.target.closest(".pill"); if (!b) return; S.party = +b.dataset.n; renderParty(); renderSlots(); renderTicket(); });
-    $("days").addEventListener("click", function (e) { var b = e.target.closest(".day"); if (!b || b.disabled) return; S.day = +b.dataset.d; S.slot = null; renderDays(); renderSlots(); renderTicket(); });
+    $("party").addEventListener("click", function (e) { var b = e.target.closest(".pill"); if (!b) return; S.party = +b.dataset.n; renderParty(); renderSlots(); renderTicket(); liveTables(); });
+    $("days").addEventListener("click", function (e) { var b = e.target.closest(".day"); if (!b || b.disabled) return; S.day = +b.dataset.d; S.slot = null; renderDays(); renderSlots(); renderTicket(); liveTables(); });
     $("slotWrap").addEventListener("click", function (e) { var b = e.target.closest(".slot"); if (!b || b.disabled) return; S.slot = +b.dataset.t; renderSlots(); renderTicket(); $("resErr").textContent = ""; });
 
     /* ---------- submit ---------- */
@@ -646,7 +685,56 @@
       S.slot = null; $("resForm").reset(); $("done").classList.remove("show"); $("resGrid").hidden = false; renderSlots(); renderTicket();
     });
 
-    applyLang();
+    /* menu reveal when it scrolls into view */
+    if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      var mio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { menuSeen = true; staggerDishes(); mio.disconnect(); } }, { threshold: .15 });
+      mio.observe($("dishes"));
+    } else { menuSeen = true; $("dishes").classList.add("in"); }
+
+    /* embers off the grill */
+    (function () {
+      var c = $("embers"); if (!c || !c.getContext) return;
+      var ctx = c.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 1.5), w, h, P = [], vel = 0, lastY = window.scrollY, run = true, blocks = [];
+      var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function measure() {
+        var cr = c.getBoundingClientRect(); blocks = [];
+        document.querySelectorAll(".hero .place, .hero h1, .hero .lead, .hero .actions, .hero .today").forEach(function (e) {
+          var rg = document.createRange(); rg.selectNodeContents(e);
+          var rs = e.matches(".actions, .today") ? [e.getBoundingClientRect()] : rg.getClientRects();
+          Array.prototype.forEach.call(rs, function (r) { blocks.push({ l: r.left - cr.left - 16, r: r.right - cr.left + 16, t: r.top - cr.top - 14, b: r.bottom - cr.top + 14 }); });
+        });
+      }
+      function size() { w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); measure(); }
+      function spawn(n) { for (var i = 0; i < n; i++) P.push({ x: Math.random() * w, y: h + 8, vx: (Math.random() - .5) * .35, vy: -(.5 + Math.random() * 1.1), r: 1 + Math.random() * 2.6, life: 0, max: 220 + Math.random() * 260, ph: Math.random() * 6.28 }); }
+      function hidden(x, y) { for (var i = 0; i < blocks.length; i++) { var k = blocks[i]; if (x > k.l && x < k.r && y > k.t && y < k.b) return true; } return false; }
+      function draw() {
+        ctx.clearRect(0, 0, w, h); ctx.globalCompositeOperation = "lighter";
+        for (var i = P.length - 1; i >= 0; i--) {
+          var p = P[i], boost = 1 + Math.min(3, vel * .08);
+          p.life++; p.ph += .05; p.x += p.vx + Math.sin(p.ph) * .35; p.y += p.vy * boost;
+          if (p.life > p.max || p.y < -10) { P.splice(i, 1); continue; }
+          if (hidden(p.x, p.y)) continue;
+          var a = Math.sin(Math.PI * p.life / p.max) * (.55 + .45 * Math.sin(p.ph * 3));
+          var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+          g.addColorStop(0, "rgba(255,200,120," + (a * .95).toFixed(3) + ")"); g.addColorStop(.35, "rgba(240,110,45," + (a * .55).toFixed(3) + ")"); g.addColorStop(1, "rgba(212,96,47,0)");
+          ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, 6.283); ctx.fill();
+        }
+        ctx.globalCompositeOperation = "source-over";
+      }
+      function frame() {
+        var y = window.scrollY; vel = vel * .9 + Math.abs(y - lastY) * .1; lastY = y;
+        if (run) { if (P.length < 110 + vel * 4) spawn(Math.random() < .6 + vel * .05 ? 1 + Math.round(vel * .08) : 0); draw(); }
+        requestAnimationFrame(frame);
+      }
+      size(); window.addEventListener("resize", size);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+      if (still) { spawn(60); P.forEach(function (p) { p.y = h * (.45 + Math.random() * .55); p.life = p.max / 2; }); draw(); return; }
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { run = es[0].isIntersecting; }).observe(c);
+      requestAnimationFrame(frame);
+    })();
+
+    applyLang(); liveTables();
+    document.querySelectorAll("[data-lang]").forEach(function (b) { b.addEventListener("click", function () { setTimeout(liveTables, 0); }); });
   })();
   </script>
 </body>
