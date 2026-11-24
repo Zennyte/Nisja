@@ -1,0 +1,13 @@
+{
+  "name": "Nisja Studio",
+  "short_name": "Nisja",
+  "description": "Faqe interneti moderne dhe logo për biznese.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#12100E",
+  "theme_color": "#12100E",
+  "icons": [
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zennyte.github.io/Nisja/sitemap.xml
