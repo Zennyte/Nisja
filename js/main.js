@@ -45,8 +45,14 @@
     "w2.text": "A grill restaurant in Prishtina: a menu with prices, live open/closed status and table booking by free time slot.",
     "w3.text": "Car rental in Gjakova: cars that are free on your dates, the full price up front and airport pickup.",
     "work.concepts": "A site for every business",
-    "work.conceptsIntro": "Concept projects for the businesses that lose the most time on the phone. Each has a system that saves the owner work. Try them, they work.",
+    "work.conceptsIntro": "Concept projects for the businesses that lose the most time on the phone. Each has a system that saves the owner work.",
     "work.try": "Try the demo",
+    "reel.t1": "Barber", "reel.t2": "Salon", "reel.t3": "Gym", "reel.t4": "Dentist",
+    "reel.k1": "Barber · Prishtina", "reel.k2": "Beauty salon · Gjakova", "reel.k3": "Gym · Prizren", "reel.k4": "Dental clinic · Peja",
+    "reel.p1": "Clients pick a barber and see only his free times. The owner sees each barber's day on one screen.",
+    "reel.p2": "Clients pick several services and see the time and price before booking. After the visit they get a refresh reminder.",
+    "reel.p3": "The class timetable shows free spots and fills the waitlist by itself. Trial days are booked online, with a code for reception.",
+    "reel.p4": "Two questions tell patients which visit to book. Two urgent slots are kept free every day for toothaches.",
     "c1.text": "Barber in Prishtina: booking by barber with his own free times, live chair status and a day view for the staff.",
     "c2.text": "Beauty studio in Gjakova: clients build a visit from several services, see the time and price, and get a refresh reminder.",
     "c3.text": "Gym in Prizren: how busy it is right now, a class timetable with spots and a waitlist, memberships and a free trial day.",
@@ -232,3 +238,82 @@
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();
+
+// Concept sites: tabbed browser frame. One muted clip per site, loaded only when the block is on screen.
+(function () {
+  "use strict";
+  var root = document.getElementById("reel");
+  if (!root) return;
+  var tabs = Array.prototype.slice.call(root.querySelectorAll(".reel-tab"));
+  var video = document.getElementById("reelVideo"), url = document.getElementById("reelUrl"), prog = document.getElementById("reelProg"), screen = document.getElementById("reelScreen");
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var current = 0, visible = false, touched = false;
+  if (reduced) video.setAttribute("controls", "");
+
+  function load(i, play) {
+    var slug = tabs[i].getAttribute("data-slug");
+    if (visible) {
+      video.poster = "assets/work/reel/" + slug + ".jpg";
+      if (video.getAttribute("src") !== "assets/work/reel/" + slug + ".mp4") video.src = "assets/work/reel/" + slug + ".mp4";
+      if (play && !reduced) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    }
+  }
+  function select(i, opts) {
+    opts = opts || {};
+    current = (i + tabs.length) % tabs.length;
+    tabs.forEach(function (t, k) {
+      var on = k === current;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    url.textContent = "/work/" + tabs[current].getAttribute("data-slug");
+    prog.style.transform = "scaleX(0)";
+    if (opts.focus) tabs[current].focus();
+    if (opts.user) { touched = true; if (history.replaceState) history.replaceState(null, "", "#" + tabs[current].id); }
+    load(current, true);
+  }
+  tabs.forEach(function (t, k) {
+    t.addEventListener("click", function () { select(k, { user: true }); });
+    t.addEventListener("keydown", function (e) {
+      var to = { ArrowRight: current + 1, ArrowLeft: current - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (to === undefined) return;
+      e.preventDefault(); select(to, { user: true, focus: true });
+    });
+  });
+  /* swipe on the screen to change site */
+  var x0 = null;
+  screen.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  screen.addEventListener("touchend", function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) select(current + (dx < 0 ? 1 : -1), { user: true });
+  });
+  /* until someone picks a tab, the clips play one after another */
+  video.addEventListener("ended", function () { if (touched) { video.currentTime = 0; video.play(); } else select(current + 1); });
+  video.addEventListener("timeupdate", function () { if (video.duration) prog.style.transform = "scaleX(" + (video.currentTime / video.duration).toFixed(3) + ")"; });
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) load(current, true); else if (!video.paused) video.pause();
+    }, { rootMargin: "150px 0px" }).observe(root);
+  } else { visible = true; load(current, false); }
+
+  /* deep links: #punet-berber, #punet-sallon, #punet-palester, #punet-dentist */
+  function fromHash() {
+    var k = tabs.findIndex ? tabs.findIndex(function (t) { return "#" + t.id === location.hash; }) : -1;
+    if (k > -1) { touched = true; select(k); }
+  }
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
+
+  if (window.Nisja && window.Nisja.onLangChange) {
+    var label = function (l) {
+      root.querySelector(".reel-tabs").setAttribute("aria-label", l === "en" ? "Concept projects by industry" : "Projekte koncept sipas industrisë");
+      video.setAttribute("aria-label", l === "en" ? "Short recording of the site" : "Regjistrim i shkurtër i faqes");
+    };
+    window.Nisja.onLangChange(label); label(window.Nisja.lang || "sq");
+  }
+})();
+

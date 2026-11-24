@@ -390,61 +390,52 @@
           </article>
         </div>
 
-        <div class="concepts-head">
-          <h3 data-i18n="work.concepts">Një faqe për çdo biznes</h3>
-          <p data-i18n="work.conceptsIntro">Projekte koncept për bizneset që humbin më shumë kohë në telefon. Secila ka një sistem që i kursen punë pronarit. Provojini, funksionojnë.</p>
+        <div class="reel" id="reel">
+          <div class="reel-frame">
+            <div class="reel-bar">
+              <div class="reel-tabs" role="tablist" aria-label="Projekte koncept sipas industrisë">
+              <button class="reel-tab" type="button" role="tab" id="punet-berber" aria-controls="reel-p-berber" aria-selected="true" tabindex="0" data-slug="brisk" style="--dot:#B3202A"><span data-i18n="reel.t1">Berber</span></button>
+              <button class="reel-tab" type="button" role="tab" id="punet-sallon" aria-controls="reel-p-sallon" aria-selected="false" tabindex="-1" data-slug="mendafsh" style="--dot:#C2667B"><span data-i18n="reel.t2">Sallon</span></button>
+              <button class="reel-tab" type="button" role="tab" id="punet-palester" aria-controls="reel-p-palester" aria-selected="false" tabindex="-1" data-slug="vrull" style="--dot:#4C6BFF"><span data-i18n="reel.t3">Palestër</span></button>
+              <button class="reel-tab" type="button" role="tab" id="punet-dentist" aria-controls="reel-p-dentist" aria-selected="false" tabindex="-1" data-slug="kristal" style="--dot:#3A8FD6"><span data-i18n="reel.t4">Dentist</span></button>
+              </div>
+              <span class="reel-url" id="reelUrl" aria-hidden="true">/work/brisk</span>
+            </div>
+            <div class="reel-screen" id="reelScreen">
+              <video id="reelVideo" muted playsinline preload="none" width="1040" height="586" aria-label="Regjistrim i shkurtër i faqes"></video>
+              <span class="reel-progress" aria-hidden="true"><i id="reelProg"></i></span>
+            </div>
+          </div>
+          <div class="reel-info">
+            <h3 data-i18n="work.concepts">Një faqe për çdo biznes</h3>
+            <p class="reel-intro" data-i18n="work.conceptsIntro">Projekte koncept për bizneset që humbin më shumë kohë në telefon. Secila ka një sistem që i kursen punë pronarit.</p>
+          <div class="reel-panel" role="tabpanel" id="reel-p-berber" aria-labelledby="punet-berber">
+            <p class="reel-kicker" data-i18n="reel.k1">Berber · Prishtinë</p>
+            <h4>Brisk Barber Club</h4>
+            <p data-i18n="reel.p1">Klienti zgjedh berberin dhe sheh vetëm orët e tij të lira. Pronari sheh ditën e secilit berber në një ekran.</p>
+            <a class="visit" href="work/brisk/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          </div>
+          <div class="reel-panel" role="tabpanel" id="reel-p-sallon" aria-labelledby="punet-sallon" hidden>
+            <p class="reel-kicker" data-i18n="reel.k2">Sallon bukurie · Gjakovë</p>
+            <h4>Mëndafsh Beauty Studio</h4>
+            <p data-i18n="reel.p2">Klientja zgjedh disa shërbime dhe sheh kohën dhe çmimin para se të rezervojë. Pas vizitës merr kujtesë për rifreskim.</p>
+            <a class="visit" href="work/mendafsh/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          </div>
+          <div class="reel-panel" role="tabpanel" id="reel-p-palester" aria-labelledby="punet-palester" hidden>
+            <p class="reel-kicker" data-i18n="reel.k3">Palestër · Prizren</p>
+            <h4>Vrull Fitness</h4>
+            <p data-i18n="reel.p3">Orari i klasave tregon vendet e lira dhe e mbush vetë listën e pritjes. Dita e provës rezervohet online, me kod për recepsionin.</p>
+            <a class="visit" href="work/vrull/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          </div>
+          <div class="reel-panel" role="tabpanel" id="reel-p-dentist" aria-labelledby="punet-dentist" hidden>
+            <p class="reel-kicker" data-i18n="reel.k4">Klinikë dentare · Pejë</p>
+            <h4>Kristal Dental</h4>
+            <p data-i18n="reel.p4">Dy pyetje i tregojnë pacientit cilën vizitë të rezervojë. Dy orë urgjente mbahen të lira çdo ditë për dhimbjet.</p>
+            <a class="visit" href="work/kristal/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          </div>
+            <p class="older"><span data-i18n="work.older">Demo më e vjetër:</span> <a href="demos/restaurant/" target="_blank" rel="noopener">Trattoria Sole</a></p>
+          </div>
         </div>
-        <div class="work-grid work-grid--four">
-          <article class="work-card tilt">
-            <a class="shot" href="work/brisk/" target="_blank" rel="noopener">
-              <span class="shot-bar" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="shot-url">brisk barber club</span></span>
-              <span class="shot-view"><img src="assets/work/brisk.jpg" alt="Faqja e Brisk Barber Club" loading="lazy" width="786" height="1500"></span>
-            </a>
-            <div class="work-info">
-              <h3>Brisk Barber Club</h3>
-              <p data-i18n="c1.text">Berber në Prishtinë: rezervim sipas berberit me orët e tij të lira, statusi live i karrigeve dhe pamja e ditës për stafin.</p>
-              <ul class="tags"><li class="tag-concept" data-i18n="tag.project">Projekt koncept</li><li data-i18n="tag.byBarber">Termin sipas berberit</li></ul>
-              <a class="visit" href="work/brisk/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-            </div>
-          </article>
-          <article class="work-card tilt">
-            <a class="shot" href="work/mendafsh/" target="_blank" rel="noopener">
-              <span class="shot-bar" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="shot-url">mëndafsh beauty studio</span></span>
-              <span class="shot-view"><img src="assets/work/mendafsh.jpg" alt="Faqja e Mëndafsh Beauty Studio" loading="lazy" width="786" height="1500"></span>
-            </a>
-            <div class="work-info">
-              <h3>Mëndafsh Beauty Studio</h3>
-              <p data-i18n="c2.text">Studio bukurie në Gjakovë: klientja ndërton vizitën me disa shërbime, sheh kohën dhe çmimin, dhe merr kujtesë për rifreskim.</p>
-              <ul class="tags"><li class="tag-concept" data-i18n="tag.project">Projekt koncept</li><li data-i18n="tag.builder">Ndërtues vizite</li></ul>
-              <a class="visit" href="work/mendafsh/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-            </div>
-          </article>
-          <article class="work-card tilt">
-            <a class="shot" href="work/vrull/" target="_blank" rel="noopener">
-              <span class="shot-bar" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="shot-url">vrull fitness</span></span>
-              <span class="shot-view"><img src="assets/work/vrull.jpg" alt="Faqja e Vrull Fitness" loading="lazy" width="786" height="1500"></span>
-            </a>
-            <div class="work-info">
-              <h3>Vrull Fitness</h3>
-              <p data-i18n="c3.text">Palestër në Prizren: sa plot është tani, orari i klasave me vende dhe listë pritjeje, abonime dhe ditë prove falas.</p>
-              <ul class="tags"><li class="tag-concept" data-i18n="tag.project">Projekt koncept</li><li data-i18n="tag.classes">Klasa me vende</li></ul>
-              <a class="visit" href="work/vrull/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-            </div>
-          </article>
-          <article class="work-card tilt">
-            <a class="shot" href="work/kristal/" target="_blank" rel="noopener">
-              <span class="shot-bar" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="shot-url">kristal dental</span></span>
-              <span class="shot-view"><img src="assets/work/kristal.jpg" alt="Faqja e Kristal Dental" loading="lazy" width="786" height="1500"></span>
-            </a>
-            <div class="work-info">
-              <h3>Kristal Dental</h3>
-              <p data-i18n="c4.text">Klinikë dentare në Pejë: dy pyetje gjejnë vizitën e duhur, orë urgjente çdo ditë dhe plan për pacientët nga diaspora.</p>
-              <ul class="tags"><li class="tag-concept" data-i18n="tag.project">Projekt koncept</li><li data-i18n="tag.finder">Gjen vizitën</li></ul>
-              <a class="visit" href="work/kristal/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-            </div>
-          </article>
-        </div>
-        <p class="older"><span data-i18n="work.older">Demo më e vjetër:</span> <a href="demos/restaurant/" target="_blank" rel="noopener">Trattoria Sole</a></p>
       </div>
     </section>
 
