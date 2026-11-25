@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nisja.vercel.app/sitemap.xml
+Sitemap: https://nisjastudio.com/sitemap.xml

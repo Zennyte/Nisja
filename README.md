@@ -39,13 +39,13 @@ Send yourself a test message right after the site goes live.
 
 Already set up: page title and description, social-share preview (`assets/og-image.png`), structured business data for Google (the `application/ld+json` block in `index.html`), `robots.txt`, `sitemap.xml` and `site.webmanifest`.
 
-All of these point to `https://nisja.vercel.app/`. When you buy your own domain, search for that address and replace it everywhere in `index.html`, `robots.txt` and `sitemap.xml`.
+All of these point to `https://nisjastudio.com/`, as does the structured data in each `work/*` page. If the address ever changes, search for it and replace it everywhere.
 
 After the site is live, add it to [Google Search Console](https://search.google.com/search-console) and submit `sitemap.xml`, so Google finds it faster. Creating a free Google Business Profile for Nisja Studio helps local search too.
 
 ## Hosting
 
-The site is live at **https://nisja.vercel.app/**, deployed by Vercel from this GitHub repository. Every push to `main` redeploys it automatically within a minute.
+The site is live at **https://nisjastudio.com/** (the old https://nisja.vercel.app/ address forwards there), deployed by Vercel from this GitHub repository. Every push to `main` redeploys it automatically within a minute.
 
 A custom domain (e.g. `nisjastudio.com`) can be added in the Vercel project under **Settings → Domains**. Then update the URLs as described in the SEO section.
 
