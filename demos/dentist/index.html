@@ -7,10 +7,10 @@
   <meta name="description" content="Koncept demo nga Nisja Studio: faqe për klinikë dentare me shërbime, çmime dhe kërkesë termini online.">
   <meta name="robots" content="noindex, follow">
   <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <style>
+/* fonts are self-hosted (no requests to Google) */
+@font-face{font-family:'Plus Jakarta Sans';font-style:normal;font-weight:200 800;font-display:swap;src:url(/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
     :root {
       --bg: #F5F8F8; --white: #FFFFFF; --ink: #0F2A2E; --muted: #5B7175; --line: #DCE6E7;
       --teal: #0E7C7B; --teal-2: #0A6463; --mint: #D8F0EC; --sky: #E6F1FB; --coral: #F28F6B;
@@ -241,34 +241,6 @@
 
   <footer><div class="wrap"><p>© Klinika Dentare Bardha · koncept demo</p><p>Faqe nga <a href="../../">Nisja Studio</a></p></div></footer>
 
-  <script>
-  (function () {
-    var part = null;
-    document.querySelectorAll(".slot").forEach(function (b) {
-      b.addEventListener("click", function () {
-        document.querySelectorAll(".slot").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
-        b.setAttribute("aria-pressed", "true"); part = b.textContent;
-      });
-    });
-    var d = document.getElementById("date"); var t = new Date();
-    d.min = t.toISOString().slice(0, 10);
-    document.getElementById("f").addEventListener("submit", function (e) {
-      e.preventDefault();
-      var svc = document.getElementById("svc").value, name = document.getElementById("name").value.trim(), phone = document.getElementById("phone").value.trim();
-      var miss = !svc ? "shërbimin" : !d.value ? "datën" : !part ? "pjesën e ditës" : !name ? "emrin" : !phone ? "telefonin" : "";
-      document.getElementById("err").textContent = miss ? "Ju lutem zgjidhni ose plotësoni " + miss + "." : "";
-      if (miss) return;
-      var day = new Date(d.value + "T00:00").toLocaleDateString("sq-AL", { weekday: "long", day: "numeric", month: "long" });
-      document.getElementById("ok-text").textContent = name + ", kërkesa për " + svc.toLowerCase() + " më " + day + " (" + part.toLowerCase() + ") u pranua. Ju telefonojmë në " + phone + " për ta konfirmuar.";
-      Array.prototype.forEach.call(this.children, function (el) { if (el.id !== "ok") el.style.display = "none"; });
-      document.getElementById("ok").classList.add("show");
-    });
-    var els = document.querySelectorAll(".rv");
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }); }, { threshold: .12 });
-      els.forEach(function (el) { io.observe(el); });
-    } else els.forEach(function (el) { el.classList.add("in"); });
-  })();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>

@@ -242,7 +242,7 @@
     var words = el.textContent.trim().split(/\s+/);
     el.setAttribute("aria-label", words.join(" "));
     el.innerHTML = words.map(function (wd, i) {
-      return '<span class="w" aria-hidden="true"><span style="transition-delay:' + (i * 70) + 'ms">' + wd + "</span></span>";
+      return '<span class="w" aria-hidden="true"><span style="transition-delay:' + (i * 70) + 'ms">' + wd.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + "</span></span>";
     }).join(" ");
   }
   var splitEls = $$(".split");
@@ -390,9 +390,12 @@
       });
     }
 
+    var openedAt = Date.now();
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (form.querySelector('[name="_honey"]').value) return;
+      /* nobody types a name, email and message in under 4 seconds: that's a bot, so drop it quietly */
+      if (Date.now() - openedAt < 4000) { form.reset(); return; }
       var t = TXT[(window.Nisja && window.Nisja.lang) === "en" ? "en" : "sq"];
       var button = form.querySelector('button[type="submit"]');
       button.disabled = true;

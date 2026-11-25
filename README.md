@@ -48,3 +48,14 @@ After the site is live, add it to [Google Search Console](https://search.google.
 The site is live at **https://nisja.vercel.app/**, deployed by Vercel from this GitHub repository. Every push to `main` redeploys it automatically within a minute.
 
 A custom domain (e.g. `nisjastudio.com`) can be added in the Vercel project under **Settings → Domains**. Then update the URLs as described in the SEO section.
+
+## Security
+
+`vercel.json` sends strict security headers on every page (Content-Security-Policy, HSTS, no framing by other sites, no MIME sniffing, a privacy-friendly referrer policy, and camera/mic/location switched off).
+Because of the Content-Security-Policy:
+
+- **No inline JavaScript.** Put scripts in a `.js` file and load it with `<script src="...">`. `<script>` blocks with code inside, and `onclick=`/`onerror=` attributes, are blocked by the browser. (`application/ld+json` blocks are fine: they are data, not code.)
+- **Everything loads from this site.** Fonts are self-hosted in `assets/fonts/`. To use another outside service (analytics, maps embed, another form service), add its address to the matching line in `vercel.json` first.
+- The contact form may only send to `formsubmit.co`.
+
+`/.well-known/security.txt` tells people how to report a security problem. Renew its `Expires` date before November 2027.

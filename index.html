@@ -138,10 +138,8 @@
   <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
   <link rel="apple-touch-icon" href="assets/icon-512.png">
   <link rel="manifest" href="site.webmanifest">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/bricolage-grotesque-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -162,27 +160,7 @@
       </g>
     </svg>
   </div>
-  <script>
-    (function () {
-      var root = document.documentElement, loader = document.getElementById("loader"), seen = false;
-      try { seen = sessionStorage.getItem("nisja-loaded") === "1"; } catch (e) {}
-      if (seen || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { loader.remove(); return; }
-      root.classList.add("is-loading");
-      var start = Date.now(), finished = false;
-      function finish() {
-        if (finished) return; finished = true;
-        setTimeout(function () {
-          root.classList.remove("is-loading");
-          loader.classList.add("is-done");
-          try { sessionStorage.setItem("nisja-loaded", "1"); } catch (e) {}
-          window.dispatchEvent(new Event("nisja:ready"));
-          setTimeout(function () { loader.remove(); }, 1000);
-        }, Math.max(0, 1900 - (Date.now() - start)));
-      }
-      window.addEventListener("load", finish);
-      setTimeout(finish, 4500);
-    })();
-  </script>
+  <script src="js/loader.js"></script>
 
   <a class="skip-link" href="#main" data-i18n="skip">Kalo te përmbajtja</a>
   <div class="cursor-ring" aria-hidden="true"></div>
@@ -617,19 +595,20 @@
           <input type="hidden" name="_subject" value="Mesazh i ri nga faqja e Nisja Studio">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_blacklist" value="viagra, casino, crypto, bitcoin, forex, backlinks, seo services, guest post, loan offer, porn">
           <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
 
           <div class="field">
             <label for="f-name" data-i18n="form.name">Emri</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required>
+            <input id="f-name" name="name" type="text" autocomplete="name" maxlength="80" required>
           </div>
           <div class="field">
             <label for="f-email">Email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <input id="f-email" name="email" type="email" autocomplete="email" maxlength="120" required>
           </div>
           <div class="field">
             <label for="f-business" data-i18n="form.business">Biznesi juaj (opsionale)</label>
-            <input id="f-business" name="business" type="text" autocomplete="organization">
+            <input id="f-business" name="business" type="text" autocomplete="organization" maxlength="100">
           </div>
           <div class="field">
             <label for="f-plan" data-i18n="form.plan">Paketa</label>
@@ -643,7 +622,7 @@
           </div>
           <div class="field field--full">
             <label for="f-message" data-i18n="form.message">Mesazhi</label>
-            <textarea id="f-message" name="message" rows="5" required></textarea>
+            <textarea id="f-message" name="message" rows="5" maxlength="3000" required></textarea>
           </div>
           <button class="btn btn-primary field--full magnetic" type="submit" data-i18n="form.send">Dërgo mesazhin</button>
           <div class="terminal field--full" id="form-terminal" role="status" aria-live="polite" hidden></div>
