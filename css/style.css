@@ -962,6 +962,10 @@ p { margin: 0; }
 .footer-slogan { font-family: var(--font-display); font-weight: 600; color: var(--sand); font-size: 1.125rem; }
 .site-footer a { color: var(--ash); }
 .site-footer a:hover { color: var(--sand); }
+.footer-social { display: flex; gap: 10px; list-style: none; margin: 0; padding: 0; }
+.footer-social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); color: var(--sand); transition: background-color .2s, border-color .2s, color .2s; }
+.footer-social svg { width: 19px; height: 19px; }
+.footer-social a:hover, .footer-social a:focus-visible { background: #FF6B2C; border-color: #FF6B2C; color: #fff; }
 
 /* ---------- Loading screen ---------- */
 

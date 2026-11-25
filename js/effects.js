@@ -367,12 +367,14 @@
       sq: {
         cmd: "$ nisja dergo --mesazh",
         sending: "→ Duke dërguar mesazhin…",
+        wait: "→ Shërbimi i email-it po e konfirmon, zakonisht 5–10 sekonda. Mund ta mbyllni faqen, mesazhi arrin njësoj.",
         ok: "✓ U dërgua! Do t’ju shkruajmë së shpejti.",
         err: "✗ Mesazhi nuk u dërgua. Na shkruani direkt te nisjastudio@gmail.com."
       },
       en: {
         cmd: "$ nisja send --message",
         sending: "→ Sending your message…",
+        wait: "→ The email service is confirming it, usually 5–10 seconds. You can close the page, it still arrives.",
         ok: "✓ Sent! We’ll get back to you soon.",
         err: "✗ The message didn’t go through. Email us directly at nisjastudio@gmail.com."
       }
@@ -405,14 +407,20 @@
       var request = fetch("https://formsubmit.co/ajax/41e7fb5e547431c7ebd7349e96f94390", {
         method: "POST",
         headers: { "Accept": "application/json" },
-        body: new FormData(form)
+        body: new FormData(form),
+        keepalive: true /* finishes sending even if the visitor closes the page */
       }).then(function (res) { return res.json().catch(function () { return {}; }).then(function (data) {
         return res.ok && String(data.success) !== "false";
       }); }).catch(function () { return false; });
 
       line(t.cmd, "dim", 0)
         .then(function () { return line(t.sending, "", 350); })
-        .then(function () { return request; })
+        .then(function () {
+          /* FormSubmit (free) often needs 5-10 s: say so, so the wait doesn't look broken */
+          var done = false;
+          var slow = setTimeout(function () { if (!done) line(t.wait, "dim", 0); }, 2500);
+          return request.then(function (ok) { done = true; clearTimeout(slow); return ok; });
+        })
         .then(function (ok) {
           return line(ok ? t.ok : t.err, ok ? "ok" : "err", 450).then(function () {
             button.disabled = false;
