@@ -1,4 +1,4 @@
-/* Nisja Studio — showcase preview (hero-v2.html): sections taken from the live homepage.
+/* Nisja Studio — homepage sections
    1. The live hero: dot field, the full stop that turns into an arrow, and the code editor.
       Each site the editor finishes rises out of the "Demo live" folder, marked Live.
    2. "Punë të fundit": the tabbed video player (one clip per site, loaded only on screen).

@@ -11,22 +11,23 @@
   var NS = window.NisjaShowcase || {};
   var reduced = NS.reduced || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  var T = (window.Nisja && window.Nisja.t) || function (sq) { return sq; };
   var DEMOS = {
-    udha:     { name: "Udha", kind: "Rent a car · koncept", url: "work/udha/" },
-    prush:    { name: "Prush", kind: "Restorant · koncept", url: "work/prush/" },
-    brisk:    { name: "Brisk Barber Club", kind: "Berber · koncept", url: "work/brisk/" },
-    mendafsh: { name: "Mëndafsh", kind: "Sallon bukurie · koncept", url: "work/mendafsh/" },
-    vrull:    { name: "Vrull", kind: "Palestër · koncept", url: "work/vrull/" },
-    kristal:  { name: "Kristal Dental", kind: "Dentist · koncept", url: "work/kristal/" },
-    kaliber:  { name: "Kalibër Motors", kind: "Auto sallon · koncept", url: "work/kaliber/" },
-    kroni:    { name: "Vila Kroni", kind: "Vend dasmash · koncept", url: "work/kroni/" },
-    fener:    { name: "Fener", kind: "Bar kokteji · koncept", url: "work/fener/" },
-    embel:    { name: "Ëmbël", kind: "Pastiçeri · koncept", url: "work/embel/" },
-    lisi:     { name: "Lisi", kind: "Mobilje me masë · koncept", url: "work/lisi/" },
-    "nika-1": { name: "Nika Architecture Studio", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/", external: true },
-    "nika-2": { name: "Nika · Projektet", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#projektet", external: true },
-    "nika-3": { name: "Nika · Rreth nesh", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#about", external: true },
-    "nika-4": { name: "Nika · Kontakti", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#contact", external: true }
+    udha:     { name: "Udha", kind: T("Rent a car · koncept", "Rent a car · concept"), url: "work/udha/" },
+    prush:    { name: "Prush", kind: T("Restorant · koncept", "Restaurant · concept"), url: "work/prush/" },
+    brisk:    { name: "Brisk Barber Club", kind: T("Berber · koncept", "Barber · concept"), url: "work/brisk/" },
+    mendafsh: { name: "Mëndafsh", kind: T("Sallon bukurie · koncept", "Beauty salon · concept"), url: "work/mendafsh/" },
+    vrull:    { name: "Vrull", kind: T("Palestër · koncept", "Gym · concept"), url: "work/vrull/" },
+    kristal:  { name: "Kristal Dental", kind: T("Dentist · koncept", "Dentist · concept"), url: "work/kristal/" },
+    kaliber:  { name: "Kalibër Motors", kind: T("Auto sallon · koncept", "Car dealership · concept"), url: "work/kaliber/" },
+    kroni:    { name: "Vila Kroni", kind: T("Vend dasmash · koncept", "Wedding venue · concept"), url: "work/kroni/" },
+    fener:    { name: "Fener", kind: T("Bar kokteji · koncept", "Cocktail bar · concept"), url: "work/fener/" },
+    embel:    { name: "Ëmbël", kind: T("Pastiçeri · koncept", "Pastry shop · concept"), url: "work/embel/" },
+    lisi:     { name: "Lisi", kind: T("Mobilje me masë · koncept", "Custom furniture · concept"), url: "work/lisi/" },
+    "nika-1": { name: "Nika Architecture Studio", kind: T("Klient i vërtetë", "Real client"), url: "https://nika-archi.vercel.app/", external: true },
+    "nika-2": { name: T("Nika · Projektet", "Nika · Projects"), kind: T("Klient i vërtetë", "Real client"), url: "https://nika-archi.vercel.app/#projektet", external: true },
+    "nika-3": { name: "Nika · Rreth nesh", kind: T("Klient i vërtetë", "Real client"), url: "https://nika-archi.vercel.app/#about", external: true },
+    "nika-4": { name: "Nika · Kontakti", kind: T("Klient i vërtetë", "Real client"), url: "https://nika-archi.vercel.app/#contact", external: true }
   };
   var STREAM = ["kaliber", "prush", "udha", "embel", "fener", "kroni", "brisk", "mendafsh", "lisi", "vrull", "kristal", "nika-2"];
   var HERO_SHOT = { kaliber: 1, udha: 1, fener: 1, brisk: 1 };   // these show their hero; the rest an inner section
@@ -69,6 +70,8 @@
       var el = document.createElement("div"); el.className = "sh-card"; el.dataset.id = id;
       var img = document.createElement("img");
       img.alt = ""; img.decoding = "async"; img.draggable = false;
+      var n = track.children.length;                 // the first cards are on screen at load; the rest load when they turn into view
+      if (n === 0) img.fetchPriority = "high"; else if (n > 2) img.loading = "lazy";
       var f = id.replace(/-\d+$/, ""), small = (HERO_SHOT[id] ? "assets/demo/" : "assets/demo/sec/") + f + ".webp";
       img.src = small;
       img.srcset = small + " 720w, assets/demo/hd/" + f + ".webp 1280w";
@@ -117,7 +120,7 @@
         if (Math.abs(x) < best) { best = Math.abs(x); centerIdx = i; }
       });
       var d = DEMOS[cards[centerIdx].id];
-      if (nameEl.textContent !== d.name) { nameEl.textContent = d.name; kindEl.textContent = d.kind; }
+      if (nameEl.textContent !== d.name || kindEl.textContent !== d.kind) { nameEl.textContent = d.name; kindEl.textContent = d.kind; }
     }
     var lastT = 0;
     function tick() {

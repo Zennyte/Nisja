@@ -1,4 +1,4 @@
-/* Nisja Studio — showcase preview (hero-v2.html)
+/* Nisja Studio — homepage effects
    Effects shared by most of Awwwards' top 10 studios, rebuilt for Nisja:
      preloader with counter + scrambled words ... Immersive Garden, Locomotive
      WebGL hero ................................. Active Theory, Resn, Immersive Garden, Merci-Michel, Dogstudio
@@ -435,6 +435,7 @@
 
   /* ================= contact form ================= */
   (function () {
+    var T = (window.Nisja && window.Nisja.t) || function (sq) { return sq; };
     var form = $("contact-form"), status = $("sc-form-status"), openedAt = Date.now();
     if (!form) return;
     form.addEventListener("submit", function (e) {
@@ -442,15 +443,15 @@
       if (form.querySelector('[name="_honey"]').value) return;
       if (Date.now() - openedAt < 4000) { form.reset(); return; }   // nobody fills this in under 4 seconds
       status.className = "sc-form-status field--full";
-      status.textContent = "→ Duke dërguar…";
-      var slow = setTimeout(function () { status.textContent = "→ Shërbimi i email-it po e konfirmon, zakonisht 5–10 sekonda."; }, 2500);
+      status.textContent = T("→ Duke dërguar…", "→ Sending…");
+      var slow = setTimeout(function () { status.textContent = T("→ Shërbimi i email-it po e konfirmon, zakonisht 5–10 sekonda.", "→ The email service is confirming it, usually 5–10 seconds."); }, 2500);
       fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), { method: "POST", headers: { Accept: "application/json" }, body: new FormData(form), keepalive: true })
         .then(function (r) { return r.ok; })
         .catch(function () { return false; })
         .then(function (ok) {
           clearTimeout(slow);
-          if (ok) { status.textContent = "✓ U dërgua! Ju shkruajmë brenda një dite."; status.classList.add("is-ok"); form.reset(); }
-          else { status.textContent = "✗ Nuk u dërgua. Na shkruani te nisjastudio@gmail.com."; status.classList.add("is-err"); }
+          if (ok) { status.textContent = T("✓ U dërgua! Ju shkruajmë brenda një dite.", "✓ Sent! We'll write back within a day."); status.classList.add("is-ok"); form.reset(); }
+          else { status.textContent = T("✗ Nuk u dërgua. Na shkruani te nisjastudio@gmail.com.", "✗ Not sent. Write to us at nisjastudio@gmail.com."); status.classList.add("is-err"); }
         });
     });
   })();
