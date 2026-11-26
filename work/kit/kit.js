@@ -124,6 +124,17 @@
     var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([lines.join("\r\n")], { type: "text/calendar" })); a.download = name + ".ics"; document.body.appendChild(a); a.click(); a.remove();
   };
 
+  /* ---------- accessible names ----------
+     Hides the short visible bits of a button from screen readers and adds a full
+     description they read instead, e.g. "Sat 28 Nov" -> "Saturday, 28 November, full". */
+  K.srText = function (el, text) {
+    [].forEach.call(el.children, function (c) { c.setAttribute("aria-hidden", "true"); });
+    var s = document.createElement("span"); s.textContent = text;
+    s.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;";
+    if (!el.isConnected || getComputedStyle(el).position === "static") el.style.position = "relative"; // keeps the hidden text inside scroll areas
+    el.appendChild(s); el.removeAttribute("aria-label");
+  };
+
   /* ---------- reveal on scroll ---------- */
   K.reveal = function (sel) {
     var els = document.querySelectorAll(sel || "[data-reveal]");

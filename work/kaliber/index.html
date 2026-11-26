@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalibër Motors · Makina luksoze të përdorura në Prishtinë, me garanci</title>
+  <meta name="description" content="Kalibër Motors: Porsche, BMW M, Mercedes-AMG dhe Audi RS të kontrolluara në 160 pika, të doganuara dhe me 12 muaj garanci. Llogaritni këstin dhe rezervoni test drive.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#E8E8E5">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <meta property="og:title" content="Kalibër Motors · Prishtinë">
+  <meta property="og:description" content="Stoku, këstet dhe test drive, online.">
+  <meta property="og:image" content="img/hero.jpg">
+  <link rel="preload" href="../kit/fonts/michroma.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="img/hero-960.jpg" imagesrcset="img/hero-960.jpg 960w, img/hero.jpg 2200w" imagesizes="100vw">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "name": "Kalibër Motors",
+    "description": "Makina luksoze dhe sportive të përdorura, të kontrolluara në 160 pika, me garanci 12 muaj.",
+    "image": "https://nisjastudio.com/work/kaliber/img/hero.jpg",
+    "url": "https://nisjastudio.com/work/kaliber/",
+    "telephone": "+383 49 000 000",
+    "priceRange": "€45,000–€140,000",
+    "address": { "@type": "PostalAddress", "streetAddress": "Magjistralja Prishtinë–Ferizaj, km 6", "addressLocality": "Prishtinë", "postalCode": "10000", "addressCountry": "XK" },
+    "geo": { "@type": "GeoCoordinates", "latitude": 42.6012, "longitude": 21.1610 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "16:00" }
+    ]
+  }
+  </script>
+  <style>
+    @font-face { font-family: "Michroma"; src: url("../kit/fonts/michroma.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Manrope"; src: url("../kit/fonts/manrope.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+    :root {
+      --plat: #E8E8E5; --paper: #F6F6F4; --white: #FFFFFF; --ink: #141619; --steel: #5A6067; --line: #CBCBC6; --line-2: #DEDEDA;
+      --green: #0E4A36; --green-2: #0A3A2A; --green-l: #DCE8E1;
+      --wide: "Michroma", "Arial", sans-serif; --sans: "Manrope", system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    body { margin: 0; font: 16px/1.6 var(--sans); color: var(--ink); background: var(--plat); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, select, input { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    [hidden] { display: none !important; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+    :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+    h1, h2, h3 { font-family: var(--wide); font-weight: 400; margin: 0; line-height: 1.12; letter-spacing: -.01em; }
+    h2 { font-size: clamp(30px, 3.8vw, 52px); }
+    .lead { color: var(--steel); font-size: 18px; max-width: 54ch; margin: 18px 0 0; }
+    .num { font-variant-numeric: tabular-nums; }
+    section { padding: 110px 0; }
+
+    .demo-bar { background: var(--ink); color: #D6D7D9; font-size: 14px; padding: 8px 16px; display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; text-align: center; }
+    .demo-bar a { color: #fff; font-weight: 700; }
+
+    header { position: sticky; top: 0; z-index: 40; background: rgba(232, 232, 229, .86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; gap: 30px; height: 68px; }
+    .logo { font-family: var(--wide); font-size: 19px; letter-spacing: .18em; text-decoration: none; display: flex; align-items: center; gap: 12px; }
+    .logo svg { width: 26px; height: 26px; }
+    .nav ul { list-style: none; display: flex; gap: 26px; margin: 0 0 0 auto; padding: 0; font-size: 15px; font-weight: 600; }
+    .nav ul a { text-decoration: none; color: var(--steel); }
+    .nav ul a:hover { color: var(--ink); }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+    .lang button { background: none; border: 0; padding: 5px 10px; font-size: 12px; font-weight: 800; color: var(--steel); }
+    .lang button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 24px; border: 0; border-radius: 4px; background: var(--green); color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; transition: background .2s, transform .15s; }
+    .btn:hover { background: var(--green-2); }
+    .btn:active { transform: scale(.98); }
+    .btn.line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+    .btn.line:hover { background: var(--ink); color: #fff; }
+    .btn.ink { background: var(--ink); }
+    .btn.ink:hover { background: #2B2E33; }
+    .nav .btn { min-height: 40px; padding: 0 16px; font-size: 14px; }
+    @media (max-width: 960px) { .nav ul { display: none; } .nav .lang { margin-left: auto; } }
+    @media (max-width: 480px) { .nav { gap: 10px; } .logo { font-size: 15px; letter-spacing: .12em; gap: 8px; } .nav .btn { padding: 0 10px; font-size: 12.5px; } }
+
+    /* hero */
+    .hero { position: relative; height: min(88vh, 860px); min-height: 560px; overflow: hidden; padding: 0; background: #DADBD8; }
+    .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; transform: scale(var(--z, 1.06)); will-change: transform; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(232,232,229,.96) 0, rgba(232,232,229,.9) 34%, rgba(232,232,229,.55) 50%, rgba(232,232,229,0) 66%); z-index: 1; }
+    .hero-txt { position: relative; z-index: 2; padding-top: 64px; }
+    .hero h1 { font-size: clamp(34px, 5.2vw, 76px); max-width: 15ch; }
+    .hero .lead { color: #2A2E33; max-width: 50ch; }
+    .spec { position: absolute; z-index: 2; left: 28px; right: 28px; bottom: 28px; max-width: 1224px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr repeat(4, 1fr) auto; align-items: stretch; background: rgba(255,255,255,.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.9); border-radius: 6px; overflow: hidden; }
+    .spec > div { padding: 18px 22px; border-left: 1px solid var(--line-2); }
+    .spec > div:first-child { border-left: 0; }
+    .spec small { display: block; font-size: 12px; color: var(--steel); font-weight: 700; letter-spacing: .04em; }
+    .spec b { display: block; font-family: var(--wide); font-weight: 400; font-size: 20px; margin-top: 4px; font-variant-numeric: tabular-nums; }
+    .spec .car b, .spec .eur b { font-family: var(--sans); font-weight: 800; font-size: 20px; }
+    .spec .go { display: flex; align-items: center; padding: 14px; }
+    @media (max-width: 1000px) { .spec { grid-template-columns: repeat(2, 1fr); } .spec .car { grid-column: 1 / -1; } .spec > div:nth-child(2n) { border-left: 0; } .spec > div { border-top: 1px solid var(--line-2); } .spec .car { border-top: 0; } .spec .go { grid-column: 1 / -1; } .spec .go .btn { width: 100%; } }
+    @media (max-width: 1000px) and (min-width: 640px) { .spec { grid-template-columns: repeat(4, 1fr); } .spec > div:nth-child(2n) { border-left: 1px solid var(--line-2); } .spec > div:nth-child(2) { border-left: 0; } }
+    @media (max-width: 640px) { .hero { height: auto; min-height: 0; padding-bottom: 24px; display: flex; flex-direction: column; } .hero-txt { order: 1; padding-top: 36px; } .hero > img { order: 2; position: relative; height: 280px; transform: none; margin-top: 28px; } .hero::before { display: none; } .spec { order: 3; position: relative; left: auto; right: auto; bottom: auto; margin: -36px 16px 0; } }
+
+    /* trust band */
+    .band { background: var(--ink); color: #E3E4E6; padding: 0; }
+    .band .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .band div div { padding: 26px 24px; border-left: 1px solid #2B2E33; }
+    .band div div:first-child { border-left: 0; padding-left: 0; }
+    .band b { display: block; font-family: var(--wide); font-weight: 400; font-size: 26px; color: #fff; }
+    .band span { font-size: 14px; color: #A9ADB2; }
+    .band b .eu { font-family: var(--sans); font-weight: 700; font-size: 24px; color: #fff; margin-right: 2px; }
+    @media (max-width: 860px) { .band .wrap { grid-template-columns: 1fr 1fr; } .band div div:nth-child(3) { border-left: 0; padding-left: 0; } .band div div { border-top: 1px solid #2B2E33; } }
+
+    /* stock */
+    .tools { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin: 40px 0 30px; padding: 16px 0; border-block: 1px solid var(--line); }
+    .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+    .seg button { background: none; border: 1px solid var(--line); border-radius: 4px; padding: 7px 13px; font-size: 14px; font-weight: 600; color: var(--steel); }
+    .seg button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .rng { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; color: var(--steel); }
+    .rng input { width: 170px; accent-color: var(--green); }
+    .rng output { color: var(--ink); min-width: 78px; }
+    .tools select { border: 1px solid var(--line); border-radius: 4px; background: var(--paper); padding: 8px 10px; font-size: 14px; font-weight: 600; }
+    .tools .count { margin-left: auto; font-size: 14px; color: var(--steel); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 46px 30px; }
+    .car-c { display: flex; flex-direction: column; }
+    .car-c .ph { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; background: #D5D6D2; cursor: pointer; }
+    .car-c .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+    .car-c:hover .ph img { transform: scale(1.04); }
+    .car-c .tag { position: absolute; left: 10px; top: 10px; background: var(--green); color: #fff; font-size: 12px; font-weight: 800; padding: 4px 9px; border-radius: 3px; }
+    .car-c .row1 { display: flex; justify-content: space-between; gap: 14px; align-items: baseline; margin-top: 16px; }
+    .car-c h3 { font-family: var(--sans); font-weight: 800; font-size: 19px; line-height: 1.25; }
+    .car-c h3 small { display: block; font-weight: 600; font-size: 14px; color: var(--steel); }
+    .car-c .pr { font-weight: 800; font-size: 19px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .car-c .meta { display: grid; grid-template-columns: repeat(3, 1fr); margin: 14px 0; border-block: 1px solid var(--line); }
+    .car-c .meta span { padding: 9px 0; font-size: 13.5px; font-weight: 600; text-align: center; border-left: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+    .car-c .meta span:first-child { border-left: 0; text-align: left; }
+    .car-c .meta span:last-child { text-align: right; }
+    .car-c .row2 { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14px; }
+    .car-c .mo { color: var(--green); font-weight: 700; }
+    .cmp { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--steel); cursor: pointer; font-size: 14px; }
+    .cmp input { width: 18px; height: 18px; accent-color: var(--green); margin: 0; }
+    .empty { grid-column: 1 / -1; padding: 40px 0; color: var(--steel); }
+    @media (max-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .tools .count { margin-left: 0; width: 100%; } .rng input { width: 140px; } }
+
+    .cmpbar { position: fixed; left: 50%; bottom: 18px; transform: translate(-50%, 140%); z-index: 45; background: var(--ink); color: #fff; border-radius: 6px; padding: 10px 10px 10px 20px; display: flex; gap: 18px; align-items: center; box-shadow: 0 20px 40px -12px rgba(0,0,0,.4); transition: transform .4s cubic-bezier(.2,.8,.2,1); font-size: 15px; }
+    .cmpbar { visibility: hidden; }
+    .cmpbar.on { transform: translate(-50%, 0); visibility: visible; }
+    .cmpbar .btn { min-height: 42px; background: #fff; color: var(--ink); }
+    .cmpbar .x { background: none; border: 0; color: #A9ADB2; font-size: 14px; }
+
+    /* finance band */
+    .fin-sec { background: var(--paper); border-block: 1px solid var(--line); }
+    .fin { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+    .calc { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 30px; }
+    .calc label { display: block; font-size: 14px; font-weight: 700; color: var(--steel); margin-bottom: 8px; }
+    .calc .ln { display: flex; justify-content: space-between; align-items: baseline; }
+    .calc .ln output { font-weight: 800; font-size: 15px; color: var(--ink); }
+    .calc input[type=range] { width: 100%; accent-color: var(--green); margin: 0 0 22px; }
+    .calc select { width: 100%; border: 1px solid var(--line); border-radius: 4px; padding: 11px 12px; margin-bottom: 22px; background: var(--paper); font-weight: 600; }
+    .res { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); margin-top: 6px; }
+    .res div { padding: 16px 0 0; }
+    .res div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+    .res small { font-size: 13px; font-weight: 700; color: var(--steel); }
+    .res b { display: block; font-weight: 800; font-size: 36px; letter-spacing: -.01em; color: var(--green); line-height: 1.2; }
+    .res b.sm { font-size: 24px; color: var(--ink); }
+    .fine { font-size: 13px; color: var(--steel); margin: 16px 0 0; }
+    .steps { list-style: none; counter-reset: s; padding: 0; margin: 40px 0 0; display: grid; gap: 0; }
+    .steps li { counter-increment: s; display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); }
+    .steps li::before { content: counter(s, decimal-leading-zero); font-family: var(--wide); font-size: 18px; color: var(--green); }
+    .steps b { display: block; font-size: 17px; }
+    .steps span { color: var(--steel); font-size: 15px; }
+    @media (max-width: 920px) { .fin { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* showroom split */
+    .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; padding: 0; }
+    .split > img { width: 100%; height: 100%; object-fit: cover; }
+    .split .txt { background: var(--ink); color: #E3E4E6; padding: 90px 8%; display: flex; flex-direction: column; justify-content: center; }
+    .split h2 { color: #fff; }
+    .split .lead { color: #A9ADB2; }
+    .checks { list-style: none; padding: 0; margin: 34px 0 0; columns: 2; column-gap: 30px; font-size: 15px; }
+    .checks li { break-inside: avoid; padding: 10px 0 10px 26px; border-top: 1px solid #2B2E33; position: relative; }
+    .checks li::before { content: ""; position: absolute; left: 0; top: 17px; width: 12px; height: 7px; border-left: 2px solid #7FC3A4; border-bottom: 2px solid #7FC3A4; transform: rotate(-45deg); }
+    @media (max-width: 900px) { .split { grid-template-columns: 1fr; } .split > img { height: 320px; } .checks { columns: 1; } }
+
+    /* test drive */
+    .td { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; margin-top: 46px; align-items: start; }
+    .panel { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 30px; }
+    .fld { display: grid; gap: 7px; font-size: 14px; font-weight: 700; color: var(--steel); margin-bottom: 18px; }
+    .fld input, .fld select { border: 1px solid var(--line); border-radius: 4px; background: var(--paper); padding: 11px 12px; min-height: 48px; font-weight: 600; color: var(--ink); }
+    .fld input:focus, .fld select:focus { border-color: var(--green); outline: none; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .days { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+    .days button { flex: 0 0 auto; width: 62px; border: 1px solid var(--line); background: var(--paper); border-radius: 4px; padding: 8px 0; line-height: 1.25; font-size: 12px; font-weight: 700; color: var(--steel); }
+    .days button b { display: block; font-family: var(--wide); font-weight: 400; font-size: 20px; color: var(--ink); }
+    .days button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #A9ADB2; }
+    .days button[aria-pressed="true"] b { color: #fff; }
+    .days button:disabled { opacity: .35; cursor: not-allowed; }
+    .slots { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .slots button { border: 1px solid var(--line); background: var(--paper); border-radius: 4px; padding: 10px 0; font-weight: 700; font-size: 14px; font-variant-numeric: tabular-nums; }
+    .slots button[aria-pressed="true"] { background: var(--green); color: #fff; border-color: var(--green); }
+    .slots button:disabled { opacity: .35; text-decoration: line-through; cursor: not-allowed; }
+    .chk { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--steel); margin: 4px 0 18px; cursor: pointer; }
+    .chk input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--green); flex: 0 0 auto; }
+    .err { color: #B3261E; font-size: 14px; font-weight: 700; min-height: 1.3em; margin: 0 0 10px; }
+    .pick { display: grid; grid-template-columns: 160px 1fr; gap: 18px; align-items: center; padding-bottom: 22px; margin-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .pick img { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: 4px; }
+    .pick b { display: block; font-size: 18px; }
+    .pick span { color: var(--steel); font-size: 14px; }
+    .ok { text-align: left; }
+    .ok .code { font-family: var(--wide); font-size: 44px; color: var(--green); margin: 10px 0; }
+    .ok p { color: var(--steel); }
+    @media (max-width: 920px) { .td { grid-template-columns: 1fr; gap: 30px; } }
+    @media (max-width: 520px) { .slots { grid-template-columns: repeat(3, 1fr); } .two { grid-template-columns: 1fr; } .pick { grid-template-columns: 110px 1fr; } .panel, .calc { padding: 22px; } }
+
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+    .addr { font-family: var(--wide); font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3; margin: 24px 0; }
+    .contact a { display: inline-block; margin: 0 22px 8px 0; font-weight: 800; color: var(--green); text-underline-offset: 4px; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
+    .hours td:last-child { text-align: right; font-variant-numeric: tabular-nums; color: var(--steel); }
+    .hours tr.today td { color: var(--green); font-weight: 800; }
+    .faq details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+    .faq summary { cursor: pointer; font-weight: 700; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 20px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; font-family: var(--wide); color: var(--green); transition: transform .3s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq p { color: var(--steel); margin: 10px 0 0; }
+    @media (max-width: 860px) { .visit { grid-template-columns: 1fr; gap: 40px; } }
+
+    footer { background: var(--ink); color: #A9ADB2; padding: 50px 0 60px; font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    footer a { color: #fff; }
+    footer .mark { font-family: var(--wide); color: #fff; letter-spacing: .18em; font-size: 15px; }
+
+    dialog { border: 0; border-radius: 6px; padding: 0; width: min(1080px, 95vw); max-height: 92vh; background: var(--paper); color: var(--ink); }
+    dialog::backdrop { background: rgba(20, 22, 25, .72); backdrop-filter: blur(3px); }
+    .dlg-h { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 24px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--paper); z-index: 2; }
+    .dlg-h h3 { font-family: var(--sans); font-weight: 800; font-size: 20px; }
+    .dlg-h button { background: none; border: 1px solid var(--ink); border-radius: 4px; padding: 6px 14px; font-weight: 700; }
+    .det { display: grid; grid-template-columns: 1.15fr .85fr; }
+    .det .l { padding: 24px; border-right: 1px solid var(--line); }
+    .det .l img { width: 100%; aspect-ratio: 3/2; object-fit: cover; border-radius: 4px; }
+    .det .r { padding: 24px; }
+    .tbl { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14.5px; }
+    .tbl th, .tbl td { text-align: left; padding: 10px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
+    .tbl th { color: var(--steel); width: 44%; font-weight: 700; }
+    .tbl td { font-variant-numeric: tabular-nums; }
+    .ex { display: grid; gap: 8px; margin: 10px 0 22px; }
+    .ex label { display: grid; grid-template-columns: 20px 1fr auto; gap: 10px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--white); cursor: pointer; font-size: 14.5px; font-weight: 600; }
+    .ex input { width: 18px; height: 18px; margin: 0; accent-color: var(--green); }
+    .ex span:last-child { font-variant-numeric: tabular-nums; color: var(--steel); }
+    .ex label:has(input:checked) { border-color: var(--green); background: var(--green-l); }
+    .h4 { font-size: 13px; font-weight: 800; color: var(--steel); letter-spacing: .04em; margin: 0 0 4px; }
+    .tot { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-top: 2px solid var(--ink); margin-bottom: 18px; }
+    .tot b { font-weight: 800; font-size: 28px; }
+    .mini { background: var(--white); border: 1px solid var(--line); border-radius: 4px; padding: 16px; margin-bottom: 18px; }
+    .mini .ln { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--steel); }
+    .mini input { width: 100%; accent-color: var(--green); margin: 6px 0 12px; }
+    .mini .m { font-weight: 800; font-size: 28px; color: var(--green); }
+    .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 860px) { .det { grid-template-columns: 1fr; } .det .l { border-right: 0; border-bottom: 1px solid var(--line); } }
+    .ctbl { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+    .ctbl th, .ctbl td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-variant-numeric: tabular-nums; }
+    .ctbl thead th { vertical-align: bottom; }
+    .ctbl thead img { width: 100%; max-width: 220px; aspect-ratio: 3/2; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+    .ctbl tbody th { color: var(--steel); font-weight: 700; width: 18%; }
+    .ctbl .best { color: var(--green); font-weight: 800; }
+    .cwrap { overflow-x: auto; padding: 10px 24px 24px; }
+  </style>
+</head>
+<body>
+  <div class="demo-bar"><span data-i18n-html="demo">Ky është një <b>projekt koncept</b> nga <a href="../../">Nisja Studio</a>. Salloni dhe ofertat nuk ekzistojnë.</span></div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#top"><svg viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="11.5" stroke="currentColor" stroke-width="1.5"/><path d="M13 3v4M13 19v4M3 13h4M19 13h4" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="13" r="3" fill="#0E4A36"/></svg>KALIBËR</a>
+      <ul>
+        <li><a href="#stoku" data-i18n="nav.stock">Stoku</a></li>
+        <li><a href="#financimi" data-i18n="nav.fin">Financimi</a></li>
+        <li><a href="#kontrolli" data-i18n="nav.check">Kontrolli</a></li>
+        <li><a href="#vizita" data-i18n="nav.visit">Salloni</a></li>
+      </ul>
+      <div class="lang" role="group" aria-label="Gjuha / Language"><button type="button" data-lang="sq">SQ</button><button type="button" data-lang="en">EN</button></div>
+      <a class="btn" href="#testdrive" data-i18n="cta.td">Test drive</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="hero">
+      <img src="img/hero-960.jpg" srcset="img/hero-960.jpg 960w, img/hero.jpg 2200w" sizes="100vw" alt="Porsche 911 e bardhë në një rrugë me borë" data-i18n-alt="h.alt" fetchpriority="high" id="heroImg">
+      <div class="wrap hero-txt">
+        <h1 data-i18n="h.title">Makina që kanë kaluar 160 kontrolle.</h1>
+        <p class="lead" data-i18n="h.lead">Porsche, BMW M, Mercedes-AMG dhe Audi RS nga Gjermania, me histori servisi, të doganuara dhe me 12 muaj garanci. Çmimi që shihni është çmimi në targa kosovare.</p>
+      </div>
+      <div class="spec" id="spec">
+        <div class="car"><small data-i18n="h.feat">Sot në sallon</small><b id="spCar">Porsche 911 Carrera S</b></div>
+        <div><small data-i18n="h.year">Viti</small><b class="num" id="spYear">2021</b></div>
+        <div><small data-i18n="h.km">Kilometra</small><b class="num" id="spKm">28 400</b></div>
+        <div><small data-i18n="h.hp">Fuqia</small><b class="num" id="spHp">450 hp</b></div>
+        <div class="eur"><small data-i18n="h.price">Çmimi</small><b class="num" id="spPrice">€118 900</b></div>
+        <div class="go"><button type="button" class="btn ink" id="spOpen" data-i18n="h.open">Shiko makinën</button></div>
+      </div>
+    </section>
+
+    <section class="band" aria-label="Pse Kalibër">
+      <div class="wrap">
+        <div><b>160</b><span data-i18n="t.1">pika kontrolli para shitjes</span></div>
+        <div><b>12</b><span data-i18n="t.2">muaj garanci e përfshirë</span></div>
+        <div><b><span class="eu">€</span>0</b><span data-i18n="t.3">dogana dhe TVSH shtesë</span></div>
+        <div><b>48 h</b><span data-i18n="t.4">nga pagesa te dorëzimi</span></div>
+      </div>
+    </section>
+
+    <section id="stoku">
+      <div class="wrap">
+        <h2 data-i18n="s.title">Në stok tani</h2>
+        <p class="lead" data-i18n="s.lead">Çdo makinë është në sallon dhe mund ta provoni. Krahasoni deri në tri, ose hapni njërën për të llogaritur këstin me opsionet që doni.</p>
+        <div class="tools" role="group" data-i18n-aria="s.tools" aria-label="Filtrat">
+          <div class="seg" id="bodySeg"></div>
+          <div class="rng"><label for="maxP" data-i18n="s.max">Deri në</label><input type="range" id="maxP" min="45000" max="140000" step="5000" value="140000"><output id="maxPo" class="num">€140 000</output></div>
+          <select id="sort" data-i18n-aria="s.sort" aria-label="Rendit">
+            <option value="new" data-i18n="s.o1">Më të rejat</option>
+            <option value="pa" data-i18n="s.o2">Çmimi: nga më i ulëti</option>
+            <option value="pd" data-i18n="s.o3">Çmimi: nga më i larti</option>
+            <option value="km" data-i18n="s.o4">Kilometra: më pak</option>
+            <option value="hp" data-i18n="s.o5">Fuqia: më e madhe</option>
+          </select>
+          <span class="count" id="count" aria-live="polite"></span>
+        </div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+
+    <section class="fin-sec" id="financimi">
+      <div class="wrap fin">
+        <div>
+          <h2 data-i18n="f.title">Sa del në muaj?</h2>
+          <p class="lead" data-i18n="f.lead">Zgjidhni makinën, paradhënien dhe kohëzgjatjen. Llogaritja përdor normën e bankës partnere, kështu që numri është afër ofertës që merrni në zyrë.</p>
+          <ol class="steps">
+            <li><div><b data-i18n="f.s1">Aplikoni këtu ose në sallon</b><span data-i18n="f.s2">Ju duhet letërnjoftimi dhe vërtetimi i pagës.</span></div></li>
+            <li><div><b data-i18n="f.s3">Banka përgjigjet brenda një dite pune</b><span data-i18n="f.s4">Ne e dërgojmë dosjen, ju nuk shkoni në bankë.</span></div></li>
+            <li><div><b data-i18n="f.s5">Nënshkruani dhe merrni çelësat</b><span data-i18n="f.s6">Targat dhe sigurimi bëhen po atë ditë.</span></div></li>
+          </ol>
+        </div>
+        <div class="calc">
+          <label for="fCar" data-i18n="f.car">Makina</label>
+          <select id="fCar"></select>
+          <div class="ln"><label for="fDown" data-i18n="f.down">Paradhënia</label><output id="fDownO"></output></div>
+          <input type="range" id="fDown" step="5">
+          <div class="ln"><label for="fTerm" data-i18n="f.term">Kohëzgjatja</label><output id="fTermO"></output></div>
+          <input type="range" id="fTerm" step="12">
+          <div class="res">
+            <div><small data-i18n="f.month">Kësti mujor</small><b id="fMonth" class="num">€0</b></div>
+            <div><small data-i18n="f.total">Kostoja totale e kredisë</small><b class="sm num" id="fTotal">€0</b></div>
+          </div>
+          <p class="fine" id="fFine"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="split" id="kontrolli">
+      <img src="img/lamp.jpg" alt="Drita e përparme e një makine në errësirë" data-i18n-alt="c.alt" loading="lazy" width="933" height="1400">
+      <div class="txt">
+        <h2 data-i18n="c.title">Çfarë kontrollojmë</h2>
+        <p class="lead" data-i18n="c.lead">Çdo makinë hyn në servisin tonë para se të dalë në sallon. Raportin e kontrollit e merrni me makinën, me foto dhe matje.</p>
+        <ul class="checks">
+          <li data-i18n="c.1">Historia e servisit dhe kilometrat, me VIN</li>
+          <li data-i18n="c.2">Trashësia e bojës në çdo panel</li>
+          <li data-i18n="c.3">Diagnostikë kompjuterike e plotë</li>
+          <li data-i18n="c.4">Frenat, disqet dhe amortizatorët</li>
+          <li data-i18n="c.5">Gomat, minimumi 5 mm</li>
+          <li data-i18n="c.6">Provë rruge 40 km me teknik</li>
+          <li data-i18n="c.7">Pastrim i brendshëm me avull</li>
+          <li data-i18n="c.8">Servis i ri vaji dhe filtrash</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="testdrive">
+      <div class="wrap">
+        <h2 data-i18n="d.title">Rezervoni test drive</h2>
+        <p class="lead" data-i18n="d.lead">45 minuta, me një këshilltar, në rrugë të vërtetë. Zgjidhni makinën dhe orën, ne e kemi gati dhe të larë kur arrini.</p>
+        <div class="td">
+          <div>
+            <div class="pick" id="tdPick"><img id="tdImg" alt=""><div><b id="tdName"></b><span id="tdMeta"></span></div></div>
+            <label class="fld"><span data-i18n="d.car">Makina</span><select id="tdCar"></select></label>
+            <div class="fld"><span data-i18n="d.day">Dita</span><div class="days" id="tdDays" role="group" data-i18n-aria="d.dayA" aria-label="Dita"></div></div>
+            <div class="fld"><span data-i18n="d.time">Ora</span><div class="slots" id="tdSlots" role="group" data-i18n-aria="d.timeA" aria-label="Ora"></div></div>
+          </div>
+          <div class="panel">
+            <div id="tdForm">
+              <div class="two">
+                <label class="fld"><span data-i18n="d.name">Emri dhe mbiemri</span><input id="tdN" autocomplete="name" maxlength="60"></label>
+                <label class="fld"><span data-i18n="d.phone">Telefoni</span><input id="tdP" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="+383 4x xxx xxx"></label>
+              </div>
+              <label class="fld"><span data-i18n="d.trade">Keni makinë për ta ndërruar? (opsionale)</span><input id="tdT" maxlength="80" data-i18n-ph="d.tradePh" placeholder="p.sh. VW Golf 7, 2016, 140 000 km"></label>
+              <label class="chk"><input type="checkbox" id="tdL"><span data-i18n="d.lic">Kam patentë shoferi të vlefshme prej të paktën 3 vjetësh dhe jam mbi 23 vjeç.</span></label>
+              <p class="err" id="tdE" role="alert"></p>
+              <button type="button" class="btn" id="tdS" style="width:100%" data-i18n="d.send">Rezervo test drive</button>
+              <p class="fine" data-i18n="d.fine">Ju telefonojmë një ditë më parë për ta konfirmuar. Merrni me vete patentën.</p>
+            </div>
+            <div class="ok" id="tdOk" hidden tabindex="-1">
+              <p class="h4" data-i18n="d.okT">Test drive i rezervuar</p>
+              <div class="code" id="tdCode"></div>
+              <p id="tdOkTxt"></p>
+              <div class="acts"><button type="button" class="btn" id="tdIcs" data-i18n="d.ics">Shto në kalendar</button><button type="button" class="btn line" id="tdNew" data-i18n="d.new">Rezervim tjetër</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="vizita" style="padding-top:0">
+      <div class="wrap visit">
+        <div>
+          <h2 data-i18n="v.title">Salloni</h2>
+          <p class="addr">Magjistralja Prishtinë–Ferizaj, km 6</p>
+          <p class="contact"><a href="tel:+38349000000">+383 49 000 000</a><a href="https://maps.google.com/?q=42.6012,21.1610" target="_blank" rel="noopener" data-i18n="v.map">Hap në Google Maps</a></p>
+          <table class="hours" id="hours"></table>
+        </div>
+        <div class="faq">
+          <details><summary data-i18n="q.1">A janë makinat të doganuara?</summary><p data-i18n="q.1a">Po. Çmimi përfshin doganën, akcizën dhe TVSH-në. Ju paguani vetëm regjistrimin, nëse nuk e zgjidhni si opsion.</p></details>
+          <details><summary data-i18n="q.2">Çfarë mbulon garancia?</summary><p data-i18n="q.2a">Motorin, kutinë e shpejtësive, diferencialin dhe elektronikën për 12 muaj pa kufi kilometrash. Mund ta zgjasni edhe 12 muaj.</p></details>
+          <details><summary data-i18n="q.3">A e merrni makinën time si pjesë të pagesës?</summary><p data-i18n="q.3a">Po. Shkruajeni te formulari i test drive dhe e vlerësojmë po atë ditë, pa detyrim.</p></details>
+          <details><summary data-i18n="q.4">A mund ta sillni nga Gjermania një makinë që nuk e keni?</summary><p data-i18n="q.4a">Po, me porosi. Kërkojmë, kontrollojmë dhe e sjellim brenda 3 deri 5 javësh, me të njëjtën garanci.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap"><span class="mark">KALIBËR</span><span>© Kalibër Motors · <span data-i18n="foot">Projekt koncept nga</span> <a href="../../">Nisja Studio</a></span></div>
+  </footer>
+
+  <div class="cmpbar" id="cmpbar" role="region" data-i18n-aria="cmp.bar" aria-label="Krahasimi"><span id="cmpTxt"></span><button type="button" class="btn" id="cmpOpen" data-i18n="cmp.open">Krahaso</button><button type="button" class="x" id="cmpClear" data-i18n="cmp.clear">Pastro</button></div>
+
+  <dialog id="carDlg" aria-labelledby="cdT">
+    <div class="dlg-h"><h3 id="cdT"></h3><button type="button" data-close data-i18n="close">Mbyll</button></div>
+    <div class="det">
+      <div class="l"><img id="cdImg" alt=""><table class="tbl" id="cdSpec"></table></div>
+      <div class="r">
+        <p class="h4" data-i18n="cd.ex">Opsione</p>
+        <div class="ex" id="cdEx"></div>
+        <div class="tot"><span data-i18n="cd.tot">Totali</span><b id="cdTot" class="num"></b></div>
+        <div class="mini">
+          <div class="ln"><span data-i18n="f.down">Paradhënia</span><span id="cdDownO"></span></div><input type="range" id="cdDown" step="5" data-i18n-aria="f.down" aria-label="Paradhënia">
+          <div class="ln"><span data-i18n="f.term">Kohëzgjatja</span><span id="cdTermO"></span></div><input type="range" id="cdTerm" step="12" data-i18n-aria="f.term" aria-label="Kohëzgjatja">
+          <div class="ln"><span data-i18n="f.month">Kësti mujor</span><span class="m num" id="cdMonth"></span></div>
+        </div>
+        <div class="acts"><button type="button" class="btn" id="cdTd" data-i18n="cd.td">Rezervo test drive</button><button type="button" class="btn line" id="cdCmp" data-i18n="cd.cmp">Shto te krahasimi</button></div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="cmpDlg" aria-labelledby="cmpH">
+    <div class="dlg-h"><h3 id="cmpH" data-i18n="cmp.title">Krahasimi</h3><button type="button" data-close data-i18n="close">Mbyll</button></div>
+    <div class="cwrap"><table class="ctbl" id="cmpTbl"></table></div>
+  </dialog>
+
+  <script src="../kit/kit.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

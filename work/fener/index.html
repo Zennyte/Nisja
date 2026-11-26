@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fener · Kokteje dhe kuzhinë në Prishtinë, rezervo tavolinën</title>
+  <meta name="description" content="Fener në Prishtinë: kokteje me raki, xhin dhe çaj mali, pjata për ndarje dhe jazz të enjten. Gjeni koktejin tuaj dhe zgjidhni tavolinën në planimetri.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#140D0C">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <meta property="og:title" content="Fener · Kokteje dhe kuzhinë">
+  <meta property="og:description" content="Gjeni koktejin tuaj dhe zgjidhni tavolinën në planimetri.">
+  <meta property="og:image" content="img/hero.jpg">
+  <link rel="preload" href="../kit/fonts/gloock.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="img/hero-960.jpg" imagesrcset="img/hero-960.jpg 960w, img/hero.jpg 2200w" imagesizes="100vw">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BarOrPub",
+    "name": "Fener",
+    "description": "Bar koktejesh dhe kuzhinë me pjata për ndarje në Prishtinë.",
+    "image": "https://nisjastudio.com/work/fener/img/hero.jpg",
+    "url": "https://nisjastudio.com/work/fener/",
+    "telephone": "+383 44 000 000",
+    "servesCuisine": ["Kokteje", "Pjata për ndarje"],
+    "priceRange": "€€",
+    "acceptsReservations": "True",
+    "address": { "@type": "PostalAddress", "streetAddress": "Rr. Agim Ramadani 15", "addressLocality": "Prishtinë", "postalCode": "10000", "addressCountry": "XK" },
+    "geo": { "@type": "GeoCoordinates", "latitude": 42.6611, "longitude": 21.1622 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "17:00", "closes": "01:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "17:00", "closes": "02:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "17:00", "closes": "23:59" }
+    ]
+  }
+  </script>
+  <style>
+    @font-face { font-family: "Gloock"; src: url("../kit/fonts/gloock.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Hanken"; src: url("../kit/fonts/hanken.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+    :root {
+      --night: #140D0C; --night-2: #1D1412; --wine: #4E1820; --wine-2: #6B2430; --amber: #E3A857; --amber-2: #F2C07A;
+      --smoke: #F0E6D8; --ash: #B5A796; --ash-2: #8A7D70; --line: #3A2B26;
+      --serif: "Gloock", "Georgia", serif; --sans: "Hanken", system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    body { margin: 0; font: 17px/1.6 var(--sans); color: var(--smoke); background: var(--night); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    [hidden] { display: none !important; }
+    .wrap { max-width: 1220px; margin: 0 auto; padding: 0 24px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+    ::selection { background: var(--amber); color: var(--night); }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; line-height: 1.02; letter-spacing: -.01em; }
+    h2 { font-size: clamp(44px, 6.4vw, 88px); }
+    .lead { color: var(--ash); font-size: 19px; max-width: 46ch; margin: 18px 0 0; }
+    section { padding: 120px 0; }
+
+    .demo-bar { background: var(--amber); color: var(--night); font-size: 14px; padding: 8px 16px; display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; text-align: center; }
+    .demo-bar a { font-weight: 700; }
+    .demo-bar button { background: var(--night); color: var(--smoke); border: 0; border-radius: 99px; padding: 4px 12px; font-size: 13px; font-weight: 700; }
+
+    header { position: sticky; top: 0; z-index: 40; background: rgba(20, 13, 12, .78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240, 230, 216, .08); }
+    .nav { display: flex; align-items: center; gap: 28px; height: 66px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--serif); font-size: 28px; letter-spacing: .02em; }
+    .logo svg { width: 20px; height: 26px; color: var(--amber); }
+    .nav ul { list-style: none; display: flex; gap: 26px; margin: 0 0 0 auto; padding: 0; font-size: 15px; }
+    .nav ul a { text-decoration: none; color: var(--ash); transition: color .2s; }
+    .nav ul a:hover { color: var(--smoke); }
+    .lang { display: flex; border: 1px solid var(--line); border-radius: 99px; overflow: hidden; }
+    .lang button { background: none; border: 0; padding: 5px 10px; font-size: 13px; font-weight: 700; color: var(--ash); }
+    .lang button[aria-pressed="true"] { background: var(--smoke); color: var(--night); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 24px; border-radius: 99px; border: 0; background: var(--amber); color: var(--night); font-weight: 700; font-size: 16px; text-decoration: none; transition: background .2s, transform .15s, box-shadow .3s; }
+    .btn:hover { background: var(--amber-2); box-shadow: 0 0 40px rgba(227, 168, 87, .35); }
+    .btn:active { transform: scale(.98); }
+    .btn.ghost { background: transparent; color: var(--smoke); box-shadow: inset 0 0 0 1px rgba(240, 230, 216, .35); }
+    .btn.ghost:hover { box-shadow: inset 0 0 0 1px var(--amber); color: var(--amber-2); }
+    .nav .btn { min-height: 40px; padding: 0 18px; font-size: 14px; }
+    @media (max-width: 920px) { .nav ul { display: none; } .nav .lang { margin-left: auto; } }
+    @media (max-width: 460px) { .nav { gap: 10px; } .logo { font-size: 24px; } .nav .btn { padding: 0 12px; font-size: 13px; } }
+
+    /* hero: a lantern lights the room under your cursor */
+    .hero { position: relative; min-height: min(92vh, 860px); display: flex; align-items: flex-end; overflow: hidden; padding: 0; isolation: isolate; }
+    .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: saturate(1.05) contrast(1.05); }
+    .dark { position: absolute; inset: 0; z-index: -1; --x: 62%; --y: 38%;
+      background: radial-gradient(circle at var(--x) var(--y), rgba(20,13,12,0) 0, rgba(20,13,12,.12) 110px, rgba(20,13,12,.78) 320px, rgba(20,13,12,.94) 560px); }
+    .dark::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,13,12,.2), rgba(20,13,12,0) 30%, rgba(20,13,12,.85) 92%); }
+    .hero-in { width: 100%; padding-bottom: 64px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+    .hero h1 { font-size: clamp(64px, 11vw, 170px); line-height: .9; }
+    .hero h1 em { font-style: normal; color: var(--amber); text-shadow: 0 0 50px rgba(227, 168, 87, .45); }
+    .hero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .status { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--smoke); background: rgba(20,13,12,.55); border: 1px solid rgba(240,230,216,.16); border-radius: 99px; padding: 7px 14px; margin-bottom: 24px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .status i { width: 9px; height: 9px; border-radius: 50%; background: var(--ash-2); }
+    .status.open i { background: #8BD48B; box-shadow: 0 0 0 4px rgba(139, 212, 139, .2); }
+    .golden { text-align: right; max-width: 260px; }
+    .golden b { display: block; font-family: var(--serif); font-weight: 400; font-size: 54px; line-height: 1; color: var(--amber); font-variant-numeric: tabular-nums; }
+    .golden span { color: var(--ash); font-size: 15px; }
+    @media (max-width: 760px) {
+      .hero-in { grid-template-columns: 1fr; padding-top: 38vh; } .golden { text-align: left; }
+      .hero > img { height: 62%; }
+      .dark::after { background: linear-gradient(180deg, rgba(20,13,12,.1) 0, rgba(20,13,12,.35) 34%, rgba(20,13,12,.97) 58%); }
+    }
+
+    /* finder */
+    .finder { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+    .sliders { display: grid; gap: 30px; margin-top: 44px; }
+    .sl label { display: flex; justify-content: space-between; font-size: 15px; color: var(--ash); margin-bottom: 10px; }
+    .sl label b { color: var(--smoke); font-weight: 600; }
+    .sl input { width: 100%; appearance: none; -webkit-appearance: none; height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--wine-2), var(--amber)); outline-offset: 8px; }
+    .sl input::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--smoke); border: 6px solid var(--night); box-shadow: 0 0 0 1px var(--amber), 0 0 20px rgba(227,168,87,.5); cursor: grab; }
+    .sl input::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--smoke); border: 6px solid var(--night); box-shadow: 0 0 0 1px var(--amber); cursor: grab; }
+    .zero { display: inline-flex; align-items: center; gap: 12px; font-size: 15px; color: var(--ash); cursor: pointer; }
+    .zero input { width: 44px; height: 26px; appearance: none; -webkit-appearance: none; background: var(--line); border-radius: 99px; position: relative; margin: 0; cursor: pointer; transition: background .2s; }
+    .zero input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--smoke); transition: transform .2s; }
+    .zero input:checked { background: var(--amber); }
+    .zero input:checked::after { transform: translateX(18px); background: var(--night); }
+    .pour { display: grid; grid-template-columns: 220px 1fr; gap: 34px; align-items: center; background: radial-gradient(circle at 30% 40%, rgba(227,168,87,.12), transparent 60%), var(--night-2); border: 1px solid var(--line); border-radius: 28px; padding: 36px; }
+    .glass { width: 100%; height: auto; overflow: visible; }
+    .glass .liq { transition: transform .9s cubic-bezier(.3,.7,.2,1), fill .6s; transform-origin: 50% 100%; transform-box: fill-box; }
+    .match small { color: var(--amber); font-size: 14px; font-weight: 700; }
+    .match h3 { font-size: 46px; margin: 6px 0 10px; }
+    .match p { color: var(--ash); margin: 0 0 16px; }
+    .match .price { font-family: var(--serif); font-size: 30px; }
+    .alts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .alts button { background: none; border: 1px solid var(--line); border-radius: 99px; padding: 6px 14px; font-size: 14px; color: var(--ash); }
+    .alts button:hover { border-color: var(--amber); color: var(--smoke); }
+    @media (max-width: 960px) { .finder { grid-template-columns: 1fr; gap: 40px; } }
+    @media (max-width: 560px) { .pour { grid-template-columns: 1fr; padding: 26px; } .glass { max-width: 170px; margin: 0 auto; } }
+
+    /* menu */
+    .menu-sec { background: var(--night-2); border-block: 1px solid var(--line); }
+    .menu-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; flex-wrap: wrap; margin-bottom: 40px; }
+    .tabs { display: inline-flex; border: 1px solid var(--line); border-radius: 99px; padding: 4px; gap: 4px; }
+    .tabs button { background: none; border: 0; border-radius: 99px; padding: 9px 18px; font-size: 15px; color: var(--ash); }
+    .tabs button[aria-selected="true"] { background: var(--smoke); color: var(--night); font-weight: 700; }
+    .mlist { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 70px; }
+    .mlist li { break-inside: avoid; display: grid; grid-template-columns: 1fr auto; gap: 4px 20px; padding: 18px 0; border-bottom: 1px solid var(--line); position: relative; }
+    .mlist .nm { font-family: var(--serif); font-size: 26px; line-height: 1.1; }
+    .mlist .pr { font-family: var(--serif); font-size: 22px; color: var(--amber); font-variant-numeric: tabular-nums; }
+    .mlist .ds { grid-column: 1 / -1; color: var(--ash); font-size: 15px; }
+    .mlist .tg { display: inline-flex; gap: 6px; margin-left: 10px; vertical-align: middle; }
+    .mlist .tg abbr { text-decoration: none; font-family: var(--sans); font-size: 11px; font-weight: 800; width: 22px; height: 22px; border-radius: 50%; display: inline-grid; place-items: center; border: 1px solid var(--ash-2); color: var(--ash); }
+    .mlist .tg abbr.v { border-color: #8BD48B; color: #8BD48B; }
+    .mlist li[data-img] .nm::after { content: "◐"; font-size: 13px; color: var(--ash-2); margin-left: 8px; vertical-align: middle; }
+    .mfilters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .chip { background: none; border: 1px solid var(--line); border-radius: 99px; padding: 6px 14px; font-size: 14px; color: var(--ash); }
+    .chip[aria-pressed="true"] { border-color: var(--amber); color: var(--night); background: var(--amber); font-weight: 700; }
+    .legend { color: var(--ash-2); font-size: 14px; margin-top: 22px; }
+    .peek { position: fixed; left: 0; top: 0; width: 220px; aspect-ratio: 4/5; border-radius: 18px; overflow: hidden; pointer-events: none; z-index: 30; opacity: 0; transform: translate(-50%, -50%) scale(.9) rotate(-4deg); transition: opacity .25s, transform .35s cubic-bezier(.2,.7,.2,1); box-shadow: 0 30px 60px -20px rgba(0,0,0,.7); }
+    .peek.on { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-4deg); }
+    .peek img { width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 860px) { .mlist { columns: 1; } .peek { display: none; } }
+
+    /* booking */
+    .book { display: grid; grid-template-columns: 380px 1fr; gap: 50px; align-items: start; margin-top: 50px; }
+    .book > * { min-width: 0; }
+    .step { margin-bottom: 28px; }
+    .step h3 { font-family: var(--sans); font-size: 14px; font-weight: 700; color: var(--ash); margin-bottom: 12px; letter-spacing: .02em; }
+    .days { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+    .day { flex: 0 0 auto; width: 66px; background: var(--night-2); border: 1px solid var(--line); border-radius: 14px; padding: 9px 0; text-align: center; line-height: 1.2; }
+    .day b { display: block; font-family: var(--serif); font-weight: 400; font-size: 26px; }
+    .day span { font-size: 12px; color: var(--ash); }
+    .day[aria-pressed="true"] { background: var(--amber); border-color: var(--amber); color: var(--night); }
+    .day[aria-pressed="true"] span { color: var(--wine); }
+    .times { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .tm { background: var(--night-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 0; font-size: 15px; font-variant-numeric: tabular-nums; }
+    .tm[aria-pressed="true"] { background: var(--smoke); color: var(--night); border-color: var(--smoke); font-weight: 700; }
+    .tm:disabled { opacity: .3; cursor: not-allowed; text-decoration: line-through; }
+    .count { display: flex; align-items: center; gap: 18px; }
+    .count button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--night-2); font-size: 22px; line-height: 1; }
+    .count output { font-family: var(--serif); font-size: 40px; min-width: 50px; text-align: center; }
+    .count small { color: var(--ash); font-size: 14px; }
+    .note { color: var(--ash); font-size: 14px; margin: 10px 0 0; }
+    .plan-box { background: var(--night-2); border: 1px solid var(--line); border-radius: 28px; padding: 24px; }
+    .plan-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+    .plan-top p { margin: 0; color: var(--ash); font-size: 15px; }
+    .plan-top p b { color: var(--smoke); }
+    .keys { display: flex; gap: 16px; font-size: 13px; color: var(--ash); flex-wrap: wrap; }
+    .keys i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+    .k-free { background: #4C3A31; box-shadow: inset 0 0 0 1px var(--amber); } .k-busy { background: #2A1F1C; } .k-sel { background: var(--amber); }
+    svg.plan { width: 100%; height: auto; display: block; }
+    .plan .room { fill: #1A110F; stroke: var(--line); stroke-width: 2; }
+    .plan .terr { fill: #17120F; stroke: var(--line); stroke-width: 2; stroke-dasharray: 6 6; }
+    .plan .counter { fill: #3A2018; }
+    .plan .zl { fill: var(--ash-2); font: 600 12px var(--sans); letter-spacing: .08em; }
+    .plan .tb { cursor: pointer; }
+    .plan .tb rect, .plan .tb circle { fill: #4C3A31; stroke: var(--amber); stroke-width: 1.5; transition: fill .2s, stroke .2s; }
+    .plan .tb text { fill: var(--smoke); font: 700 13px var(--sans); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+    .plan .tb .cap { font-size: 10px; font-weight: 500; fill: var(--ash); }
+    .plan .tb:hover rect, .plan .tb:hover circle, .plan .tb:focus-visible rect, .plan .tb:focus-visible circle { fill: #6B4E3A; }
+    .plan .tb:focus { outline: none; }
+    .plan .tb:focus-visible rect, .plan .tb:focus-visible circle { stroke: var(--smoke); stroke-width: 3; }
+    .plan .tb.busy, .plan .tb.fit { cursor: not-allowed; }
+    .plan .tb.busy rect, .plan .tb.busy circle { fill: #2A1F1C; stroke: #3A2B26; }
+    .plan .tb.busy text { fill: #6E6058; }
+    .plan .tb.fit rect, .plan .tb.fit circle { fill: transparent; stroke: #4A3A33; stroke-dasharray: 4 4; }
+    .plan .tb.fit text { fill: #6E6058; }
+    .plan .tb.sel rect, .plan .tb.sel circle { fill: var(--amber); stroke: var(--amber-2); filter: drop-shadow(0 0 12px rgba(227,168,87,.7)); }
+    .plan .tb.sel text { fill: var(--night); }
+    .plan .tb.sel .cap { fill: var(--wine); }
+    .plan .closed { fill: var(--ash-2); font: italic 400 15px var(--serif); text-anchor: middle; }
+    .form { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form label { display: grid; gap: 6px; font-size: 14px; color: var(--ash); }
+    .form .full { grid-column: 1 / -1; }
+    .form input, .form textarea { font: inherit; background: var(--night); color: var(--smoke); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-height: 50px; }
+    .form textarea { min-height: 80px; resize: vertical; }
+    .form input:focus, .form textarea:focus { border-color: var(--amber); outline: none; }
+    .err { color: #FF9C8A; font-size: 14px; min-height: 1.3em; margin: 0; }
+    .done { text-align: center; padding: 40px 20px; }
+    .done .code { font-family: var(--serif); font-size: 64px; color: var(--amber); line-height: 1; margin: 14px 0; }
+    .done p { color: var(--ash); max-width: 44ch; margin: 0 auto 22px; }
+    .done .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    @media (max-width: 1000px) { .book { grid-template-columns: 1fr; } }
+    .plan-scroll { overflow-x: auto; margin: 0 -4px; padding: 0 4px; }
+    @media (max-width: 620px) { svg.plan { min-width: 580px; } .plan-scroll::after { content: attr(data-hint); display: block; font-size: 13px; color: var(--ash-2); margin-top: 6px; } }
+    @media (max-width: 520px) { .form { grid-template-columns: 1fr; } .plan-box { padding: 14px; border-radius: 20px; } }
+
+    /* nights */
+    .nights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 50px; }
+    .night { border-top: 1px solid var(--line); padding-top: 22px; }
+    .night .dw { color: var(--amber); font-size: 15px; font-weight: 700; }
+    .night h3 { font-size: 34px; margin: 10px 0; }
+    .night p { color: var(--ash); margin: 0; font-size: 15px; }
+    .night.tonight { border-top: 2px solid var(--amber); }
+    .night.tonight .dw::after { content: attr(data-t); margin-left: 8px; background: var(--amber); color: var(--night); padding: 2px 8px; border-radius: 99px; font-size: 12px; }
+    @media (max-width: 900px) { .nights { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .nights { grid-template-columns: 1fr; } }
+
+    .strip { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 12px; padding: 0 12px; }
+    .strip figure { margin: 0; overflow: hidden; border-radius: 18px; background: var(--night-2); }
+    .strip img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+    .strip figure:hover img { transform: scale(1.05); }
+    .strip .a { grid-row: span 2; }
+    @media (max-width: 760px) { .strip { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px 200px; } .strip .a { grid-column: span 2; grid-row: span 1; } }
+
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+    .addr { font-family: var(--serif); font-size: clamp(34px, 4vw, 52px); line-height: 1.05; margin: 26px 0; }
+    .contact a { display: inline-block; margin: 0 22px 10px 0; color: var(--amber); text-underline-offset: 4px; }
+    .hours { width: 100%; border-collapse: collapse; }
+    .hours td { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .hours td:last-child { text-align: right; font-variant-numeric: tabular-nums; color: var(--ash); }
+    .hours tr.today td { color: var(--amber); }
+    .faq { margin-top: 60px; }
+    .faq details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+    .faq summary { cursor: pointer; font-size: 19px; list-style: none; display: flex; justify-content: space-between; gap: 20px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; color: var(--amber); font-size: 24px; line-height: 1; transition: transform .3s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq p { color: var(--ash); margin: 10px 0 0; }
+    @media (max-width: 860px) { .visit { grid-template-columns: 1fr; gap: 40px; } }
+
+    footer { border-top: 1px solid var(--line); padding: 40px 0 60px; color: var(--ash-2); font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    footer .big::before { content: attr(data-word); }
+    footer .big { font-family: var(--serif); font-size: clamp(80px, 22vw, 320px); line-height: .8; color: var(--night-2); -webkit-text-stroke: 1px var(--line); text-align: center; margin: 0 0 30px; user-select: none; }
+
+    dialog { border: 1px solid var(--line); border-radius: 20px; padding: 0; width: min(620px, 94vw); max-height: 88vh; background: var(--night-2); color: var(--smoke); }
+    dialog::backdrop { background: rgba(0,0,0,.7); }
+    .dlg-h { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--night-2); }
+    .dlg-h h3 { font-size: 30px; }
+    .dlg-h button { background: none; border: 1px solid var(--line); border-radius: 99px; padding: 5px 14px; }
+    .dlg-b { padding: 20px 24px 26px; }
+    .roster { display: grid; gap: 8px; }
+    .roster div { display: grid; grid-template-columns: 56px 50px 1fr auto; gap: 12px; align-items: center; background: var(--night); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-size: 15px; }
+    .roster b { font-variant-numeric: tabular-nums; }
+    .roster em { font-style: normal; color: var(--amber); font-weight: 700; }
+    .roster small { color: var(--ash); }
+  </style>
+</head>
+<body>
+  <div class="demo-bar"><span data-i18n-html="demo">Ky është një <b>projekt koncept</b> nga <a href="../../">Nisja Studio</a>. Bari nuk ekziston.</span><button type="button" id="openStaff" data-i18n="demo.staff">Paneli i stafit</button></div>
+
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#top"><svg viewBox="0 0 20 26" fill="none" aria-hidden="true"><path d="M7 1h6M10 1v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 7h12l-1.5 14h-9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 11c1.6 1.6 1.8 3.4 0 5.4-1.8-2-1.6-3.8 0-5.4z" fill="currentColor"/><path d="M3 24h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Fener</a>
+      <ul>
+        <li><a href="#gjej" data-i18n="nav.find">Koktejet</a></li>
+        <li><a href="#menu" data-i18n="nav.menu">Menyja</a></li>
+        <li><a href="#rezervo" data-i18n="nav.book">Rezervo</a></li>
+        <li><a href="#netet" data-i18n="nav.nights">Netët</a></li>
+        <li><a href="#vizita" data-i18n="nav.visit">Vizita</a></li>
+      </ul>
+      <div class="lang" role="group" aria-label="Gjuha / Language"><button type="button" data-lang="sq">SQ</button><button type="button" data-lang="en">EN</button></div>
+      <a class="btn" href="#rezervo" data-i18n="cta.book">Rezervo tavolinë</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="hero">
+      <img src="img/hero-960.jpg" srcset="img/hero-960.jpg 960w, img/hero.jpg 2200w" sizes="100vw" alt="" fetchpriority="high">
+      <div class="dark" id="dark" aria-hidden="true"></div>
+      <div class="wrap hero-in">
+        <div>
+          <p class="status" id="status"><i></i><span id="statusTxt">…</span></p>
+          <h1 data-i18n-html="h.title">Ndriço<br><em>natën.</em></h1>
+          <p class="lead" data-i18n="h.lead">Kokteje me raki, xhin dhe çaj mali, pjata për ndarje nga thëngjilli dhe jazz çdo të enjte. Gjeni koktejin tuaj, pastaj zgjidhni vetë tavolinën.</p>
+          <div class="cta-row"><a class="btn" href="#rezervo" data-i18n="h.cta">Zgjidh tavolinën</a><a class="btn ghost" href="#gjej" data-i18n="h.cta2">Gjej koktejin tënd</a></div>
+        </div>
+        <div class="golden" id="golden"><b id="goldenT">17–19</b><span id="goldenS" data-i18n="h.golden">Ora e artë: klasikët për €5 çdo ditë</span></div>
+      </div>
+    </section>
+
+    <section id="gjej">
+      <div class="wrap finder">
+        <div>
+          <h2 data-i18n="f.title">Çfarë ke qejf sonte?</h2>
+          <p class="lead" data-i18n="f.lead">Lëvizni tri shiritat. Banakieri ynë i ka shënuar të gjitha koktejet sipas shijes, dhe gota mbushet me atë që ju përshtatet më shumë.</p>
+          <div class="sliders">
+            <div class="sl"><label for="sSour"><b data-i18n="f.sweet">Ëmbël</b><b data-i18n="f.sour">Thartë</b></label><input type="range" id="sSour" min="0" max="10" value="5" data-i18n-aria="f.a1" aria-label="Nga e ëmbël në të thartë"></div>
+            <div class="sl"><label for="sStrong"><b data-i18n="f.light">E lehtë</b><b data-i18n="f.strong">E fortë</b></label><input type="range" id="sStrong" min="0" max="10" value="5" data-i18n-aria="f.a2" aria-label="Nga e lehtë në të fortë"></div>
+            <div class="sl"><label for="sBitter"><b data-i18n="f.fruit">Frutore</b><b data-i18n="f.bitter">E hidhur</b></label><input type="range" id="sBitter" min="0" max="10" value="4" data-i18n-aria="f.a3" aria-label="Nga frutore në të hidhur"></div>
+            <label class="zero"><input type="checkbox" id="zeroOnly"><span data-i18n="f.zero">Vetëm pa alkool</span></label>
+          </div>
+        </div>
+        <div class="pour" aria-live="polite">
+          <svg class="glass" viewBox="0 0 200 260" aria-hidden="true">
+            <defs><clipPath id="cup"><path d="M30 20 H170 L118 130 V214 H82 V130 Z"/></clipPath>
+              <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
+            <g clip-path="url(#cup)">
+              <rect class="liq" id="liq" x="20" y="20" width="160" height="112" fill="#D9902F"/>
+              <circle cx="100" cy="64" r="44" fill="url(#shine)"/>
+            </g>
+            <path d="M30 20 H170 L118 130 V214 H82 V130 Z" fill="none" stroke="#F0E6D8" stroke-opacity=".55" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M62 232 H138" stroke="#F0E6D8" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/>
+            <path d="M100 214 V232" stroke="#F0E6D8" stroke-opacity=".55" stroke-width="2.5"/>
+            <circle id="garnish" cx="150" cy="22" r="16" fill="none" stroke="#E3A857" stroke-width="3"/>
+          </svg>
+          <div class="match">
+            <small id="mScore">…</small>
+            <h3 id="mName">…</h3>
+            <p id="mDesc"></p>
+            <span class="price" id="mPrice"></span>
+            <div class="alts" id="mAlts"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-sec" id="menu">
+      <div class="wrap">
+        <div class="menu-head">
+          <div><h2 data-i18n="m.title">Menyja</h2><p class="lead" data-i18n="m.lead">Kuzhina punon deri në 23:00. Pjatat janë të vogla, porositni dy ose tre për person.</p></div>
+          <div class="tabs" role="tablist" data-i18n-aria="m.tabs" aria-label="Menyja">
+            <button type="button" role="tab" id="tabD" aria-controls="panD" aria-selected="true" data-i18n="m.drinks">Kokteje</button>
+            <button type="button" role="tab" id="tabF" aria-controls="panF" aria-selected="false" data-i18n="m.food">Kuzhina</button>
+          </div>
+        </div>
+        <div role="tabpanel" id="panD" aria-labelledby="tabD"><ul class="mlist" id="drinkList"></ul></div>
+        <div role="tabpanel" id="panF" aria-labelledby="tabF" hidden>
+          <div class="mfilters"><button type="button" class="chip" data-tag="v" aria-pressed="false" data-i18n="m.veg">Vegjetariane</button><button type="button" class="chip" data-tag="-g" aria-pressed="false" data-i18n="m.nog">Pa gluten</button><button type="button" class="chip" data-tag="-n" aria-pressed="false" data-i18n="m.non">Pa arra</button></div>
+          <ul class="mlist" id="foodList"></ul>
+          <p class="legend" data-i18n="m.legend">V vegjetariane · G gluten · L qumësht · N arra. Për alergji, tregojini kamarierit.</p>
+        </div>
+      </div>
+      <div class="peek" id="peek" aria-hidden="true"><img id="peekImg" alt=""></div>
+    </section>
+
+    <section id="rezervo">
+      <div class="wrap">
+        <h2 data-i18n="b.title">Zgjidhni tavolinën</h2>
+        <p class="lead" data-i18n="b.lead">Jo vetëm orën: shihni sallën dhe zgjidhni ku uleni. Te banaku për dy, në kabinë për shoqërinë, pranë dritares për bisedë.</p>
+        <div class="book">
+          <div>
+            <div class="step"><h3 data-i18n="b.s1">1. Dita</h3><div class="days" id="days" role="group" data-i18n-aria="b.dayA" aria-label="Dita"></div></div>
+            <div class="step"><h3 data-i18n="b.s2">2. Sa veta jeni?</h3>
+              <div class="count"><button type="button" id="minus" data-i18n-aria="b.less" aria-label="Më pak">−</button><output id="party" aria-live="polite">2</output><button type="button" id="plus" data-i18n-aria="b.more" aria-label="Më shumë">+</button><small id="partyNote"></small></div>
+            </div>
+            <div class="step"><h3 data-i18n="b.s3">3. Ora</h3><div class="times" id="times" role="group" data-i18n-aria="b.timeA" aria-label="Ora"></div><p class="note" id="timeNote"></p></div>
+          </div>
+          <div class="plan-box" id="planBox">
+            <div class="plan-top"><p id="planHead"></p><div class="keys"><span><i class="k-free"></i><span data-i18n="b.free">E lirë</span></span><span><i class="k-busy"></i><span data-i18n="b.busy">E zënë</span></span><span><i class="k-sel"></i><span data-i18n="b.sel">Juaja</span></span></div></div>
+            <div class="plan-scroll" data-hint="← Rrëshqisni për të parë terracën →" data-i18n-hint><svg class="plan" id="plan" viewBox="0 0 640 400" role="group" data-i18n-aria="b.plan" aria-label="Planimetria e sallës"></svg></div>
+            <div id="bookForm">
+              <div class="form">
+                <label><span data-i18n="b.name">Emri</span><input id="fName" autocomplete="name" maxlength="60"></label>
+                <label><span data-i18n="b.phone">Telefoni</span><input id="fPhone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="+383 4x xxx xxx"></label>
+                <label class="full"><span data-i18n="b.notes">Shënim (opsional)</span><textarea id="fNote" maxlength="300" data-i18n-ph="b.notesPh" placeholder="Ditëlindje, alergji, karrige për fëmijë…"></textarea></label>
+                <p class="err full" id="fErr" role="alert"></p>
+                <button type="button" class="btn full" id="fSend" data-i18n="b.send">Rezervo tavolinën</button>
+              </div>
+            </div>
+            <div class="done" id="bookDone" hidden>
+              <p data-i18n="b.doneT">Tavolina juaj është mbajtur</p>
+              <div class="code" id="dCode"></div>
+              <p id="dTxt"></p>
+              <div class="cta-row"><button type="button" class="btn" id="dIcs" data-i18n="b.ics">Shto në kalendar</button><button type="button" class="btn ghost" id="dNew" data-i18n="b.new">Rezervim tjetër</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="netet" style="padding-top:0">
+      <div class="wrap">
+        <h2 data-i18n="n.title">Netët e javës</h2>
+        <div class="nights" id="nights"></div>
+      </div>
+    </section>
+
+    <div class="strip" aria-label="Fotografi nga bari">
+      <figure class="a"><img src="img/shelf.jpg" alt="Raftet e shisheve pas banakut" data-i18n-alt="g.1" loading="lazy" width="933" height="1400"></figure>
+      <figure><img src="img/trio.jpg" alt="Tri kokteje në banak" data-i18n-alt="g.2" loading="lazy" width="1200" height="800"></figure>
+      <figure><img src="img/steak.jpg" alt="Biftek me patate" data-i18n-alt="g.3" loading="lazy" width="1200" height="800"></figure>
+      <figure><img src="img/pour.jpg" alt="Banakieri duke derdhur një koktej" data-i18n-alt="g.4" loading="lazy" width="1200" height="800"></figure>
+      <figure><img src="img/plate.jpg" alt="Darkë në tavolinë" data-i18n-alt="g.5" loading="lazy" width="1200" height="800"></figure>
+    </div>
+
+    <section id="vizita">
+      <div class="wrap visit">
+        <div>
+          <h2 data-i18n="v.title">Na gjeni</h2>
+          <p class="addr">Rr. Agim Ramadani 15<br>Prishtinë</p>
+          <p class="contact"><a href="tel:+38344000000">+383 44 000 000</a><a href="https://maps.google.com/?q=42.6611,21.1622" target="_blank" rel="noopener" data-i18n="v.map">Hap në Google Maps</a></p>
+          <div class="faq">
+            <details><summary data-i18n="q.1">A mund të vij pa rezervim?</summary><p data-i18n="q.1a">Po. Banaku dhe tre tavolina mbahen gjithmonë për ata që vijnë pa rezervim.</p></details>
+            <details><summary data-i18n="q.2">Sa kohë e mbani tavolinën?</summary><p data-i18n="q.2a">Dy orë, dy orë e gjysmë për grupe nga pesë veta. Nëse vonoheni më shumë se 15 minuta, na telefononi.</p></details>
+            <details><summary data-i18n="q.3">Grupe më të mëdha se 8 veta?</summary><p data-i18n="q.3a">Na shkruani te shënimi ose telefononi. Për 10 deri 30 veta e mbyllim kabinën e madhe ose terracën.</p></details>
+          </div>
+        </div>
+        <div><table class="hours" id="hours"></table></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="big" aria-hidden="true" data-word="Fener"></div>
+    <div class="wrap"><span>© Fener · <span data-i18n="foot">Projekt koncept nga</span> <a href="../../">Nisja Studio</a></span><span data-i18n="foot2">Pini me përgjegjësi. Vetëm mbi 18 vjeç.</span></div>
+  </footer>
+
+  <dialog id="staff" aria-labelledby="staffH">
+    <div class="dlg-h"><h3 id="staffH" data-i18n="s.title">Rezervimet e sotme</h3><button type="button" data-close data-i18n="close">Mbyll</button></div>
+    <div class="dlg-b"><p id="staffMeta" style="color:var(--ash);margin:0 0 16px"></p><div class="roster" id="roster"></div></div>
+  </dialog>
+
+  <script src="../kit/kit.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

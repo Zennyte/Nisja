@@ -19,12 +19,17 @@
     mendafsh: { name: "Mëndafsh", kind: "Sallon bukurie · koncept", url: "work/mendafsh/" },
     vrull:    { name: "Vrull", kind: "Palestër · koncept", url: "work/vrull/" },
     kristal:  { name: "Kristal Dental", kind: "Dentist · koncept", url: "work/kristal/" },
+    kaliber:  { name: "Kalibër Motors", kind: "Auto sallon · koncept", url: "work/kaliber/" },
+    kroni:    { name: "Vila Kroni", kind: "Vend dasmash · koncept", url: "work/kroni/" },
+    fener:    { name: "Fener", kind: "Bar kokteji · koncept", url: "work/fener/" },
+    embel:    { name: "Ëmbël", kind: "Pastiçeri · koncept", url: "work/embel/" },
+    lisi:     { name: "Lisi", kind: "Mobilje me masë · koncept", url: "work/lisi/" },
     "nika-1": { name: "Nika Architecture Studio", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/", external: true },
     "nika-2": { name: "Nika · Projektet", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#projects", external: true },
     "nika-3": { name: "Nika · Rreth nesh", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#about", external: true },
     "nika-4": { name: "Nika · Kontakti", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#contact", external: true }
   };
-  var STREAM = ["udha", "prush", "nika-1", "brisk", "mendafsh", "vrull", "kristal"];
+  var STREAM = ["kaliber", "udha", "kroni", "nika-1", "fener", "prush", "embel", "brisk", "lisi", "mendafsh", "vrull", "kristal"];
 
   /* ================= live demo window ================= */
   var dlg = $("sc-demo"), frame = $("sc-demo-frame"), urlEl = $("sc-demo-url"), newEl = $("sc-demo-new");

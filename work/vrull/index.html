@@ -6,7 +6,7 @@
   <title>Vrull Fitness · Palestër dhe klasa në Prizren, dita e parë falas</title>
   <meta name="description" content="Vrull Fitness në Prizren: palestër, HIIT, boks, spinning dhe trajnerë personalë. Shihni orarin e klasave, rezervoni vendin dhe provoni një ditë falas.">
   <meta name="robots" content="noindex, follow">
-  <meta name="theme-color" content="#ECEBE7">
+  <meta name="theme-color" content="#0A0C0B">
   <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
   <meta property="og:title" content="Vrull Fitness · Prizren">
   <meta property="og:description" content="Orari i klasave, abonimet dhe dita e provës, online.">
@@ -44,7 +44,9 @@
   <style>
     @font-face { font-family: "Archivo"; src: url("../kit/fonts/archivo-wdth.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
     :root {
-      --chalk: #ECEBE7; --paper: #F7F6F3; --ink: #15161A; --text2: #55585F; --line: #D2D0CA; --cobalt: #2340D8; --cobalt-d: #1A31AE; --flare: #FF5B1F;
+      /* neon theme: --ink is the light text colour, --cobalt is the neon accent (names kept from the first version) */
+      --chalk: #0A0C0B; --paper: #101311; --ink: #EEF3EA; --text2: #9DA79F; --line: #252B27; --cobalt: #C6FF3D; --cobalt-d: #B2F01C; --flare: #C6FF3D;
+      --deep: #050605; --card: #141815; --card-2: #1B201C; --on-neon: #0A0C0B; --glow: 0 0 32px rgba(198, 255, 61, .38);
       --f: "Archivo", "Arial Narrow", system-ui, sans-serif; --r: 4px;
     }
     *, *::before, *::after { box-sizing: border-box; }
@@ -259,6 +261,75 @@
     .roster b { font-variant-numeric: tabular-nums; }
     .roster em { font-style: normal; font-weight: 800; }
     .roster .wl { color: #C2341B; font-size: 13px; font-weight: 700; }
+    /* ================= neon theme overrides ================= */
+    .demo-bar { background: var(--deep); color: #C9D1C9; border-bottom: 1px solid var(--line); }
+    .demo-bar button { background: var(--cobalt); color: var(--on-neon); }
+    header { background: rgba(10, 12, 11, .82); }
+    .logo i { box-shadow: var(--glow); }
+    .btn { background: var(--cobalt); color: var(--on-neon); transition: background .2s, transform .15s, box-shadow .25s; }
+    .btn:hover { background: #D6FF6A; box-shadow: var(--glow); }
+    .btn.dark { background: var(--card-2); color: var(--ink); }
+    .btn.dark:hover { background: #262C28; box-shadow: none; }
+    .btn.out { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px #3A433C; }
+    .btn.out:hover { background: transparent; color: var(--cobalt); box-shadow: inset 0 0 0 2px var(--cobalt), var(--glow); }
+    .lang button[aria-pressed="true"] { background: var(--cobalt); color: var(--on-neon); }
+    .kin span:nth-child(2) { color: var(--cobalt); text-shadow: 0 0 60px rgba(198, 255, 61, .35); }
+    .hero-row .lead { color: #B9C2BA; }
+    .band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,12,11,0) 45%, rgba(10,12,11,.75)), linear-gradient(120deg, rgba(198,255,61,.14), transparent 40%); pointer-events: none; }
+    .band img { filter: saturate(.75) contrast(1.08); }
+    .band .stats { background: rgba(5, 6, 5, .8); z-index: 1; }
+    .band .stats b { color: var(--cobalt); }
+    .marquee { background: var(--cobalt); color: var(--on-neon); border-top-color: #000; }
+    .marquee span::after { background: var(--on-neon); }
+    .meter .bar { background: #2A312C; }
+    .meter .bar.past { background: #1A1F1B; }
+    .meter .bar.now { background: var(--cobalt); box-shadow: 0 0 22px rgba(198, 255, 61, .55); }
+    .meter .bar.now::after { background: var(--cobalt); color: var(--on-neon); }
+    .crowd-now[data-l="low"] { color: #7CFF9B; } .crowd-now[data-l="mid"] { color: #FFC34D; } .crowd-now[data-l="high"] { color: #FF7A66; }
+    .filt { border-color: #3A433C; }
+    .filt[aria-pressed="true"] { background: var(--cobalt); color: var(--on-neon); border-color: var(--cobalt); }
+    .col.today h3 { text-shadow: 0 0 24px rgba(198, 255, 61, .4); }
+    .cls { background: var(--card); border-color: var(--line); }
+    .cls:hover:not(:disabled) { box-shadow: 0 12px 30px -14px rgba(198, 255, 61, .35); border-color: #3A433C; }
+    .cls .sp.low { color: #FF7A66; }
+    .cls .pips i { background: #2A312C; }
+    .cls .pips i.on { background: var(--cobalt); }
+    .terms { background: var(--card); }
+    .terms button[aria-pressed="true"] { background: var(--cobalt); color: var(--on-neon); }
+    .terms small { color: #FF9B7A; }
+    .terms button[aria-pressed="true"] small { color: #2E4100; }
+    .switch input { background: #2A312C; }
+    .switch input::after { background: var(--ink); }
+    .switch input:checked::after { background: var(--on-neon); }
+    .plan { background: var(--card); border-color: var(--line); }
+    .plan.best { background: #0E120F; color: var(--ink); border: 2px solid var(--cobalt); box-shadow: 0 0 60px -10px rgba(198, 255, 61, .35); }
+    .plan.best .price span, .plan.best .tot { color: var(--text2); }
+    .plan .flag { background: var(--cobalt); color: var(--on-neon); }
+    .plan.best .btn { background: var(--cobalt); color: var(--on-neon); }
+    .plan.best .btn:hover { background: #D6FF6A; }
+    .trial { background: var(--cobalt); color: var(--on-neon); }
+    .trial h2 { color: var(--on-neon); }
+    .trial .lead { color: #263600; }
+    .form, .pass { background: var(--chalk); color: var(--ink); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55); }
+    .pill { background: var(--card); border-color: #2E352F; color: var(--ink); }
+    .pill[aria-pressed="true"] { background: var(--cobalt); color: var(--on-neon); border-color: var(--cobalt); }
+    .fields input { background: var(--card); border-color: #2E352F; color: var(--ink); }
+    .err { color: #FF7A66; }
+    .pass::after { box-shadow: var(--glow); }
+    .floor figure { background: var(--card); }
+    .floor img { filter: grayscale(.55) contrast(1.06); transition: transform 1s cubic-bezier(.2,.7,.2,1), filter .6s; }
+    .floor figure:hover img { filter: none; }
+    .floor figcaption { background: var(--chalk); color: var(--ink); box-shadow: inset 3px 0 0 var(--cobalt); }
+    .coach .ini { text-shadow: 0 0 40px rgba(198, 255, 61, .3); }
+    .faq summary::after { color: var(--cobalt); }
+    footer { background: var(--deep); color: #8E978F; border-top: 1px solid var(--line); }
+    footer a { color: var(--ink); }
+    dialog::backdrop { background: rgba(0, 0, 0, .75); }
+    .roster div { background: var(--card); border-color: var(--line); }
+    .roster .wl { color: #FF7A66; }
+    .form .btn.dark, .pass .btn.dark { background: var(--cobalt); color: var(--on-neon); }
+    .form .btn.dark:hover, .pass .btn.dark:hover { background: #D6FF6A; box-shadow: var(--glow); }
+    ::selection { background: var(--cobalt); color: var(--on-neon); }
   </style>
 </head>
 <body>

@@ -21,11 +21,11 @@ window.SITE = {
   studentOff: 15,
 
   types: {
-    hiit:   { sq: "HIIT", en: "HIIT", c: "#FF5B1F" },
-    box:    { sq: "Boks", en: "Boxing", c: "#16171A" },
-    str:    { sq: "Forcë", en: "Strength", c: "#2340D8" },
-    mob:    { sq: "Lëvizshmëri", en: "Mobility", c: "#3E8E6A" },
-    spin:   { sq: "Spinning", en: "Spin", c: "#8A4FD8" }
+    hiit:   { sq: "HIIT", en: "HIIT", c: "#FF6B3D" },
+    box:    { sq: "Boks", en: "Boxing", c: "#F2F5EF" },
+    str:    { sq: "Forcë", en: "Strength", c: "#C6FF3D" },
+    mob:    { sq: "Lëvizshmëri", en: "Mobility", c: "#38E0A8" },
+    spin:   { sq: "Spinning", en: "Spin", c: "#B07CFF" }
   },
   coaches: [
     { id: "driton", name: "Driton", tag: { sq: "Forcë dhe powerlifting. Ish-garues kombëtar.", en: "Strength and powerlifting. Former national competitor." } },
