@@ -85,8 +85,8 @@
         <p class="sh-sub sc-in">Faqe interneti, rezervime online dhe logo për biznese në Kosovë. Këto janë disa që kemi ndërtuar.</p>
         <p class="sh-hint sc-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.6-2.2L4.3 16a1.6 1.6 0 0 1 2.4-2.1L9 16"/></svg>Klikoni një faqe për ta parë</p>
       </div>
-      <div class="sc-stream-stage sh-stage sc-in" id="sc-stream" data-cursor="Shiko" tabindex="0" role="group" aria-label="Faqet tona demo. Përdorni shigjetat majtas dhe djathtas, Enter për ta hapur.">
-        <canvas id="sc-stream-canvas" aria-hidden="true"></canvas>
+      <div class="sc-stream-stage sh-stage sc-in" id="sc-stream" data-cursor="Shiko" tabindex="0" role="group" aria-label="Katër faqe demo. Përdorni shigjetat majtas dhe djathtas, Enter për ta hapur.">
+        <div class="sh-track" id="sc-stream-track" aria-hidden="true"></div>
       </div>
       <div class="wrap sc-stream-foot sc-in">
         <button class="sc-arrow" type="button" id="sc-stream-prev" aria-label="Faqja e mëparshme" data-magnetic><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -258,6 +258,62 @@
         </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ================= MORE DEMOS 1: a deck that fans open as you scroll ================= -->
+    <section class="dk" id="me-shume" aria-labelledby="dk-title">
+      <div class="wrap dk-head-row">
+        <h2 id="dk-title" class="sc-h2" data-split>Ushqim, bukuri dhe festa</h2>
+        <p class="sc-lead" data-reveal>Rezervime, porosi dhe kalendarë për vendet ku njerëzit vijnë për të festuar. Prekni një kartë për ta provuar.</p>
+      </div>
+      <div class="dk-stage">
+          <button class="dk-card" type="button" data-open-demo="prush" style="--k:0" data-cursor="Hap" aria-label="Hap demon: Prush, Restorant me skarë">
+            <span class="dk-head"><b>Prush</b><i>Restorant me skarë</i></span>
+            <img src="assets/demo/prush.webp" alt="" width="720" height="450" loading="lazy">
+          </button>
+          <button class="dk-card" type="button" data-open-demo="embel" style="--k:1" data-cursor="Hap" aria-label="Hap demon: Ëmbël, Pastiçeri">
+            <span class="dk-head"><b>Ëmbël</b><i>Pastiçeri</i></span>
+            <img src="assets/demo/embel.webp" alt="" width="720" height="450" loading="lazy">
+          </button>
+          <button class="dk-card" type="button" data-open-demo="kroni" style="--k:2" data-cursor="Hap" aria-label="Hap demon: Vila Kroni, Vend dasmash">
+            <span class="dk-head"><b>Vila Kroni</b><i>Vend dasmash</i></span>
+            <img src="assets/demo/kroni.webp" alt="" width="720" height="450" loading="lazy">
+          </button>
+          <button class="dk-card" type="button" data-open-demo="mendafsh" style="--k:3" data-cursor="Hap" aria-label="Hap demon: Mëndafsh, Sallon bukurie">
+            <span class="dk-head"><b>Mëndafsh</b><i>Sallon bukurie</i></span>
+            <img src="assets/demo/mendafsh.webp" alt="" width="720" height="450" loading="lazy">
+          </button>
+      </div>
+    </section>
+
+    <!-- ================= MORE DEMOS 2: browser windows, the whole page scrolls inside on hover ================= -->
+    <section class="wns" id="dyqane" aria-labelledby="wn-title">
+      <div class="wrap dk-head-row">
+        <h2 id="wn-title" class="sc-h2" data-split>Dyqane dhe shërbime</h2>
+        <p class="sc-lead" data-reveal>Kaloni mausin mbi një dritare për ta shfletuar faqen e plotë. Në telefon lëvizin vetë.</p>
+      </div>
+      <div class="wrap-wide wn-row">
+          <button class="wn" type="button" data-open-demo="lisi" data-cursor="Hap" aria-label="Hap Lisi, Mobilje me masë">
+            <span class="wn-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="wn-url">nisjastudio.com/work/lisi</span></span>
+            <span class="wn-view"><img src="assets/work/tall/lisi.webp" alt="" width="600" height="2625" loading="lazy"></span>
+            <span class="wn-meta"><b>Lisi</b><i>Mobilje me masë</i></span>
+          </button>
+          <button class="wn" type="button" data-open-demo="vrull" data-cursor="Hap" aria-label="Hap Vrull, Palestër">
+            <span class="wn-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="wn-url">nisjastudio.com/work/vrull</span></span>
+            <span class="wn-view"><img src="assets/work/tall/vrull.webp" alt="" width="600" height="2625" loading="lazy"></span>
+            <span class="wn-meta"><b>Vrull</b><i>Palestër</i></span>
+          </button>
+          <button class="wn" type="button" data-open-demo="kristal" data-cursor="Hap" aria-label="Hap Kristal Dental, Klinikë dentare">
+            <span class="wn-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="wn-url">nisjastudio.com/work/kristal</span></span>
+            <span class="wn-view"><img src="assets/work/tall/kristal.webp" alt="" width="600" height="2522" loading="lazy"></span>
+            <span class="wn-meta"><b>Kristal Dental</b><i>Klinikë dentare</i></span>
+          </button>
+          <button class="wn" type="button" data-open-demo="nika-1" data-cursor="Vizito" aria-label="Vizito Nika Architecture, Studio arkitekture">
+            <span class="wn-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="wn-url">nika-archi.vercel.app</span></span>
+            <span class="wn-view"><img src="assets/work/tall/nika.webp" alt="" width="600" height="2625" loading="lazy"></span>
+            <span class="wn-meta"><b>Nika Architecture</b><i>Klient i vërtetë</i></span>
+          </button>
       </div>
     </section>
 
