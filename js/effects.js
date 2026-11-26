@@ -97,7 +97,7 @@
     var inner = document.querySelector(".hero-inner");
     var copy = document.querySelector(".hero-copy");
     var sub = document.querySelector(".hero-sub");
-    var editor = document.querySelector(".editor");
+    var editor = document.querySelector("[data-trail-target]") || document.querySelector(".editor");
     if (!title || !inner || !editor) return { run: function () {}, refresh: function () {} };
 
     var NS = "http://www.w3.org/2000/svg";

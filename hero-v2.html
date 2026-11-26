@@ -223,71 +223,19 @@
           </div>
         </div>
 
-        <!-- Rebuild: an outdated site is scanned, turned into a blueprint and rebuilt; drag the line to compare -->
+        <!-- Rebuild: an outdated site is scanned, turned into a blueprint and rebuilt; drag the line to compare.
+             Every ~18 s it moves on to another kind of business. Content lives in js/hero-rebuild.js. -->
         <div class="rebuild" id="rebuild">
-          <div class="rb-window">
+          <div class="rb-window" data-trail-target>
             <div class="window-bar rb-bar" aria-hidden="true">
               <span class="dots"><i></i><i></i><i></i></span>
-              <span class="rb-url">trattoria-rosa.com</span>
+              <span class="rb-url" id="rb-url">nisjastudio.com/work/prush</span>
               <span class="rb-state" id="rb-state">2009</span>
             </div>
-            <div class="rb-view" id="rb-view">
-              <!-- 1. the old site -->
-              <div class="rb-layer rb-old" aria-hidden="true">
-                <div class="o-head"><b>~*~ TRATTORIA ROSA ~*~</b><u>Mirë se vini në faqen tonë zyrtare!!!</u></div>
-                <div class="o-nav"><span>Kryefaqja</span><span>Menyja</span><span>Galeria</span><span>Kontakti</span></div>
-                <div class="o-marq"><span>*** OFERTË SPECIALE!!! Pasta 2 me 1 çdo të martë!!! *** Na telefononi!!! *** OFERTË SPECIALE!!! Pasta 2 me 1 çdo të martë!!! ***</span></div>
-                <div class="o-main">
-                  <div class="o-photo"><img src="assets/hero-rebuild/pasta-old.jpg" alt="" width="36" height="45"><i>foto e lokalit</i></div>
-                  <div class="o-text">
-                    <p class="o-big">Ushqim i shijshëm!!!</p>
-                    <p>Ejani na vizitoni. Kemi pasta, pica dhe shumë gjëra tjera.</p>
-                    <p class="o-red">Për rezervime na telefononi:<br>044 000 000</p>
-                    <p class="o-small">Hapur: 10:00 - 23:00 (të dielën ndoshta)</p>
-                  </div>
-                </div>
-                <div class="o-foot">
-                  <span class="o-box">MENYJA<br><small>(PDF, 8 MB)</small></span>
-                  <span class="o-box o-build">FAQJA NË<br>NDËRTIM</span>
-                  <span class="o-box">Vizitorë:<br><b class="o-count">001287</b></span>
-                </div>
-                <p class="o-ie">Shikohet më mirë me Internet Explorer 6 · © 2009</p>
-              </div>
-
-              <!-- 2. the blueprint -->
-              <div class="rb-layer rb-wire" aria-hidden="true">
-                <div class="w-box w-nav"><em>nav · logo + rezervo</em></div>
-                <div class="w-box w-copy"><em>h1 · Bricolage 800</em><span class="w-line"></span><span class="w-line w-short"></span><span class="w-btn">btn · rezervo</span></div>
-                <div class="w-box w-photo"><em>img · 4:5 · webp</em><span class="w-x"></span></div>
-                <div class="w-box w-c1"><em>kartë</em></div>
-                <div class="w-box w-c2"><em>kartë</em></div>
-                <div class="w-box w-c3"><em>kartë</em></div>
-                <span class="w-dim w-dim-h">1240 px</span>
-                <span class="w-dim w-dim-v">grid 12</span>
-              </div>
-
-              <!-- 3. the rebuilt site -->
-              <div class="rb-layer rb-new" aria-hidden="true">
-                <div class="n-nav"><b>Trattoria Rosa</b><span class="n-links"><i>Menyja</i><i>Rreth nesh</i><i>Kontakt</i></span><span class="n-pill">Rezervo</span></div>
-                <div class="n-hero">
-                  <div class="n-copy">
-                    <span class="n-open"><i></i>Hapur tani · deri në 23:00</span>
-                    <p class="n-h1">Pasta e freskët, çdo ditë.</p>
-                    <p class="n-p">Gatuar në vend, me përbërës të freskët. Rezervoni tavolinën për 30 sekonda.</p>
-                    <span class="n-btns"><span class="n-btn">Rezervo tavolinë</span><span class="n-btn n-ghost">Shiko menynë</span></span>
-                  </div>
-                  <div class="n-photo">
-                    <img src="assets/hero-rebuild/pasta.webp" alt="" width="560" height="588">
-                    <span class="n-toast"><b>✓ U rezervua</b>Sot · 20:00 · 4 persona</span>
-                  </div>
-                </div>
-                <div class="n-cards">
-                  <span class="n-card"><img src="assets/hero-rebuild/t-pasta.webp" alt="" width="160" height="160"><span><b>Tagliatelle</b><i>€8.50</i></span></span>
-                  <span class="n-card"><img src="assets/hero-rebuild/t-burrata.webp" alt="" width="160" height="160"><span><b>Burrata</b><i>€7.00</i></span></span>
-                  <span class="n-card"><img src="assets/hero-rebuild/t-fondant.webp" alt="" width="160" height="160"><span><b>Fondant</b><i>€4.50</i></span></span>
-                </div>
-              </div>
-
+            <div class="rb-view" id="rb-view" data-biz="prush">
+              <div class="rb-layer rb-old" id="rb-old" aria-hidden="true"></div>
+              <div class="rb-layer rb-wire" id="rb-wire" aria-hidden="true"></div>
+              <div class="rb-layer rb-new" id="rb-new" aria-hidden="true"></div>
               <div class="rb-front" aria-hidden="true"></div>
               <div class="rb-cut"><button type="button" class="rb-handle" id="rb-handle" role="slider" aria-label="Krahaso faqen e vjetër me të renë" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Faqja e vjetër"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></button></div>
               <span class="rb-tag rb-tag-new" aria-hidden="true">Pas</span>
@@ -295,17 +243,25 @@
             </div>
           </div>
 
-          <!-- the small editor: types the real changes as a diff -->
-          <div class="editor rb-code" aria-hidden="true">
-            <div class="window-bar">
-              <span class="dots"><i></i><i></i><i></i></span>
-              <span class="editor-file">rindertimi.css</span>
+          <div class="rb-below">
+            <!-- the small editor: types the real changes as a diff -->
+            <div class="editor rb-code" aria-hidden="true">
+              <div class="window-bar">
+                <span class="dots"><i></i><i></i><i></i></span>
+                <span class="editor-file">rindertimi.css</span>
+              </div>
+              <pre class="rb-diff" id="rb-diff"></pre>
+              <span class="rb-progress" id="rb-progress"></span>
             </div>
-            <pre class="rb-diff" id="rb-diff"></pre>
-            <span class="rb-progress" id="rb-progress"></span>
+            <div class="rb-side">
+              <div class="rb-tabs" role="group" aria-label="Shembuj rindërtimi">
+                <button type="button" class="rb-tab" data-i="0" aria-pressed="true">Restorant<i></i></button>
+                <button type="button" class="rb-tab" data-i="1" aria-pressed="false">Berber<i></i></button>
+                <button type="button" class="rb-tab" data-i="2" aria-pressed="false">Rent a car<i></i></button>
+              </div>
+              <p class="rb-hint" id="rb-hint">Tërhiqe vijën: para dhe pas</p>
+            </div>
           </div>
-
-          <p class="rb-hint" id="rb-hint">Tërhiqe vijën: para dhe pas</p>
         </div>
       </div>
     </section>
