@@ -59,3 +59,7 @@ Because of the Content-Security-Policy:
 - The contact form may only send to `formsubmit.co`.
 
 `/.well-known/security.txt` tells people how to report a security problem. Renew its `Expires` date before November 2027.
+
+## Preview: hero-v2.html
+
+`hero-v2.html` is a preview (noindex, not linked) of the site rebuilt with the effects most of Awwwards' top 10 studios share. It uses `css/showcase.css`, `js/showcase.js` and self-hosted libraries in `assets/vendor/`: GSAP 3 with ScrollTrigger, SplitText and ScrambleText (free under GSAP's standard license) and Lenis (MIT). The live homepage (`index.html`) does not load any of them.

@@ -173,7 +173,7 @@
   mask-image: linear-gradient(transparent, #000 26%);
 }
 .rb-diff span { display: block; }
-.rb-diff .d-com { color: #7D746A; }
+.rb-diff .d-com { color: #948A7F; }
 .rb-diff .d-del { color: #FF8A80; }
 .rb-diff .d-add { color: #7EE7A0; }
 .rb-diff .d-ok { color: #FFB27F; font-weight: 600; }
@@ -335,7 +335,7 @@
   --o-hstyle: italic 700; --o-hfont: "Times New Roman", Times, serif; --o-ht: #FFFF00; --o-hs: #000; --o-sub: #A8DCFF;
   --o-navbg: #7A7A7A; --o-btn: #C0C0C0; --o-btnedge: #EEE; --o-btnink: #00007A; --o-mqbg: #FFFF00; --o-mqink: #F00;
   --o-framebg: #fff; --o-frame: #8B4513; --o-cap: #666; --o-big: #008000; --o-bigs: #9F9; --o-red: #F00;
-  --n-bg: #15110E; --n-ink: #F3EDE4; --n-mute: #A89C8F; --n-line: #2E2620; --n-card: #211B17; --n-acc: #E8662B; --n-acc-ink: #fff;
+  --n-bg: #15110E; --n-ink: #F3EDE4; --n-mute: #A89C8F; --n-line: #2E2620; --n-card: #211B17; --n-acc: #E8662B; --n-acc-ink: #15110E;
   --n-pill: #F3EDE4; --n-pill-ink: #15110E; --n-open: rgba(232, 102, 43, .16); --n-open-ink: #F2A27C; --n-ok: #7EE7A0; --n-price: #F2A27C;
   --n-disp: "RB Bodoni", Georgia, serif; --n-disp-w: 600; --n-case: none; --n-ls: -.02em; --n-h1: 6.3cqw; --n-body: "RB Figtree", var(--font-body); --n-radius: 99px;
 }
