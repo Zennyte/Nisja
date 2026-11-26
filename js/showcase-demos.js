@@ -64,7 +64,7 @@
     var ctx = canvas.getContext("2d");
     var nameEl = $("sc-stream-name"), kindEl = $("sc-stream-kind");
     var DPR = Math.min(window.devicePixelRatio || 1, 2);
-    var W = 0, H = 0, cw = 0, ch = 0, gap = 0, step = 0, L = 0;
+    var W = 0, H = 0, cw = 0, ch = 0, gap = 0, step = 0, L = 0, span = 1;
     var BEND = 0.5;        // how much taller the cards get at the edges
     var SLICE = 2;         // slice width in CSS px
 
@@ -97,9 +97,12 @@
     function resize() {
       W = stage.clientWidth; H = stage.clientHeight;
       canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
-      cw = Math.round(Math.min(480, Math.max(230, W * 0.3)));
+      // phones: wider cards, and the bend is measured over a wider span so each card stays almost flat
+      cw = W < 700 ? Math.round(W * 0.66) : Math.round(Math.min(480, Math.max(230, W * 0.3)));
+      span = Math.max(W / 2, cw * 1.7);
+      var edge = 1 + BEND * Math.pow(W / 2 / span, 2);          // tallest a slice gets at the stage edge
       ch = Math.round(cw * 0.625);
-      if (ch * (1 + BEND) > H * 0.96) { ch = Math.floor(H * 0.96 / (1 + BEND)); cw = Math.round(ch / 0.625); }
+      if (ch * edge > H * 0.96) { ch = Math.floor(H * 0.96 / edge); cw = Math.round(ch / 0.625); }
       gap = Math.round(cw * 0.07);
       step = cw + gap; L = step * cards.length;
       cards.forEach(paintCard);
@@ -121,14 +124,18 @@
         var left = k * step - base + half - cw / 2;            // card k is centred when offset = k * step
         if (left > W || left + cw < 0) continue;
         var srcW = c.canvas.width, srcH = c.canvas.height;
-        for (var x = Math.max(left, 0); x < Math.min(left + cw, W); x += SLICE) {
-          var nx = (x + SLICE / 2 - half) / half;              // -1 … 1 across the stage
-          var a = Math.min(1, Math.max(0, (1.04 - Math.abs(nx)) / 0.32));
-          if (a <= 0) continue;
+        // strips sit on a fixed pixel grid (not on the moving card edge), so their seams don't shimmer;
+        // the side fade is a CSS mask on the canvas, not per-strip transparency
+        var x0 = Math.floor(Math.max(left, 0) / SLICE) * SLICE, x1 = Math.min(left + cw, W);
+        for (var x = x0; x < x1; x += SLICE) {
+          var a0 = Math.max(x, left), a1 = Math.min(x + SLICE, left + cw);
+          if (a1 <= a0) continue;
+          var nx = (x + SLICE / 2 - half) / span;
           var s = 1 + BEND * nx * nx, h = ch * s, y = (H - h) / 2;
-          var sx = (x - left) / cw * srcW;
-          ctx.globalAlpha = a;
-          ctx.drawImage(c.canvas, sx, 0, Math.max(1, SLICE / cw * srcW), srcH, x * DPR, y * DPR, SLICE * DPR + 0.6, h * DPR);
+          var dx = Math.round(a0 * DPR), dw = Math.round(a1 * DPR) - dx;
+          if (dw <= 0) continue;
+          var dy = Math.round(y * DPR), dh = Math.round((y + h) * DPR) - dy;
+          ctx.drawImage(c.canvas, (a0 - left) / cw * srcW, 0, Math.max(0.5, (a1 - a0) / cw * srcW), srcH, dx, dy, dw, dh);
         }
       }
       ctx.globalAlpha = 1;
