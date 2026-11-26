@@ -57,9 +57,9 @@
 
       <!-- Links roll on hover (Merci-Michel) -->
       <nav class="site-nav" id="site-nav" aria-label="Kryesore">
+        <a class="sc-roll" href="#demot">Demot</a>
         <a class="sc-roll" href="#work">Punët</a>
         <a class="sc-roll" href="#services">Shërbimet</a>
-        <a class="sc-roll" href="#rindertimi">Para / Pas</a>
         <a class="sc-roll" href="#process">Si punojmë</a>
         <a class="sc-roll" href="#pricing">Çmimet</a>
         <a class="sc-roll" href="#contact">Kontakt</a>
@@ -97,6 +97,23 @@
         </div>
       </div>
       <a class="sc-scroll" href="#work" aria-label="Shkrollo te punët"><span></span></a>
+    </section>
+
+    <!-- ================= TILTED STREAM: curved, endless row of live demos (after 21st.dev "Tilted Grid Hero") ================= -->
+    <section class="sc-stream" id="demot" aria-labelledby="stream-title">
+      <div class="wrap sc-stream-head">
+        <h2 id="stream-title" class="sc-stream-title" data-split>Çdo faqe, e sjellë në fokus.</h2>
+      </div>
+      <div class="sc-stream-stage" id="sc-stream" data-cursor="Provoje" tabindex="0" role="group" aria-label="Rreshti i demove. Përdorni shigjetat majtas dhe djathtas.">
+        <canvas id="sc-stream-canvas" aria-hidden="true"></canvas>
+      </div>
+      <div class="wrap sc-stream-foot">
+        <button class="sc-arrow" type="button" id="sc-stream-prev" aria-label="Faqja e mëparshme" data-magnetic><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <p class="sc-stream-now" aria-live="polite"><b id="sc-stream-name">Udha</b><span id="sc-stream-kind">Rent a car · koncept</span></p>
+        <button class="btn btn-primary btn-small" type="button" id="sc-stream-open" data-cursor="Hap">Provoje live</button>
+        <button class="sc-arrow" type="button" id="sc-stream-next" aria-label="Faqja tjetër" data-magnetic><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <p class="sc-stream-hint">Tërhiqeni rreshtin, ose klikoni një faqe për ta provuar live.</p>
     </section>
 
     <!-- ================= MARQUEE: speeds up and leans with the scroll ================= -->
@@ -167,6 +184,48 @@
           <li class="sc-row" data-img="assets/work/sc/mendafsh.webp"><h3>Shqip dhe anglisht</h3><p>Një prekje dhe faqja flet me turistët dhe diasporën.</p><img class="sc-row-thumb" src="assets/work/sc/mendafsh.webp" alt="" width="560" height="1069" loading="lazy"></li>
           <li class="sc-row" data-img="assets/work/sc/vrull.webp"><h3>Ndryshimet i bëni vetë</h3><p>Çmimet, tekstet dhe fotot i përditësoni vetë, ose na shkruani dhe i bëjmë ne.</p><img class="sc-row-thumb" src="assets/work/sc/vrull.webp" alt="" width="560" height="1069" loading="lazy"></li>
         </ul>
+      </div>
+    </section>
+
+    <!-- ================= FOLDERS: frosted-glass folders full of live demos ================= -->
+    <section class="sc-folders" id="dosjet" aria-labelledby="folders-title">
+      <div class="wrap">
+        <div class="sc-section-head">
+          <h2 id="folders-title" class="sc-h2" data-split>Dosjet tona</h2>
+          <p class="sc-lead" data-reveal>Hapni një dosje dhe provoni faqet live, pa dalë nga kjo faqe.</p>
+        </div>
+        <div class="fd-row">
+          <div class="fd" id="fd-demo">
+            <div class="fd-back" aria-hidden="true"></div>
+            <div class="fd-cards" id="fd-demo-cards">
+            <button class="fd-card" type="button" data-demo="kristal" style="--i:0"><span class="fd-card-head"><b>Kristal Dental</b><i>dentist</i></span><img src="assets/demo/kristal.webp" alt="" width="720" height="450" loading="lazy"></button>
+            <button class="fd-card" type="button" data-demo="vrull" style="--i:1"><span class="fd-card-head"><b>Vrull</b><i>palestër</i></span><img src="assets/demo/vrull.webp" alt="" width="720" height="450" loading="lazy"></button>
+            <button class="fd-card" type="button" data-demo="mendafsh" style="--i:2"><span class="fd-card-head"><b>Mëndafsh</b><i>sallon bukurie</i></span><img src="assets/demo/mendafsh.webp" alt="" width="720" height="450" loading="lazy"></button>
+            <button class="fd-card" type="button" data-demo="brisk" style="--i:3"><span class="fd-card-head"><b>Brisk Barber Club</b><i>berber</i></span><img src="assets/demo/brisk.webp" alt="" width="720" height="450" loading="lazy"></button>
+            <button class="fd-card" type="button" data-demo="prush" style="--i:4"><span class="fd-card-head"><b>Prush</b><i>restorant</i></span><img src="assets/demo/prush.webp" alt="" width="720" height="450" loading="lazy"></button>
+            <button class="fd-card" type="button" data-demo="udha" style="--i:5"><span class="fd-card-head"><b>Udha</b><i>rent a car · tani</i></span><img src="assets/demo/udha.webp" alt="" width="720" height="450" loading="lazy"></button>
+            </div>
+            <div class="fd-front">
+              <h3 class="fd-title">Demo live</h3>
+              <p class="fd-count"><span id="fd-demo-count">6</span> faqe</p>
+              <button class="fd-btn fd-btn--dark" type="button" id="fd-add" aria-label="Shto faqen tuaj në dosje" data-cursor="Shto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+          <div class="fd fd--fan" id="fd-client">
+            <div class="fd-back fd-back--nika" aria-hidden="true"></div>
+            <div class="fd-cards">
+            <button class="fd-card" type="button" data-demo="nika-1" style="--i:0"><span class="fd-card-head"><b>Kreu</b><i>video · hero</i></span><img src="assets/demo/nika-1.webp" alt="" width="720" height="450" loading="lazy"></button>
+            <button class="fd-card" type="button" data-demo="nika-2" style="--i:1"><span class="fd-card-head"><b>Projektet</b><i>8 projekte</i></span><img src="assets/demo/nika-2.webp" alt="" width="720" height="450" loading="lazy"></button>
+            <button class="fd-card" type="button" data-demo="nika-3" style="--i:2"><span class="fd-card-head"><b>Rreth nesh</b><i>studio</i></span><img src="assets/demo/nika-3.webp" alt="" width="720" height="450" loading="lazy"></button>
+            <button class="fd-card" type="button" data-demo="nika-4" style="--i:3"><span class="fd-card-head"><b>Kontakti</b><i>Gjakovë</i></span><img src="assets/demo/nika-4.webp" alt="" width="720" height="450" loading="lazy"></button>
+            </div>
+            <div class="fd-front">
+              <h3 class="fd-title">Klient i vërtetë</h3>
+              <p class="fd-count">Nika Architecture Studio · 4 faqe</p>
+              <button class="fd-btn fd-btn--light" type="button" id="fd-spread" aria-expanded="false" aria-label="Hapi kartat e Nikës" data-cursor="Hap"><svg viewBox="0 0 28 12" aria-hidden="true"><circle cx="5" cy="6" r="3.6"/><circle cx="14" cy="6" r="3.6"/><circle cx="23" cy="6" r="3.6"/></svg></button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -378,6 +437,18 @@
     </div>
   </footer>
 
+
+  <!-- Live demo window: our demo sites open inside the page -->
+  <dialog class="sc-demo" id="sc-demo" aria-labelledby="sc-demo-url">
+    <div class="sc-demo-bar">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <p class="sc-demo-url" id="sc-demo-url">nisjastudio.com/work/udha</p>
+      <a class="sc-demo-new" id="sc-demo-new" href="work/udha/" target="_blank" rel="noopener">Hap në faqe të re</a>
+      <button class="sc-demo-close" type="button" id="sc-demo-close" aria-label="Mbyll demon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <iframe id="sc-demo-frame" title="Demo live"></iframe>
+  </dialog>
+
   <script src="assets/vendor/gsap.min.js"></script>
   <script src="assets/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/vendor/SplitText.min.js"></script>
@@ -385,5 +456,6 @@
   <script src="assets/vendor/lenis.min.js"></script>
   <script src="js/hero-rebuild.js"></script>
   <script src="js/showcase.js"></script>
+  <script src="js/showcase-demos.js"></script>
 </body>
 </html>

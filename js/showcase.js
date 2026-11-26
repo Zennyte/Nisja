@@ -109,6 +109,9 @@
     gsap.ticker.lagSmoothing(0);
   }
 
+  // shared with js/showcase-demos.js
+  window.NisjaShowcase = { lenis: lenis, sound: Sound, reduced: reduced, fine: fine };
+
   /* ================= header: menu, progress, rolling links, anchors ================= */
   var header = document.querySelector(".site-header");
   var nav = $("site-nav"), menuBtn = $("menu-toggle");
