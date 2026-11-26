@@ -315,7 +315,6 @@
     gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
   });
   if (!reduced) {
-    gsap.from(".sc-row", { y: 50, opacity: 0, duration: 0.9, ease: "power3.out", stagger: 0.08, scrollTrigger: { trigger: ".sc-svlist", start: "top 85%", once: true } });
     gsap.from(".plan", { y: 36, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.1, scrollTrigger: { trigger: ".plans", start: "top 92%", once: true } });
   }
 
@@ -330,10 +329,7 @@
   /* ================= hero entrance + preloader ================= */
   function heroIntro() {
     if (heroSplit) gsap.to(heroSplit.chars, { yPercent: 0, duration: 1.15, ease: "expo.out", stagger: 0.024 });
-    gsap.to(".sc-hero .sc-in", { opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: heroSplit ? 0.45 : 0 });
-  }
-  if (!reduced) {
-    gsap.to(".sc-hero-inner", { yPercent: -14, opacity: 0.25, ease: "none", scrollTrigger: { trigger: ".sc-hero", start: "top top", end: "bottom top", scrub: true } });
+    gsap.to(".sh .sc-in", { opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: heroSplit ? 0.45 : 0 });
   }
   (function () {
     var loader = $("sc-loader"), skip = false;
@@ -379,91 +375,38 @@
     });
   })();
 
-  /* ================= work: pinned horizontal gallery ================= */
+  /* ================= pinned sideways rows (services): the row slides while the page scrolls ================= */
   var mm = gsap.matchMedia();
   mm.add("(min-width: 901px) and (prefers-reduced-motion: no-preference)", function () {
-    var track = $("sc-work-track"), now = $("sc-work-now"), line = $("sc-work-line");
-    var n = document.querySelectorAll(".sc-card:not(.sc-card--end)").length;
-    $("sc-work-total").textContent = ("0" + n).slice(-2);
-    function dist() { return Math.max(0, track.scrollWidth - window.innerWidth); }
-    var tween = gsap.to(track, {
-      x: function () { return -dist(); }, ease: "none",
-      scrollTrigger: {
-        trigger: ".sc-work", pin: ".sc-work-pin", start: "top top", end: function () { return "+=" + dist(); },
-        scrub: 1, invalidateOnRefresh: true,
-        onUpdate: function (self) {
-          now.textContent = ("0" + Math.min(n, Math.floor(self.progress * n) + 1)).slice(-2);
-          line.style.transform = "scaleX(" + self.progress.toFixed(4) + ")";
+    var offs = [];
+    Array.prototype.forEach.call(document.querySelectorAll("[data-hpin]"), function (sec) {
+      var track = sec.querySelector(".hp-track"), now = sec.querySelector(".hp-now"), line = sec.querySelector(".hp-line");
+      var n = track.querySelectorAll(":scope > :not(.sc-card--end)").length;
+      sec.querySelector(".hp-total").textContent = ("0" + n).slice(-2);
+      function dist() { return Math.max(0, track.scrollWidth - window.innerWidth); }
+      var tween = gsap.to(track, {
+        x: function () { return -dist(); }, ease: "none",
+        scrollTrigger: {
+          trigger: sec, pin: sec.querySelector(".sc-work-pin"), start: "top top", end: function () { return "+=" + dist(); },
+          scrub: 1, invalidateOnRefresh: true,
+          onUpdate: function (self) {
+            now.textContent = ("0" + Math.min(n, Math.floor(self.progress * n) + 1)).slice(-2);
+            line.style.transform = "scaleX(" + self.progress.toFixed(4) + ")";
+          }
         }
-      }
-    });
-    // keyboard: tabbing to a card that's off to the side scrolls the page so it slides into view
-    function onFocus(e) {
-      var card = e.target.closest(".sc-card"); if (!card) return;
-      var st = tween.scrollTrigger, p = gsap.utils.clamp(0, 1, (card.offsetLeft - window.innerWidth * 0.2) / Math.max(1, dist()));
-      var y = st.start + (st.end - st.start) * p;
-      if (lenis) lenis.scrollTo(y, { immediate: true }); else window.scrollTo(0, y);
-    }
-    track.addEventListener("focusin", onFocus);
-    gsap.utils.toArray(".sc-card-media img").forEach(function (img) {
-      gsap.fromTo(img, { yPercent: 0 }, { yPercent: -18, ease: "none", scrollTrigger: { trigger: img.closest(".sc-card"), containerAnimation: tween, start: "left right", end: "right left", scrub: true } });
-    });
-    return function () { track.removeEventListener("focusin", onFocus); };
-  });
-
-  /* ================= services: the image follows the cursor ================= */
-  if (fine && !reduced) {
-    var list = document.querySelector(".sc-svlist"), fl = document.querySelector(".sc-float"), flImg = $("sc-float-img");
-    var fx = gsap.quickTo(fl, "x", { duration: 0.6, ease: "power3" }), fy = gsap.quickTo(fl, "y", { duration: 0.6, ease: "power3" });
-    var fr = gsap.quickTo(fl, "rotation", { duration: 0.8, ease: "power3" }), lastX = 0;
-    list.addEventListener("pointermove", function (e) {
-      fx(e.clientX + 24); fy(e.clientY - 160);
-      fr(gsap.utils.clamp(-14, 14, (e.clientX - lastX) * 0.8)); lastX = e.clientX;
-    });
-    Array.prototype.forEach.call(list.querySelectorAll(".sc-row"), function (row) {
-      row.addEventListener("pointerenter", function () {
-        if (flImg.getAttribute("src") !== row.getAttribute("data-img")) flImg.src = row.getAttribute("data-img");
-        gsap.to(fl, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out", overwrite: "auto" });
       });
-    });
-    list.addEventListener("pointerleave", function () { gsap.to(fl, { opacity: 0, scale: 0.6, duration: 0.35, ease: "power2.in", overwrite: "auto" }); });
-  }
-
-  /* ================= showreel: grows from a small frame, loads only when close ================= */
-  (function () {
-    var frame = $("sc-reel-frame"), video = $("sc-reel-video"), cap = $("sc-reel-caption");
-    var CLIPS = [["brisk", "Brisk Barber Club"], ["mendafsh", "Mëndafsh"], ["vrull", "Vrull"], ["kristal", "Kristal"]], ci = 0, paused = false, inView = false;
-    function load(i) {
-      ci = i;
-      video.poster = "assets/work/reel/" + CLIPS[i][0] + ".jpg";
-      video.src = "assets/work/reel/" + CLIPS[i][0] + ".mp4";
-      cap.textContent = CLIPS[i][1];
-      if (inView && !paused) video.play().catch(function () {});
-    }
-    video.addEventListener("ended", function () { load((ci + 1) % CLIPS.length); });
-    ScrollTrigger.create({ trigger: ".sc-reel", start: "top 160%", once: true, onEnter: function () { load(0); } });
-    ScrollTrigger.create({
-      trigger: ".sc-reel", start: "top bottom", end: "bottom top",
-      onToggle: function (self) {
-        inView = self.isActive;
-        if (!video.src) return;
-        if (inView && !paused) video.play().catch(function () {}); else video.pause();
+      // keyboard: tabbing to something off to the side scrolls the page so it slides into view
+      function onFocus(e) {
+        var card = e.target.closest(".hp-track > *"); if (!card) return;
+        var st = tween.scrollTrigger, p = gsap.utils.clamp(0, 1, (card.offsetLeft - window.innerWidth * 0.2) / Math.max(1, dist()));
+        var y = st.start + (st.end - st.start) * p;
+        if (lenis) lenis.scrollTo(y, { immediate: true }); else window.scrollTo(0, y);
       }
+      track.addEventListener("focusin", onFocus);
+      offs.push(function () { track.removeEventListener("focusin", onFocus); });
     });
-    frame.addEventListener("click", function () {
-      paused = !paused;
-      if (paused) video.pause(); else video.play().catch(function () {});
-      frame.setAttribute("data-cursor", paused ? "Luaj" : "Ndal");
-      var l = $("sc-cursor-label"); if (l) l.textContent = paused ? "Luaj" : "Ndal";
-    });
-    if (!reduced) {
-      var tl = gsap.timeline({ scrollTrigger: { trigger: ".sc-reel", pin: ".sc-reel-pin", start: "top top", end: "+=130%", scrub: true } });
-      var small = window.innerWidth < 641 ? 0.55 : 0.3;
-      tl.fromTo(frame, { scale: small, borderRadius: 40 }, { scale: 1, borderRadius: 0, ease: "power1.inOut" }, 0)
-        .to(".sc-reel-title span:first-child", { xPercent: -60, opacity: 0, ease: "power1.in" }, 0)
-        .to(".sc-reel-title span:last-child", { xPercent: 60, opacity: 0, ease: "power1.in" }, 0);
-    }
-  })();
+    return function () { offs.forEach(function (f) { f(); }); };
+  });
 
   /* ================= process: cards stack and shrink ================= */
   if (!reduced) {

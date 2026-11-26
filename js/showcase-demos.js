@@ -211,6 +211,7 @@
     stage.addEventListener("keydown", function (e) {
       if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
       if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDemo(cards[centerIdx < 0 ? 0 : centerIdx].id); }
     });
   })();
 

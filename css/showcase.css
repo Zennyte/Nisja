@@ -573,3 +573,82 @@ html.sc-js [data-reveal] { opacity: 0; transform: translateY(24px); }
   .sc-stream-now { order: -1; flex-basis: 100%; }
   .sc-stream-stage { height: 280px; }
 }
+
+/* =====================================================================
+   Layout v3 (26 Nov): stream hero → live hero with the folder → the live
+   site's "Punë të fundit" → services on a pinned sideways row → process,
+   prices, contact, FAQ, footer.
+   ===================================================================== */
+
+/* ---------- hero: headline over the demo stream ---------- */
+.sh { position: relative; overflow: hidden; isolation: isolate; text-align: center; padding: clamp(36px, 5vw, 64px) 0 clamp(44px, 5vw, 72px); }
+.sh::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(50% 55% at 50% 68%, rgba(255, 107, 44, .16), transparent 70%);
+}
+.sh-title { margin: 0 auto; font: 800 clamp(3rem, 7.6vw, 7.6rem)/.9 var(--font-display); letter-spacing: -.05em; text-wrap: balance; }
+.sh-title .char-mask { padding-bottom: .06em; }
+.sh-sub { margin: 18px auto 0; max-width: 46ch; font-size: clamp(1.05rem, 1.35vw, 1.2rem); line-height: 1.55; color: #CFC6BA; }
+.sh-hint { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 6px 14px 6px 10px; border: 1px dashed #4A423B; border-radius: 99px; font-size: 14px; color: var(--sand); }
+.sh-hint svg { width: 18px; height: 18px; fill: none; stroke: var(--fire); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; animation: shTap 1.6s ease-in-out infinite; }
+@keyframes shTap { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.sh-stage { height: clamp(260px, 30vw, 460px); margin-top: clamp(10px, 2vw, 26px); }
+.sh .sc-stream-foot { margin-top: clamp(4px, 1.4vw, 16px); }
+
+/* ---------- the live hero, with the folder where the built site used to be ---------- */
+.bf { border-top: 1px solid var(--line); }
+.bf .hero-inner { min-height: 0; padding-top: clamp(72px, 9vw, 128px); padding-bottom: clamp(72px, 9vw, 128px); }
+.bf .hero-title { margin-top: 28px; }
+.bf-build { height: 640px; }
+.bf-build .editor { z-index: 1; }
+.bf-fd { position: absolute; right: -8px; bottom: 0; z-index: 3; }
+.bf-state { margin-left: auto; font: 600 12px var(--font-mono); color: var(--ash); transition: color .3s; }
+.bf-state.is-live { color: #4ADE80; }
+/* a finished site rises out of the folder (only while the folder is closed) */
+.bf .fd-card {
+  transform: translateY(calc(var(--open) * (-30px - (var(--n, 6) - 1 - var(--i)) * 36px) - var(--lift, 0) * (1 - var(--open)) * 150px)) rotate(calc(var(--open) * (var(--i) - 2.5) * 1.2deg));
+}
+.bf .fd-card.is-live { --lift: 1; z-index: 2; box-shadow: 0 -12px 30px rgba(0, 0, 0, .4), 0 0 0 2px #4ADE80; transition: transform .9s cubic-bezier(.2, .9, .25, 1.15), box-shadow .3s; }
+.bf .fd-card.is-live .fd-card-head i { visibility: hidden; }
+.bf .fd-card.is-live::after { content: "Live ✓"; position: absolute; top: 8px; right: 12px; padding: 3px 9px; border-radius: 99px; background: #15803D; color: #fff; font: 700 11px var(--font-body); letter-spacing: .02em; }
+@media (max-width: 1100px) { .bf-build { margin-top: 24px; } }
+@media (max-width: 640px) { .bf-build { height: 540px; } .bf-build .editor { height: 230px; } }
+@media (max-width: 520px) { .bf-build { height: 480px; } .bf-fd { right: 0; } }
+
+/* ---------- "Punë të fundit": the live site's block, no Nika, bigger player ---------- */
+.sc-wk { padding: clamp(80px, 10vw, 140px) 0; border-top: 1px solid var(--line); }
+.sc-wk .wall { align-items: start; }
+.sc-wk .wall-right { display: block; }
+.sc-wk .reel { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+.sc-wk .reel-url { display: block; }
+.sc-wk .reel-info { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px 48px; align-items: start; }
+.sc-wk .reel-info > h3, .sc-wk .reel-intro, .sc-wk .older { grid-column: 1; }
+.sc-wk .reel-panel { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; padding-top: 0; border-top: 0; }
+.sc-wk .older { margin-top: 10px; font-size: 14px; color: var(--ash); }
+.sc-wk .older a { color: var(--sand); }
+@media (max-width: 1180px) { .sc-wk .wall-right { display: contents; } }
+@media (max-width: 760px) {
+  .sc-wk .reel-info { grid-template-columns: minmax(0, 1fr); }
+  .sc-wk .reel-panel { grid-column: 1; grid-row: auto; }
+  .sc-wk .reel-url { display: none; }
+}
+
+/* ---------- "Çfarë bëjmë": pinned sideways row of working demos ---------- */
+.sv { border-top: 1px solid var(--line); }
+.sv .sc-work-pin { padding-top: clamp(56px, 7vw, 96px); }
+.sv-lead { margin-top: 14px; }
+.sv-card { flex: none; width: clamp(300px, 34vw, 500px); display: flex; flex-direction: column; }
+.sv-stage { background: var(--stone); border: 1px solid var(--line); border-radius: 22px; padding: 8px; }
+.sv-meta { padding: 16px 6px 0; }
+.sv-meta h3 { font: 800 clamp(1.5rem, 2.2vw, 2.1rem)/1.05 var(--font-display); letter-spacing: -.03em; }
+.sv-meta p { margin-top: 8px; max-width: 42ch; color: var(--ash); }
+.sv-end { width: clamp(240px, 22vw, 340px); }
+@media (max-width: 900px) {
+  .sv-card { width: 84vw; scroll-snap-align: start; }
+  .sv-end { width: 64vw; }
+}
+
+/* ---------- FAQ ---------- */
+.sc-faq { border-top: 1px solid var(--line); }
+.sc-faq .faq-head .sc-lead { margin-top: 20px; }
+@media (max-width: 900px) { .sv .sc-work-count { display: none; } }
