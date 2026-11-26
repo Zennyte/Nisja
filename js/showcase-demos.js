@@ -1,7 +1,7 @@
 /* Nisja Studio — showcase preview: live demos
-   1. Hero strip: an endless row of four demo sites on a 3D curve (real images,
-      CSS perspective), bending toward the viewer at the edges and fading out.
-      The other demos live in their own sections (deck, scrolling windows).
+   1. Hero strip: an endless row of every demo site on a 3D curve (real images,
+      CSS perspective). Kalibër, Udha, Fener and Brisk show their hero; the rest
+      show their most telling inner section (menu, cakes, prices…).
    2. Folders: frosted-glass folders whose cards are demo sites.
    3. Live demo window: clicking any card opens that site inside the page. */
 (function () {
@@ -24,11 +24,12 @@
     embel:    { name: "Ëmbël", kind: "Pastiçeri · koncept", url: "work/embel/" },
     lisi:     { name: "Lisi", kind: "Mobilje me masë · koncept", url: "work/lisi/" },
     "nika-1": { name: "Nika Architecture Studio", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/", external: true },
-    "nika-2": { name: "Nika · Projektet", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#projects", external: true },
+    "nika-2": { name: "Nika · Projektet", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#projektet", external: true },
     "nika-3": { name: "Nika · Rreth nesh", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#about", external: true },
     "nika-4": { name: "Nika · Kontakti", kind: "Klient i vërtetë", url: "https://nika-archi.vercel.app/#contact", external: true }
   };
-  var STREAM = ["kaliber", "udha", "fener", "brisk"];
+  var STREAM = ["kaliber", "prush", "udha", "embel", "fener", "kroni", "brisk", "mendafsh", "lisi", "vrull", "kristal", "nika-2"];
+  var HERO_SHOT = { kaliber: 1, udha: 1, fener: 1, brisk: 1 };   // these show their hero; the rest an inner section
 
   /* ================= live demo window ================= */
   var dlg = $("sc-demo"), frame = $("sc-demo-frame"), urlEl = $("sc-demo-url"), newEl = $("sc-demo-new");
@@ -61,15 +62,16 @@
     var stage = $("sc-stream"), track = $("sc-stream-track");
     if (!stage || !track) return;
     var nameEl = $("sc-stream-name"), kindEl = $("sc-stream-kind");
-    var COPIES = 3, P = 1300;                       // copies fill the loop on wide screens; P = perspective (px)
+    var COPIES = 1, P = 1300;                       // copies fill the loop on wide screens; P = perspective (px)
     var W = 0, H = 0, cw = 0, ch = 0, step = 0, L = 0, span = 1, zMax = 0;
     var cards = [];
     for (var r = 0; r < COPIES; r++) STREAM.forEach(function (id) {
       var el = document.createElement("div"); el.className = "sh-card"; el.dataset.id = id;
       var img = document.createElement("img");
       img.alt = ""; img.decoding = "async"; img.draggable = false;
-      img.src = "assets/demo/" + id + ".webp";
-      img.srcset = "assets/demo/" + id + ".webp 720w, assets/demo/hd/" + id + ".webp 1280w";
+      var f = id.replace(/-\d+$/, ""), small = (HERO_SHOT[id] ? "assets/demo/" : "assets/demo/sec/") + f + ".webp";
+      img.src = small;
+      img.srcset = small + " 720w, assets/demo/hd/" + f + ".webp 1280w";
       el.appendChild(img); track.appendChild(el);
       cards.push({ id: id, el: el, img: img });
     });

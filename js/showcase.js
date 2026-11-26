@@ -94,7 +94,7 @@
     };
   })();
   var soundBtn = $("sc-sound");
-  soundBtn.addEventListener("click", function () {
+  if (soundBtn) soundBtn.addEventListener("click", function () {
     var on = Sound.toggle();
     soundBtn.setAttribute("aria-pressed", on ? "true" : "false");
   });
