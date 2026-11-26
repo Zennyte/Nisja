@@ -75,12 +75,23 @@
       el.appendChild(img); track.appendChild(el);
       cards.push({ id: id, el: el, img: img });
     });
+    var curved = false, R = 1;                      // iPad and wider: cards sit on the inside of a cylinder
     function resize() {
       W = stage.clientWidth; H = stage.clientHeight;
-      cw = W < 700 ? Math.round(W * 0.68) : Math.round(Math.min(500, Math.max(240, W * 0.3)));
-      span = Math.max(W / 2, cw * 1.6);
-      zMax = Math.min(220, cw * 0.42);
-      var edgeScale = P / (P - zMax * Math.pow(Math.min(1.2, W / 2 / span), 2));
+      curved = W >= 700;
+      var edgeScale;
+      if (curved) {
+        var tall = window.innerHeight > window.innerWidth * 1.1;   // iPad upright: bigger cards so the strip fills the screen
+        cw = Math.round(Math.min(640, Math.max(300, W * (tall ? 0.56 : 0.34))));
+        R = W * 0.58;
+        var thE = Math.min(1.15, W / 2 / R);
+        edgeScale = P / (P - R * (1 - Math.cos(thE)));
+      } else {
+        cw = Math.round(W * 0.68);
+        span = Math.max(W / 2, cw * 1.6);
+        zMax = Math.min(220, cw * 0.42);
+        edgeScale = P / (P - zMax * Math.pow(Math.min(1.2, W / 2 / span), 2));
+      }
       ch = Math.round(cw * 0.625);
       if (ch * edgeScale > H * 0.94) { ch = Math.floor(H * 0.94 / edgeScale); cw = Math.round(ch / 0.625); }
       step = Math.round(cw * 1.06); L = step * cards.length;
@@ -94,9 +105,15 @@
       cards.forEach(function (c, i) {
         var x = i * step - offset;
         x = ((x + L / 2) % L + L) % L - L / 2;               // wrap into -L/2 … L/2 around the centre
-        var nx = x / span, z = zMax * Math.min(1.44, nx * nx);
-        c.el.style.transform = "translate3d(" + (x - cw / 2).toFixed(1) + "px," + (-ch / 2) + "px," + z.toFixed(1) + "px) rotateY(" + (-nx * 26).toFixed(2) + "deg)";
-        c.el.style.visibility = Math.abs(x) > W / 2 + cw ? "hidden" : "visible";
+        if (curved) {
+          var th = x / R, X = R * Math.sin(th), Z = R * (1 - Math.cos(th));
+          c.el.style.transform = "translate3d(" + (X - cw / 2).toFixed(1) + "px," + (-ch / 2) + "px," + Z.toFixed(1) + "px) rotateY(" + (-th).toFixed(4) + "rad)";
+          c.el.style.visibility = Math.abs(th) > 1.4 ? "hidden" : "visible";
+        } else {
+          var nx = x / span, z = zMax * Math.min(1.44, nx * nx);
+          c.el.style.transform = "translate3d(" + (x - cw / 2).toFixed(1) + "px," + (-ch / 2) + "px," + z.toFixed(1) + "px) rotateY(" + (-nx * 26).toFixed(2) + "deg)";
+          c.el.style.visibility = Math.abs(x) > W / 2 + cw ? "hidden" : "visible";
+        }
         if (Math.abs(x) < best) { best = Math.abs(x); centerIdx = i; }
       });
       var d = DEMOS[cards[centerIdx].id];
@@ -116,7 +133,7 @@
     }
     if (window.gsap) gsap.ticker.add(tick); else (function loop() { tick(); requestAnimationFrame(loop); })();
     if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(stage);
-    window.addEventListener("resize", resize);
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(stage); else window.addEventListener("resize", resize);
     resize();
 
     // drag, flick and click

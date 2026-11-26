@@ -19,12 +19,24 @@
 <body class="sc">
   <a class="skip-link" href="#main">Kalo te përmbajtja</a>
 
-  <!-- Preloader: counter + scrambled words (Immersive Garden, Locomotive) -->
-  <div class="sc-loader" id="sc-loader" aria-hidden="true">
-    <p class="sc-loader-word" id="sc-loader-word">Nisja</p>
-    <p class="sc-loader-count"><span id="sc-loader-count">000</span></p>
-    <span class="sc-loader-bar" id="sc-loader-bar"></span>
+  <!-- Loading screen: the logo draws itself, then lifts away (once per visit) -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <svg class="loader-mark" viewBox="-12 -22 289 165">
+      <g class="ld-letters" fill="none" stroke="#F5EFE6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+        <path pathLength="1" d="M10 40 V100 M10 64 A24 24 0 0 1 58 64 V100"/>
+        <path pathLength="1" d="M142.7 47.5 A17 15 0 1 0 128 70 A17 15 0 1 1 113.3 92.5"/>
+        <path pathLength="1" d="M174 40 V112 A16 16 0 0 1 158 128 H152"/>
+        <circle pathLength="1" cx="230" cy="70" r="30"/>
+        <path pathLength="1" d="M260 40 V100"/>
+      </g>
+      <circle class="ld-dot" cx="174" cy="18" r="8" fill="#F5EFE6"/>
+      <g class="ld-arrow" fill="none" stroke="#FF6B2C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+        <path class="ld-shaft" pathLength="1" d="M84 100 V2"/>
+        <path class="ld-head" d="M70 16 L84 2 L98 16"/>
+      </g>
+    </svg>
   </div>
+  <script src="js/loader.js"></script>
 
   <!-- Custom cursor (Immersive Garden, makemepulse); difference blend (Locomotive, AQuest) -->
   <div class="sc-cursor" aria-hidden="true"><span class="sc-cursor-dot"></span><span class="sc-cursor-ring"><b id="sc-cursor-label"></b></span></div>
@@ -80,7 +92,7 @@
         <p class="sh-sub sc-in">Faqe interneti, rezervime online dhe logo për biznese në Kosovë. Këto janë disa që kemi ndërtuar.</p>
         <p class="sh-hint sc-in"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.6-2.2L4.3 16a1.6 1.6 0 0 1 2.4-2.1L9 16"/></svg>Klikoni një faqe për ta parë</p>
       </div>
-      <div class="sc-stream-stage sh-stage sc-in" id="sc-stream" data-cursor="Shiko" tabindex="0" role="group" aria-label="Katër faqe demo. Përdorni shigjetat majtas dhe djathtas, Enter për ta hapur.">
+      <div class="sc-stream-stage sh-stage sc-in" id="sc-stream" data-cursor="Shiko" tabindex="0" role="group" aria-label="Faqe demo. Përdorni shigjetat majtas dhe djathtas, Enter për ta hapur.">
         <div class="sh-track" id="sc-stream-track" aria-hidden="true"></div>
       </div>
       <div class="wrap sc-stream-foot sc-in">
@@ -558,8 +570,8 @@
   <script src="assets/vendor/SplitText.min.js"></script>
   <script src="assets/vendor/ScrambleTextPlugin.min.js"></script>
   <script src="assets/vendor/lenis.min.js"></script>
-  <script src="js/showcase.js"></script>
-  <script src="js/showcase-demos.js?v=6"></script>
-  <script src="js/showcase-sections.js?v=6"></script>
+  <script src="js/showcase.js?v=7"></script>
+  <script src="js/showcase-demos.js?v=7"></script>
+  <script src="js/showcase-sections.js?v=7"></script>
 </body>
 </html>

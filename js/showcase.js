@@ -332,28 +332,21 @@
     gsap.to(".sh .sc-in", { opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: heroSplit ? 0.45 : 0 });
   }
   (function () {
-    var loader = $("sc-loader"), skip = false;
-    try { skip = sessionStorage.getItem("sc-loaded") === "1"; } catch (e) {}
-    if (reduced || skip || !loader) { if (loader) loader.remove(); heroIntro(); return; }
+    // same loading screen as the live homepage (js/loader.js); the hero plays in once it lifts
+    var root = document.documentElement;
+    if (!root.classList.contains("is-loading")) { heroIntro(); return; }
     if (lenis) lenis.stop();
-    var cEl = $("sc-loader-count"), bar = $("sc-loader-bar"), word = $("sc-loader-word"), c = { v: 0 };
-    var tl = gsap.timeline();
-    tl.to(c, {
-      v: 100, duration: 1.4, ease: "power2.inOut",
-      onUpdate: function () { cEl.textContent = ("00" + Math.round(c.v)).slice(-3); bar.style.transform = "scaleX(" + (c.v / 100).toFixed(3) + ")"; }
-    }, 0);
-    if (window.ScrambleTextPlugin) {
-      ["Faqe interneti", "Rezervime online", "Logo", "Nisja Studio"].forEach(function (w, i) {
-        tl.to(word, { duration: 0.32, scrambleText: { text: w, chars: "upperAndLowerCase", speed: 0.8 } }, i * 0.34);
-      });
-    }
-    tl.to(loader, { yPercent: -100, duration: 0.85, ease: "expo.inOut" }, 1.5);
-    tl.add(heroIntro, 1.8);
-    tl.add(function () {
-      loader.remove();
-      try { sessionStorage.setItem("sc-loaded", "1"); } catch (e) {}
+    window.addEventListener("nisja:ready", function () {
+      setTimeout(heroIntro, 300);
       if (lenis) lenis.start();
-    }, 2.4);
+    }, { once: true });
+  })();
+
+  /* header height, so the hero and the next section fill exactly one screen */
+  (function () {
+    var hd = document.querySelector(".site-header"); if (!hd) return;
+    function set() { document.documentElement.style.setProperty("--hdr", hd.offsetHeight + "px"); }
+    set(); window.addEventListener("resize", set);
   })();
 
   /* ================= marquee: speed and lean follow the scroll ================= */

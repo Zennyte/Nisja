@@ -780,3 +780,12 @@ html.sc-js [data-reveal] { opacity: 0; transform: translateY(24px); }
 .wn-row { --wh: clamp(240px, calc(100svh - 450px), 520px); }
 @media (max-width: 900px) { .wn-row { --wh: clamp(190px, calc((100svh - 460px) / 2), 300px); } }
 @media (max-width: 600px) { .wn-row { --wh: clamp(170px, calc((100svh - 470px) / 2), 280px); } .wns .sc-lead { display: none; } .wn-meta { padding: 9px 11px; } .wn-meta i { display: none; } }
+
+/* v7: hero and the folder section fill exactly one screen below the header */
+.sh { min-height: calc(100svh - var(--hdr, 72px)); display: flex; flex-direction: column; justify-content: center; }
+.sh > * { width: 100%; }
+.sh-stage { flex: 1 0 auto; }
+.bf { min-height: calc(100svh - var(--hdr, 72px)); display: flex; flex-direction: column; justify-content: center; }
+.bf > * { width: 100%; }
+.sh-stage { max-height: 64svh; }
+@media (min-width: 700px) and (orientation: portrait) { .sh-stage { max-height: 46svh; } }
