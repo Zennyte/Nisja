@@ -192,7 +192,12 @@
     "v2.rt.lisi": "Customers choose the wood and size, try the furniture in a plan of their own room and ask for a quote with free samples.",
     "v2.svLead": "Everything your business needs to be found online, from one place.",
     "v2.bigline": "Have a business that deserves to be seen? Let's get it started together, today.",
-    "v2.openNew": "Open in a new tab"
+    "v2.openNew": "Open in a new tab",
+    // test pages (lab)
+    "lab.live": "Live",
+    "lab.cap": "Prush Grill & Bar · concept",
+    "lab.gq": "grill restaurant prishtina",
+    "lab.gmeta": "Restaurant · Prishtina · Open now"
   };
 
   var META = {
