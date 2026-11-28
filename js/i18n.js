@@ -247,7 +247,7 @@
   var toggle = document.getElementById("lang-toggle");
   if (toggle) {
     toggle.textContent = META[lang].toggle;
-    toggle.setAttribute("aria-label", META[lang].toggleLabel);
+    toggle.setAttribute("aria-label", META[lang].toggle + " — " + META[lang].toggleLabel);   // the label starts with the visible text
     toggle.addEventListener("click", function () {
       try { localStorage.setItem("nisja-lang", lang === "en" ? "sq" : "en"); } catch (e) { return; }
       location.reload();

@@ -144,6 +144,11 @@
   <link rel="stylesheet" href="css/showcase.css">
 </head>
 <body class="sc">
+  <!-- Intro: a Nisja workstation; one scroll, swipe or key flies into the laptop and on into the site (js/office.js) -->
+  <div class="zy" id="zyra" aria-hidden="true">
+    <canvas></canvas>
+    <div class="zy-veil"><span class="zy-hint">Lëvizni poshtë</span></div>
+  </div>
   <a data-i18n="skip" class="skip-link" href="#main">Kalo te përmbajtja</a>
 
   <!-- Loading screen: the logo draws itself, then lifts away (once per visit) -->
@@ -192,7 +197,7 @@
 
       <!-- Links roll on hover (Merci-Michel) -->
       <nav class="site-nav" id="site-nav" aria-label="Kryesore">
-        <a data-i18n="nav.work" class="sc-roll" href="#work">Punët</a>
+        <a data-i18n="nav.work" class="sc-roll" href="#top">Punët</a>
         <a data-i18n="nav.services" class="sc-roll" href="#services">Shërbimet</a>
         <a data-i18n="process.title" class="sc-roll" href="#process">Si punojmë</a>
         <a data-i18n="pricing.title" class="sc-roll" href="#pricing">Çmimet</a>
@@ -201,7 +206,7 @@
       </nav>
 
       <div class="header-actions">
-        <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Switch to English">EN</button>
+        <button class="lang-toggle" type="button" id="lang-toggle" aria-label="EN — Switch to English">EN</button>
         <a data-i18n="cta.start" class="btn btn-primary btn-small header-cta" href="#contact" data-magnetic data-cursor="Shkruaj">Fillo projektin</a>
         <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">
           <span data-i18n="menu" class="sr-only">Menuja</span>
@@ -223,6 +228,11 @@
       <div class="sc-stream-stage sh-stage sc-in" id="sc-stream" data-cursor="Shiko" tabindex="0" role="group" aria-label="Faqe demo. Përdorni shigjetat majtas dhe djathtas, Enter për ta hapur.">
         <div class="sh-track" id="sc-stream-track" aria-hidden="true"></div>
       </div>
+      <div class="mh" role="group" aria-label="Faqe demo">
+        <div class="mh-row mh-a"><div class="mh-track"><button class="mh-tile" type="button" data-open-demo="kaliber"><img src="assets/demo/kaliber.webp" alt="" width="720" height="450" decoding="async"><span>Kalibër Motors</span></button><button class="mh-tile" type="button" data-open-demo="prush"><img src="assets/demo/sec/prush.webp" alt="" width="720" height="450" decoding="async"><span>Prush</span></button><button class="mh-tile" type="button" data-open-demo="udha"><img src="assets/demo/udha.webp" alt="" width="720" height="450" decoding="async"><span>Udha</span></button><button class="mh-tile" type="button" data-open-demo="embel"><img src="assets/demo/sec/embel.webp" alt="" width="720" height="450" decoding="async"><span>Ëmbël</span></button><button class="mh-tile" type="button" data-open-demo="fener"><img src="assets/demo/fener.webp" alt="" width="720" height="450" decoding="async"><span>Fener</span></button><button class="mh-tile" type="button" data-open-demo="kroni"><img src="assets/demo/sec/kroni.webp" alt="" width="720" height="450" decoding="async"><span>Vila Kroni</span></button><button class="mh-tile" type="button" data-open-demo="kaliber" aria-hidden="true" tabindex="-1"><img src="assets/demo/kaliber.webp" alt="" width="720" height="450" decoding="async"><span>Kalibër Motors</span></button><button class="mh-tile" type="button" data-open-demo="prush" aria-hidden="true" tabindex="-1"><img src="assets/demo/sec/prush.webp" alt="" width="720" height="450" decoding="async"><span>Prush</span></button><button class="mh-tile" type="button" data-open-demo="udha" aria-hidden="true" tabindex="-1"><img src="assets/demo/udha.webp" alt="" width="720" height="450" decoding="async"><span>Udha</span></button><button class="mh-tile" type="button" data-open-demo="embel" aria-hidden="true" tabindex="-1"><img src="assets/demo/sec/embel.webp" alt="" width="720" height="450" decoding="async"><span>Ëmbël</span></button><button class="mh-tile" type="button" data-open-demo="fener" aria-hidden="true" tabindex="-1"><img src="assets/demo/fener.webp" alt="" width="720" height="450" decoding="async"><span>Fener</span></button><button class="mh-tile" type="button" data-open-demo="kroni" aria-hidden="true" tabindex="-1"><img src="assets/demo/sec/kroni.webp" alt="" width="720" height="450" decoding="async"><span>Vila Kroni</span></button></div></div>
+        <div class="mh-row mh-b"><div class="mh-track"><button class="mh-tile" type="button" data-open-demo="brisk"><img src="assets/demo/brisk.webp" alt="" width="720" height="450" decoding="async"><span>Brisk Barber Club</span></button><button class="mh-tile" type="button" data-open-demo="mendafsh"><img src="assets/demo/sec/mendafsh.webp" alt="" width="720" height="450" decoding="async"><span>Mëndafsh</span></button><button class="mh-tile" type="button" data-open-demo="lisi"><img src="assets/demo/sec/lisi.webp" alt="" width="720" height="450" decoding="async"><span>Lisi</span></button><button class="mh-tile" type="button" data-open-demo="vrull"><img src="assets/demo/sec/vrull.webp" alt="" width="720" height="450" decoding="async"><span>Vrull</span></button><button class="mh-tile" type="button" data-open-demo="kristal"><img src="assets/demo/sec/kristal.webp" alt="" width="720" height="450" decoding="async"><span>Kristal Dental</span></button><button class="mh-tile" type="button" data-open-demo="nika-2"><img src="assets/demo/sec/nika.webp" alt="" width="720" height="450" decoding="async"><span>Nika Architecture</span></button><button class="mh-tile" type="button" data-open-demo="brisk" aria-hidden="true" tabindex="-1"><img src="assets/demo/brisk.webp" alt="" width="720" height="450" decoding="async"><span>Brisk Barber Club</span></button><button class="mh-tile" type="button" data-open-demo="mendafsh" aria-hidden="true" tabindex="-1"><img src="assets/demo/sec/mendafsh.webp" alt="" width="720" height="450" decoding="async"><span>Mëndafsh</span></button><button class="mh-tile" type="button" data-open-demo="lisi" aria-hidden="true" tabindex="-1"><img src="assets/demo/sec/lisi.webp" alt="" width="720" height="450" decoding="async"><span>Lisi</span></button><button class="mh-tile" type="button" data-open-demo="vrull" aria-hidden="true" tabindex="-1"><img src="assets/demo/sec/vrull.webp" alt="" width="720" height="450" decoding="async"><span>Vrull</span></button><button class="mh-tile" type="button" data-open-demo="kristal" aria-hidden="true" tabindex="-1"><img src="assets/demo/sec/kristal.webp" alt="" width="720" height="450" decoding="async"><span>Kristal Dental</span></button><button class="mh-tile" type="button" data-open-demo="nika-2" aria-hidden="true" tabindex="-1"><img src="assets/demo/sec/nika.webp" alt="" width="720" height="450" decoding="async"><span>Nika Architecture</span></button></div></div>
+        <a class="btn btn-primary mh-cta" href="#contact" data-i18n="cta.start">Fillo projektin</a>
+      </div>
       <div class="wrap sc-stream-foot sc-in">
         <button class="sc-arrow" type="button" id="sc-stream-prev" aria-label="Faqja e mëparshme" data-magnetic><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
         <p class="sc-stream-now" aria-live="polite"><b id="sc-stream-name">Kalibër Motors</b><span id="sc-stream-kind">Auto sallon · koncept</span></p>
@@ -241,7 +251,7 @@
           <p data-i18n="v2.buildSub" class="hero-sub">Çdo rresht e shkruajmë vetë, pa shabllone. Kur kodi mbaron, faqja shkon live dhe hyn në dosjen tonë. Hapeni dosjen dhe provoni cilëndo.</p>
           <div class="hero-actions">
             <a data-i18n="cta.start" class="btn btn-primary" href="#contact" data-magnetic data-cursor="Shkruaj">Fillo projektin</a>
-            <a data-i18n="hero.secondary" class="btn btn-ghost" href="#work" data-cursor="Shiko">Shiko punët</a>
+            <a data-i18n="hero.secondary" class="btn btn-ghost" href="#top" data-cursor="Shiko">Shiko punët</a>
           </div>
         </div>
 
@@ -275,234 +285,119 @@
       </div>
     </section>
 
-    <!-- ================= WORK: the live site's block, without Nika, with a bigger player ================= -->
-    <section class="sc-wk" id="work" aria-labelledby="work-title">
-      <div class="wrap-wide">
-        <div class="sc-section-head">
-          <h2 data-i18n="work.title" id="work-title" class="sc-h2" data-split>Punë të fundit</h2>
-          <p data-i18n="v2.workLead" class="sc-lead" data-reveal>Faqe të ndërtuara nga ne, live tani. Kaloni mausin mbi një telefon për ta shfletuar, ose zgjidhni një biznes te videoja.</p>
-        </div>
-        <div class="wall">
-          <div class="phones">
-          <article class="phone-card">
-            <a class="phone" href="work/udha/" target="_blank" rel="noopener" data-cursor="Shfleto">
-              <span class="notch" aria-hidden="true"></span>
-              <img src="assets/work/udha-phone.webp" alt="Faqja e Udha Rent a Car në telefon" loading="lazy" width="460" height="2831">
-            </a>
-            <div class="phone-info">
-              <h3>Udha Rent a Car</h3>
-              <p data-i18n="w3.text">Rent a car në Gjakovë: makinat e lira sipas datave, çmimi i plotë që në fillim dhe marrje në aeroport.</p>
-              <ul class="tags"><li data-i18n="tag.booking">Rezervim online</li></ul>
-              <a class="visit" href="work/udha/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-            </div>
-          </article>
-          <article class="phone-card">
-            <a class="phone" href="work/prush/" target="_blank" rel="noopener" data-cursor="Shfleto">
-              <span class="notch" aria-hidden="true"></span>
-              <img src="assets/work/prush-phone.webp" alt="Faqja e Prush Grill &amp; Bar në telefon" loading="lazy" width="460" height="2831">
-            </a>
-            <div class="phone-info">
-              <h3>Prush Grill &amp; Bar</h3>
-              <p data-i18n="w2.text">Restorant grill në Prishtinë: menu me çmime, hapur/mbyllur në kohë reale dhe rezervim tavoline sipas orëve të lira.</p>
-              <ul class="tags"><li data-i18n="tag.table">Rezervim tavoline</li></ul>
-              <a class="visit" href="work/prush/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-            </div>
-          </article>
-          </div>
-          <div class="wall-right">
-        <div class="reel" id="reel">
-          <div class="reel-frame">
-            <div class="reel-bar">
-              <div class="reel-tabs" role="tablist" aria-label="Projekte koncept sipas industrisë">
-              <button class="reel-tab" type="button" role="tab" id="punet-auto" aria-controls="reel-p-kaliber" aria-selected="true" tabindex="0" data-slug="kaliber" style="--dot:#2E8B62"><span data-i18n="v2.tab.auto">Auto sallon</span></button>
-              <button class="reel-tab" type="button" role="tab" id="punet-dasma" aria-controls="reel-p-kroni" aria-selected="false" tabindex="-1" data-slug="kroni" style="--dot:#C9A46B"><span data-i18n="v2.tab.dasma">Dasma</span></button>
-              <button class="reel-tab" type="button" role="tab" id="punet-bar" aria-controls="reel-p-fener" aria-selected="false" tabindex="-1" data-slug="fener" style="--dot:#E3A857"><span data-i18n="v2.tab.bar">Bar</span></button>
-              <button class="reel-tab" type="button" role="tab" id="punet-pasticeri" aria-controls="reel-p-embel" aria-selected="false" tabindex="-1" data-slug="embel" style="--dot:#E0507A"><span data-i18n="v2.tab.past">Pastiçeri</span></button>
-              <button class="reel-tab" type="button" role="tab" id="punet-mobilje" aria-controls="reel-p-lisi" aria-selected="false" tabindex="-1" data-slug="lisi" style="--dot:#8FA07A"><span data-i18n="v2.tab.mob">Mobilje</span></button>
-              <button class="reel-tab" type="button" role="tab" id="punet-berber" aria-controls="reel-p-berber" aria-selected="false" tabindex="-1" data-slug="brisk" style="--dot:#B3202A"><span data-i18n="reel.t1">Berber</span></button>
-              <button class="reel-tab" type="button" role="tab" id="punet-sallon" aria-controls="reel-p-sallon" aria-selected="false" tabindex="-1" data-slug="mendafsh" style="--dot:#C2667B"><span data-i18n="reel.t2">Sallon</span></button>
-              <button class="reel-tab" type="button" role="tab" id="punet-palester" aria-controls="reel-p-palester" aria-selected="false" tabindex="-1" data-slug="vrull" style="--dot:#9BD12A"><span data-i18n="reel.t3">Palestër</span></button>
-              <button class="reel-tab" type="button" role="tab" id="punet-dentist" aria-controls="reel-p-dentist" aria-selected="false" tabindex="-1" data-slug="kristal" style="--dot:#3A8FD6"><span data-i18n="reel.t4">Dentist</span></button>
-              </div>
-              <span class="reel-url" id="reelUrl" aria-hidden="true">/work/kaliber</span>
-            </div>
-            <div class="reel-screen" id="reelScreen" data-cursor="Rrëshqit">
-              <video id="reelVideo" muted playsinline preload="none" width="1040" height="586" aria-label="Regjistrim i shkurtër i faqes"></video>
-              <span class="reel-progress" aria-hidden="true"><i id="reelProg"></i></span>
-            </div>
-          </div>
-          <div class="reel-info">
-            <h3 data-i18n="work.concepts">Një faqe për çdo biznes</h3>
-            <p data-i18n="work.conceptsIntro" class="reel-intro">Projekte koncept për bizneset që humbin më shumë kohë në telefon. Secila ka një sistem që i kursen punë pronarit.</p>
-          <div class="reel-panel" role="tabpanel" id="reel-p-kaliber" aria-labelledby="punet-auto">
-            <p data-i18n="v2.rk.kaliber" class="reel-kicker">Auto sallon · Prishtinë</p>
-            <h4>Kalibër Motors</h4>
-            <p data-i18n="v2.rt.kaliber">Klienti filtron stokun, krahason deri në tri makina dhe sheh këstin mujor me opsionet që zgjedh. Test drive-i rezervohet me orë.</p>
-            <a class="visit" href="work/kaliber/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-          <div class="reel-panel" role="tabpanel" id="reel-p-kroni" aria-labelledby="punet-dasma" hidden>
-            <p data-i18n="v2.rk.kroni" class="reel-kicker">Vend dasmash · Rahovec</p>
-            <h4>Vila Kroni</h4>
-            <p data-i18n="v2.rt.kroni">Çiftet shohin datat e lira për 12 muaj dhe çmimin e plotë sipas ditës, të ftuarve dhe menysë. Data mbahet 7 ditë falas.</p>
-            <a class="visit" href="work/kroni/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-          <div class="reel-panel" role="tabpanel" id="reel-p-fener" aria-labelledby="punet-bar" hidden>
-            <p data-i18n="v2.rk.fener" class="reel-kicker">Bar kokteji · Prishtinë</p>
-            <h4>Fener</h4>
-            <p data-i18n="v2.rt.fener">Mysafiri gjen koktejin me tri shirita shije dhe zgjedh vetë tavolinën në planimetrinë e barit.</p>
-            <a class="visit" href="work/fener/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-          <div class="reel-panel" role="tabpanel" id="reel-p-embel" aria-labelledby="punet-pasticeri" hidden>
-            <p data-i18n="v2.rk.embel" class="reel-kicker">Pastiçeri · Gjakovë</p>
-            <h4>Ëmbël</h4>
-            <p data-i18n="v2.rt.embel">Klienti ndërton tortën dhe sheh çmimin live. Kalendari tregon vetëm ditët kur furra ka ende vend.</p>
-            <a class="visit" href="work/embel/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-          <div class="reel-panel" role="tabpanel" id="reel-p-lisi" aria-labelledby="punet-mobilje" hidden>
-            <p data-i18n="v2.rk.lisi" class="reel-kicker">Mobilje me masë · Pejë</p>
-            <h4>Lisi</h4>
-            <p data-i18n="v2.rt.lisi">Klienti zgjedh drurin dhe masën, i provon mobiljet në planin e dhomës së vet dhe kërkon ofertë me mostra falas.</p>
-            <a class="visit" href="work/lisi/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-          <div class="reel-panel" role="tabpanel" id="reel-p-berber" aria-labelledby="punet-berber" hidden>
-            <p data-i18n="reel.k1" class="reel-kicker">Berber · Prishtinë</p>
-            <h4>Brisk Barber Club</h4>
-            <p data-i18n="reel.p1">Klienti zgjedh berberin dhe sheh vetëm orët e tij të lira. Pronari sheh ditën e secilit berber në një ekran.</p>
-            <a class="visit" href="work/brisk/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-          <div class="reel-panel" role="tabpanel" id="reel-p-sallon" aria-labelledby="punet-sallon" hidden>
-            <p data-i18n="reel.k2" class="reel-kicker">Sallon bukurie · Gjakovë</p>
-            <h4>Mëndafsh Beauty Studio</h4>
-            <p data-i18n="reel.p2">Klientja zgjedh disa shërbime dhe sheh kohën dhe çmimin para se të rezervojë. Pas vizitës merr kujtesë për rifreskim.</p>
-            <a class="visit" href="work/mendafsh/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-          <div class="reel-panel" role="tabpanel" id="reel-p-palester" aria-labelledby="punet-palester" hidden>
-            <p data-i18n="reel.k3" class="reel-kicker">Palestër · Prizren</p>
-            <h4>Vrull Fitness</h4>
-            <p data-i18n="reel.p3">Orari i klasave tregon vendet e lira dhe e mbush vetë listën e pritjes. Dita e provës rezervohet online, me kod për recepsionin.</p>
-            <a class="visit" href="work/vrull/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-          <div class="reel-panel" role="tabpanel" id="reel-p-dentist" aria-labelledby="punet-dentist" hidden>
-            <p data-i18n="reel.k4" class="reel-kicker">Klinikë dentare · Pejë</p>
-            <h4>Kristal Dental</h4>
-            <p data-i18n="reel.p4">Dy pyetje i tregojnë pacientit cilën vizitë të rezervojë. Dy orë urgjente mbahen të lira çdo ditë për dhimbjet.</p>
-            <a class="visit" href="work/kristal/" target="_blank" rel="noopener"><span data-i18n="work.open">Hap faqen</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
-          </div>
-            <p class="older"><span data-i18n="work.older">Demo më e vjetër:</span> <a href="demos/restaurant/" target="_blank" rel="noopener">Trattoria Sole</a></p>
-          </div>
-        </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ================= SERVICES: pinned sideways row, each card plays its service ================= -->
-    <section class="sc-work sv" id="services" aria-labelledby="services-title" data-hpin>
-      <div class="sc-work-pin">
-        <div class="wrap sc-work-head">
-          <div>
-            <h2 data-i18n="services.title" id="services-title" class="sc-h2" data-split>Çfarë bëjmë</h2>
-            <p data-i18n="v2.svLead" class="sc-lead sv-lead" data-reveal>Gjithçka që i duhet biznesit tuaj për t’u gjetur online, nga një vend i vetëm.</p>
-          </div>
-          <p class="sc-work-count" aria-hidden="true"><b class="hp-now">01</b> / <span class="hp-total">06</span></p>
+    <section class="svx" id="services" aria-labelledby="services-title">
+      <div class="wrap svx-grid">
+        <div class="svx-copy">
+          <h2 data-i18n="services.title" id="services-title" class="sc-h2">Çfarë bëjmë</h2>
+          <p data-i18n="v2.svLead" class="sc-lead sv-lead">Gjithçka që i duhet biznesit tuaj për t’u gjetur online, nga një vend i vetëm.</p>
+          <ol class="svx-list">
+            <li class="svx-item is-on" data-i="0"><button class="svx-btn" type="button" aria-controls="svx-stage"><h3 class="svx-h" data-i18n="sv.web">Faqe interneti</h3><p data-i18n="sv.webd">Dizajn i personalizuar, jo shabllon. Ngarkohet shpejt dhe duket mirë në çdo ekran.</p></button></li>
+            <li class="svx-item" data-i="1"><button class="svx-btn" type="button" aria-controls="svx-stage"><h3 class="svx-h" data-i18n="sv.book">Rezervime online</h3><p data-i18n="sv.bookd">Klientët rezervojnë tavolinë, termin ose makinë vetë, dhe ju njoftoheni menjëherë.</p></button></li>
+            <li class="svx-item" data-i="2"><button class="svx-btn" type="button" aria-controls="svx-stage"><h3 class="svx-h" data-i18n="sv.google">Gjendeni në Google</h3><p data-i18n="sv.googled">Harta e Google, optimizim bazë dhe të dhëna të sakta, që klientët t’ju gjejnë kur kërkojnë.</p></button></li>
+            <li class="svx-item" data-i="3"><button class="svx-btn" type="button" aria-controls="svx-stage"><h3 class="svx-h" data-i18n="sv.logo">Logo dhe identitet</h3><p data-i18n="sv.logod">Logo, ngjyra dhe fonte që e bëjnë biznesin tuaj të njohur kudo.</p></button></li>
+            <li class="svx-item" data-i="4"><button class="svx-btn" type="button" aria-controls="svx-stage"><h3 class="svx-h" data-i18n="plan2.f2">Shqip dhe anglisht</h3><p data-i18n="sv.langd">Një prekje dhe faqja flet me turistët dhe diasporën.</p></button></li>
+            <li class="svx-item" data-i="5"><button class="svx-btn" type="button" aria-controls="svx-stage"><h3 class="svx-h" data-i18n="sv.care">Ndryshimet i bëni vetë</h3><p data-i18n="sv.cared">Çmimet, tekstet dhe fotot i përditësoni vetë, ose na shkruani dhe i bëjmë ne.</p></button></li>
+          </ol>
+          <div class="svx-more"><span class="sc-card-endtext" data-i18n="v2.endText">Ju duhet diçka tjetër?</span>
+            <a class="sc-circle" href="#contact" data-magnetic data-cursor="Shkruaj" data-i18n="v2.ask">Na pyesni</a></div>
         </div>
-        <div class="sc-work-track hp-track">
-          <article class="sv-card">
-            <div class="sv-stage" aria-hidden="true">
-              <div class="ss-bar"><i></i><i></i><i></i><span>biznesijuaj.com</span></div>
-              <div class="ss-screen">
-              <div class="scene" data-s="web">
-                <div class="sw-nav"><i></i><span></span><span></span><span></span></div>
-                <div class="sw-hero"><b></b><b></b><em></em></div>
-                <div class="sw-cards"><i></i><i></i><i></i></div>
-                <div class="sw-score"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27"/><circle class="sw-arc" cx="32" cy="32" r="27"/></svg><strong id="swNum">0</strong><small data-i18n="sv.speed">shpejtësia në telefon</small></div>
+        <div class="svx-side">
+          <div class="svx-stage" id="svx-stage" aria-hidden="true" data-urls="biznesijuaj.com|biznesijuaj.com/rezervo|google.com/maps|biznesijuaj.com/logo|biznesijuaj.com/en|biznesijuaj.com/admin">
+            <div class="ss-bar"><i></i><i></i><i></i><span class="svx-url">biznesijuaj.com</span></div>
+            <div class="ss-screen x-screen">
+              <div class="scene x-web" data-s="web">
+                <div class="xw-win"><div class="xw-skel"><i></i><i></i><i></i><b></b><b></b><b></b></div><img class="xw-shot" src="assets/demo/hd/kaliber.webp" alt="" decoding="async"></div>
+                <div class="xw-phone"><img src="assets/svx/kaliber-phone.webp" alt="" decoding="async"></div>
+                <div class="xw-score"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27"/><circle class="xw-arc" cx="32" cy="32" r="27"/></svg><strong id="swNum">0</strong><small data-i18n="sv.speed">shpejtësia në telefon</small></div>
               </div>
+              <div class="scene x-book" data-s="book">
+                <div class="xb-card">
+                  <div class="xb-head"><b data-i18n="x.month">Nëntor 2026</b><span>‹&nbsp;&nbsp;›</span></div>
+                  <div class="xb-grid"><span>H</span><span>M</span><span>M</span><span>E</span><span>P</span><span>Sh</span><span>D</span><i class="xb-e"></i><i class="xb-e"></i><i class="xb-e"></i><i class="xb-e"></i><i class="xb-e"></i><i class="xb-e"></i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>10</i><i>11</i><i>12</i><i>13</i><i>14</i><i>15</i><i>16</i><i>17</i><i>18</i><i>19</i><i>20</i><i>21</i><i>22</i><i>23</i><i>24</i><i>25</i><i>26</i><i>27</i><i class="xb-pick" data-tap="1">28</i><i>29</i><i>30</i></div>
+                  <div class="xb-times"><i>19:00</i><i class="xb-t" data-tap="2">20:00</i><i>21:00</i></div>
+                  <div class="xb-btn" data-tap="3" data-i18n="x.book">Rezervo</div>
+                </div>
+                <div class="xb-phone"><b class="xb-clock">20:04</b><div class="xb-note"><em></em><div><b data-i18n="sv.newbook">Rezervim i ri</b><span data-i18n="sv.newbookd">4 veta · e shtunë 20:00</span></div></div></div>
+                <i class="x-cur"></i><i class="x-tap x1"></i><i class="x-tap x2"></i><i class="x-tap x3"></i>
               </div>
-            </div>
-            <div class="sv-meta"><h3 data-i18n="sv.web">Faqe interneti</h3><p data-i18n="sv.webd">Dizajn i personalizuar, jo shabllon. Ngarkohet shpejt dhe duket mirë në çdo ekran.</p></div>
-          </article>
-          <article class="sv-card">
-            <div class="sv-stage" aria-hidden="true">
-              <div class="ss-bar"><i></i><i></i><i></i><span>biznesijuaj.com/rezervo</span></div>
-              <div class="ss-screen">
-              <div class="scene" data-s="book">
-                <div class="sb-cal"><span>H</span><span>M</span><span>M</span><span>E</span><span>P</span><span>Sh</span><span>D</span><i></i><i></i><i></i><i></i><i></i><i class="sb-pick"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                <div class="sb-toast"><em></em><div><b data-i18n="sv.newbook">Rezervim i ri</b><span data-i18n="sv.newbookd">4 veta · e shtunë 20:00</span></div></div>
+              <div class="scene x-goo" data-s="google">
+                <svg class="xg-map" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <rect width="160" height="110" fill="#1d2230"/>
+                  <path d="M-5 78 C 30 70, 60 92, 95 80 S 150 60, 170 66" stroke="#2a4a6e" stroke-width="7" fill="none"/>
+                  <rect x="10" y="10" width="34" height="22" rx="3" fill="#20352a"/><rect x="112" y="84" width="40" height="20" rx="3" fill="#20352a"/>
+                  <g stroke="#363c4d" stroke-width="2.4" fill="none"><path d="M0 40 H160"/><path d="M0 58 H160"/><path d="M52 0 V110"/><path d="M104 0 V110"/><path d="M0 16 L70 60 L160 100"/></g>
+                  <g stroke="#2b3040" stroke-width="1" fill="none"><path d="M0 26 H160"/><path d="M0 92 H160"/><path d="M26 0 V110"/><path d="M78 0 V110"/><path d="M132 0 V110"/></g>
+                  <g fill="#262b39"><rect x="56" y="44" width="20" height="10" rx="1.5"/><rect x="82" y="44" width="18" height="10" rx="1.5"/><rect x="56" y="62" width="44" height="10" rx="1.5"/><rect x="108" y="44" width="22" height="10" rx="1.5"/><rect x="108" y="20" width="20" height="16" rx="1.5"/><rect x="30" y="44" width="18" height="10" rx="1.5"/></g>
+                </svg>
+                <i class="xg-dot" style="left:24%;top:46%"></i><i class="xg-dot" style="left:78%;top:30%"></i><i class="xg-dot" style="left:36%;top:70%"></i>
+                <div class="xg-search"><span class="xg-ic"></span><span class="xg-q" data-i18n="sv.query">berber afër meje</span><i class="xg-caret"></i></div>
+                <div class="xg-pin"><i></i></div><i class="xg-ring"></i>
+                <div class="xg-card"><img src="assets/svx/brisk.webp" alt="" decoding="async"><div class="xg-info"><b>Brisk Barber Club</b><span data-i18n="sv.gmeta">Berber · Prishtinë · Hapur tani</span><div class="xg-btns"><i data-i18n="sv.gweb">Faqja</i><i data-i18n="sv.gcall">Thirr</i><i data-i18n="sv.gdir">Udhëzime</i></div></div></div>
               </div>
+              <div class="scene x-logo" data-s="logo">
+                <svg class="xl-art" viewBox="0 0 200 124" aria-hidden="true">
+                  <g class="xl-grid" fill="none" stroke="rgba(255,107,44,.45)" stroke-width=".5"><circle cx="70" cy="58" r="34"/><circle cx="70" cy="58" r="20"/><path d="M20 58 H180"/><path d="M70 10 V106"/><path d="M36 92 L104 24"/><path d="M104 92 L36 24"/></g>
+                  <path class="xl-flame" d="M70 22 C 84 38, 94 50, 92 66 C 90 82, 80 92, 70 92 C 58 92, 48 82, 48 68 C 48 58, 54 52, 58 44 C 60 54, 64 58, 68 58 C 66 46, 64 34, 70 22 Z"/>
+                  <path class="xl-core" d="M70 62 C 76 68, 80 74, 78 80 C 76 86, 72 88, 70 88 C 66 88, 62 84, 62 79 C 62 74, 66 70, 70 62 Z"/>
+                  <text class="xl-word" x="112" y="64">PRUSH</text><text class="xl-sub" x="113" y="76">GRILL &amp; BAR</text>
+                </svg>
+                <div class="xl-sw"><i style="background:#17110d"></i><i style="background:#e2572b"></i><i style="background:#f3e7d3"></i><i style="background:#8a5a3b"></i></div>
+                <div class="xl-type"><b>Aa</b><span>Bodoni · Inter</span></div>
               </div>
-            </div>
-            <div class="sv-meta"><h3 data-i18n="sv.book">Rezervime online</h3><p data-i18n="sv.bookd">Klientët rezervojnë tavolinë, termin ose makinë vetë, dhe ju njoftoheni menjëherë.</p></div>
-          </article>
-          <article class="sv-card">
-            <div class="sv-stage" aria-hidden="true">
-              <div class="ss-bar"><i></i><i></i><i></i><span>google.com/maps</span></div>
-              <div class="ss-screen">
-              <div class="scene" data-s="google">
-                <div class="sg-search"><span data-i18n="sv.query" class="sg-type">berber afër meje</span></div>
-                <div class="sg-result"><div class="sg-map"><i></i></div><div><b>Brisk Barber Club</b><span data-i18n="sv.gmeta">Berber · Prishtinë · Hapur tani</span><p><em data-i18n="sv.gweb">Faqja</em><em data-i18n="sv.gcall">Thirr</em><em data-i18n="sv.gdir">Udhëzime</em></p></div></div>
+              <div class="scene x-lang" data-s="lang">
+                <img class="xn-sq" src="assets/svx/prush-sq.webp" alt="" decoding="async"><img class="xn-en" src="assets/svx/prush-en.webp" alt="" decoding="async">
+                <span class="xn-hit" data-tap="1"></span>
+                <i class="x-cur"></i><i class="x-tap x1"></i>
               </div>
-              </div>
-            </div>
-            <div class="sv-meta"><h3 data-i18n="sv.google">Gjendeni në Google</h3><p data-i18n="sv.googled">Harta e Google, optimizim bazë dhe të dhëna të sakta, që klientët t’ju gjejnë kur kërkojnë.</p></div>
-          </article>
-          <article class="sv-card">
-            <div class="sv-stage" aria-hidden="true">
-              <div class="ss-bar"><i></i><i></i><i></i><span>biznesijuaj.com/logo</span></div>
-              <div class="ss-screen">
-              <div class="scene" data-s="logo">
-                <svg class="sl-mark" viewBox="0 0 100 100"><path class="sl-n" d="M20 36 V80 M20 54 A17 17 0 0 1 54 54 V80"/><path class="sl-a" d="M78 80 V16 M67 27 L78 16 L89 27"/></svg>
-                <div class="sl-sw"><i style="--c:#12100E"></i><i style="--c:#F5EFE6"></i><i style="--c:#FF6B2C"></i><i style="--c:#A39B91"></i></div>
-              </div>
-              </div>
-            </div>
-            <div class="sv-meta"><h3 data-i18n="sv.logo">Logo dhe identitet</h3><p data-i18n="sv.logod">Logo, ngjyra dhe fonte që e bëjnë biznesin tuaj të njohur kudo.</p></div>
-          </article>
-          <article class="sv-card">
-            <div class="sv-stage" aria-hidden="true">
-              <div class="ss-bar"><i></i><i></i><i></i><span>biznesijuaj.com/en</span></div>
-              <div class="ss-screen">
-              <div class="scene" data-s="lang">
-                <div class="sla-pill"><span>SQ</span><span>EN</span><i></i></div>
-                <div class="sla-words"><b>Mirë se vini.</b><b>Welcome.</b></div>
-              </div>
-              </div>
-            </div>
-            <div class="sv-meta"><h3 data-i18n="plan2.f2">Shqip dhe anglisht</h3><p data-i18n="sv.langd">Një prekje dhe faqja flet me turistët dhe diasporën.</p></div>
-          </article>
-          <article class="sv-card">
-            <div class="sv-stage" aria-hidden="true">
-              <div class="ss-bar"><i></i><i></i><i></i><span>biznesijuaj.com/admin</span></div>
-              <div class="ss-screen">
-              <div class="scene" data-s="care">
-                <ul class="sc-list"><li><span data-i18n="sv.item1">Qethje klasike</span><b>€8</b></li><li class="sc-edit"><span data-i18n="sv.item2">Qethje + mjekër</span><b><s>€12</s><ins>€13</ins></b></li><li><span data-i18n="sv.item3">Fëmijë</span><b>€6</b></li></ul>
-                <div data-i18n="sv.saved" class="sc-toast">U ruajt · live në faqe</div>
-              </div>
+              <div class="scene x-care" data-s="care">
+                <div class="xc-cms">
+                  <div class="xc-top"><b data-i18n="x.prices">Çmimet</b><span class="xc-dot"></span></div>
+                  <div class="xc-row"><span data-i18n="sv.item1">Qethje klasike</span><em>€8</em></div>
+                  <div class="xc-row xc-active"><span data-i18n="sv.item2">Qethje + mjekër</span><em class="xc-field" data-tap="1"><s>€13</s><b>€15</b><i></i></em></div>
+                  <div class="xc-row"><span data-i18n="sv.item3">Fëmijë</span><em>€6</em></div>
+                  <div class="xc-save" data-tap="2" data-i18n="x.save">Ruaj</div>
+                </div>
+                <div class="xc-live"><img src="assets/svx/brisk.webp" alt="" decoding="async"><div class="xc-list"><p><span data-i18n="sv.item1">Qethje klasike</span><b>€8</b></p><p><span data-i18n="sv.item2">Qethje + mjekër</span><b class="xc-flip"><s>€13</s><i>€15</i></b></p><p><span data-i18n="sv.item3">Fëmijë</span><b>€6</b></p></div></div>
+                <div class="xc-toast"><em></em><span data-i18n="sv.saved">U ruajt · live në faqe</span></div>
+                <i class="x-cur"></i><i class="x-tap x1"></i><i class="x-tap x2"></i>
               </div>
             </div>
-            <div class="sv-meta"><h3 data-i18n="sv.care">Ndryshimet i bëni vetë</h3><p data-i18n="sv.cared">Çmimet, tekstet dhe fotot i përditësoni vetë, ose na shkruani dhe i bëjmë ne.</p></div>
-          </article>
-          <div class="sc-card sc-card--end sv-end">
-            <span class="sc-card-endtext" data-i18n="v2.endText">Ju duhet diçka tjetër?</span>
-            <a class="sc-circle" href="#contact" data-magnetic data-cursor="Shkruaj" data-i18n="v2.ask">Na pyesni</a>
+            <div class="svx-steps"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
           </div>
         </div>
-        <div class="wrap"><span class="sc-work-line" aria-hidden="true"><i class="hp-line"></i></span></div>
       </div>
     </section>
 
     <!-- ================= PROCESS: sticky stacking cards ================= -->
-    <section class="sc-process" id="process" aria-labelledby="process-title">
-      <div class="wrap">
-        <div class="sc-section-head">
-          <h2 data-i18n="process.title" id="process-title" class="sc-h2" data-split>Si punojmë</h2>
-          <p data-i18n="process.intro" class="sc-lead" data-reveal>Nga mesazhi i parë deri te faqja live, në katër hapa të thjeshtë.</p>
+    <section class="sc-process lb-proc" id="process" aria-labelledby="process-title">
+      <div class="lb-pin">
+        <div class="wrap lb-grid">
+          <div class="lb-copy">
+            <h2 data-i18n="process.title" id="process-title" class="sc-h2">Si punojmë</h2>
+            <p data-i18n="process.intro" class="sc-lead">Nga mesazhi i parë deri te faqja live, në katër hapa të thjeshtë.</p>
+            <ol class="lb-steps">
+            <li class="lb-step is-on"><span class="lb-n">1</span><div><h3 data-i18n="p1.title">Bisedojmë</h3><p data-i18n="p1.text">Na tregoni për biznesin tuaj dhe çfarë ju duhet. Ju dërgojmë një ofertë falas.</p></div></li>
+            <li class="lb-step"><span class="lb-n">2</span><div><h3 data-i18n="p2.title">Dizajnojmë</h3><p data-i18n="p2.text">Ju e shihni dizajnin para se të ndërtohet çdo gjë, dhe kërkoni ndryshimet që dëshironi.</p></div></li>
+            <li class="lb-step"><span class="lb-n">3</span><div><h3 data-i18n="p3.title">Ndërtojmë</h3><p data-i18n="p3.text">E ndërtojmë faqen dhe e testojmë në telefon, tablet dhe kompjuter.</p></div></li>
+            <li class="lb-step"><span class="lb-n">4</span><div><h3 data-i18n="p4.title">Publikojmë</h3><p data-i18n="p4.text">Faqja shkon live dhe ju tregojmë si ta përditësoni vetë.</p></div></li>
+            </ol>
+          </div>
+          <figure class="lb-stage">
+            <div class="lb-browser">
+              <div class="lb-bar"><span class="lb-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="lb-url"><span class="lb-lock" aria-hidden="true"></span>prush-grill.com</span><span class="lb-live" data-i18n="lab.live">Live</span></div>
+              <div class="lb-view">
+                <img class="lb-img lb-sketch" src="assets/lab/prush-sketch.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+                <img class="lb-img lb-wire" src="assets/lab/prush-wire.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+                <img class="lb-img lb-design" src="assets/lab/prush-design.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+                <span class="lb-scan" aria-hidden="true"></span>
+                <div class="lb-toast" aria-hidden="true"><span class="lb-toast-dot"></span><div><b data-i18n="sv.newbook">Rezervim i ri</b><span data-i18n="sv.newbookd">4 veta · e shtunë 20:00</span></div></div>
+              </div>
+            </div>
+            <div class="lb-phone" aria-hidden="true"><img src="assets/work/prush-phone.webp" alt="" loading="lazy" decoding="async"></div>
+            <figcaption class="lb-cap" data-i18n="lab.cap">Prush Grill &amp; Bar · koncept</figcaption>
+          </figure>
         </div>
-        <ol class="sc-stack">
-          <li class="sc-step"><span class="sc-step-n">1</span><div><h3 data-i18n="p1.title">Bisedojmë</h3><p data-i18n="p1.text">Na tregoni për biznesin tuaj dhe çfarë ju duhet. Ju dërgojmë një ofertë falas.</p></div></li>
-          <li class="sc-step"><span class="sc-step-n">2</span><div><h3 data-i18n="p2.title">Dizajnojmë</h3><p data-i18n="p2.text">Ju e shihni dizajnin para se të ndërtohet çdo gjë, dhe kërkoni ndryshimet që dëshironi.</p></div></li>
-          <li class="sc-step"><span class="sc-step-n">3</span><div><h3 data-i18n="p3.title">Ndërtojmë</h3><p data-i18n="p3.text">E ndërtojmë faqen dhe e testojmë në telefon, tablet dhe kompjuter.</p></div></li>
-          <li class="sc-step"><span class="sc-step-n">4</span><div><h3 data-i18n="p4.title">Publikojmë</h3><p data-i18n="p4.text">Faqja shkon live dhe ju tregojmë si ta përditësoni vetë.</p></div></li>
-        </ol>
       </div>
     </section>
 
@@ -730,5 +625,8 @@
   <script src="js/showcase-demos.js" defer></script>
   <script src="js/showcase-sections.js" defer></script>
   <script src="js/dizajno.js" defer></script>
+  <script src="js/svx.js" defer></script>
+  <script src="js/process.js" defer></script>
+  <script src="js/office.js" defer></script>
 </body>
 </html>

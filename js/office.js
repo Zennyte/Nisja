@@ -84,7 +84,8 @@
      Mobile browsers start scrolling natively before a script can react, so the dive is not tied to the
      page's scroll at all: it is a timed animation, and when it ends you are at the top of the real site.
      One scroll or swipe back up at the very top plays it in reverse. */
-  var mode = window.scrollY > 10 ? "site" : "intro", state = { p: mode === "site" ? 1 : 0 }, tween = null, touchY = null;
+  var mode = (window.scrollY > 10 || location.hash.length > 1) ? "site" : "intro"   // arriving on a section link (/#contact…) skips the intro
+   , state = { p: mode === "site" ? 1 : 0 }, tween = null, touchY = null;
   function lenis() { return window.NisjaShowcase && window.NisjaShowcase.lenis; }
   function lock(on) {
     root.classList.toggle("zy-lock", on); window.__nisjaPaused = on; root.classList.toggle("zy-cover", on);
