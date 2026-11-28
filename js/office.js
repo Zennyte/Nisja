@@ -1,16 +1,17 @@
-/* Nisja Studio — test page B: a Nisja workstation by a window over the city at night; one scroll flies
-   into the laptop and on into the real site, one scroll up brings you back.
+/* Nisja Studio — test page B: a Nisja workstation by a window over the city at night. One scroll, swipe
+   or key press plays the dive into the laptop and lands at the top of the real site; one back up at the
+   very top plays it in reverse.
    The scene was rendered once, offline and supersampled (js-src/desk-render.src.js), as two depth layers:
    "far" (the window and the night skyline) and "near" (the desk and everything on it, monitors showing
    Nika, the code editor and Udha already baked in with their glow and glass reflections).
    Every frame is drawn fresh on a GPU canvas from the full-resolution images, so the picture stays sharp
    at every point of the zoom. The fly-in is a depth-correct dolly: each layer scales by z / (z − d), so
    the desk rushes past faster than the city. When the laptop's screen fills the view, the canvas fades
-   into the real homepage hero, which is pinned underneath. */
+   into the real homepage, which sits underneath at the top of the page. */
 (function () {
   "use strict";
   var wrap = document.getElementById("zyra"), hero = document.querySelector(".sh");
-  if (!wrap || !hero || !window.gsap || !window.ScrollTrigger) return;
+  if (!wrap || !hero || !window.gsap) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { wrap.remove(); return; }
   var root = document.documentElement, header = document.querySelector(".site-header");
   var T = (window.Nisja && window.Nisja.t) || function (sq) { return sq; };
@@ -43,9 +44,9 @@
     V = [(L[0] + L[2]) / 2, (L[1] + L[3]) / 2];
     s0 = Math.max(vw / F.w, vh / F.h);
     ox = Math.min(0, Math.max(vw - F.w * s0, vw / 2 - V[0] * s0)); oy = (vh - F.h * s0) / 2;
-    kEnd = framing === "land" ? Math.max(vw / (s0 * lw), vh / (s0 * lh)) : vw / (s0 * lw);
+    kEnd = Math.max(vw / (s0 * lw), vh / (s0 * lh));               // the laptop screen ends up covering the whole view
     var sh = s0 * kEnd * lh;
-    endPos = framing === "land" ? [vw / 2, Math.min(vh / 2, sh / 2)] : [vw / 2, vh / 2];
+    endPos = [vw / 2, Math.min(vh / 2, sh / 2)];                     // keep its top (the site's header) at the top
     want();
   }
 
@@ -54,7 +55,7 @@
   function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
   function draw() {
     if (!ready) return;
-    var e = ease(Math.min(1, progress / 0.86));
+    var e = Math.min(1, progress / 0.86);
     var zn = F.zNear, zf = F.zFar, d = e * zn * (1 - 1 / kEnd);
     var kn = zn / (zn - d), kf = zf / (zf - d);
     var st0 = [ox + V[0] * s0, oy + V[1] * s0], pe = e * e * (3 - 2 * e);
@@ -79,55 +80,65 @@
   function want() { if (!raf && active) raf = requestAnimationFrame(tick); }
   window.addEventListener("pointermove", function (e) { mx = e.clientX / vw - 0.5; my = e.clientY / vh - 0.5; want(); }, { passive: true });
 
-  /* ---------- scroll ---------- */
-  root.classList.add("zy-cover"); window.__nisjaPaused = true;
-  var st = ScrollTrigger.create({
-    trigger: hero,
-    start: function () { return "top " + (header ? header.offsetHeight : 0) + "px"; },
-    end: "+=180%", pin: true, pinSpacing: true, refreshPriority: 1, scrub: true,
-    onUpdate: function (self) {
-      progress = self.progress; want();
-      if ((progress > 0.01) !== wrap.classList.contains("is-moving")) wrap.classList.toggle("is-moving");
-      var fade = Math.min(1, Math.max(0, (progress - 0.86) / 0.12));
-      var op = String(1 - fade); if (wrap.style.opacity !== op) wrap.style.opacity = op;
-      var covered = progress < 0.84;                               // the hero's own effects stay paused while covered
-      if (covered !== window.__nisjaPaused) { window.__nisjaPaused = covered; root.classList.toggle("zy-cover", covered); }
-      var done = fade >= 1;
-      if (done === active) { active = !done; wrap.classList.toggle("is-done", done); if (active) want(); }
-    }
-  });
-
-  /* ---------- one scroll, swipe or key plays the whole fly-in (and one back up returns) ---------- */
-  var auto = false, touchY = null;
+  /* ---------- one gesture plays the dive; the page stays locked while the desk shows ----------
+     Mobile browsers start scrolling natively before a script can react, so the dive is not tied to the
+     page's scroll at all: it is a timed animation, and when it ends you are at the top of the real site.
+     One scroll or swipe back up at the very top plays it in reverse. */
+  var mode = window.scrollY > 10 ? "site" : "intro", state = { p: mode === "site" ? 1 : 0 }, tween = null, touchY = null;
   function lenis() { return window.NisjaShowcase && window.NisjaShowcase.lenis; }
-  function go(dir) {
-    if (auto) return;
-    var to = dir > 0 ? st.end : st.start;
-    if (Math.abs(window.scrollY - to) < 2) return;
-    auto = true;
-    var done = function () { auto = false; }, ls = lenis();
-    if (ls) ls.scrollTo(to, { duration: dir > 0 ? 1.8 : 1.4, easing: function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }, lock: true, force: true, onComplete: done });
-    else { window.scrollTo({ top: to, behavior: "smooth" }); setTimeout(done, 1300); }
+  function lock(on) {
+    root.classList.toggle("zy-lock", on); window.__nisjaPaused = on; root.classList.toggle("zy-cover", on);
+    var ls = lenis(); if (ls) { if (on) ls.stop(); else ls.start(); }
   }
-  function zone(dir) {                                           // inside the intro, or at the hero's top going back up
-    var y = window.scrollY;
-    return dir > 0 ? y < st.end - 2 : (y > st.start + 2 && y <= st.end + 6);
+  function apply() {
+    progress = state.p; draw();
+    if ((progress > 0.01) !== wrap.classList.contains("is-moving")) wrap.classList.toggle("is-moving");
+    var fade = Math.min(1, Math.max(0, (progress - 0.84) / 0.14));
+    wrap.style.opacity = String(1 - fade);
   }
-  function grab(e, dir) { if (!zone(dir) && !auto) return false; e.preventDefault(); e.stopImmediatePropagation(); if (!auto) go(dir); return true; }
-  window.addEventListener("wheel", function (e) { if (Math.abs(e.deltaY) < 1) return; grab(e, e.deltaY > 0 ? 1 : -1); }, { passive: false, capture: true });
+  function play(dir) {
+    if (mode === "playing") return;
+    mode = "playing"; active = true;
+    if (dir < 0) { var ls = lenis(); if (ls) ls.scrollTo(0, { immediate: true, force: true }); window.scrollTo(0, 0); wrap.classList.remove("is-done"); }
+    lock(true);
+    if (tween) tween.kill();
+    tween = gsap.to(state, { p: dir > 0 ? 1 : 0, duration: dir > 0 ? 1.75 : 1.3, ease: "power2.inOut", onUpdate: apply, onComplete: function () {
+      if (dir > 0) { mode = "site"; active = false; wrap.classList.add("is-done"); lock(false); }
+      else { mode = "intro"; }
+    } });
+  }
+  function atTop() { return window.scrollY <= 1; }
+  window.addEventListener("wheel", function (e) {
+    if (Math.abs(e.deltaY) < 1) return;
+    if (mode === "playing" || (mode === "intro") || (mode === "site" && e.deltaY < 0 && atTop())) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      if (mode === "intro" && e.deltaY > 0) play(1); else if (mode === "site") play(-1);
+    }
+  }, { passive: false, capture: true });
   window.addEventListener("touchstart", function (e) { touchY = e.touches[0].clientY; }, { passive: true, capture: true });
   window.addEventListener("touchmove", function (e) {
     if (touchY === null) return;
-    var dy = touchY - e.touches[0].clientY; if (Math.abs(dy) < 8) { if (auto) e.preventDefault(); return; }
-    if (grab(e, dy > 0 ? 1 : -1)) touchY = null;
+    var dy = touchY - e.touches[0].clientY;                       // > 0: finger moves up (scroll down)
+    if (mode === "intro" || mode === "playing") {
+      e.preventDefault();                                           // from the very first pixel: no native scroll at all
+      if (mode === "intro" && dy > 6) { touchY = null; play(1); }
+    } else if (mode === "site" && atTop() && dy < -6) {
+      e.preventDefault(); touchY = null; play(-1);
+    }
   }, { passive: false, capture: true });
   window.addEventListener("touchend", function () { touchY = null; }, { passive: true, capture: true });
   window.addEventListener("keydown", function (e) {
-    var k = e.key, dir = (k === "ArrowDown" || k === "PageDown" || (k === " " && !e.shiftKey)) ? 1 : (k === "ArrowUp" || k === "PageUp" || (k === " " && e.shiftKey)) ? -1 : 0;
-    if (!dir || /input|textarea|select/i.test((e.target && e.target.tagName) || "")) return;
-    grab(e, dir);
+    if (/input|textarea|select/i.test((e.target && e.target.tagName) || "")) return;
+    var k = e.key, down = k === "ArrowDown" || k === "PageDown" || (k === " " && !e.shiftKey), up = k === "ArrowUp" || k === "PageUp" || (k === " " && e.shiftKey);
+    if (mode === "playing" && (down || up)) { e.preventDefault(); return; }
+    if (mode === "intro" && down) { e.preventDefault(); play(1); }
+    else if (mode === "site" && up && atTop()) { e.preventDefault(); play(-1); }
   }, { capture: true });
 
-  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { layout(); ScrollTrigger.refresh(); }, 120); });
-  layout(); ScrollTrigger.refresh();
+  window.__zySeek = function (p) { if (tween) tween.kill(); state.p = p; active = true; apply(); };   // for screenshots and tests
+  if (mode === "site") { active = false; wrap.classList.add("is-done"); wrap.style.opacity = "0"; }
+  else lock(true);
+
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
+  layout();
 })();

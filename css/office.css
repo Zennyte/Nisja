@@ -10,3 +10,5 @@
 .zy.is-moving .zy-hint { opacity: 0; transform: translateY(6px); transition-delay: 0s; }
 @keyframes zyNudge { 50% { transform: rotate(45deg) translate(3px, 1px); } }
 .zy.is-done { visibility: hidden; pointer-events: none; }
+html.zy-lock, html.zy-lock body { overflow: hidden !important; overscroll-behavior: none; }
+.zy { touch-action: none; }
