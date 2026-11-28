@@ -326,6 +326,44 @@ async function build() {
     N(put(m, -0.62, TY + 0.016 + i * 0.03, -0.66));
   });
 
+  /* phone framing: only the laptop and the code monitor are in view, so the desk things are brought in
+     close around the laptop (none of them in front of its screen) */
+  if (framing === "port") {
+    ph.position.set(0.232, TY, -0.045); ph.rotation.y = -0.5;
+    nb.material = new THREE.MeshStandardMaterial({ color: 0xa79e8f, roughness: 0.95 });   // cream pages, kept below the lamp's glare
+    nb.position.set(-0.238, TY + 0.006, -0.07); nb.rotation.y = 0.48;
+    cover.position.set(-0.238, TY + 0.0005, -0.07); cover.rotation.y = 0.48;
+    // a ribbon bookmark and a pen lying across the open notebook
+    var rib = new THREE.Mesh(new THREE.PlaneGeometry(0.006, 0.05), new THREE.MeshStandardMaterial({ color: 0xb2452c, roughness: 0.7 }));
+    rib.rotation.set(-Math.PI / 2, 0, 0.48); N(put(rib, -0.2, TY + 0.0125, 0.03));
+    pen.rotation.set(Math.PI / 2, 0, 1.0); N(put(pen, -0.225, TY + 0.017, -0.075));
+    var cap = new THREE.Mesh(new THREE.CylinderGeometry(0.005, 0.005, 0.045, 16), new THREE.MeshStandardMaterial({ color: 0x14110e, roughness: 0.35 }));
+    cap.rotation.set(Math.PI / 2, 0, 1.0); N(put(cap, -0.225 - Math.sin(1.0) * 0.05, TY + 0.017, -0.075 - Math.cos(1.0) * 0.05));
+    cup.position.set(0.255, TY, -0.31); cof.position.set(0.255, TY + 0.076, -0.31); handle.position.set(0.3, TY + 0.05, -0.31);
+    // pen cup with a few pens, back left
+    var pc = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.03, 0.09, 40, 1, true), M.steel); pc.castShadow = true; N(put(pc, -0.25, TY + 0.045, -0.34));
+    var pcb = new THREE.Mesh(new THREE.CircleGeometry(0.03, 32), M.steel); pcb.rotation.x = -Math.PI / 2; N(put(pcb, -0.25, TY + 0.002, -0.34));
+    [[0.008, 0.006, 0.12, 0x1b1712], [-0.01, 0.004, -0.15, 0xb2452c], [0.002, -0.011, 0.05, 0xd8cfc0]].forEach(function (p) {
+      var pn = new THREE.Mesh(new THREE.CylinderGeometry(0.0042, 0.0042, 0.15, 12), new THREE.MeshStandardMaterial({ color: p[3], roughness: 0.4 }));
+      pn.castShadow = true; pn.rotation.set(p[1] * 9, 0, p[2]); N(put(pn, -0.25 + p[0], TY + 0.085, -0.34 + p[1]));
+    });
+    // a small plant in a pale ceramic pot, back right
+    var potG = new THREE.LatheGeometry([[0, 0], [0.034, 0], [0.042, 0.075], [0.045, 0.078], [0, 0.078]].map(function (p) { return new THREE.Vector2(p[0], p[1]); }), 40);
+    var pot = new THREE.Mesh(potG, new THREE.MeshStandardMaterial({ color: 0xd9d1c4, roughness: 0.55 })); pot.castShadow = true; N(put(pot, 0.33, TY, -0.47));
+    var leafM = new THREE.MeshStandardMaterial({ color: 0x3f5a35, roughness: 0.6, side: THREE.DoubleSide }), rl = rand(7);
+    for (var li = 0; li < 14; li++) {
+      var lf = new THREE.Mesh(new THREE.SphereGeometry(0.03, 16, 10), leafM); lf.scale.set(0.42, 0.08, 1.15); lf.castShadow = true;
+      var ang = li / 14 * Math.PI * 2 + rl() * 0.4, tilt = 0.5 + rl() * 0.5, len = 0.03 + rl() * 0.02;
+      lf.position.set(0.33 + Math.cos(ang) * len, TY + 0.09 + rl() * 0.05, -0.47 + Math.sin(ang) * len);
+      lf.rotation.set(0, -ang + Math.PI / 2, 0); lf.rotateX(-tilt); N(lf); scene.add(lf);
+    }
+    // two books stacked behind the notebook
+    [[0.17, 0.026, 0.12, 0x2e3b36], [0.155, 0.022, 0.11, 0x9c4a2f]].forEach(function (bk, i) {
+      var m = rbox(bk[0], bk[1], bk[2], new THREE.MeshStandardMaterial({ color: bk[3], roughness: 0.8 }), 0.004); m.rotation.y = 0.35 - i * 0.2;
+      N(put(m, -0.31, TY + 0.013 + i * 0.025, -0.5));
+    });
+  }
+
   /* light */
   var key = new THREE.SpotLight(0xffc995, 4.2, 4, 0.75, 0.8, 1.4); key.position.set(-0.5, 2.3, 0.3); key.target.position.set(0, TY, -0.25);
   key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 10; key.shadow.blurSamples = 20; key.shadow.bias = -0.0002;
