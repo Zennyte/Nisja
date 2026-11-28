@@ -35,9 +35,10 @@
     }
     if (reduced) { render(1); return; }
     render(0);
+    // progress only: the CSS keeps the stage sticky for the section's extra height
     ScrollTrigger.create({
-      trigger: pin, pin: true, start: function () { return "top " + hdr() + "px"; }, end: "+=280%", scrub: 0.5, refreshPriority: 1,
-      onUpdate: function (self) { render(self.progress); }
+      trigger: sec, start: function () { return "top " + hdr() + "px"; }, end: function () { return "+=" + Math.max(1, sec.offsetHeight - pin.offsetHeight); },
+      scrub: 0.5, onUpdate: function (self) { render(self.progress); }
     });
   })();
 

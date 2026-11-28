@@ -101,6 +101,7 @@
   document.addEventListener("click", function (e) { if (e.target.closest("a, button")) Sound.click(); });
 
   /* ================= smooth scroll ================= */
+  ScrollTrigger.config({ ignoreMobileResize: true });   // the phone toolbar sliding in/out must not re-measure the page mid-scroll
   var lenis = null;
   if (!reduced && window.Lenis) {
     lenis = new Lenis({ lerp: 0.1 });
