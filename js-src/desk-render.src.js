@@ -80,13 +80,13 @@ function plaster(color, seed) {
   return { map: tex(c, true, [3, 1.5]), normalMap: tex(heightToNormal(h, 1.2), false, [3, 1.5]) };
 }
 function woodStrip(seed, base) {                // long-grain oak / walnut for furniture
-  var c = canvas(2048, 512), g = c.getContext("2d"), r = rand(seed);
-  var grd = g.createLinearGradient(0, 0, 0, 512); grd.addColorStop(0, base[0]); grd.addColorStop(1, base[1]);
-  g.fillStyle = grd; g.fillRect(0, 0, 2048, 512);
-  for (var k = 0; k < 160; k++) {
+  var c = canvas(4096, 1024), g = c.getContext("2d"), r = rand(seed);
+  var grd = g.createLinearGradient(0, 0, 0, 1024); grd.addColorStop(0, base[0]); grd.addColorStop(1, base[1]);
+  g.fillStyle = grd; g.fillRect(0, 0, 4096, 1024);
+  for (var k = 0; k < 420; k++) {
     g.strokeStyle = "rgba(" + (r() > 0.55 ? "40,24,12" : "215,175,125") + "," + (0.05 + r() * 0.14) + ")"; g.lineWidth = 0.6 + r() * 2.4;
-    var y = r() * 512; g.beginPath(); g.moveTo(0, y);
-    for (var x = 0; x <= 2048; x += 48) g.lineTo(x, y + Math.sin(x / (180 + r() * 60) + k) * (2 + r() * 6));
+    var y = r() * 1024; g.beginPath(); g.moveTo(0, y);
+    for (var x = 0; x <= 4096; x += 48) g.lineTo(x, y + Math.sin(x / (260 + r() * 120) + k) * (2 + r() * 9));
     g.stroke();
   }
   var t = tex(c, true); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
@@ -147,7 +147,7 @@ async function build() {
     wall: new THREE.MeshStandardMaterial({ map: wallT.map, normalMap: wallT.normalMap, roughness: 0.95 }),
     floor: new THREE.MeshStandardMaterial({ color: 0x1a1512, roughness: 0.7 }),
     oak: new THREE.MeshStandardMaterial({ map: oak, roughness: 0.5 }),
-    desk: new THREE.MeshStandardMaterial({ map: walnut, roughness: 0.42 }),
+    desk: new THREE.MeshPhysicalMaterial({ map: walnut, roughness: 0.48, clearcoat: 0.35, clearcoatRoughness: 0.28 }),
     felt: new THREE.MeshStandardMaterial({ color: 0x131110, roughness: 1, normalMap: feltN }),
     steel: new THREE.MeshStandardMaterial({ color: 0x121212, roughness: 0.38, metalness: 0.85 }),
     alu: new THREE.MeshStandardMaterial({ color: 0xc5c7cb, roughness: 0.28, metalness: 1 }),
@@ -171,44 +171,48 @@ async function build() {
 
   /* the city at night, seen through floor-to-ceiling windows */
   var city = (function () {
-    var Wc = 4096, Hc = 1792, c = canvas(Wc, Hc), g = c.getContext("2d"), r = rand(2026);
+    var Wc = 6144, Hc = 2304, c = canvas(Wc, Hc), g = c.getContext("2d"), r = rand(2026);
+    var glow = canvas(Wc / 4, Hc / 4), gg = glow.getContext("2d");
     var sky = g.createLinearGradient(0, 0, 0, Hc);
-    sky.addColorStop(0, "#03050c"); sky.addColorStop(0.45, "#0a1024"); sky.addColorStop(0.7, "#1a1a36"); sky.addColorStop(0.84, "#3a2a3c"); sky.addColorStop(0.92, "#6a3a2e"); sky.addColorStop(1, "#8a4a30");
+    sky.addColorStop(0, "#02040a"); sky.addColorStop(0.4, "#070c1e"); sky.addColorStop(0.66, "#141834"); sky.addColorStop(0.82, "#2c2340"); sky.addColorStop(0.92, "#5a3330"); sky.addColorStop(1, "#7a442c");
     g.fillStyle = sky; g.fillRect(0, 0, Wc, Hc);
-    for (var i = 0; i < 900; i++) { var y = r() * Hc * 0.55; g.fillStyle = "rgba(255,255,255," + (0.15 + r() * 0.6) * (1 - y / (Hc * 0.6)) + ")"; g.fillRect(r() * Wc, y, r() < 0.06 ? 2 : 1, r() < 0.06 ? 2 : 1); }
-    var mg = g.createRadialGradient(3150, 300, 0, 3150, 300, 140); mg.addColorStop(0, "rgba(255,246,228,1)"); mg.addColorStop(0.28, "rgba(255,246,228,1)"); mg.addColorStop(0.32, "rgba(255,240,215,.25)"); mg.addColorStop(1, "rgba(255,240,215,0)");
-    g.fillStyle = mg; g.beginPath(); g.arc(3150, 300, 140, 0, 7); g.fill();
+    for (var i = 0; i < 1600; i++) { var y = r() * Hc * 0.5; g.fillStyle = "rgba(255,255,255," + (0.12 + r() * 0.55) * (1 - y / (Hc * 0.55)) + ")"; g.fillRect(r() * Wc, y, r() < 0.05 ? 2 : 1, r() < 0.05 ? 2 : 1); }
+    var mg = g.createRadialGradient(4700, 380, 0, 4700, 380, 260); mg.addColorStop(0, "rgba(255,246,228,1)"); mg.addColorStop(0.24, "rgba(255,246,228,1)"); mg.addColorStop(0.27, "rgba(255,236,210,.22)"); mg.addColorStop(1, "rgba(255,236,210,0)");
+    g.fillStyle = mg; g.beginPath(); g.arc(4700, 380, 260, 0, 7); g.fill();
     var layers = [
-      { base: 0.86, minH: 0.06, maxH: 0.2, col: [34, 36, 58], win: 0.18, ws: 5, haze: 0.55 },
-      { base: 0.9, minH: 0.1, maxH: 0.32, col: [22, 22, 38], win: 0.26, ws: 7, haze: 0.35 },
-      { base: 0.95, minH: 0.14, maxH: 0.46, col: [14, 13, 22], win: 0.34, ws: 9, haze: 0.18 },
-      { base: 1.0, minH: 0.2, maxH: 0.62, col: [9, 8, 13], win: 0.42, ws: 12, haze: 0 }
+      { base: 0.84, minH: 0.04, maxH: 0.16, col: [30, 32, 54], win: 0.14, ws: 4, haze: 0.6, w: [26, 70] },
+      { base: 0.88, minH: 0.07, maxH: 0.26, col: [20, 21, 37], win: 0.2, ws: 5, haze: 0.42, w: [34, 96] },
+      { base: 0.93, minH: 0.1, maxH: 0.4, col: [13, 13, 23], win: 0.28, ws: 6, haze: 0.24, w: [46, 130] },
+      { base: 0.98, minH: 0.16, maxH: 0.56, col: [8, 8, 13], win: 0.36, ws: 8, haze: 0.08, w: [60, 170] }
     ];
     layers.forEach(function (L, li) {
-      var x = -r() * 80;
+      var x = -r() * 60;
       while (x < Wc) {
-        var bw = (60 + r() * 170) * (0.7 + li * 0.25), bh = (L.minH + r() * (L.maxH - L.minH)) * Hc, top = L.base * Hc - bh;
-        if (li === 3 && r() < 0.12) bh *= 1.3, top = L.base * Hc - bh;
-        g.fillStyle = "rgb(" + L.col.join(",") + ")"; g.fillRect(x, top, bw, bh + 4);
-        if (r() < 0.35) { g.fillRect(x + bw * 0.4, top - bh * 0.06, bw * 0.12, bh * 0.06); }
-        var cols = Math.floor(bw / L.ws), rows = Math.floor(bh / (L.ws * 1.5));
+        var bw = L.w[0] + r() * (L.w[1] - L.w[0]), bh = (L.minH + r() * (L.maxH - L.minH)) * Hc;
+        if (r() < 0.08) bh *= 1.45;
+        var top = L.base * Hc - bh, shade = (r() - 0.5) * 6;
+        g.fillStyle = "rgb(" + (L.col[0] + shade | 0) + "," + (L.col[1] + shade | 0) + "," + (L.col[2] + shade | 0) + ")"; g.fillRect(x, top, bw, bh + 6);
+        if (r() < 0.3) { g.fillRect(x + bw * 0.3, top - bh * 0.05, bw * 0.4, bh * 0.05); if (r() < 0.5) g.fillRect(x + bw * 0.48, top - bh * 0.12, 2 + li, bh * 0.07); }
+        var cols = Math.floor(bw / L.ws), rows = Math.floor(bh / (L.ws * 1.6)), lit = L.win * (0.5 + r());
         for (var cx = 1; cx < cols - 1; cx++) for (var ry = 1; ry < rows; ry++) {
-          if (r() > L.win) continue;
-          var warm = r() < 0.7, a = 0.45 + r() * 0.55;
-          g.fillStyle = warm ? "rgba(255," + (190 + r() * 50 | 0) + "," + (110 + r() * 60 | 0) + "," + a + ")" : "rgba(" + (170 + r() * 40 | 0) + ",210,255," + a + ")";
-          g.fillRect(x + cx * L.ws + 1, top + ry * L.ws * 1.5, Math.max(1, L.ws * 0.5), Math.max(1, L.ws * 0.7));
+          if (r() > lit) continue;
+          var warm = r() < 0.72, a = 0.4 + r() * 0.6, wx = x + cx * L.ws, wy = top + ry * L.ws * 1.6;
+          var col = warm ? "rgba(255," + (186 + r() * 50 | 0) + "," + (105 + r() * 60 | 0) + "," + a + ")" : "rgba(" + (165 + r() * 45 | 0) + ",208,255," + a + ")";
+          g.fillStyle = col; g.fillRect(wx, wy, Math.max(1, L.ws * 0.45), Math.max(1, L.ws * 0.7));
+          if (li >= 2 && r() < 0.35) { gg.fillStyle = col; gg.fillRect(wx / 4, wy / 4, 1.2, 1.2); }
         }
-        if (bh > Hc * 0.35 && r() < 0.6) { g.fillStyle = "#ff2a1a"; g.beginPath(); g.arc(x + bw / 2, top - 3, 3 + li, 0, 7); g.fill(); }
-        if (L.haze) { g.fillStyle = "rgba(40,36,70," + L.haze * 0.5 + ")"; g.fillRect(x, top, bw, bh); }
-        x += bw + r() * 14 * (li + 1);
+        if (bh > Hc * 0.3 && r() < 0.55) { g.fillStyle = "#ff2a1a"; g.beginPath(); g.arc(x + bw / 2, top - 4, 2 + li, 0, 7); g.fill(); gg.fillStyle = "rgba(255,40,20,.9)"; gg.fillRect((x + bw / 2) / 4 - 1, (top - 4) / 4 - 1, 3, 3); }
+        if (L.haze) { g.fillStyle = "rgba(38,34,66," + L.haze * 0.5 + ")"; g.fillRect(x, top, bw, bh); }
+        x += bw + r() * 10 * (li + 1);
       }
-      var hz = g.createLinearGradient(0, L.base * Hc - Hc * 0.12, 0, L.base * Hc); hz.addColorStop(0, "rgba(120,70,60,0)"); hz.addColorStop(1, "rgba(150,80,55," + (0.18 - li * 0.04) + ")");
-      g.fillStyle = hz; g.fillRect(0, L.base * Hc - Hc * 0.12, Wc, Hc * 0.12);
+      var hz = g.createLinearGradient(0, L.base * Hc - Hc * 0.14, 0, L.base * Hc); hz.addColorStop(0, "rgba(120,70,60,0)"); hz.addColorStop(1, "rgba(160,86,58," + (0.2 - li * 0.04) + ")");
+      g.fillStyle = hz; g.fillRect(0, L.base * Hc - Hc * 0.14, Wc, Hc * 0.14);
     });
-    for (var k = 0; k < 260; k++) { g.fillStyle = "rgba(255," + (170 + r() * 60 | 0) + ",90," + (0.4 + r() * 0.5) + ")"; g.beginPath(); g.arc(r() * Wc, Hc * (0.975 + r() * 0.025), 1 + r() * 2.5, 0, 7); g.fill(); }
+    for (var k = 0; k < 420; k++) { var sx = r() * Wc, sy = Hc * (0.965 + r() * 0.035); g.fillStyle = "rgba(255," + (165 + r() * 70 | 0) + ",90," + (0.45 + r() * 0.5) + ")"; g.beginPath(); g.arc(sx, sy, 1 + r() * 2.6, 0, 7); g.fill(); gg.fillStyle = "rgba(255,170,90,.8)"; gg.fillRect(sx / 4, sy / 4, 2, 2); }
+    // soft glow around the lights
+    g.save(); g.globalCompositeOperation = "lighter"; g.filter = "blur(10px)"; g.globalAlpha = 0.9; g.drawImage(glow, 0, 0, Wc, Hc); g.filter = "blur(3px)"; g.globalAlpha = 0.6; g.drawImage(glow, 0, 0, Wc, Hc); g.restore();
     return tex(c, true);
   })();
-  city.wrapS = THREE.RepeatWrapping; city.repeat.set(1.7, 1);
   var cityM = new THREE.Mesh(new THREE.PlaneGeometry(64, 28), new THREE.MeshBasicMaterial({ map: city, toneMapped: false, fog: false, color: 0xbdbdbd }));
   cityM.position.set(0, 6.6, -26); scene.add(cityM);
   // window wall: black steel mullions, a sill and a soft reflection on the glass
@@ -218,7 +222,7 @@ async function build() {
   var glassM = new THREE.MeshPhysicalMaterial({ color: 0x000000, roughness: 0.04, metalness: 0, transparent: true, opacity: 0.14, envMapIntensity: 1.2 });
   var glassP = new THREE.Mesh(new THREE.PlaneGeometry(9, 3), glassM); glassP.position.set(0, 1.5, WIN + 0.01); scene.add(glassP);
   [-1, 1].forEach(function (sd) { var w = new THREE.Mesh(new THREE.PlaneGeometry(10, 3), new THREE.MeshStandardMaterial({ color: 0x15120f, roughness: 0.95 })); w.rotation.y = -sd * Math.PI / 2; w.position.set(sd * 4.5, 1.5, 0); scene.add(w); });
-  var cityGlow = new THREE.RectAreaLight(0x6f7fb8, 1.1, 8, 2.6); cityGlow.position.set(0, 1.5, WIN + 0.05); cityGlow.lookAt(0, 1.2, 2); scene.add(cityGlow);
+  var cityGlow = new THREE.RectAreaLight(0x6f7fb8, 0.55, 8, 2.6); cityGlow.position.set(0, 1.5, WIN + 0.05); cityGlow.lookAt(0, 1.2, 2); scene.add(cityGlow);
 
   /* desk, with a felt mat under the laptop */
   N(put(rbox(1.9, 0.036, 0.84, M.desk, 0.01), 0, TY - 0.018, -0.33));
@@ -226,25 +230,28 @@ async function build() {
   var mat = slab(0.9, 0.42, 0.002, 0.03, M.felt, 0.001); mat.rotation.x = -Math.PI / 2; N(put(mat, 0.05, TY + 0.002, -0.14));
 
   /* monitors on weighted stands, standing on the desk */
-  function monitor(name, w, h, x, y, z, ry, glow) {
+  async function monitor(name, w, h, x, y, z, ry, glow, url, imgAspect) {
     var g = new THREE.Group();
     var head = new THREE.Group(); head.position.y = y - TY; g.add(head);
-    head.add(rbox(w + 0.016, h + 0.016, 0.022, M.bezel, 0.004));
-    var back = rbox(w * 0.42, h * 0.42, 0.035, M.grey, 0.012); back.position.z = -0.028; head.add(back);
-    var scr = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: glow, toneMapped: false })); scr.position.z = 0.0115; head.add(scr);
+    head.add(rbox(w + 0.012, h + 0.012, 0.018, M.bezel, 0.003));
+    var back = rbox(w * 0.42, h * 0.42, 0.035, M.grey, 0.012); back.position.z = -0.026; head.add(back);
+    var map = await load(url); coverUV(map, imgAspect, w / h);
+    map.generateMipmaps = false; map.minFilter = THREE.LinearFilter; map.anisotropy = 16;   // keep small screen text crisp (the render is supersampled)
+    var scr = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: map, toneMapped: false, color: 0xd6d6d6 })); scr.position.z = 0.0095; head.add(scr);
+    var gl = glass(w, h, 0.001); gl.position.z = 0.0102; head.add(gl);
     var neckH = y - TY - 0.02;
     var neck = rbox(0.06, neckH, 0.022, M.alu, 0.008); neck.position.set(0, neckH / 2 + 0.006, -0.075); g.add(neck);
     var link = rbox(0.06, 0.05, 0.06, M.alu, 0.01); link.position.set(0, y - TY, -0.05); g.add(link);
     var foot = slab(0.22, 0.17, 0.006, 0.03, M.alu, 0.002); foot.rotation.x = -Math.PI / 2; foot.position.set(0, 0.005, -0.05); g.add(foot);
     g.position.set(x, TY, z); g.rotation.y = ry; scene.add(g); g.updateMatrixWorld(true); N(g);
-    var l = new THREE.RectAreaLight(glow, 2.2, w, h); var c = new THREE.Vector3(); scr.getWorldPosition(c);
+    var l = new THREE.RectAreaLight(glow, 2.0, w, h); var c = new THREE.Vector3(); scr.getWorldPosition(c);
     l.position.copy(c); var nrm = new THREE.Vector3(0, 0, 1).applyQuaternion(g.quaternion); l.lookAt(c.clone().add(nrm)); scene.add(l);
     screenMeshes[name] = { mesh: scr, w: w, h: h };
     return g;
   }
-  monitor("left", 0.6, 0.3375, -0.64, 1.07, -0.5, 0.4, 0x8a8f99);        // Nika: dark site, light photos
-  monitor("mid", 0.66, 0.37, 0, 1.1, -0.58, 0, 0x5b6a8a);                 // code editor
-  monitor("right", 0.3, 0.533, 0.58, 1.08, -0.52, -0.4, 0x6f8f6a);        // Udha: green and white, portrait
+  await monitor("left", 0.6, 0.3375, -0.64, 1.07, -0.5, 0.4, 0x7a7f8a, "scr-nika.webp", 2000 / 1125);
+  await monitor("mid", 0.66, 0.37, 0, 1.1, -0.58, 0, 0x55607a, "scr-editor.webp", 2560 / 1436);
+  await monitor("right", 0.3, 0.533, 0.58, 1.08, -0.52, -0.4, 0x9fb59a, "scr-udha.webp", 1350 / 2400);
 
   /* headphones on a stand, back right */
   (function () {
@@ -262,6 +269,12 @@ async function build() {
       var cap = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.004, 40), M.alu); cap.rotation.z = Math.PI / 2; cap.position.set(sd * 0.118, -0.075, 0); hp.add(cap);
     });
     g.add(hp); g.position.set(0.86, TY, -0.42); g.rotation.y = -0.5; N(g); scene.add(g);
+  })();
+  /* a warm lamp just out of frame on the left, pooling light on the desk */
+  (function () {
+    var sp = new THREE.SpotLight(0xffc68a, 6.5, 3, 0.8, 0.75, 1.6); sp.position.set(-1.25, 1.45, -0.35); sp.target.position.set(-0.2, TY, -0.25);
+    sp.castShadow = true; sp.shadow.mapSize.set(2048, 2048); sp.shadow.radius = 8; sp.shadow.blurSamples = 16; sp.shadow.bias = -0.0003; sp.shadow.camera.near = 0.05;
+    scene.add(sp, sp.target);
   })();
   /* mouse on the mat */
   (function () {
@@ -310,7 +323,7 @@ async function build() {
   // a small stack of books at the back left of the desk
   [[0.2, 0.03, 0.15, 0x2e3b36], [0.19, 0.026, 0.14, 0xd8cfc0], [0.17, 0.03, 0.13, 0x9c4a2f]].forEach(function (bk, i) {
     var m = rbox(bk[0], bk[1], bk[2], new THREE.MeshStandardMaterial({ color: bk[3], roughness: 0.8 }), 0.004); m.rotation.y = 0.1 - i * 0.12;
-    N(put(m, -0.78, TY + 0.016 + i * 0.03, -0.6));
+    N(put(m, -0.62, TY + 0.016 + i * 0.03, -0.66));
   });
 
   /* light */
@@ -388,8 +401,7 @@ window.pass = async function (name) {
     setVisible(farObjs, false); setVisible(near, true);
     var bg = scene.background, tm = renderer.toneMapping, sh = renderer.shadowMap.enabled;
     scene.background = new THREE.Color(0x000000); scene.overrideMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    renderer.toneMapping = THREE.NoToneMapping; renderer.setSize(W * 2, H * 2, false);
-    camera.setViewOffset(W * 2, H * 2, 0, (framing === "land" ? -H * 0.17 : -H * 0.14) * 2, W * 2, H * 2); camera.updateProjectionMatrix();
+    renderer.toneMapping = THREE.NoToneMapping;
     renderer.render(scene, camera);
     var url = renderer.domElement.toDataURL("image/png");
     scene.background = bg; scene.overrideMaterial = null; renderer.toneMapping = tm; renderer.setSize(W, H, false); setupCamera(); setVisible(farObjs, true);
