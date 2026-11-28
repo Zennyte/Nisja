@@ -197,7 +197,11 @@
     "lab.live": "Live",
     "lab.cap": "Prush Grill & Bar · concept",
     "lab.gq": "grill restaurant prishtina",
-    "lab.gmeta": "Restaurant · Prishtina · Open now"
+    "lab.gmeta": "Restaurant · Prishtina · Open now",
+    "x.month": "November 2026",
+    "x.book": "Book",
+    "x.save": "Save",
+    "x.prices": "Prices"
   };
 
   var META = {

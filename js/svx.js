@@ -6,13 +6,13 @@
   var items = Array.prototype.slice.call(sec.querySelectorAll(".svx-item"));
   var stage = sec.querySelector(".svx-stage"), scenes = stage.querySelectorAll(".scene"), steps = stage.querySelectorAll(".svx-steps i");
   var url = stage.querySelector(".svx-url"), urls = (stage.getAttribute("data-urls") || "").split("|");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches, current = -1, onScreen = false;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches, current = -1, onScreen = false, loopT = 0;
 
   function count(el) {
     if (!el) return;
     if (reduce) { el.textContent = "98"; return; }
     var t0 = performance.now();
-    (function f(n) { var k = Math.min(1, Math.max(0, (n - t0 - 500) / 1600)); el.textContent = Math.round(98 * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(t0);
+    (function f(n) { var k = Math.min(1, Math.max(0, (n - t0 - 2400) / 1600)); el.textContent = Math.round(98 * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(t0);
   }
   function show(i, force) {
     if (i === current && !force) return;
@@ -21,10 +21,26 @@
     Array.prototype.forEach.call(steps, function (s, k) { s.classList.toggle("on", k === i); s.classList.toggle("done", k < i); });
     Array.prototype.forEach.call(scenes, function (s) { s.classList.remove("on"); });
     if (!onScreen) return;
-    var sc = scenes[i]; void sc.offsetWidth;                  // restart its animation
+    var sc = scenes[i]; aim(sc); void sc.offsetWidth;            // restart its animation
     sc.classList.add("on"); count(sc.querySelector("#swNum"));
+    clearTimeout(loopT);                                          // play it again 7 s after it started, while it stays in focus
+    if (!reduce) loopT = setTimeout(function () { if (onScreen && !document.hidden) show(current, true); }, 7000);
     if (url && urls[i]) url.textContent = urls[i];
   }
+  // the cursor's targets: centre of each [data-tap] element, relative to the screen
+  var screen = stage.querySelector(".ss-screen");
+  function aim(sc) {
+    var box = screen.getBoundingClientRect();
+    sc.style.setProperty("--sx", (box.width * 1.05).toFixed(1) + "px"); sc.style.setProperty("--sy", (box.height * 0.95).toFixed(1) + "px");
+    Array.prototype.forEach.call(sc.querySelectorAll("[data-tap]"), function (el) {
+      var r = el.getBoundingClientRect(), n = el.getAttribute("data-tap");
+      sc.style.setProperty("--cx" + n, (r.left - box.left + r.width / 2).toFixed(1) + "px");
+      sc.style.setProperty("--cy" + n, (r.top - box.top + r.height / 2).toFixed(1) + "px");
+    });
+  }
+  // loop the demo in focus while it stays on screen
+  window.addEventListener("resize", function () { if (current >= 0) aim(scenes[current]); });
+
   // which service sits on the reading line (just above the middle of the screen)
   var line = function () { return window.innerWidth < 900 ? window.innerHeight * 0.7 : window.innerHeight * 0.5; };
   var ticking = false;
