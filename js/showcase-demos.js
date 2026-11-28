@@ -126,7 +126,7 @@
     function tick() {
       var now = performance.now(), dt = lastT ? Math.min(0.05, (now - lastT) / 1000) : 0;
       lastT = now;
-      if (!visible || document.hidden) { lastT = 0; return; }
+      if (!visible || document.hidden || window.__nisjaPaused) { lastT = 0; return; }   // __nisjaPaused: an intro covers the hero
       if (!dragging && !tween) {
         var lv = NS.lenis ? NS.lenis.velocity : 0;
         vel += ((hover ? 0 : speed) + Math.abs(lv) * 6 - vel) * Math.min(1, dt * 3);

@@ -1,120 +1,184 @@
-/* Nisja Studio — test page B: the client's view of a made-up Nisja office.
-   The office was rendered offline at full quality (js-src/office-render.src.js) into three frame
-   sequences: laptop (16:10), tablet (3:4) and phone (9:19.5). This player picks the one that fits
-   the visitor's screen and flips through it on a canvas as they scroll, so there is no 3D work on
-   the device at all. Frames load progressively: the first frame, then every 8th, 4th, 2nd, then the
-   rest; until a frame arrives the nearest loaded one is shown. When the device screen fills the
-   view, the canvas fades out over the real homepage hero, which is pinned underneath. */
+/* Nisja Studio — test page B: a Nisja desk that the first scroll flies straight into.
+   The desk was rendered once, offline (js-src/desk-render.src.js), as two depth layers: "far" (wall and
+   three monitors) and "near" (desk, laptop, tablet and phone, switched off). Here those layers are two
+   images, and the fly-in is a dolly done with CSS transforms only: each layer scales by its own depth
+   (z / (z − d)), so the desk rushes past faster than the monitors, all on the GPU. The screens are live
+   HTML mapped onto the render in perspective with matrix3d: Nika's project strip, a code editor that
+   types, Udha's hero and booking confirmation, and the Nisja homepage on the laptop. When the laptop's
+   screen fills the view, the overlay fades into the real homepage hero, which is pinned underneath. */
 (function () {
   "use strict";
   var wrap = document.getElementById("zyra"), hero = document.querySelector(".sh");
   if (!wrap || !hero || !window.gsap || !window.ScrollTrigger) return;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce) { wrap.remove(); return; }                         // straight to the real site
-  var canvas = wrap.querySelector("canvas"), ctx = canvas.getContext("2d", { alpha: false });
-  var veil = wrap.querySelector(".zy-veil"), header = document.querySelector(".site-header");
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { wrap.remove(); return; }
+  var root = document.documentElement, header = document.querySelector(".site-header");
   var T = (window.Nisja && window.Nisja.t) || function (sq) { return sq; };
-  var label = wrap.querySelector(".zy-hint"); if (label) label.textContent = T("Lëvizni poshtë për të hyrë", "Scroll to step inside");
+  var hint = wrap.querySelector(".zy-hint"); if (hint) hint.textContent = T("Lëvizni poshtë", "Scroll down");
 
-  var N = 90;
-  function pick() {
-    var w = window.innerWidth, a = w / window.innerHeight;
-    if (w < 700 && a < 0.8) return "phone";
-    if (a < 0.95) return "tablet";
-    return "laptop";
-  }
-  var seq = pick();
-  var frames = new Array(N), ready = new Array(N), loadedCount = 0;
-  function url(i) { return "assets/office/seq/" + seq + "/f" + String(i).padStart(3, "0") + ".webp"; }
+  /* where everything sits in the two renders (image pixels) and how far it is from the camera (m) */
+  var INFO = {
+    land: { w: 3000, h: 1875,
+      laptop: [[1247.9, 1098.69], [1752.1, 1098.69], [1752.1, 1413.81], [1247.9, 1413.81]], zNear: 1.62,
+      left: [[7.21, 550.68], [962.66, 555.51], [984.08, 1026.91], [74.68, 1085.41]],
+      mid: [[1022.53, 500.58], [1977.47, 500.58], [1956.15, 1031.1], [1043.85, 1031.1]],
+      right: [[2171.1, 406.81], [2645.36, 394.31], [2567.65, 1207.63], [2128.29, 1170.68]], zFar: 1.92 },
+    port: { w: 1290, h: 2580,
+      laptop: [[345.76, 1464.17], [944.24, 1464.17], [944.24, 1838.23], [345.76, 1838.23]], zNear: 1.12,
+      left: [[-1092.68, 829.88], [50.13, 875.42], [81.68, 1400.78], [-983.34, 1456.02]],
+      mid: [[111.39, 806.68], [1178.61, 806.68], [1146.68, 1403.58], [143.32, 1403.58]],
+      right: [[1398.27, 697.75], [1963.71, 658.81], [1841.53, 1596.71], [1334.06, 1557.35]], zFar: 1.42 }
+  };
+  var SIZE = { laptop: [1440, 900], left: [1600, 900], mid: [1280, 718], right: [900, 1600] };
 
-  /* ---------- progressive loading ---------- */
-  var order = [0], seen = { 0: 1 };
-  [8, 4, 2, 1].forEach(function (step) { for (var i = 0; i < N; i += step) if (!seen[i]) { seen[i] = 1; order.push(i); } });
-  if (!seen[N - 1]) order.push(N - 1);
-  var next = 0, inflight = 0, MAX = 6;
-  function pump() {
-    while (inflight < MAX && next < order.length) loadOne(order[next++]);
-  }
-  var gen = 0;
-  function loadOne(i) {
-    inflight++; var g = gen;
-    var img = new Image(); img.decoding = "async"; img.src = url(i);
-    var done = function () {
-      inflight--; if (g !== gen) { pump(); return; } frames[i] = img; ready[i] = true; loadedCount++;
-      if (veil) veil.style.setProperty("--p", (loadedCount / N).toFixed(3));
-      if (i === 0) { wrap.classList.add("is-ready"); }
-      if (loadedCount === N) wrap.classList.add("is-loaded");
-      want = true; pump();
-    };
-    img.onload = function () { if (img.decode) img.decode().then(done, done); else done(); };
-    img.onerror = function () { inflight--; pump(); };
-  }
+  var stage = wrap.querySelector(".zy-stage"), farG = wrap.querySelector(".zy-far"), nearG = wrap.querySelector(".zy-near");
+  var farImg = farG.querySelector(".zy-img"), nearImg = nearG.querySelector(".zy-img");
+  var framing = null, F, vw, vh, s0, ox, oy, V, kEnd, endPos;
 
-  /* ---------- drawing ---------- */
-  var W = 0, H = 0, current = -1, want = true, progress = 0;
-  function size() {
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = Math.round(window.innerWidth * dpr); H = Math.round(window.innerHeight * dpr);
-    canvas.width = W; canvas.height = H; current = -1; want = true;
+  /* ---------- perspective mapping: a w×h box onto any four corners ---------- */
+  function homography(w, h, q) {
+    var src = [[0, 0], [w, 0], [w, h], [0, h]], A = [], b = [];
+    for (var i = 0; i < 4; i++) {
+      var x = src[i][0], y = src[i][1], u = q[i][0], v = q[i][1];
+      A.push([x, y, 1, 0, 0, 0, -u * x, -u * y]); b.push(u);
+      A.push([0, 0, 0, x, y, 1, -v * x, -v * y]); b.push(v);
+    }
+    for (var c = 0; c < 8; c++) {                                // Gaussian elimination
+      var p = c; for (var r = c + 1; r < 8; r++) if (Math.abs(A[r][c]) > Math.abs(A[p][c])) p = r;
+      var t = A[c]; A[c] = A[p]; A[p] = t; t = b[c]; b[c] = b[p]; b[p] = t;
+      for (r = c + 1; r < 8; r++) { var f = A[r][c] / A[c][c]; for (var k = c; k < 8; k++) A[r][k] -= f * A[c][k]; b[r] -= f * b[c]; }
+    }
+    var m = new Array(8);
+    for (var i2 = 7; i2 >= 0; i2--) { var s = b[i2]; for (var j = i2 + 1; j < 8; j++) s -= A[i2][j] * m[j]; m[i2] = s / A[i2][i2]; }
+    return "matrix3d(" + [m[0], m[3], 0, m[6], m[1], m[4], 0, m[7], 0, 0, 1, 0, m[2], m[5], 0, 1].map(function (n) { return +n.toFixed(9); }).join(",") + ")";
   }
-  function nearest(i) {
-    if (ready[i]) return i;
-    for (var d = 1; d < N; d++) { if (i - d >= 0 && ready[i - d]) return i - d; if (i + d < N && ready[i + d]) return i + d; }
-    return -1;
-  }
-  function draw() {
-    var target = Math.round(Math.min(1, progress / 0.92) * (N - 1)), k = nearest(target);
-    if (k < 0 || (k === current && !want)) return;
-    var img = frames[k], iw = img.naturalWidth, ih = img.naturalHeight;
-    var s = Math.max(W / iw, H / ih), dw = iw * s, dh = ih * s;
-    // keep the top of the frame on screen at the end, so the header lines up with the real page
-    var t = Math.min(1, Math.max(0, (progress - 0.6) / 0.25));
-    ctx.drawImage(img, (W - dw) / 2, (H - dh) / 2 * (1 - t), dw, dh);
-    current = k; want = false;
+  function grow(q, px) {                                         // a hair larger, so no seam shows at the edges
+    var cx = (q[0][0] + q[2][0]) / 2, cy = (q[0][1] + q[2][1]) / 2;
+    return q.map(function (p) { var dx = p[0] - cx, dy = p[1] - cy, l = Math.hypot(dx, dy) || 1; return [p[0] + dx / l * px, p[1] + dy / l * px]; });
   }
 
-  /* ---------- the client glances around before scrolling ---------- */
-  var mx = 0, my = 0, sx = 0, sy = 0;
-  window.addEventListener("pointermove", function (e) { mx = e.clientX / window.innerWidth - 0.5; my = e.clientY / window.innerHeight - 0.5; }, { passive: true });
-
-  var running = true;
-  function loop() {
-    if (!running) return;
-    draw();
-    sx += (mx - sx) * 0.06; sy += (my - sy) * 0.06;
-    var look = Math.max(0, 1 - progress * 6);
-    canvas.style.transform = look > 0 ? "scale(" + (1 + 0.035 * look) + ") translate3d(" + (-sx * 14 * look).toFixed(2) + "px," + (-sy * 10 * look).toFixed(2) + "px,0)" : "";
-    requestAnimationFrame(loop);
+  function layout() {
+    vw = window.innerWidth; vh = window.innerHeight;
+    var f = vw / vh < 0.85 ? "port" : "land";
+    if (f !== framing) {
+      framing = f; F = INFO[f];
+      farImg.src = "assets/office/desk-" + f + "-far.webp"; nearImg.src = "assets/office/desk-" + f + "-near.webp";
+      [farImg, nearImg, stage].forEach(function (el) { el.style.width = F.w + "px"; el.style.height = F.h + "px"; });
+      ["laptop", "left", "mid", "right"].forEach(function (name) {
+        var el = wrap.querySelector(".zy-" + name); if (!el) return;
+        el.style.width = SIZE[name][0] + "px"; el.style.height = SIZE[name][1] + "px";
+        el.style.transform = homography(SIZE[name][0], SIZE[name][1], grow(F[name], 1.2));
+      });
+    }
+    var L = F.laptop, lw = L[1][0] - L[0][0], lh = L[2][1] - L[1][1];
+    V = [(L[0][0] + L[1][0]) / 2, (L[0][1] + L[2][1]) / 2];
+    s0 = Math.max(vw / F.w, vh / F.h);
+    // start: the laptop centred left-right (kept inside the picture), the picture centred up-down
+    ox = Math.min(0, Math.max(vw - F.w * s0, vw / 2 - V[0] * s0)); oy = (vh - F.h * s0) / 2;
+    // end: the laptop's screen covers the view (on tall screens it fills the width, then fades)
+    kEnd = framing === "land" ? Math.max(vw / (s0 * lw), vh / (s0 * lh)) : vw / (s0 * lw);
+    var sh = s0 * kEnd * lh;
+    endPos = framing === "land" ? [vw / 2, Math.min(vh / 2, sh / 2)] : [vw / 2, vh / 2];
+    render();
   }
 
-  /* ---------- scroll: pin the real hero while the camera flies, then fade into it ---------- */
+  /* ---------- the dolly ---------- */
+  var progress = 0, mx = 0, my = 0, sx = 0, sy = 0;
+  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function render() {
+    var e = ease(Math.min(1, progress / 0.86));
+    var zn = F.zNear, zf = F.zFar, d = e * zn * (1 - 1 / kEnd);
+    var kn = zn / (zn - d), kf = zf / (zf - d);
+    var st = [ox + V[0] * s0, oy + V[1] * s0], pe = e * e * (3 - 2 * e);
+    var px = st[0] + (endPos[0] - st[0]) * pe, py = st[1] + (endPos[1] - st[1]) * pe;
+    var look = 1 - Math.min(1, progress * 5), dx = -sx * 18 * look, dy = -sy * 12 * look;
+    farG.style.transform = "translate3d(" + (px - V[0] * s0 * kf + dx * 0.55).toFixed(2) + "px," + (py - V[1] * s0 * kf + dy * 0.55).toFixed(2) + "px,0) scale(" + (s0 * kf).toFixed(5) + ")";
+    nearG.style.transform = "translate3d(" + (px - V[0] * s0 * kn + dx).toFixed(2) + "px," + (py - V[1] * s0 * kn + dy).toFixed(2) + "px,0) scale(" + (s0 * kn).toFixed(5) + ")";
+  }
+
+  var editor = wrap.querySelector(".zy-mid");
+  if (editor) buildEditor(editor);
+
+  /* ---------- frames only when something changed ---------- */
+  var raf = 0, active = true;
+  function tick() {
+    raf = 0; if (!active) return;
+    sx += (mx - sx) * 0.08; sy += (my - sy) * 0.08;
+    render();
+    if (Math.abs(mx - sx) > 0.001 || Math.abs(my - sy) > 0.001) raf = requestAnimationFrame(tick);
+  }
+  function kick() { if (!raf && active) raf = requestAnimationFrame(tick); }
+  window.addEventListener("pointermove", function (e) { mx = e.clientX / vw - 0.5; my = e.clientY / vh - 0.5; kick(); }, { passive: true });
+
+  /* ---------- scroll ---------- */
+  root.classList.add("zy-cover"); window.__nisjaPaused = true;
   ScrollTrigger.create({
     trigger: hero,
     start: function () { return "top " + (header ? header.offsetHeight : 0) + "px"; },
-    end: "+=260%", pin: true, pinSpacing: true, refreshPriority: 1, scrub: true,
+    end: "+=180%", pin: true, pinSpacing: true, refreshPriority: 1, scrub: true,
     onUpdate: function (self) {
-      progress = self.progress; want = true;
-      wrap.classList.toggle("is-moving", progress > 0.02);
-      var fade = Math.min(1, Math.max(0, (progress - 0.9) / 0.1));
-      wrap.style.opacity = String(1 - fade);
+      progress = self.progress; kick();
+      if ((progress > 0.01) !== wrap.classList.contains("is-moving")) wrap.classList.toggle("is-moving");
+      var fade = Math.min(1, Math.max(0, (progress - 0.86) / 0.12));
+      var op = String(1 - fade); if (wrap.style.opacity !== op) wrap.style.opacity = op;
+      var covered = progress < 0.84;                               // the hero's own effects stay paused while covered
+      if (covered !== window.__nisjaPaused) { window.__nisjaPaused = covered; root.classList.toggle("zy-cover", covered); }
       var done = fade >= 1;
-      if (done !== wrap.classList.contains("is-done")) {
-        wrap.classList.toggle("is-done", done);
-        running = !done; if (running) loop();
-      }
+      if (done === active) { active = !done; wrap.classList.toggle("is-done", done); if (editor) editor.classList.toggle("is-paused", done); if (active) kick(); }
     }
   });
-  ScrollTrigger.refresh();
 
-  var rt;
-  window.addEventListener("resize", function () {
-    clearTimeout(rt);
-    rt = setTimeout(function () {
-      size();
-      var s = pick();
-      if (s !== seq) { seq = s; gen++; frames = new Array(N); ready = new Array(N); loadedCount = 0; next = 0; current = -1; pump(); }
-    }, 150);
-  });
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { layout(); ScrollTrigger.refresh(); }, 120); });
+  var pending = 2;
+  [farImg, nearImg].forEach(function (img) { img.addEventListener("load", function () { if (--pending === 0) wrap.classList.add("is-ready"); }, { once: true }); });
+  layout(); ScrollTrigger.refresh();
 
-  size(); pump(); loop();
+  /* ---------- the code editor on the middle monitor ---------- */
+  function buildEditor(el) {
+    var code = [
+      ["c", "/* Nisja Studio — hero strip: every demo site on a 3D curve */"],
+      ["k", "import", "p", " { gsap } ", "k", "from", "s", " \"gsap\"", "p", ";"],
+      ["k", "import", "p", " { ScrollTrigger } ", "k", "from", "s", " \"gsap/ScrollTrigger\"", "p", ";"],
+      [],
+      ["k", "const", "v", " STREAM", "p", " = [", "s", "\"kaliber\"", "p", ", ", "s", "\"prush\"", "p", ", ", "s", "\"udha\"", "p", ", ", "s", "\"embel\"", "p", ", ", "s", "\"fener\"", "p", "];"],
+      ["k", "const", "v", " P", "p", " = ", "n", "1300", "p", ";  ", "c", "// perspective in px"],
+      [],
+      ["k", "function", "f", " layout", "p", "(", "v", "offset", "p", ") {"],
+      ["p", "  cards.", "f", "forEach", "p", "((", "v", "card", "p", ", ", "v", "i", "p", ") => {"],
+      ["k", "    const", "v", " x", "p", " = ", "f", "wrap", "p", "(i * step - offset, L);"],
+      ["k", "    const", "v", " th", "p", " = x / R;               ", "c", "// angle on the cylinder"],
+      ["p", "    card.style.transform = ", "s", "`translate3d(${", "p", "R * Math.", "f", "sin", "p", "(th)", "s", "}px, 0, ${", "p", "R * (", "n", "1", "p", " - Math.", "f", "cos", "p", "(th))", "s", "}px)`", "p", ";"],
+      ["p", "  });"],
+      ["p", "}"],
+      [],
+      ["f", "ScrollTrigger", "p", ".", "f", "create", "p", "({"],
+      ["v", "  trigger", "p", ": hero, ", "v", "pin", "p", ": ", "k", "true", "p", ", ", "v", "scrub", "p", ": ", "k", "true", "p", ","],
+      ["v", "  onUpdate", "p", ": (", "v", "self", "p", ") => ", "f", "render", "p", "(self.progress),"],
+      ["p", "});"],
+      [],
+      ["k", "export async function", "f", " book", "p", "(", "v", "car", "p", ", ", "v", "dates", "p", ") {"],
+      ["k", "  const", "v", " res", "p", " = ", "k", "await", "f", " fetch", "p", "(", "s", "\"/api/rezervo\"", "p", ", { ", "v", "method", "p", ": ", "s", "\"POST\"", "p", " });"],
+      ["k", "  return", "p", " res.", "f", "json", "p", "();  ", "c", "// { code: \"UD 4821\" }"],
+      ["p", "}"]
+    ];
+    function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+    function line(parts) {
+      var out = "";
+      for (var i = 0; i < parts.length; i += 2) out += '<span class="t-' + parts[i] + '">' + esc(parts[i + 1]) + "</span>";
+      return out || "&nbsp;";
+    }
+    var tree = ["nisja", "  css", "    showcase.css", "  js", "    showcase.js", "    showcase-demos.js", "    office.js", "  work", "    kaliber", "    udha", "    prush", "  index.html", "  vercel.json"];
+    var lines = code.map(function (c, i) { return '<div class="ed-l"><i>' + (i + 1) + "</i><span>" + line(c) + "</span></div>"; }).join("");
+    el.innerHTML =
+      '<div class="ed-top"><b></b><b></b><b></b><span>nisja — showcase-demos.js</span></div>' +
+      '<div class="ed-body"><aside class="ed-tree">' + tree.map(function (t, i) { return '<div class="' + (i === 5 ? "on" : "") + '">' + t.replace(/ /g, "&nbsp;") + "</div>"; }).join("") + "</aside>" +
+      '<div class="ed-main"><div class="ed-tabs"><span>index.html</span><span class="on">showcase-demos.js</span><span>office.js</span></div>' +
+      '<div class="ed-code">' + lines + '<div class="ed-l"><i>' + (code.length + 1) + '</i><span class="ed-type"></span><span class="ed-cur"></span></div></div></div>' +
+      '<div class="ed-map">' + code.map(function (c) { var w = 0; for (var i = 1; i < c.length; i += 2) w += c[i].length; return '<i style="width:' + Math.min(100, w * 1.4) + '%"></i>'; }).join("") + "</div></div>" +
+      '<div class="ed-term"><span class="t-c">~/nisja $</span> vercel --prod<br><span class="t-s">✓</span> Deployed to <span class="t-f">nisjastudio.com</span> <span class="t-c">[1.8s]</span></div>';
+    var typed = el.querySelector(".ed-type"), text = "book(\"Škoda Octavia\", { nga: \"29 nën\", deri: \"2 dhj\" });", n = 0;
+    setInterval(function () {
+      if (el.classList.contains("is-paused") || document.hidden) return;
+      n = (n + 1) % (text.length + 18); typed.textContent = text.slice(0, Math.min(n, text.length));
+    }, 85);
+  }
 })();

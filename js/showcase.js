@@ -282,7 +282,7 @@
     new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(canvas);
     var odd = false, slow = 0, last = 0;
     function loop() {
-      if (!visible || document.hidden) return;
+      if (!visible || document.hidden || window.__nisjaPaused) return;
       odd = !odd; if (odd) return;               // 30 fps is plenty for a slow field
       var now = performance.now();
       if (last && now - last > 70 && ++slow > 40) { gsap.ticker.remove(loop); return; }   // a weak device: freeze on the current frame

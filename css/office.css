@@ -1,14 +1,46 @@
-/* test page B: the 3D office intro */
-.zy { position: fixed; inset: 0; z-index: 9000; background: #0e0c0b; }
-.zy canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity .9s ease; }
-.zy.is-ready canvas { opacity: 1; }
-.zy.is-done { visibility: hidden; pointer-events: none; }
-.zy-veil { position: absolute; left: 0; right: 0; bottom: 0; display: grid; justify-items: center; gap: 14px; padding: 0 0 clamp(22px, 5svh, 44px); pointer-events: none; }
-.zy-veil::before { content: ""; width: min(220px, 50vw); height: 2px; border-radius: 2px; background: linear-gradient(90deg, #ff6a2b calc(var(--p, 0) * 100%), rgba(255,255,255,.14) 0); transition: opacity .5s; }
-.zy.is-ready .zy-veil::before { opacity: 0; }
-.zy-hint { font: 500 14px/1.2 Inter, system-ui, sans-serif; color: rgba(255,248,240,.82); letter-spacing: .01em; opacity: 0; transform: translateY(6px); transition: opacity .6s .4s, transform .6s .4s; display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px; border-radius: 999px; background: rgba(14,12,11,.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.1); }
+/* test page B: the Nisja desk intro (two rendered layers + live screens, moved with transforms only) */
+.zy { position: fixed; inset: 0; z-index: 9000; overflow: hidden; background: #0c0a09; contain: strict; }
+.zy-stage { position: absolute; left: 0; top: 0; }
+.zy-far, .zy-near { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; backface-visibility: hidden; }
+.zy-img { position: absolute; left: 0; top: 0; display: block; max-width: none; opacity: 0; transition: opacity .7s ease; }
+.zy.is-ready .zy-img { opacity: 1; }
+.zy-scr { position: absolute; left: 0; top: 0; transform-origin: 0 0; overflow: hidden; background: #0d0d0f; }
+.zy-scr > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.zy-scr::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,.07), rgba(255,255,255,0) 38%); }
+.zy-laptop::after { background: none; }
+/* Nika's strip drifts slowly, like someone browsing it */
+.zy-left > img { transform-origin: 30% 40%; animation: zyDrift 14s ease-in-out infinite alternate; }
+@keyframes zyDrift { to { transform: scale(1.08) translate(-3%, -2%); } }
+/* Udha: the hero, then the booking confirmation, one after the other */
+.zy-right > img { height: 200%; object-fit: fill; animation: zyBook 9s cubic-bezier(.65,0,.35,1) infinite; }
+@keyframes zyBook { 0%, 38% { transform: translateY(0); } 50%, 88% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+.zy-cover .sh-stage, .zy-cover .sc-dots { visibility: hidden; }
+.zy.is-done * { animation-play-state: paused !important; }
+
+/* code editor */
+.zy-mid { display: grid; grid-template-rows: 34px 1fr 74px; font: 15px/1.62 "JetBrains Mono", ui-monospace, monospace; color: #c9d1d9; background: #0f1115; }
+.ed-top { display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #16191f; border-bottom: 1px solid #22262e; }
+.ed-top b { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; } .ed-top b:nth-child(2) { background: #febc2e; } .ed-top b:nth-child(3) { background: #28c840; }
+.ed-top span { margin: 0 auto; color: #7d8590; font-size: 13px; }
+.ed-body { display: grid; grid-template-columns: 210px 1fr 70px; min-height: 0; }
+.ed-tree { padding: 12px 0; background: #13161b; border-right: 1px solid #22262e; color: #8b949e; font-size: 13.5px; }
+.ed-tree div { padding: 1px 14px; white-space: nowrap; } .ed-tree .on { background: #1f2630; color: #e6edf3; box-shadow: inset 2px 0 #ff6b2c; }
+.ed-main { display: grid; grid-template-rows: 36px 1fr; min-width: 0; min-height: 0; }
+.ed-tabs { display: flex; background: #13161b; border-bottom: 1px solid #22262e; font-size: 13px; color: #7d8590; }
+.ed-tabs span { padding: 0 16px; display: flex; align-items: center; border-right: 1px solid #22262e; } .ed-tabs .on { background: #0f1115; color: #e6edf3; box-shadow: inset 0 2px #ff6b2c; }
+.ed-code { padding: 8px 0; overflow: hidden; white-space: pre; }
+.ed-l { display: flex; } .ed-l i { flex: none; width: 48px; padding-right: 16px; text-align: right; color: #484f58; font-style: normal; }
+.ed-cur { display: inline-block; width: 2px; height: 1.2em; margin-left: 1px; background: #ff6b2c; vertical-align: -3px; animation: edBlink 1s steps(1) infinite; }
+@keyframes edBlink { 50% { opacity: 0; } }
+.ed-type { color: #e6edf3; }
+.ed-map { padding: 12px 10px; background: #0f1115; border-left: 1px solid #1b1f26; } .ed-map i { display: block; height: 3px; margin: 3px 0; border-radius: 2px; background: rgba(139,148,158,.35); }
+.ed-term { padding: 10px 16px; background: #0b0d10; border-top: 1px solid #22262e; font-size: 13.5px; color: #c9d1d9; }
+.t-k { color: #ff7b72; } .t-s { color: #a5d6ff; } .t-f { color: #d2a8ff; } .t-v { color: #ffa657; } .t-n { color: #79c0ff; } .t-c { color: #6e7681; } .t-p { color: #c9d1d9; }
+
+.zy-veil { position: absolute; left: 0; right: 0; bottom: 0; display: grid; justify-items: center; padding: 0 0 clamp(22px, 5svh, 44px); pointer-events: none; }
+.zy-hint { font: 500 14px/1.2 Inter, system-ui, sans-serif; color: rgba(255,248,240,.85); display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px; border-radius: 999px; background: rgba(14,12,11,.6); border: 1px solid rgba(255,255,255,.1); opacity: 0; transform: translateY(6px); transition: opacity .6s .5s, transform .6s .5s; }
 .zy-hint::after { content: ""; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); animation: zyNudge 1.6s ease-in-out infinite; }
 .zy.is-ready .zy-hint { opacity: 1; transform: none; }
-@keyframes zyNudge { 50% { transform: rotate(45deg) translate(3px, 1px); } }
-@media (prefers-reduced-motion: reduce) { .zy-hint::after { animation: none; } }
 .zy.is-moving .zy-hint { opacity: 0; transform: translateY(6px); transition-delay: 0s; }
+@keyframes zyNudge { 50% { transform: rotate(45deg) translate(3px, 1px); } }
+.zy.is-done { visibility: hidden; pointer-events: none; }
