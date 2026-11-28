@@ -941,3 +941,5 @@ html.zy-lock, html.zy-lock body { overflow: hidden !important; overscroll-behavi
 
 /* while the intro covers the page, the hero rows stand still */
 .zy-cover .mh-track { animation-play-state: paused; }
+/* phones: the desk intro is the opening, so the hero under it is shown as is from the first paint */
+html.desk-first .sh .sc-in { opacity: 1; transform: none; }

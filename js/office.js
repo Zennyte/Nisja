@@ -21,11 +21,11 @@
   /* where the laptop screen sits in each render (image px) and the layer depths (m) */
   var INFO = {
     land: { w: 3200, h: 2000, laptop: [1331.09, 1171.93, 1868.91, 1508.07], zNear: 1.62, zFar: 3.0 },
-    port: { w: 1400, h: 2800, laptop: [375.24, 1589.03, 1024.76, 1994.97], zNear: 1.12, zFar: 2.5 }
+    port: { w: 1120, h: 1920, laptop: [300.19, 1047.22, 819.81, 1371.98], zNear: 1.12, zFar: 2.5 }   // phone cut: just the laptop and the code monitor
   };
   var imgs = {}, framing = null, F, vw, vh, dpr, s0, ox, oy, V, lw, lh, kEnd, endPos, ready = false;
   function load(src) { var im = new Image(); im.decoding = "async"; im.src = src; return im; }
-  var heroImg = load("assets/office/hero-laptop.webp");
+  var heroImg;
 
   function layout() {
     vw = window.innerWidth; vh = window.innerHeight; dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -34,6 +34,7 @@
     if (f !== framing) {
       framing = f; F = INFO[f]; ready = false;
       var far = load("assets/office/desk-" + f + "-far.webp"), near = load("assets/office/desk-" + f + "-near.webp");
+      heroImg = load(f === "port" ? "assets/office/hero-laptop-m.webp" : "assets/office/hero-laptop.webp");   // phones get a lighter screen
       imgs = { far: far, near: near };
       Promise.all([far, near, heroImg].map(function (im) { return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); })).then(function () {
         if (imgs.far !== far) return;

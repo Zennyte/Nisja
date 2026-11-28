@@ -297,8 +297,11 @@
   /* ================= text: split headings, reveals, scroll-lit words ================= */
   var heroSplit = null;
   if (!reduced && window.SplitText) {
-    heroSplit = SplitText.create($("sc-hero-title"), { type: "words,chars", mask: "chars" });
-    gsap.set(heroSplit.chars, { yPercent: 118 });
+    // when the desk intro covers the hero (phones), the title is simply there; nobody would see it play in
+    if (!document.documentElement.classList.contains("desk-first")) {
+      heroSplit = SplitText.create($("sc-hero-title"), { type: "words,chars", mask: "chars" });
+      gsap.set(heroSplit.chars, { yPercent: 118 });
+    }
     Array.prototype.forEach.call(document.querySelectorAll("[data-split]"), function (el) {
       SplitText.create(el, {
         type: "lines", mask: "lines", autoSplit: true,
@@ -328,6 +331,7 @@
 
   /* ================= hero entrance + preloader ================= */
   function heroIntro() {
+    if (document.documentElement.classList.contains("desk-first")) return;
     if (heroSplit) gsap.to(heroSplit.chars, { yPercent: 0, duration: 1.15, ease: "expo.out", stagger: 0.024 });
     gsap.to(".sh .sc-in", { opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.12, delay: heroSplit ? 0.45 : 0 });
   }
@@ -341,6 +345,22 @@
       if (lenis) lenis.start();
     }, { once: true });
   })();
+
+  /* phone hero rows: their pictures wait until the page has loaded (so the first paint isn't held back),
+     then all load at once, before any tile slides into view. Desktops hide the rows and never fetch them. */
+  window.addEventListener("load", function () {
+    if (!window.matchMedia("(max-width: 699.98px)").matches) return;
+    var done = false, evs = ["touchstart", "pointerdown", "wheel", "keydown"];
+    function go() {
+      if (done) return; done = true;
+      evs.forEach(function (e) { window.removeEventListener(e, go); });
+      Array.prototype.forEach.call(document.querySelectorAll(".mh img[loading=lazy]"), function (im) { im.loading = "eager"; });
+    }
+    // under the desk intro the rows stay hidden until the first swipe, which starts the 1.75 s dive
+    if (!document.documentElement.classList.contains("desk-first")) return go();
+    evs.forEach(function (e) { window.addEventListener(e, go, { passive: true }); });
+    setTimeout(go, 6000);
+  });
 
   /* header height, so the hero and the next section fill exactly one screen */
   (function () {
