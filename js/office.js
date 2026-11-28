@@ -1,8 +1,10 @@
-/* Nisja Studio — test page B: a Nisja desk that the first scroll flies straight into.
-   The desk was rendered once, offline (js-src/desk-render.src.js), as two depth layers: "far" (wall and
-   three monitors) and "near" (desk, laptop, tablet and phone, switched off). Here those layers are two
+/* Nisja Studio — test page B: a Nisja workstation by a window over the city at night; one scroll flies
+   into the laptop and on into the real site, one scroll up brings you back.
+   The scene was rendered once, offline (js-src/desk-render.src.js), as two depth layers: "far" (the
+   window and the night skyline) and "near" (the desk and everything on it: monitors on their stands,
+   the laptop, headphones on a stand, and a tablet and phone that are switched off). Here those layers are two
    images, and the fly-in is a dolly done with CSS transforms only: each layer scales by its own depth
-   (z / (z − d)), so the desk rushes past faster than the monitors, all on the GPU. The screens are live
+   (z / (z − d)), so the desk rushes past faster than the city, all on the GPU. The screens are live
    HTML mapped onto the render in perspective with matrix3d: Nika's project strip, a code editor that
    types, Udha's hero and booking confirmation, and the Nisja homepage on the laptop. When the laptop's
    screen fills the view, the overlay fades into the real homepage hero, which is pinned underneath. */
@@ -19,14 +21,14 @@
   var INFO = {
     land: { w: 3000, h: 1875,
       laptop: [[1247.9, 1098.69], [1752.1, 1098.69], [1752.1, 1413.81], [1247.9, 1413.81]], zNear: 1.62,
-      left: [[7.21, 550.68], [962.66, 555.51], [984.08, 1026.91], [74.68, 1085.41]],
-      mid: [[1022.53, 500.58], [1977.47, 500.58], [1956.15, 1031.1], [1043.85, 1031.1]],
-      right: [[2171.1, 406.81], [2645.36, 394.31], [2567.65, 1207.63], [2128.29, 1170.68]], zFar: 1.92 },
+      left: [[-5.61, 600.58], [978.65, 599.3], [1000.03, 1082.54], [64.24, 1147.19]],
+      mid: [[1008.55, 528.63], [1991.45, 528.63], [1968.89, 1072.68], [1031.11, 1072.68]],
+      right: [[2156.82, 433.03], [2643.36, 422.55], [2564.04, 1252.27], [2113.92, 1213.52]], zFar: 3.0 },
     port: { w: 1290, h: 2580,
       laptop: [[345.76, 1464.17], [944.24, 1464.17], [944.24, 1838.23], [345.76, 1838.23]], zNear: 1.12,
-      left: [[-1092.68, 829.88], [50.13, 875.42], [81.68, 1400.78], [-983.34, 1456.02]],
-      mid: [[111.39, 806.68], [1178.61, 806.68], [1146.68, 1403.58], [143.32, 1403.58]],
-      right: [[1398.27, 697.75], [1963.71, 658.81], [1841.53, 1596.71], [1334.06, 1557.35]], zFar: 1.42 }
+      left: [[-1128.25, 878.98], [61.68, 916.16], [93.82, 1459.69], [-1012.52, 1525.29]],
+      mid: [[89.88, 829.31], [1200.12, 829.31], [1165.64, 1447.37], [124.36, 1447.37]],
+      right: [[1389.28, 718.37], [1974.4, 681.84], [1847.4, 1646.7], [1323.78, 1603.96]], zFar: 2.5 }
   };
   var SIZE = { laptop: [1440, 900], left: [1600, 900], mid: [1280, 718], right: [900, 1600] };
 
@@ -111,7 +113,7 @@
 
   /* ---------- scroll ---------- */
   root.classList.add("zy-cover"); window.__nisjaPaused = true;
-  ScrollTrigger.create({
+  var st = ScrollTrigger.create({
     trigger: hero,
     start: function () { return "top " + (header ? header.offsetHeight : 0) + "px"; },
     end: "+=180%", pin: true, pinSpacing: true, refreshPriority: 1, scrub: true,
@@ -126,6 +128,37 @@
       if (done === active) { active = !done; wrap.classList.toggle("is-done", done); if (editor) editor.classList.toggle("is-paused", done); if (active) kick(); }
     }
   });
+
+  /* ---------- one scroll, swipe or key plays the whole fly-in (and one back up returns) ---------- */
+  var auto = false, touchY = null;
+  function lenis() { return window.NisjaShowcase && window.NisjaShowcase.lenis; }
+  function go(dir) {
+    if (auto) return;
+    var to = dir > 0 ? st.end : st.start;
+    if (Math.abs(window.scrollY - to) < 2) return;
+    auto = true;
+    var done = function () { auto = false; }, ls = lenis();
+    if (ls) ls.scrollTo(to, { duration: dir > 0 ? 1.8 : 1.4, easing: function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }, lock: true, force: true, onComplete: done });
+    else { window.scrollTo({ top: to, behavior: "smooth" }); setTimeout(done, 1300); }
+  }
+  function zone(dir) {                                           // inside the intro, or at the hero's top going back up
+    var y = window.scrollY;
+    return dir > 0 ? y < st.end - 2 : (y > st.start + 2 && y <= st.end + 6);
+  }
+  function grab(e, dir) { if (!zone(dir) && !auto) return false; e.preventDefault(); e.stopImmediatePropagation(); if (!auto) go(dir); return true; }
+  window.addEventListener("wheel", function (e) { if (Math.abs(e.deltaY) < 1) return; grab(e, e.deltaY > 0 ? 1 : -1); }, { passive: false, capture: true });
+  window.addEventListener("touchstart", function (e) { touchY = e.touches[0].clientY; }, { passive: true, capture: true });
+  window.addEventListener("touchmove", function (e) {
+    if (touchY === null) return;
+    var dy = touchY - e.touches[0].clientY; if (Math.abs(dy) < 8) { if (auto) e.preventDefault(); return; }
+    if (grab(e, dy > 0 ? 1 : -1)) touchY = null;
+  }, { passive: false, capture: true });
+  window.addEventListener("touchend", function () { touchY = null; }, { passive: true, capture: true });
+  window.addEventListener("keydown", function (e) {
+    var k = e.key, dir = (k === "ArrowDown" || k === "PageDown" || (k === " " && !e.shiftKey)) ? 1 : (k === "ArrowUp" || k === "PageUp" || (k === " " && e.shiftKey)) ? -1 : 0;
+    if (!dir || /input|textarea|select/i.test((e.target && e.target.tagName) || "")) return;
+    grab(e, dir);
+  }, { capture: true });
 
   var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { layout(); ScrollTrigger.refresh(); }, 120); });
   var pending = 2;

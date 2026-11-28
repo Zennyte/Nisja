@@ -165,40 +165,109 @@ async function build() {
     fabric: new THREE.MeshStandardMaterial({ color: 0x2b2927, roughness: 1, normalMap: feltN })
   };
 
-  var BACK = -0.78, TY = 0.75;
-  var floor = new THREE.Mesh(new THREE.PlaneGeometry(10, 8), M.floor); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
-  var wall = new THREE.Mesh(new THREE.PlaneGeometry(10, 4), M.wall); wall.position.set(0, 2, BACK); wall.receiveShadow = true; scene.add(wall);
-  // slatted oak panel on dark felt behind the monitors
-  put(rbox(3.0, 2.3, 0.02, M.felt, 0.005), 0, 1.77, BACK + 0.012);
-  for (var s = 0; s < 30; s++) put(rbox(0.052, 2.26, 0.034, M.oak, 0.008, 2), -1.45 + s * 0.1, 1.77, BACK + 0.04);
-  // orange bias light behind the monitors (Nisja's colour)
-  put(new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.01, 0.01), M.led), 0, 0.95, BACK + 0.07);
-  var bias = new THREE.RectAreaLight(0xff7230, 3.2, 1.9, 0.5); bias.position.set(0, 1.1, BACK + 0.1); bias.lookAt(0, 1.1, BACK - 1); scene.add(bias);
+  var TY = 0.75, WIN = -1.7;
+  var floor = new THREE.Mesh(new THREE.PlaneGeometry(12, 10), new THREE.MeshStandardMaterial({ color: 0x17120f, roughness: 0.45, metalness: 0 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+  var ceil = new THREE.Mesh(new THREE.PlaneGeometry(12, 10), new THREE.MeshStandardMaterial({ color: 0x0c0b0a, roughness: 1 })); ceil.rotation.x = Math.PI / 2; ceil.position.y = 3.0; scene.add(ceil);
 
-  /* desk */
+  /* the city at night, seen through floor-to-ceiling windows */
+  var city = (function () {
+    var Wc = 4096, Hc = 1792, c = canvas(Wc, Hc), g = c.getContext("2d"), r = rand(2026);
+    var sky = g.createLinearGradient(0, 0, 0, Hc);
+    sky.addColorStop(0, "#03050c"); sky.addColorStop(0.45, "#0a1024"); sky.addColorStop(0.7, "#1a1a36"); sky.addColorStop(0.84, "#3a2a3c"); sky.addColorStop(0.92, "#6a3a2e"); sky.addColorStop(1, "#8a4a30");
+    g.fillStyle = sky; g.fillRect(0, 0, Wc, Hc);
+    for (var i = 0; i < 900; i++) { var y = r() * Hc * 0.55; g.fillStyle = "rgba(255,255,255," + (0.15 + r() * 0.6) * (1 - y / (Hc * 0.6)) + ")"; g.fillRect(r() * Wc, y, r() < 0.06 ? 2 : 1, r() < 0.06 ? 2 : 1); }
+    var mg = g.createRadialGradient(3150, 300, 0, 3150, 300, 140); mg.addColorStop(0, "rgba(255,246,228,1)"); mg.addColorStop(0.28, "rgba(255,246,228,1)"); mg.addColorStop(0.32, "rgba(255,240,215,.25)"); mg.addColorStop(1, "rgba(255,240,215,0)");
+    g.fillStyle = mg; g.beginPath(); g.arc(3150, 300, 140, 0, 7); g.fill();
+    var layers = [
+      { base: 0.86, minH: 0.06, maxH: 0.2, col: [34, 36, 58], win: 0.18, ws: 5, haze: 0.55 },
+      { base: 0.9, minH: 0.1, maxH: 0.32, col: [22, 22, 38], win: 0.26, ws: 7, haze: 0.35 },
+      { base: 0.95, minH: 0.14, maxH: 0.46, col: [14, 13, 22], win: 0.34, ws: 9, haze: 0.18 },
+      { base: 1.0, minH: 0.2, maxH: 0.62, col: [9, 8, 13], win: 0.42, ws: 12, haze: 0 }
+    ];
+    layers.forEach(function (L, li) {
+      var x = -r() * 80;
+      while (x < Wc) {
+        var bw = (60 + r() * 170) * (0.7 + li * 0.25), bh = (L.minH + r() * (L.maxH - L.minH)) * Hc, top = L.base * Hc - bh;
+        if (li === 3 && r() < 0.12) bh *= 1.3, top = L.base * Hc - bh;
+        g.fillStyle = "rgb(" + L.col.join(",") + ")"; g.fillRect(x, top, bw, bh + 4);
+        if (r() < 0.35) { g.fillRect(x + bw * 0.4, top - bh * 0.06, bw * 0.12, bh * 0.06); }
+        var cols = Math.floor(bw / L.ws), rows = Math.floor(bh / (L.ws * 1.5));
+        for (var cx = 1; cx < cols - 1; cx++) for (var ry = 1; ry < rows; ry++) {
+          if (r() > L.win) continue;
+          var warm = r() < 0.7, a = 0.45 + r() * 0.55;
+          g.fillStyle = warm ? "rgba(255," + (190 + r() * 50 | 0) + "," + (110 + r() * 60 | 0) + "," + a + ")" : "rgba(" + (170 + r() * 40 | 0) + ",210,255," + a + ")";
+          g.fillRect(x + cx * L.ws + 1, top + ry * L.ws * 1.5, Math.max(1, L.ws * 0.5), Math.max(1, L.ws * 0.7));
+        }
+        if (bh > Hc * 0.35 && r() < 0.6) { g.fillStyle = "#ff2a1a"; g.beginPath(); g.arc(x + bw / 2, top - 3, 3 + li, 0, 7); g.fill(); }
+        if (L.haze) { g.fillStyle = "rgba(40,36,70," + L.haze * 0.5 + ")"; g.fillRect(x, top, bw, bh); }
+        x += bw + r() * 14 * (li + 1);
+      }
+      var hz = g.createLinearGradient(0, L.base * Hc - Hc * 0.12, 0, L.base * Hc); hz.addColorStop(0, "rgba(120,70,60,0)"); hz.addColorStop(1, "rgba(150,80,55," + (0.18 - li * 0.04) + ")");
+      g.fillStyle = hz; g.fillRect(0, L.base * Hc - Hc * 0.12, Wc, Hc * 0.12);
+    });
+    for (var k = 0; k < 260; k++) { g.fillStyle = "rgba(255," + (170 + r() * 60 | 0) + ",90," + (0.4 + r() * 0.5) + ")"; g.beginPath(); g.arc(r() * Wc, Hc * (0.975 + r() * 0.025), 1 + r() * 2.5, 0, 7); g.fill(); }
+    return tex(c, true);
+  })();
+  city.wrapS = THREE.RepeatWrapping; city.repeat.set(1.7, 1);
+  var cityM = new THREE.Mesh(new THREE.PlaneGeometry(64, 28), new THREE.MeshBasicMaterial({ map: city, toneMapped: false, fog: false, color: 0xbdbdbd }));
+  cityM.position.set(0, 6.6, -26); scene.add(cityM);
+  // window wall: black steel mullions, a sill and a soft reflection on the glass
+  var frameM = new THREE.MeshStandardMaterial({ color: 0x0b0b0c, roughness: 0.5, metalness: 0.6 });
+  for (var mx = -4.2; mx <= 4.2; mx += 1.4) put(rbox(0.06, 3.0, 0.1, frameM, 0.008), mx, 1.5, WIN);
+  [0.12, 2.25, 2.96].forEach(function (y) { put(rbox(9, 0.06, 0.1, frameM, 0.008), 0, y, WIN); });
+  var glassM = new THREE.MeshPhysicalMaterial({ color: 0x000000, roughness: 0.04, metalness: 0, transparent: true, opacity: 0.14, envMapIntensity: 1.2 });
+  var glassP = new THREE.Mesh(new THREE.PlaneGeometry(9, 3), glassM); glassP.position.set(0, 1.5, WIN + 0.01); scene.add(glassP);
+  [-1, 1].forEach(function (sd) { var w = new THREE.Mesh(new THREE.PlaneGeometry(10, 3), new THREE.MeshStandardMaterial({ color: 0x15120f, roughness: 0.95 })); w.rotation.y = -sd * Math.PI / 2; w.position.set(sd * 4.5, 1.5, 0); scene.add(w); });
+  var cityGlow = new THREE.RectAreaLight(0x6f7fb8, 1.1, 8, 2.6); cityGlow.position.set(0, 1.5, WIN + 0.05); cityGlow.lookAt(0, 1.2, 2); scene.add(cityGlow);
+
+  /* desk, with a felt mat under the laptop */
   N(put(rbox(1.9, 0.036, 0.84, M.desk, 0.01), 0, TY - 0.018, -0.33));
   [[-0.88, -0.36], [0.88, -0.36], [-0.88, 0.0], [0.88, 0.0]].forEach(function (p) { N(put(rbox(0.04, TY - 0.036, 0.04, M.steel, 0.006), p[0], (TY - 0.036) / 2, -0.33 + p[1])); });
+  var mat = slab(0.9, 0.42, 0.002, 0.03, M.felt, 0.001); mat.rotation.x = -Math.PI / 2; N(put(mat, 0.05, TY + 0.002, -0.14));
 
-  /* monitors on wall arms */
+  /* monitors on weighted stands, standing on the desk */
   function monitor(name, w, h, x, y, z, ry, glow) {
     var g = new THREE.Group();
-    g.add(rbox(w + 0.016, h + 0.016, 0.022, M.bezel, 0.004));
-    var back = rbox(w * 0.5, h * 0.5, 0.03, M.grey, 0.01); back.position.z = -0.025; g.add(back);
-    var scr = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: glow, toneMapped: false })); scr.position.z = 0.0115; g.add(scr);
-    g.position.set(x, y, z); g.rotation.y = ry; scene.add(g); g.updateMatrixWorld(true);
-    // arm to the wall
-    var armLen = Math.abs(BACK - z) + 0.05, arm = rbox(0.03, 0.03, armLen, M.steel, 0.008);
-    arm.position.set(x, y - 0.04, (BACK + z) / 2 - 0.02); scene.add(arm);
-    put(rbox(0.07, 0.1, 0.02, M.steel, 0.006), x, y - 0.04, BACK + 0.06);
+    var head = new THREE.Group(); head.position.y = y - TY; g.add(head);
+    head.add(rbox(w + 0.016, h + 0.016, 0.022, M.bezel, 0.004));
+    var back = rbox(w * 0.42, h * 0.42, 0.035, M.grey, 0.012); back.position.z = -0.028; head.add(back);
+    var scr = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: glow, toneMapped: false })); scr.position.z = 0.0115; head.add(scr);
+    var neckH = y - TY - 0.02;
+    var neck = rbox(0.06, neckH, 0.022, M.alu, 0.008); neck.position.set(0, neckH / 2 + 0.006, -0.075); g.add(neck);
+    var link = rbox(0.06, 0.05, 0.06, M.alu, 0.01); link.position.set(0, y - TY, -0.05); g.add(link);
+    var foot = slab(0.22, 0.17, 0.006, 0.03, M.alu, 0.002); foot.rotation.x = -Math.PI / 2; foot.position.set(0, 0.005, -0.05); g.add(foot);
+    g.position.set(x, TY, z); g.rotation.y = ry; scene.add(g); g.updateMatrixWorld(true); N(g);
     var l = new THREE.RectAreaLight(glow, 2.2, w, h); var c = new THREE.Vector3(); scr.getWorldPosition(c);
     l.position.copy(c); var nrm = new THREE.Vector3(0, 0, 1).applyQuaternion(g.quaternion); l.lookAt(c.clone().add(nrm)); scene.add(l);
     screenMeshes[name] = { mesh: scr, w: w, h: h };
     return g;
   }
-  monitor("left", 0.6, 0.3375, -0.66, 1.1, -0.56, 0.42, 0x8a8f99);       // Nika: dark site, light photos
-  monitor("mid", 0.66, 0.37, 0, 1.12, -0.64, 0, 0x5b6a8a);                // code editor
-  monitor("right", 0.3, 0.533, 0.6, 1.1, -0.57, -0.42, 0x6f8f6a);       // Udha: green and white, portrait
+  monitor("left", 0.6, 0.3375, -0.64, 1.07, -0.5, 0.4, 0x8a8f99);        // Nika: dark site, light photos
+  monitor("mid", 0.66, 0.37, 0, 1.1, -0.58, 0, 0x5b6a8a);                 // code editor
+  monitor("right", 0.3, 0.533, 0.58, 1.08, -0.52, -0.4, 0x6f8f6a);        // Udha: green and white, portrait
 
+  /* headphones on a stand, back right */
+  (function () {
+    var g = new THREE.Group(), black = new THREE.MeshStandardMaterial({ color: 0x141414, roughness: 0.55, metalness: 0.2 });
+    var base = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.065, 0.012, 48), M.alu); base.position.y = 0.006; base.castShadow = true; g.add(base);
+    var rod = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.27, 20), M.alu); rod.position.y = 0.14; rod.castShadow = true; g.add(rod);
+    var hook = new THREE.Mesh(new THREE.TorusGeometry(0.045, 0.008, 12, 40, Math.PI), M.alu); hook.position.y = 0.272; hook.castShadow = true; g.add(hook);
+    var hp = new THREE.Group(); hp.position.y = 0.287;
+    var band = new THREE.Mesh(new THREE.TorusGeometry(0.088, 0.011, 14, 56, Math.PI), black); band.scale.set(1, 1.1, 1.6); band.castShadow = true; hp.add(band);
+    var pad = new THREE.Mesh(new THREE.TorusGeometry(0.082, 0.009, 12, 40, Math.PI * 0.6), M.leather); pad.rotation.z = Math.PI * 0.2; pad.scale.set(1, 1.1, 2); pad.position.y = -0.004; hp.add(pad);
+    [-1, 1].forEach(function (sd) {
+      var yoke = rbox(0.008, 0.05, 0.03, M.alu, 0.003); yoke.position.set(sd * 0.088, -0.02, 0); hp.add(yoke);
+      var cup = new THREE.Mesh(new THREE.CylinderGeometry(0.046, 0.046, 0.034, 48), black); cup.rotation.z = Math.PI / 2; cup.position.set(sd * 0.1, -0.075, 0); cup.castShadow = true; hp.add(cup);
+      var ring = new THREE.Mesh(new THREE.TorusGeometry(0.04, 0.013, 14, 40), M.leather); ring.rotation.y = Math.PI / 2; ring.position.set(sd * 0.08, -0.075, 0); hp.add(ring);
+      var cap = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.004, 40), M.alu); cap.rotation.z = Math.PI / 2; cap.position.set(sd * 0.118, -0.075, 0); hp.add(cap);
+    });
+    g.add(hp); g.position.set(0.86, TY, -0.42); g.rotation.y = -0.5; N(g); scene.add(g);
+  })();
+  /* mouse on the mat */
+  (function () {
+    var mo = new THREE.Mesh(new THREE.SphereGeometry(0.03, 32, 20), new THREE.MeshStandardMaterial({ color: 0xe9e7e2, roughness: 0.35 }));
+    mo.scale.set(1, 0.38, 1.75); mo.position.set(0.35, TY + 0.011, -0.06); mo.castShadow = true; N(mo); scene.add(mo);
+  })();
   /* the laptop, facing the camera */
   var lap = new THREE.Group(), Wd = 0.3, Hd = Wd / 1.6;
   var base = slab(0.312, 0.218, 0.006, 0.012, M.alu, 0.0025); base.rotation.x = -Math.PI / 2; base.position.y = 0.0055; lap.add(base);
@@ -218,7 +287,7 @@ async function build() {
   var hinge = new THREE.Mesh(new THREE.CylinderGeometry(0.004, 0.004, 0.26, 16), M.grey); hinge.rotation.z = Math.PI / 2; hinge.position.set(0, 0.009, -0.106); lap.add(hinge);
   lap.add(lid); lap.position.set(0, TY, -0.12); N(lap); scene.add(lap);
   screenMeshes.laptop = { mesh: lscr, w: Wd, h: Hd };
-  var lapGlow = new THREE.RectAreaLight(0xd8c8b8, 1.6, Wd, Hd); scene.add(lapGlow);
+  var lapGlow = new THREE.RectAreaLight(0xd8c8b8, 0.5, Wd, Hd); scene.add(lapGlow);
 
   /* tablet and phone, switched off, lying on the desk */
   var tab = new THREE.Group();
@@ -228,17 +297,16 @@ async function build() {
   var ph = new THREE.Group();
   var pb = slab(0.072, 0.15, 0.006, 0.011, M.steel, 0.0012); pb.rotation.x = -Math.PI / 2; pb.position.y = 0.0045; ph.add(pb);
   var ps = screenPlane(0.066, 0.144, 0.009, null); ps.material = M.off; ps.rotation.x = -Math.PI / 2; ps.position.y = 0.0082; ph.add(ps);
-  ph.position.set(0.4, TY, -0.06); ph.rotation.y = -0.3; N(ph); scene.add(ph);
+  ph.position.set(0.6, TY, -0.1); ph.rotation.y = -0.25; N(ph); scene.add(ph);
 
   /* props on the desk */
   var cupG = new THREE.LatheGeometry([[0, 0], [0.03, 0], [0.042, 0.012], [0.044, 0.085], [0.04, 0.086], [0.038, 0.012], [0, 0.01]].map(function (p) { return new THREE.Vector2(p[0], p[1]); }), 48);
-  var cup = new THREE.Mesh(cupG, M.ceramicDark); cup.castShadow = true; N(put(cup, 0.62, TY, -0.3));
-  var cof = new THREE.Mesh(new THREE.CircleGeometry(0.038, 32), M.coffee); cof.rotation.x = -Math.PI / 2; N(put(cof, 0.62, TY + 0.076, -0.3));
-  var handle = new THREE.Mesh(new THREE.TorusGeometry(0.02, 0.006, 10, 24, Math.PI), M.ceramicDark); handle.rotation.z = -Math.PI / 2; N(put(handle, 0.665, TY + 0.05, -0.3));
+  var cup = new THREE.Mesh(cupG, M.ceramicDark); cup.castShadow = true; N(put(cup, -0.42, TY, -0.4));
+  var cof = new THREE.Mesh(new THREE.CircleGeometry(0.038, 32), M.coffee); cof.rotation.x = -Math.PI / 2; N(put(cof, -0.42, TY + 0.076, -0.4));
+  var handle = new THREE.Mesh(new THREE.TorusGeometry(0.02, 0.006, 10, 24, Math.PI), M.ceramicDark); handle.rotation.z = -Math.PI / 2; N(put(handle, -0.375, TY + 0.05, -0.4));
   var nb = rbox(0.15, 0.012, 0.21, M.paper, 0.004); nb.rotation.y = -0.15; N(put(nb, -0.7, TY + 0.006, -0.32));
   var cover = rbox(0.152, 0.004, 0.212, M.leather, 0.002); cover.rotation.y = -0.15; N(put(cover, -0.7, TY + 0.0005, -0.32));
   var pen = new THREE.Mesh(new THREE.CylinderGeometry(0.0045, 0.0045, 0.14, 16), M.steel); pen.rotation.set(Math.PI / 2, 0, -0.5); N(put(pen, -0.6, TY + 0.006, -0.25));
-  var spk = rbox(0.09, 0.15, 0.09, M.fabric, 0.02); N(put(spk, -0.36, TY + 0.075, -0.6));
   // a small stack of books at the back left of the desk
   [[0.2, 0.03, 0.15, 0x2e3b36], [0.19, 0.026, 0.14, 0xd8cfc0], [0.17, 0.03, 0.13, 0x9c4a2f]].forEach(function (bk, i) {
     var m = rbox(bk[0], bk[1], bk[2], new THREE.MeshStandardMaterial({ color: bk[3], roughness: 0.8 }), 0.004); m.rotation.y = 0.1 - i * 0.12;
@@ -246,10 +314,10 @@ async function build() {
   });
 
   /* light */
-  var key = new THREE.SpotLight(0xffe2c4, 7, 4, 0.7, 0.7, 1.4); key.position.set(0.6, 2.2, 0.6); key.target.position.set(0, TY, -0.25);
+  var key = new THREE.SpotLight(0xffc995, 4.2, 4, 0.75, 0.8, 1.4); key.position.set(-0.5, 2.3, 0.3); key.target.position.set(0, TY, -0.25);
   key.castShadow = true; key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 10; key.shadow.blurSamples = 20; key.shadow.bias = -0.0002;
   scene.add(key, key.target);
-  var rim = new THREE.SpotLight(0xffb27a, 4, 4, 0.8, 0.8, 1.4); rim.position.set(-1.6, 1.6, 0.4); rim.target.position.set(0, TY, -0.3); scene.add(rim, rim.target);
+  var rim = new THREE.SpotLight(0x8fa4ff, 3, 5, 0.8, 0.8, 1.4); rim.position.set(-1.2, 2.0, -1.5); rim.target.position.set(0, TY, -0.3); scene.add(rim, rim.target);
   scene.add(new THREE.HemisphereLight(0xfff0e0, 0x20160f, 0.14));
 
   scene.traverse(function (o) { if (o.isMesh && !(o.material && o.material.isMeshBasicMaterial)) o.receiveShadow = true; });
